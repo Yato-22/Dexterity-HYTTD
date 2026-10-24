@@ -257,3 +257,4 @@ export async function runCode({ language, code, stdin }) {
     compileError: `Runner not configured - set VITE_RUNNER_URL (e.g. https://emkc.org/api/v2/piston) to run ${language.toUpperCase()}.`,
   };
 }
+
