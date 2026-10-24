@@ -93,32 +93,96 @@
   z-index: 10;
 }
 
-/* Compact Viking Wood Board: 3px borders, 4px solid shadow, compact padding */
-.compact-wood-board {
-  background: #2A211B;
-  border: 3px solid #4A3A2C;
-  border-radius: 10px;
-  box-shadow: 4px 4px 0px #100C09;
+/* ========================================================================= */
+/* BROKEN OLD WOODEN PLANK SYSTEM */
+/* ========================================================================= */
+
+/* Jagged, splintered clip-path profiles for old broken planks */
+.clip-broken-plank-1 {
+  clip-path: polygon(
+    0% 3px, 2% 0%, 97% 1px, 99.5% 3px, 100% 7px,
+    98.8% 38%, 100% 41%, 98.2% 44%, 99.8% 75%, 98.5% 97%,
+    97% 100%, 3% 99%, 0.8% 96%, 1.8% 65%, 0% 62%,
+    1.2% 35%, 0% 32%
+  );
+}
+
+.clip-broken-plank-2 {
+  clip-path: polygon(
+    1.5% 0%, 98% 0.5%, 100% 4px, 99.2% 30%, 97.5% 33%,
+    100% 50%, 98.5% 85%, 100% 98%, 97.5% 100%, 2% 98.5%,
+    0% 95%, 1.5% 70%, 0% 67%, 1.2% 40%, 0% 36%
+  );
+}
+
+.clip-broken-plank-3 {
+  clip-path: polygon(
+    0.8% 2px, 3% 0%, 96.5% 1px, 100% 4px, 98.5% 48%,
+    100% 52%, 98% 80%, 99.5% 97%, 96% 100%, 2% 99.2%,
+    0% 96%, 1.8% 55%, 0.2% 51%, 1.5% 25%, 0% 21%
+  );
+}
+
+/* Torn parchment clip-path */
+.clip-torn-parchment {
+  clip-path: polygon(
+    1% 1.5%, 4% 0.5%, 12% 1.8%, 25% 0.8%, 40% 1.5%, 60% 0.5%, 78% 1.8%, 92% 0.8%, 98.5% 2%,
+    99.8% 15%, 98.5% 28%, 100% 42%, 98.8% 58%, 99.8% 75%, 98.2% 88%, 99.5% 98%,
+    96% 99%, 82% 98%, 68% 99.5%, 50% 98.5%, 35% 99.8%, 18% 98.2%, 4% 99.5%, 0.8% 97%,
+    1.8% 85%, 0.5% 70%, 1.8% 55%, 0.2% 38%, 1.5% 22%, 0.5% 10%
+  );
+}
+
+/* Planks shadow wrapper */
+.broken-plank-shadow {
+  filter: drop-shadow(4px 4px 0px #100C09);
+}
+
+/* Individual Horizontal Plank Gradients (Dark Weathered Oak) */
+.plank-row-top {
+  background: linear-gradient(180deg, #382c22 0%, #2e231b 60%, #251c15 100%);
+  border-bottom: 2px solid #100b07;
   position: relative;
 }
 
-/* Compact Wooden Beam for HP bar: 3px border, 4px solid shadow */
-.compact-wooden-beam {
-  background: linear-gradient(180deg, #382c23 0%, #261e17 60%, #1c1510 100%);
-  border: 3px solid #5A4A3C;
-  border-radius: 10px;
-  box-shadow: 4px 4px 0px #100C09;
+.plank-row-mid {
+  background: linear-gradient(180deg, #2c221a 0%, #241a13 55%, #1a130e 100%);
+  border-bottom: 2px solid #100b07;
   position: relative;
 }
 
-/* Compact Parchment Scroll: 3px border, 4px solid shadow, paper texture */
-.compact-parchment-scroll {
-  background: linear-gradient(180deg, #f5e4c6 0%, #ecd4ad 50%, #dfc394 100%);
-  border: 3px solid #4A3A2C;
-  border-radius: 10px;
-  box-shadow: 4px 4px 0px #100C09;
+.plank-row-bottom {
+  background: linear-gradient(180deg, #32261d 0%, #281d16 60%, #1f1610 100%);
   position: relative;
-  filter: url(#paper-texture);
+}
+
+/* Dark crack lines across planks */
+.wood-crack-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(12,8,5,0.85) 30%, rgba(12,8,5,0.85) 70%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Drilled hole for rope passage */
+.drilled-hole {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 45%, #050302 0%, #150e09 60%, #2a1e15 100%);
+  border: 1.5px solid #4a3828;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.08);
+  position: relative;
+}
+
+/* Missing nail empty hole */
+.missing-nail-hole {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #050302 0%, #160f0a 100%);
+  border: 1px solid #36281b;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
 }
 
 /* Light solid text shadow on headings only */
@@ -228,17 +292,33 @@
   box-shadow: 0.5px 0.5px 0px #100C09;
 }
 
-/* Screen shake keyframes */
-@keyframes screenRumble {
-  0%, 100% { transform: translate(0, 0); }
-  20% { transform: translate(-6px, 4px); }
-  40% { transform: translate(5px, -4px); }
-  60% { transform: translate(-4px, -2px); }
-  80% { transform: translate(4px, 3px); }
+/* ========================================================================= */
+/* SUBTLE HIT SHAKE & SPLINTER DUST PARTICLES */
+/* ========================================================================= */
+@keyframes plankHitTremor {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(-0.4deg); }
+  50% { transform: translateY(2px) rotate(0.3deg); }
+  75% { transform: translateY(-1px) rotate(-0.2deg); }
 }
 
-.screen-shake {
-  animation: screenRumble 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+.plank-hit-shake {
+  animation: plankHitTremor 0.3s ease-in-out;
+}
+
+@keyframes splinterFall {
+  0% {
+    opacity: 0.9;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.6) rotate(60deg);
+  }
+}
+
+.splinter-particle {
+  animation: splinterFall 0.6s ease-out forwards;
 }
 
 /* Molten Fire Lava HP Bar Animation */
@@ -251,4 +331,14 @@
 .hp-fill-lava {
   background-size: 200% 200%;
   animation: lavaFlow 4s ease infinite;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

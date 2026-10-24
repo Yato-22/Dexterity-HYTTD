@@ -9,7 +9,7 @@ export default function Dragon({
   floatingDamages = [],
   sparks = [],
   isRoaring = false,
-  roarText = "THE DRAGON ROARS!",
+  roarText = "THE RED DEATH ROARS!",
   isDefeated = false,
   winnerTeam = "Team Alpha",
   onDragonClick,
@@ -201,7 +201,7 @@ export default function Dragon({
             </div>
 
             <h2 className="font-heading text-xl 2xl:text-2xl font-bold text-[#FFF8ED] tracking-wide mb-1.5 heading-shadow">
-              THE DRAGON IS SLAIN!
+              THE RED DEATH IS SLAIN!
             </h2>
 
             <div className="my-2.5 py-2 px-3 bg-[#140E0A] border-2 border-[#FF7A1A] rounded-lg shadow-solid-ticket">

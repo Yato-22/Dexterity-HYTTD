@@ -25,6 +25,8 @@ export default {
       fontFamily: {
         heading: ['"Cinzel"', 'serif'],
         sans: ['"Alegreya Sans"', 'sans-serif'],
+        inter: ['"Inter"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
         'solid-panel': '4px 4px 0px #100C09',
