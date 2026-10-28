@@ -11,10 +11,11 @@ import Embers from '../components/Embers';
 import WeaponStations from '../components/WeaponStations';
 import FlyingProjectiles from '../components/FlyingProjectiles';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
-import { Volume2, VolumeX, Flame } from 'lucide-react';
+import { Volume2, VolumeX, Flame, LogOut } from 'lucide-react';
 
 export default function ArenaScreen() {
   const {
+    logout,
     hp,
     maxHp,
     dragonName,
@@ -166,7 +167,7 @@ export default function ArenaScreen() {
               </div>
             </div>
 
-            {/* Sound Mute Toggle (visual icon toggle only, no sound effects) */}
+            {/* Sound Mute Toggle */}
             <button
               onClick={() => setSoundMuted(!soundMuted)}
               className="relative z-10 compact-iron-btn p-1 2xl:p-1.5 sword-cursor"
@@ -177,6 +178,15 @@ export default function ArenaScreen() {
               ) : (
                 <VolumeX className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-[#A89078]" />
               )}
+            </button>
+
+            {/* Logout Button */}
+            <button
+              onClick={logout}
+              className="relative z-10 compact-iron-btn p-1 2xl:p-1.5 sword-cursor hover:text-[#EF4444]"
+              title={`Logged in as ${userTeam?.name || 'Viking'} - Click to Logout`}
+            >
+              <LogOut className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-[#FFB347]" />
             </button>
           </div>
         </div>

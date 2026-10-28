@@ -29,6 +29,7 @@ export default function CodingScreen() {
   const problem = PROBLEMS_BY_ID[id] || PROBLEMS_BY_ID['two-sum'];
 
   const {
+    token,
     hp,
     maxHp,
     dragonName,
@@ -40,7 +41,6 @@ export default function CodingScreen() {
     soundMuted,
     setSoundMuted,
     solvedProblems,
-    recordAcceptedSubmission,
     saveUserCode,
     getUserCode,
   } = useGame();
@@ -122,7 +122,7 @@ export default function CodingScreen() {
   };
 
   // =========================================================================
-  // RUN (Sample Cases)
+  // RUN (Sample Cases via Server /api/run)
   // =========================================================================
   const handleRun = async () => {
     if (isRunning || cooldownSeconds > 0) return;
@@ -139,28 +139,48 @@ export default function CodingScreen() {
 
     for (let i = 0; i < cases.length; i++) {
       const tc = cases[i];
-      const res = await runCode({ language, code, stdin: tc.input });
+      try {
+        const response = await fetch('/api/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            language,
+            code,
+            stdin: tc.input || '',
+            timeLimitMs: problem.timeLimitMs || 2000,
+          }),
+        });
 
-      if (res.compileError) {
-        fatalError = { type: 'COMPILATION_ERROR', message: res.compileError };
+        const res = await response.json();
+
+        if (res.compileError) {
+          fatalError = { type: 'COMPILATION_ERROR', message: res.compileError };
+          break;
+        }
+        if (res.isTimeout) {
+          fatalError = { type: 'TIME_LIMIT_EXCEEDED', message: 'Time limit exceeded (> 2000ms)' };
+          break;
+        }
+        if (res.exitCode !== 0 && res.stderr) {
+          fatalError = { type: 'RUNTIME_ERROR', message: res.stderr };
+          break;
+        }
+
+        const passed = compareOutputs(res.stdout, tc.expectedOutput);
+        if (!passed) allPassed = false;
+
+        runResults.push({
+          caseNum: i + 1,
+          input: tc.input,
+          expected: tc.expectedOutput,
+          actual: res.stdout,
+          passed,
+          timeMs: res.timeMs || 50,
+        });
+      } catch (err) {
+        fatalError = { type: 'RUNTIME_ERROR', message: 'Failed to reach runner: ' + err.message };
         break;
       }
-      if (res.exitCode !== 0 && res.stderr) {
-        fatalError = { type: 'RUNTIME_ERROR', message: res.stderr };
-        break;
-      }
-
-      const passed = compareOutputs(res.stdout, tc.expectedOutput);
-      if (!passed) allPassed = false;
-
-      runResults.push({
-        caseNum: i + 1,
-        input: tc.input,
-        expected: tc.expectedOutput,
-        actual: res.stdout,
-        passed,
-        timeMs: res.timeMs,
-      });
     }
 
     setIsRunning(false);
@@ -178,7 +198,7 @@ export default function CodingScreen() {
   };
 
   // =========================================================================
-  // TEST (Custom Input)
+  // TEST (Custom Input via Server /api/run)
   // =========================================================================
   const handleTest = async () => {
     if (isRunning || cooldownSeconds > 0) return;
@@ -187,28 +207,48 @@ export default function CodingScreen() {
     setActiveBottomTab('result');
     setVerdict('RUNNING');
 
-    const res = await runCode({ language, code, stdin: customInput });
-    setIsRunning(false);
-
-    if (res.compileError) {
-      setVerdict('COMPILATION_ERROR');
-      setResultData({ mode: 'test', error: res.compileError, timeMs: res.timeMs });
-    } else if (res.exitCode !== 0 && res.stderr) {
-      setVerdict('RUNTIME_ERROR');
-      setResultData({ mode: 'test', error: res.stderr, timeMs: res.timeMs });
-    } else {
-      setVerdict('FINISHED');
-      setResultData({
-        mode: 'test',
-        stdout: res.stdout,
-        stderr: res.stderr,
-        timeMs: res.timeMs,
+    try {
+      const response = await fetch('/api/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          language,
+          code,
+          stdin: customInput || '',
+          timeLimitMs: 2000,
+        }),
       });
+
+      const res = await response.json();
+      setIsRunning(false);
+
+      if (res.compileError) {
+        setVerdict('COMPILATION_ERROR');
+        setResultData({ mode: 'test', error: res.compileError, timeMs: res.timeMs });
+      } else if (res.isTimeout) {
+        setVerdict('TIME_LIMIT_EXCEEDED');
+        setResultData({ mode: 'test', error: 'Time limit exceeded (> 2000ms)', timeMs: res.timeMs });
+      } else if (res.exitCode !== 0 && res.stderr) {
+        setVerdict('RUNTIME_ERROR');
+        setResultData({ mode: 'test', error: res.stderr, timeMs: res.timeMs });
+      } else {
+        setVerdict('FINISHED');
+        setResultData({
+          mode: 'test',
+          stdout: res.stdout,
+          stderr: res.stderr,
+          timeMs: res.timeMs,
+        });
+      }
+    } catch (err) {
+      setIsRunning(false);
+      setVerdict('RUNTIME_ERROR');
+      setResultData({ mode: 'test', error: 'Runner connection error: ' + err.message });
     }
   };
 
   // =========================================================================
-  // SUBMIT (All Cases: Sample + Hidden)
+  // SUBMIT (Full Hidden & Sample Tests via Server /api/submit)
   // =========================================================================
   const handleSubmit = async () => {
     if (isRunning || cooldownSeconds > 0) return;
@@ -216,67 +256,63 @@ export default function CodingScreen() {
     startCooldown();
     setActiveBottomTab('result');
     setVerdict('EVALUATING');
-    setResultData({ mode: 'submit', passedCount: 0, totalCount: 0 });
+    setResultData({ mode: 'submit', passedCount: 0, totalCount: 10 });
 
-    const allCases = [...problem.samples, ...problem.hidden];
-    const totalCount = allCases.length;
-    let passedCount = 0;
-    let failingCase = null;
-    let fatalError = null;
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          language,
+          code,
+          problemId: problem.id,
+        }),
+      });
 
-    for (let i = 0; i < allCases.length; i++) {
-      const tc = allCases[i];
-      const res = await runCode({ language, code, stdin: tc.input });
+      const data = await response.json();
+      setIsRunning(false);
 
-      if (res.compileError) {
-        fatalError = { type: 'COMPILATION_ERROR', message: res.compileError };
-        break;
+      if (!response.ok) {
+        setVerdict('RUNTIME_ERROR');
+        setResultData({
+          mode: 'submit',
+          error: data.error || 'Submission failed',
+          passedCount: 0,
+          totalCount: 10,
+        });
+        return;
       }
-      if (res.exitCode !== 0 && res.stderr) {
-        fatalError = { type: 'RUNTIME_ERROR', message: res.stderr, caseNum: i + 1 };
-        break;
+
+      setVerdict(data.verdict);
+      setResultData({
+        mode: 'submit',
+        passedCount: data.passedCount,
+        totalCount: data.totalCount,
+        failingCase: data.failingCase,
+        error: data.failingCase?.message,
+      });
+
+      if (data.verdict === 'ACCEPTED') {
+        setCraftedWeapon(problem.weapon || 'weapon');
+        setAcceptedBanner(true);
+
+        // Redirect to arena after 1.2s to watch live projectile and damage
+        setTimeout(() => {
+          navigate('/');
+        }, 1200);
       }
-
-      const passed = compareOutputs(res.stdout, tc.expectedOutput);
-      if (passed) {
-        passedCount++;
-        setResultData({ mode: 'submit', passedCount, totalCount });
-      } else {
-        failingCase = {
-          caseNum: i + 1,
-          isHidden: tc.isHidden,
-          input: tc.isHidden ? '[Hidden Test Case Data]' : tc.input,
-          expected: tc.isHidden ? '[Hidden Output]' : tc.expectedOutput,
-          actual: tc.isHidden ? '[Wrong Output]' : res.stdout,
-          timeMs: res.timeMs,
-        };
-        break;
-      }
-    }
-
-    setIsRunning(false);
-
-    if (fatalError) {
-      setVerdict(fatalError.type);
-      setResultData({ mode: 'submit', error: fatalError.message, passedCount, totalCount });
-    } else if (passedCount === totalCount) {
-      setVerdict('ACCEPTED');
-      setResultData({ mode: 'submit', passedCount, totalCount });
-
-      // Award crafted weapon to arsenal inventory!
-      const solveResult = recordAcceptedSubmission(problem.id);
-      if (solveResult?.weapon) {
-        setCraftedWeapon(solveResult.weapon.name);
-      }
-      setAcceptedBanner(true);
-
-      // Redirect to the arena after submitting so user can inspect arsenal
-      setTimeout(() => {
-        navigate('/');
-      }, 1300);
-    } else {
-      setVerdict('WRONG_ANSWER');
-      setResultData({ mode: 'submit', passedCount, totalCount, failingCase });
+    } catch (err) {
+      setIsRunning(false);
+      setVerdict('RUNTIME_ERROR');
+      setResultData({
+        mode: 'submit',
+        error: 'Network error submitting solution: ' + err.message,
+        passedCount: 0,
+        totalCount: 10,
+      });
     }
   };
 

@@ -1,4 +1,20 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+} from 'react';
+import {
+  doc,
+  onSnapshot,
+  collection,
+  query,
+  orderBy,
+  limit,
+} from 'firebase/firestore';
+import { db } from '../services/firebase';
 import {
   DRAGON_CONFIG,
   WEAPONS,
@@ -13,66 +29,60 @@ import { PROBLEMS_BY_ID } from '../data/problems';
 
 const GameContext = createContext(null);
 
-const STORAGE_KEY_STATE = 'techflix_hyttd_game_state_v1';
+const STORAGE_KEY_TOKEN = 'techflix_token';
+const STORAGE_KEY_TEAM = 'techflix_team';
 const STORAGE_KEY_CODE = 'techflix_hyttd_user_code_v1';
+const STORAGE_KEY_INVENTORY = 'techflix_hyttd_inventory_v1';
 
 export function GameProvider({ children }) {
-  // Load saved state or default
-  const [hp, setHp] = useState(() => {
+  // Authentication State
+  const [token, setToken] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_STATE);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (typeof parsed.hp === 'number' && parsed.maxHp === DRAGON_CONFIG.maxHp) return parsed.hp;
-      }
-    } catch {}
-    return DRAGON_CONFIG.maxHp;
+      return localStorage.getItem(STORAGE_KEY_TOKEN) || null;
+    } catch {
+      return null;
+    }
   });
 
-  const [teams, setTeams] = useState(() => {
+  const [userTeam, setUserTeam] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_STATE);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed.teams)) return parsed.teams;
-      }
-    } catch {}
-    return INITIAL_TEAMS;
+      const saved = localStorage.getItem(STORAGE_KEY_TEAM);
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
   });
 
-  const [feed, setFeed] = useState(() => {
+  // Dragon State (Live from Firestore: dragon/main)
+  const [hp, setHp] = useState(DRAGON_CONFIG.maxHp);
+  const [maxHp, setMaxHp] = useState(DRAGON_CONFIG.maxHp);
+  const [dragonStatus, setDragonStatus] = useState('waiting'); // 'waiting' | 'live' | 'defeated'
+  const [winnerTeamId, setWinnerTeamId] = useState(null);
+
+  // Teams State (Live from Firestore: teams query)
+  const [teams, setTeams] = useState(INITIAL_TEAMS);
+
+  // Feed State (Live from Firestore: feed query)
+  const [feed, setFeed] = useState(INITIAL_FEED);
+
+  // Solved problems by current user team
+  const solvedProblems = userTeam?.solvedProblemIds || [];
+
+  // Weapon Inventory (User team weapons ready to fire)
+  const [inventory, setInventory] = useState(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_STATE);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed.feed)) return parsed.feed;
-      }
+      const saved = localStorage.getItem(STORAGE_KEY_INVENTORY);
+      if (saved) return JSON.parse(saved);
     } catch {}
-    return INITIAL_FEED;
+    return { dagger: 2, axe: 1, catapult: 0, ballista: 0 };
   });
 
-  const [solvedProblems, setSolvedProblems] = useState(() => {
+  // Save inventory to localStorage
+  useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_STATE);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed.solvedProblems)) return parsed.solvedProblems;
-      }
+      localStorage.setItem(STORAGE_KEY_INVENTORY, JSON.stringify(inventory));
     } catch {}
-    return [];
-  });
-
-  // Persistent hit counts per dragon body zone (head, chest, leftWing, rightWing)
-  const [zoneHits, setZoneHits] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_STATE);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.zoneHits && typeof parsed.zoneHits === 'object') return parsed.zoneHits;
-      }
-    } catch {}
-    return { head: 0, chest: 0, leftWing: 0, rightWing: 0 };
-  });
+  }, [inventory]);
 
   // User code storage: { [problemId_language]: string }
   const [userCode, setUserCode] = useState(() => {
@@ -83,17 +93,11 @@ export function GameProvider({ children }) {
     return {};
   });
 
-  // Weapon Inventory: weapons earned from solving trials, ready to fire at will
-  const [inventory, setInventory] = useState(() => {
+  useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_STATE);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.inventory && typeof parsed.inventory === 'object') return parsed.inventory;
-      }
+      localStorage.setItem(STORAGE_KEY_CODE, JSON.stringify(userCode));
     } catch {}
-    return { dagger: 2, axe: 1, catapult: 0, ballista: 0 };
-  });
+  }, [userCode]);
 
   // Visual effects state
   const [soundMuted, setSoundMuted] = useState(false);
@@ -102,61 +106,32 @@ export function GameProvider({ children }) {
   const [sparks, setSparks] = useState([]);
   const [isScreenShaking, setIsScreenShaking] = useState(false);
   const [isRoaring, setIsRoaring] = useState(false);
-  const [lastFeedId, setLastFeedId] = useState(null);
-  const [lastLeaderboardUpdate, setLastLeaderboardUpdate] = useState(null);
   const [autoSimulate, setAutoSimulate] = useState(false);
 
-  // Weapon firing & dragon damage reaction state
+  // Weapon firing state
   const [pendingFireEvents, setPendingFireEvents] = useState([]);
   const [activeFlashZone, setActiveFlashZone] = useState(null);
   const [stuckBolts, setStuckBolts] = useState([]);
   const [recoilingStation, setRecoilingStation] = useState(null);
 
   const triggeredRoarsRef = useRef(new Set());
+  const initialFeedLoadedRef = useRef(false);
+  const knownFeedIdsRef = useRef(new Set());
 
-  // Save game state changes to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem(
-        STORAGE_KEY_STATE,
-        JSON.stringify({ hp, maxHp: DRAGON_CONFIG.maxHp, teams, feed, solvedProblems, zoneHits, inventory })
-      );
-    } catch (e) {
-      console.warn("Could not save game state to localStorage:", e);
-    }
-  }, [hp, teams, feed, solvedProblems, zoneHits, inventory]);
-
-  // Save code changes to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_CODE, JSON.stringify(userCode));
-    } catch (e) {
-      console.warn("Could not save code to localStorage:", e);
-    }
-  }, [userCode]);
-
-  const saveUserCode = useCallback((problemId, language, code) => {
-    setUserCode((prev) => ({
-      ...prev,
-      [`${problemId}_${language}`]: code,
-    }));
+  // Recoil station trigger with auto-reset
+  const triggerStationRecoil = useCallback((weaponKey) => {
+    setRecoilingStation(weaponKey);
+    setTimeout(() => {
+      setRecoilingStation((current) => (current === weaponKey ? null : current));
+    }, 450);
   }, []);
-
-  const getUserCode = useCallback(
-    (problemId, language, defaultStarter = '') => {
-      const key = `${problemId}_${language}`;
-      if (userCode[key] !== undefined) return userCode[key];
-      return defaultStarter;
-    },
-    [userCode]
-  );
 
   // Spawn floating damage text
   const spawnFloatingDamage = useCallback((damage, crit = false, x = 50, y = 45) => {
     const id = Date.now() + Math.random();
     setFloatingDamages((prev) => [
-      ...prev.slice(-3),
-      { id, damage, crit, x: x + (Math.random() * 10 - 5), y: y + (Math.random() * 6 - 3) },
+      ...prev.slice(-6),
+      { id, damage, crit, x, y },
     ]);
     setTimeout(() => {
       setFloatingDamages((prev) => prev.filter((d) => d.id !== id));
@@ -183,34 +158,20 @@ export function GameProvider({ children }) {
     }, 600);
   }, []);
 
-  // Recoil station trigger with auto-reset
-  const triggerStationRecoil = useCallback((weaponKey) => {
-    setRecoilingStation(weaponKey);
-    setTimeout(() => {
-      setRecoilingStation((current) => (current === weaponKey ? null : current));
-    }, 450);
-  }, []);
-
   // Triggered on projectile arrival / impact at the dragon
   const onProjectileImpact = useCallback(
     (event, coords = null) => {
       if (!event) return;
 
-      // 1. Dragon flinch recoil
+      // 1. Dragon flinch recoil & red flash
       setIsHit(true);
-      setTimeout(() => setIsHit(false), ANIMATION_TIMINGS.hitFlinchMs || 350);
+      setTimeout(() => setIsHit(false), ANIMATION_TIMINGS.hitFlinchMs || 520);
 
-      // 2. Target hit zone flashes white then red
+      // 2. Target hit zone flashes
       setActiveFlashZone({ zone: event.targetZone, id: Date.now() });
       setTimeout(() => setActiveFlashZone(null), ANIMATION_TIMINGS.zoneFlashMs || 400);
 
-      // 3. Persistent damage increment per zone (scales up to 3 levels)
-      setZoneHits((prev) => ({
-        ...prev,
-        [event.targetZone]: (prev[event.targetZone] || 0) + 1,
-      }));
-
-      // 4. Stuck ballista bolt on head
+      // 3. Stuck ballista bolt on head
       if (event.weaponKey === 'ballista' && event.targetZone === 'head') {
         const boltId = 'bolt-' + Date.now() + Math.random();
         const boltX = coords?.x ? Math.max(46, Math.min(58, coords.x)) : 52;
@@ -226,127 +187,263 @@ export function GameProvider({ children }) {
         }, ANIMATION_TIMINGS.stuckBoltDurationMs || 4000);
       }
 
-      // 5. Floating damage and sparks at impact point
-      const impactX =
-        coords?.x ||
-        (event.targetZone === 'head'
-          ? 52
-          : event.targetZone === 'leftWing'
-          ? 28
-          : event.targetZone === 'rightWing'
-          ? 72
-          : 50);
-      const impactY =
-        coords?.y ||
-        (event.targetZone === 'head'
-          ? 28
-          : event.targetZone === 'leftWing'
-          ? 32
-          : event.targetZone === 'rightWing'
-          ? 32
-          : 46);
+      // 4. Floating damage and sparks at impact point
+      const impactX = coords?.x || 50;
+      const impactY = coords?.y || 45;
 
       spawnFloatingDamage(event.actualDamage, event.isCrit, impactX, impactY);
       spawnSparkBurst(impactX, impactY);
-
-      // 6. Deduct HP & check roar thresholds (75%, 50%, 25%)
-      setHp((prevHp) => {
-        const nextHp = Math.max(0, prevHp - event.actualDamage);
-        DRAGON_CONFIG.roarThresholds.forEach((threshold) => {
-          if (
-            prevHp > threshold &&
-            nextHp <= threshold &&
-            !triggeredRoarsRef.current.has(threshold)
-          ) {
-            triggeredRoarsRef.current.add(threshold);
-            setIsScreenShaking(true);
-            setTimeout(() => setIsScreenShaking(false), 700);
-            setIsRoaring(true);
-            setTimeout(
-              () => setIsRoaring(false),
-              ANIMATION_TIMINGS.roarDurationMs || 2400
-            );
-          }
-        });
-        return nextHp;
-      });
-
-      // 7. Update acting team scores & leaderboard
-      setTeams((prevTeams) =>
-        prevTeams.map((team) => {
-          if (team.id === event.teamId) {
-            return {
-              ...team,
-              score: team.score + event.actualDamage,
-              hits: (team.hits || 0) + 1,
-            };
-          }
-          return team;
-        })
-      );
-      setLastLeaderboardUpdate(Date.now());
-
-      // 8. Update live battle log feed
-      const feedItemId = "feed-" + Date.now() + Math.random();
-      const newFeedItem = {
-        id: feedItemId,
-        teamName: event.actingTeam.name,
-        weapon: event.weaponKey,
-        verb: event.weaponVerb,
-        part: event.targetPart,
-        damage: event.actualDamage,
-        crit: event.isCrit,
-        time: "Just now",
-        customText: event.customFeedText,
-      };
-
-      setFeed((prevFeed) => [newFeedItem, ...prevFeed.slice(0, 3)]);
-      setLastFeedId(feedItemId);
-
-      // Clean up from pendingFireEvents
-      setPendingFireEvents((prev) => prev.filter((e) => e.id !== event.id));
     },
     [spawnFloatingDamage, spawnSparkBurst]
   );
 
-  // Manual or inventory firing: checks ammo and queues projectile launch
-  const dealDamage = useCallback(
-    (teamId = USER_TEAM_ID, weaponKey = 'axe') => {
-      if (hp <= 0) return { success: false, reason: "Dragon defeated" };
+  // =========================================================================
+  // 1. LIVE FIRESTORE LISTENER: dragon/main
+  // =========================================================================
+  useEffect(() => {
+    if (!db) return;
 
-      // If user team, check and consume 1 ammo from inventory
-      if (teamId === USER_TEAM_ID) {
-        const available = inventory[weaponKey] || 0;
-        if (available <= 0) {
-          return { success: false, reason: "Out of ammo" };
+    const unsub = onSnapshot(
+      doc(db, 'dragon', 'main'),
+      (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          const newHp = typeof data.hp === 'number' ? data.hp : 100;
+          const newMaxHp = typeof data.maxHp === 'number' ? data.maxHp : 100;
+
+          setHp((prevHp) => {
+            const roarThresholds = [
+              Math.floor(newMaxHp * 0.75),
+              Math.floor(newMaxHp * 0.5),
+              Math.floor(newMaxHp * 0.25),
+            ];
+            roarThresholds.forEach((th) => {
+              if (prevHp > th && newHp <= th && !triggeredRoarsRef.current.has(th)) {
+                triggeredRoarsRef.current.add(th);
+                setIsScreenShaking(true);
+                setTimeout(() => setIsScreenShaking(false), 700);
+                setIsRoaring(true);
+                setTimeout(() => setIsRoaring(false), 2400);
+              }
+            });
+            return newHp;
+          });
+
+          setMaxHp(newMaxHp);
+          setDragonStatus(data.status || 'waiting');
+          if (data.winnerTeamId) setWinnerTeamId(data.winnerTeamId);
+        }
+      },
+      (err) => {
+        console.error('Firestore dragon/main listener error:', err);
+      }
+    );
+
+    return () => unsub();
+  }, []);
+
+  // =========================================================================
+  // 2. LIVE FIRESTORE LISTENER: teams (top 10 ordered by totalDamage)
+  // =========================================================================
+  useEffect(() => {
+    if (!db) return;
+
+    const q = query(collection(db, 'teams'), orderBy('totalDamage', 'desc'), limit(10));
+    const unsub = onSnapshot(
+      q,
+      (snapshot) => {
+        const loadedTeams = snapshot.docs.map((d, index) => {
+          const val = d.data();
+          return {
+            id: d.id,
+            name: val.name || d.id,
+            score: val.totalDamage || 0,
+            hits: val.solvedProblemIds?.length || 0,
+            solvedProblems: val.solvedProblemIds || [],
+            members: val.members || '',
+            rank: index + 1,
+            isUserTeam: userTeam && userTeam.id === d.id,
+          };
+        });
+
+        if (loadedTeams.length > 0) {
+          setTeams(loadedTeams);
+
+          // Update user team live if logged in
+          if (userTeam) {
+            const liveMatch = loadedTeams.find((t) => t.id === userTeam.id);
+            if (liveMatch) {
+              setUserTeam((prev) => ({
+                ...prev,
+                totalDamage: liveMatch.score,
+                solvedProblemIds: liveMatch.solvedProblems,
+              }));
+            }
+          }
+        }
+      },
+      (err) => {
+        console.error('Firestore teams listener error:', err);
+      }
+    );
+
+    return () => unsub();
+  }, [userTeam?.id]);
+
+  // =========================================================================
+  // 3. LIVE FIRESTORE LISTENER: feed (trigger weapon/hit animations on new entry)
+  // =========================================================================
+  useEffect(() => {
+    if (!db) return;
+
+    const q = query(collection(db, 'feed'), orderBy('createdAt', 'desc'), limit(10));
+    const unsub = onSnapshot(
+      q,
+      (snapshot) => {
+        const entries = snapshot.docs.map((d) => {
+          const val = d.data();
+          return {
+            id: d.id,
+            teamName: val.teamName || 'Viking Clan',
+            weapon: val.weapon || 'axe',
+            verb: WEAPONS[val.weapon]?.verb || 'struck',
+            part: 'hide',
+            damage: val.damage || 5,
+            customText: val.customText || null,
+            timestamp: val.createdAt?.toDate ? val.createdAt.toDate().getTime() : Date.now(),
+          };
+        });
+
+        if (entries.length > 0) {
+          setFeed(entries);
         }
 
-        setInventory((prev) => ({
-          ...prev,
-          [weaponKey]: Math.max(0, (prev[weaponKey] || 0) - 1),
-        }));
+        // Detect new entries and trigger live projectile firing animation!
+        if (initialFeedLoadedRef.current) {
+          snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added') {
+              const newDoc = change.doc;
+              if (!knownFeedIdsRef.current.has(newDoc.id)) {
+                knownFeedIdsRef.current.add(newDoc.id);
+                const data = newDoc.data();
+                const weaponKey = data.weapon || 'axe';
+
+                // Recoil station
+                triggerStationRecoil(weaponKey);
+
+                // Queue projectile flight
+                const candidateZones = WEAPON_ZONE_MAPPING[weaponKey] || ['chest'];
+                const targetZone = candidateZones[Math.floor(Math.random() * candidateZones.length)];
+                const fireEvent = {
+                  id: 'fire-feed-' + newDoc.id + '-' + Date.now(),
+                  weaponKey,
+                  targetZone,
+                  actualDamage: data.damage || 5,
+                  isCrit: true,
+                  actingTeam: { name: data.teamName || 'Viking' },
+                  teamId: 'live',
+                  weaponVerb: WEAPONS[weaponKey]?.verb || 'struck',
+                  targetPart: 'hide',
+                  customFeedText: null,
+                  timestamp: Date.now(),
+                };
+
+                setPendingFireEvents((prev) => [...prev.slice(-10), fireEvent]);
+              }
+            }
+          });
+        } else {
+          snapshot.docs.forEach((d) => knownFeedIdsRef.current.add(d.id));
+          initialFeedLoadedRef.current = true;
+        }
+      },
+      (err) => {
+        console.error('Firestore feed listener error:', err);
       }
+    );
+
+    return () => unsub();
+  }, [triggerStationRecoil]);
+
+  // Login handler
+  const login = useCallback(async (code) => {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Login failed');
+    }
+
+    setToken(data.token);
+    setUserTeam(data.team);
+    localStorage.setItem(STORAGE_KEY_TOKEN, data.token);
+    localStorage.setItem(STORAGE_KEY_TEAM, JSON.stringify(data.team));
+    return data;
+  }, []);
+
+  // Logout handler
+  const logout = useCallback(() => {
+    setToken(null);
+    setUserTeam(null);
+    localStorage.removeItem(STORAGE_KEY_TOKEN);
+    localStorage.removeItem(STORAGE_KEY_TEAM);
+  }, []);
+
+  // User Code handlers
+  const saveUserCode = useCallback((problemId, language, code) => {
+    setUserCode((prev) => ({
+      ...prev,
+      [`${problemId}_${language}`]: code,
+    }));
+  }, []);
+
+  const getUserCode = useCallback(
+    (problemId, language, defaultStarter = '') => {
+      const key = `${problemId}_${language}`;
+      if (userCode[key] !== undefined) return userCode[key];
+      return defaultStarter;
+    },
+    [userCode]
+  );
+
+  // Inventory firing
+  const dealDamage = useCallback(
+    (teamId = USER_TEAM_ID, weaponKey = 'axe') => {
+      if (hp <= 0) return { success: false, reason: 'Dragon defeated' };
+
+      const available = inventory[weaponKey] || 0;
+      if (available <= 0) {
+        return { success: false, reason: 'Out of ammo' };
+      }
+
+      setInventory((prev) => ({
+        ...prev,
+        [weaponKey]: Math.max(0, (prev[weaponKey] || 0) - 1),
+      }));
 
       const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
       const isCrit = Math.random() < weapon.critRate;
       const actualDamage = isCrit ? weapon.damage + 3 : weapon.damage;
       const targetPart =
         DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
-      const actingTeam = teams.find((t) => t.id === teamId) || teams[0];
+      const actingTeam = userTeam || teams[0];
 
-      // Map weapon to hit zone
       const candidateZones = WEAPON_ZONE_MAPPING[weaponKey] || ['chest'];
       const targetZone =
         candidateZones[Math.floor(Math.random() * candidateZones.length)];
 
       const fireEvent = {
-        id: "fire-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7),
+        id: 'fire-' + Date.now() + '-' + Math.random().toString(36).substring(2, 7),
         weaponKey,
         targetZone,
         actualDamage,
         isCrit,
         actingTeam,
-        teamId,
+        teamId: userTeam?.id || teamId,
         weaponVerb: weapon.verb,
         targetPart,
         customFeedText: null,
@@ -356,122 +453,46 @@ export function GameProvider({ children }) {
       setPendingFireEvents((prev) => [...prev.slice(-10), fireEvent]);
       return { success: true };
     },
-    [hp, inventory, teams]
+    [hp, inventory, teams, userTeam]
   );
-
-  // Solved problem by team: awards crafted weapon to inventory
-  const recordAcceptedSubmission = useCallback(
-    (problemId) => {
-      const problem = PROBLEMS_BY_ID[problemId];
-      if (!problem) return null;
-
-      // Mark solved
-      const isFirstSolve = !solvedProblems.includes(problemId);
-      if (isFirstSolve) {
-        setSolvedProblems((prev) => [...prev, problemId]);
-      }
-
-      // Weapon chosen from problem difficulty
-      const diffToWeapon = {
-        Easy: 'dagger',
-        Medium: 'axe',
-        Hard: 'catapult',
-        Extreme: 'ballista',
-      };
-      const weaponKey = diffToWeapon[problem.difficulty] || 'axe';
-      const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
-
-      // Add weapon to inventory so user can use it whenever they want!
-      setInventory((prev) => ({
-        ...prev,
-        [weaponKey]: (prev[weaponKey] || 0) + 1,
-      }));
-
-      // Log weapon craft to live feed
-      const userTeam =
-        teams.find((t) => t.id === USER_TEAM_ID || t.isUserTeam) || teams[2];
-      const feedItemId = "feed-" + Date.now() + Math.random();
-      const newFeedItem = {
-        id: feedItemId,
-        teamName: userTeam.name,
-        weapon: weaponKey,
-        verb: "forged",
-        part: "Arsenal",
-        damage: problem.xp,
-        customText: `${userTeam.name} solved "${problem.title}" and crafted a ${weapon.name}!`,
-        timestamp: Date.now(),
-      };
-      setFeed((prevFeed) => [newFeedItem, ...prevFeed.slice(0, 19)]);
-
-      return {
-        weaponKey,
-        weapon,
-        problem,
-        isFirstSolve,
-      };
-    },
-    [solvedProblems, teams]
-  );
-
-  // Reset dragon, battle, and persistent damage overlays
-  const resetDragon = useCallback(() => {
-    setHp(DRAGON_CONFIG.maxHp);
-    triggeredRoarsRef.current.clear();
-    setIsRoaring(false);
-    setIsScreenShaking(false);
-    setTeams(INITIAL_TEAMS);
-    setFeed(INITIAL_FEED);
-    setSolvedProblems([]);
-    setZoneHits({ head: 0, chest: 0, leftWing: 0, rightWing: 0 });
-    setStuckBolts([]);
-    setPendingFireEvents([]);
-    setActiveFlashZone(null);
-    setRecoilingStation(null);
-    setInventory({ dagger: 2, axe: 1, catapult: 0, ballista: 0 });
-  }, []);
-
-  // Background fake-data timer: generates weapon hits
-  useEffect(() => {
-    if (!autoSimulate || hp <= 0) return;
-
-    let timeoutId;
-    const triggerNext = () => {
-      const delay = Math.floor(Math.random() * 4000 + 7500); // 7.5s - 11.5s
-      timeoutId = setTimeout(() => {
-        if (hp > 0) {
-          const randomTeam = teams[Math.floor(Math.random() * teams.length)];
-          const weightedKeys = ['dagger', 'dagger', 'axe', 'axe', 'catapult', 'ballista'];
-          const randomWeapon = weightedKeys[Math.floor(Math.random() * weightedKeys.length)];
-          dealDamage(randomTeam.id, randomWeapon);
-          triggerNext();
-        }
-      }, delay);
-    };
-
-    triggerNext();
-    return () => clearTimeout(timeoutId);
-  }, [autoSimulate, hp, teams, dealDamage]);
 
   // Derived user team stats
   const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
-  const userTeamIndex = sortedTeams.findIndex((t) => t.id === USER_TEAM_ID || t.isUserTeam);
-  const userTeamRank = userTeamIndex !== -1 ? userTeamIndex + 1 : 3;
-  const userTeam = teams.find((t) => t.id === USER_TEAM_ID || t.isUserTeam) || teams[2];
-  const isDefeated = hp <= 0;
-  const winnerTeam = sortedTeams[0]?.name || "Team Alpha";
+  const userTeamIndex = sortedTeams.findIndex((t) => t.id === userTeam?.id);
+  const userTeamRank = userTeamIndex !== -1 ? userTeamIndex + 1 : 1;
+  const isDefeated = hp <= 0 || dragonStatus === 'defeated';
+  const winnerTeam =
+    sortedTeams.find((t) => t.id === winnerTeamId)?.name ||
+    sortedTeams[0]?.name ||
+    'Team Alpha';
 
   const value = {
+    // Session
+    token,
+    userTeam: userTeam || teams[0] || { id: USER_TEAM_ID, name: 'Dragon Rider' },
+    userTeamRank,
+    isLoggedIn: Boolean(token && userTeam),
+    login,
+    logout,
+
+    // Dragon
     hp,
-    maxHp: DRAGON_CONFIG.maxHp,
-    dragonName: "THE RED DEATH",
+    maxHp,
+    dragonStatus,
+    dragonName: 'THE RED DEATH',
+    isDefeated,
+    winnerTeam,
+
+    // Battlefield
     teams,
     sortedTeams,
     feed,
     solvedProblems,
-    userTeam,
-    userTeamRank,
-    isDefeated,
-    winnerTeam,
+    inventory,
+    setInventory,
+    dealDamage,
+
+    // Audio & Visual
     soundMuted,
     setSoundMuted,
     isHit,
@@ -479,25 +500,20 @@ export function GameProvider({ children }) {
     sparks,
     isScreenShaking,
     isRoaring,
-    lastFeedId,
-    lastLeaderboardUpdate,
     autoSimulate,
     setAutoSimulate,
-    inventory,
-    setInventory,
-    dealDamage,
-    resetDragon,
-    recordAcceptedSubmission,
-    saveUserCode,
-    getUserCode,
-    // Firing and persistent reaction states
-    zoneHits,
+
+    // Projectile Animation State
     activeFlashZone,
     stuckBolts,
     pendingFireEvents,
     recoilingStation,
     triggerStationRecoil,
     onProjectileImpact,
+
+    // Code
+    saveUserCode,
+    getUserCode,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
@@ -505,7 +521,6 @@ export function GameProvider({ children }) {
 
 export function useGame() {
   const context = useContext(GameContext);
-  if (!context) throw new Error("useGame must be used within a GameProvider");
+  if (!context) throw new Error('useGame must be used within a GameProvider');
   return context;
 }
-

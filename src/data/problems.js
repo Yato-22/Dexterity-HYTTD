@@ -1,5 +1,5 @@
 // ============================================================================
-// 12 ORIGINAL VIKING BATTLE CODING CHALLENGES WITH VERIFIED REFERENCE OUTPUTS
+// 12 ORIGINAL VIKING BATTLE CODING CHALLENGES (CLIENT BUNDLE: SAMPLES ONLY)
 // ============================================================================
 
 export const PROBLEMS = [
@@ -35,72 +35,6 @@ export const PROBLEMS = [
         "expectedOutput": "2 3",
         "explanation": "Indices 2 and 3 correspond to values 2 + 4 = 6.",
         "isHidden": false
-      }
-    ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "2 10\n5 5",
-        "expectedOutput": "1 2",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "5 0\n-3 4 3 90 10",
-        "expectedOutput": "1 3",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "6 100\n10 20 30 40 70 90",
-        "expectedOutput": "3 5",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "4 -8\n-1 -2 -3 -5",
-        "expectedOutput": "3 4",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "5 17\n1 2 3 9 8",
-        "expectedOutput": "4 5",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "6 50\n5 15 25 35 45 5",
-        "expectedOutput": "2 4",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "7 1000000000\n500000000 1 2 3 4 5 500000000",
-        "expectedOutput": "1 7",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "8 14\n1 3 5 7 9 11 13 1",
-        "expectedOutput": "3 5",
-        "explanation": "",
-        "isHidden": true
       }
     ],
     "starterCode": {
@@ -143,72 +77,6 @@ export const PROBLEMS = [
         "isHidden": false
       }
     ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "([{}])",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "(((",
-        "expectedOutput": "NO",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": ")))",
-        "expectedOutput": "NO",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "({[)]}",
-        "expectedOutput": "NO",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "{[()()]}",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "()()()()()()()()",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "(((((((((((())))))))))))",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "[[[[]]]]",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      }
-    ],
     "starterCode": {
       "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[100005];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Solve using stack\n    return 0;\n}",
       "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    string s; if (!(cin >> s)) return 0;\n    vector<char> st;\n    for (char c : s) {\n        if (c == '(' || c == '[' || c == '{') st.push_back(c);\n        else {\n            if (st.empty()) { cout << \"NO\\n\"; return 0; }\n            char top = st.back(); st.pop_back();\n            if (c == ')' && top != '(') { cout << \"NO\\n\"; return 0; }\n            if (c == ']' && top != '[') { cout << \"NO\\n\"; return 0; }\n            if (c == '}' && top != '{') { cout << \"NO\\n\"; return 0; }\n        }\n    }\n    cout << (st.empty() ? \"YES\" : \"NO\") << \"\\n\";\n    return 0;\n}",
@@ -246,72 +114,6 @@ export const PROBLEMS = [
         "expectedOutput": "NO",
         "explanation": "From left to right it reads -121. From right to left it becomes 121-, which is not a palindrome.",
         "isHidden": false
-      }
-    ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "10",
-        "expectedOutput": "NO",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "0",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "7",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "1001",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "12321",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "123321",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "-101",
-        "expectedOutput": "NO",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "1000000001",
-        "expectedOutput": "YES",
-        "explanation": "",
-        "isHidden": true
       }
     ],
     "starterCode": {
@@ -354,72 +156,6 @@ export const PROBLEMS = [
         "isHidden": false
       }
     ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "pwwkew",
-        "expectedOutput": "3",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "abcdefghijklmnopqrstuvwxyz",
-        "expectedOutput": "26",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "aab",
-        "expectedOutput": "2",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "dvdf",
-        "expectedOutput": "3",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "tmmzuxt",
-        "expectedOutput": "5",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "anviaj",
-        "expectedOutput": "5",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "abacaba",
-        "expectedOutput": "3",
-        "explanation": "",
-        "isHidden": true
-      }
-    ],
     "starterCode": {
       "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[100005];\n    if (fgets(s, sizeof(s), stdin) == NULL) { printf(\"0\\n\"); return 0; }\n    // Solve\n    return 0;\n}",
       "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    string s;\n    getline(cin, s);\n    vector<int> last(256, -1);\n    int max_len = 0, start = 0;\n    for (int i = 0; i < (int)s.size(); i++) {\n        unsigned char c = s[i];\n        if (last[c] >= start) start = last[c] + 1;\n        last[c] = i;\n        max_len = max(max_len, i - start + 1);\n    }\n    cout << max_len << \"\\n\";\n    return 0;\n}",
@@ -458,72 +194,6 @@ export const PROBLEMS = [
         "expectedOutput": "1 5",
         "explanation": "Intervals [1,4] and [4,5] touch at 4, merging into [1,5].",
         "isHidden": false
-      }
-    ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "1\n5 10",
-        "expectedOutput": "5 10",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "3\n1 10\n2 5\n3 7",
-        "expectedOutput": "1 10",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "4\n1 4\n0 2\n3 5\n6 8",
-        "expectedOutput": "0 5\n6 8",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "5\n2 3\n4 5\n6 7\n8 9\n1 10",
-        "expectedOutput": "1 10",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "3\n1 4\n5 6\n7 8",
-        "expectedOutput": "1 4\n5 6\n7 8",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "4\n1 4\n2 3\n4 5\n5 6",
-        "expectedOutput": "1 6",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "3\n10 20\n0 5\n3 8",
-        "expectedOutput": "0 8\n10 20",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "5\n1 2\n3 4\n5 6\n7 8\n9 10",
-        "expectedOutput": "1 2\n3 4\n5 6\n7 8\n9 10",
-        "explanation": "",
-        "isHidden": true
       }
     ],
     "starterCode": {
@@ -566,72 +236,6 @@ export const PROBLEMS = [
         "isHidden": false
       }
     ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "1 1\n1",
-        "expectedOutput": "1",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "1 1\n0",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "3 3\n1 0 1\n0 1 0\n1 0 1",
-        "expectedOutput": "5",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "2 4\n1 1 1 1\n1 1 1 1",
-        "expectedOutput": "1",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "4 4\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "3 4\n1 0 0 1\n0 1 1 0\n1 0 0 1",
-        "expectedOutput": "5",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "5 1\n1\n0\n1\n0\n1",
-        "expectedOutput": "3",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "4 6\n1 1 0 1 1 0\n1 0 0 0 1 0\n0 0 1 0 0 0\n1 1 0 0 1 1",
-        "expectedOutput": "5",
-        "explanation": "",
-        "isHidden": true
-      }
-    ],
     "starterCode": {
       "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    // Read grid and count connected components\n    return 0;\n}",
       "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint R, C;\nvector<vector<int>> g;\n\nvoid dfs(int i, int j) {\n    if (i < 0 || i >= R || j < 0 || j >= C || g[i][j] != 1) return;\n    g[i][j] = 0;\n    dfs(i + 1, j);\n    dfs(i - 1, j);\n    dfs(i, j + 1);\n    dfs(i, j - 1);\n}\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    if (!(cin >> R >> C)) return 0;\n    g.assign(R, vector<int>(C));\n    for (int i = 0; i < R; i++)\n        for (int j = 0; j < C; j++)\n            cin >> g[i][j];\n    int ans = 0;\n    for (int i = 0; i < R; i++)\n        for (int j = 0; j < C; j++)\n            if (g[i][j] == 1) {\n                ans++;\n                dfs(i, j);\n            }\n    cout << ans << \"\\n\";\n    return 0;\n}",
@@ -670,72 +274,6 @@ export const PROBLEMS = [
         "expectedOutput": "9",
         "explanation": "The cliffs trap 9 units of rain water.",
         "isHidden": false
-      }
-    ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "3\n2 0 2",
-        "expectedOutput": "2",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "5\n3 0 0 0 3",
-        "expectedOutput": "9",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "5\n1 2 3 4 5",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "5\n5 4 3 2 1",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "6\n0 0 0 0 0 0",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "7\n5 1 2 1 2 1 5",
-        "expectedOutput": "18",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "8\n2 1 5 3 1 0 4 2",
-        "expectedOutput": "9",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "10\n1 0 2 0 3 0 4 0 5 0",
-        "expectedOutput": "10",
-        "explanation": "",
-        "isHidden": true
       }
     ],
     "starterCode": {
@@ -778,72 +316,6 @@ export const PROBLEMS = [
         "isHidden": false
       }
     ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "a\nb",
-        "expectedOutput": "1",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "dragon\ndragon",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "viking\nking",
-        "expectedOutput": "2",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "stoick\n",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "\nberk",
-        "expectedOutput": "4",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "zoologico\nzoologico",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "sitting\nkitten",
-        "expectedOutput": "3",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "algorithm\naltitude",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
-      }
-    ],
     "starterCode": {
       "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char w1[1005] = {0}, w2[1005] = {0};\n    if (fgets(w1, sizeof(w1), stdin)) {}\n    if (fgets(w2, sizeof(w2), stdin)) {}\n    // Solve using DP\n    return 0;\n}",
       "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    string w1, w2;\n    getline(cin, w1);\n    getline(cin, w2);\n    int m = w1.size(), n = w2.size();\n    vector<vector<int>> dp(m + 1, vector<int>(n + 1));\n    for (int i = 0; i <= m; i++) dp[i][0] = i;\n    for (int j = 0; j <= n; j++) dp[0][j] = j;\n    for (int i = 1; i <= m; i++) {\n        for (int j = 1; j <= n; j++) {\n            if (w1[i-1] == w2[j-1]) dp[i][j] = dp[i-1][j-1];\n            else dp[i][j] = 1 + min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});\n        }\n    }\n    cout << dp[m][n] << \"\\n\";\n    return 0;\n}",
@@ -884,72 +356,6 @@ export const PROBLEMS = [
         "isHidden": false
       }
     ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "()",
-        "expectedOutput": "2",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": ")(",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "((()))",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "()(())",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "((((((((",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "))))))))",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "())(())",
-        "expectedOutput": "4",
-        "explanation": "",
-        "isHidden": true
-      }
-    ],
     "starterCode": {
       "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[100005];\n    if (scanf(\"%s\", s) != 1) { printf(\"0\\n\"); return 0; }\n    // Solve using stack or DP\n    return 0;\n}",
       "cpp": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    string s;\n    if (!(cin >> s)) { cout << \"0\\n\"; return 0; }\n    vector<int> st = {-1};\n    int ans = 0;\n    for (int i = 0; i < (int)s.size(); i++) {\n        if (s[i] == '(') st.push_back(i);\n        else {\n            st.pop_back();\n            if (st.empty()) st.push_back(i);\n            else ans = max(ans, i - st.back());\n        }\n    }\n    cout << ans << \"\\n\";\n    return 0;\n}",
@@ -988,72 +394,6 @@ export const PROBLEMS = [
         "expectedOutput": "10",
         "explanation": "Burst 1 first (1*1*5) + burst 5 (1*5*1) = 5 + 5 = 10.",
         "isHidden": false
-      }
-    ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "1\n7",
-        "expectedOutput": "7",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "3\n1 2 3",
-        "expectedOutput": "12",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "4\n2 3 7 9",
-        "expectedOutput": "270",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "5\n8 2 6 4 1",
-        "expectedOutput": "336",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "6\n3 1 5 8 2 4",
-        "expectedOutput": "315",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "5\n9 9 9 9 9",
-        "expectedOutput": "2277",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "4\n0 5 0 2",
-        "expectedOutput": "15",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "6\n1 1 1 1 1 1",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
       }
     ],
     "starterCode": {
@@ -1098,72 +438,6 @@ export const PROBLEMS = [
         "isHidden": false
       }
     ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "2 1 1\n1 2 50",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "3 1 1\n1 2 10",
-        "expectedOutput": "-1",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "4 3 2\n1 2 100\n2 3 200\n3 4 300",
-        "expectedOutput": "100",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "5 6 1\n1 2 10\n2 5 20\n1 3 5\n3 4 5\n4 5 100\n1 5 50",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "3 3 2\n1 2 10\n2 3 10\n1 3 25",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "4 4 0\n1 2 1\n2 3 2\n3 4 3\n1 4 10",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "5 4 2\n1 2 5\n2 3 5\n3 4 5\n4 5 5",
-        "expectedOutput": "10",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "1 0 0",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      }
-    ],
     "starterCode": {
       "c": "#include <stdio.h>\n\nint main() {\n    int n, m, k;\n    if (scanf(\"%d %d %d\", &n, &m, &k) != 3) return 0;\n    // Solve with Dijkstra on layered state graph\n    return 0;\n}",
       "cpp": "#include <iostream>\n#include <vector>\n#include <queue>\nusing namespace std;\n\nstruct Edge { int to; long long w; };\nstruct State {\n    long long d; int u, used;\n    bool operator>(const State& o) const { return d > o.d; }\n};\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    int n, m, k;\n    if (!(cin >> n >> m >> k)) return 0;\n    vector<vector<Edge>> adj(n + 1);\n    for (int i = 0; i < m; i++) {\n        int u, v; long long w;\n        cin >> u >> v >> w;\n        adj[u].push_back({v, w});\n        adj[v].push_back({u, w});\n    }\n    const long long INF = 1e18;\n    vector<vector<long long>> dist(n + 1, vector<long long>(k + 1, INF));\n    dist[1][0] = 0;\n    priority_queue<State, vector<State>, greater<State>> pq;\n    pq.push({0, 1, 0});\n    while (!pq.empty()) {\n        auto [d, u, used] = pq.top(); pq.pop();\n        if (d > dist[u][used]) continue;\n        if (u == n) { cout << d << \"\\n\"; return 0; }\n        for (auto& e : adj[u]) {\n            if (d + e.w < dist[e.to][used]) {\n                dist[e.to][used] = d + e.w;\n                pq.push({d + e.w, e.to, used});\n            }\n            if (used < k && d < dist[e.to][used + 1]) {\n                dist[e.to][used + 1] = d;\n                pq.push({d, e.to, used + 1});\n            }\n        }\n    }\n    long long ans = INF;\n    for (int i = 0; i <= k; i++) ans = min(ans, dist[n][i]);\n    cout << (ans == INF ? -1 : ans) << \"\\n\";\n    return 0;\n}",
@@ -1203,72 +477,6 @@ export const PROBLEMS = [
         "expectedOutput": "1",
         "explanation": "The single element [0] has sum 0, which lies in [0, 0].",
         "isHidden": false
-      }
-    ],
-    "hidden": [
-      {
-        "id": "hidden-1",
-        "name": "Test #3",
-        "input": "4 -1 1\n0 0 0 0",
-        "expectedOutput": "10",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-2",
-        "name": "Test #4",
-        "input": "5 1 5\n1 2 3 4 5",
-        "expectedOutput": "7",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-3",
-        "name": "Test #5",
-        "input": "5 -5 -1\n-1 -2 -3 -4 -5",
-        "expectedOutput": "7",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-4",
-        "name": "Test #6",
-        "input": "4 0 2\n-1 1 -1 1",
-        "expectedOutput": "7",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-5",
-        "name": "Test #7",
-        "input": "6 -10 10\n100 -100 50 -50 20 -20",
-        "expectedOutput": "6",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-6",
-        "name": "Test #8",
-        "input": "3 10 20\n1 2 3",
-        "expectedOutput": "0",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-7",
-        "name": "Test #9",
-        "input": "5 -3 3\n2 -2 2 -2 2",
-        "expectedOutput": "15",
-        "explanation": "",
-        "isHidden": true
-      },
-      {
-        "id": "hidden-8",
-        "name": "Test #10",
-        "input": "6 -2 4\n-1 2 -3 4 -5 6",
-        "expectedOutput": "15",
-        "explanation": "",
-        "isHidden": true
       }
     ],
     "starterCode": {
