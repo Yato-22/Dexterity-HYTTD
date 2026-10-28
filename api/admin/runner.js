@@ -33,8 +33,9 @@ export default async function handler(req, res) {
     try {
       const testPythonCode = 'import sys\nprint("Piston Runner Online! Python", sys.version.split()[0])';
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 6000);
+      const timer = setTimeout(() => controller.abort(), 8000);
 
+      // run_timeout <= 3000, compile_timeout <= 10000, memory limits omitted
       const response = await fetch(`${testUrl}/api/v2/execute`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,15 +45,36 @@ export default async function handler(req, res) {
           version: '*',
           files: [{ name: 'main.py', content: testPythonCode }],
           stdin: '',
+          run_timeout: 2000,
+          compile_timeout: 10000,
         }),
       });
 
       clearTimeout(timer);
+
+      // If Piston returns 400 or other non-2xx, extract its exact message instead of failing silently
+      if (!response.ok) {
+        let errorMsg = `HTTP ${response.status}`;
+        try {
+          const errData = await response.json();
+          errorMsg = errData.message || errData.error || JSON.stringify(errData);
+        } catch (_) {
+          const txt = await response.text().catch(() => '');
+          if (txt) errorMsg = txt.trim();
+        }
+        return res.status(200).json({
+          success: false,
+          status: response.status,
+          error: errorMsg,
+          output: `Piston Error (${response.status}): ${errorMsg}`,
+        });
+      }
+
       const data = await response.json();
       const output = data.run?.stdout || data.run?.output || data.run?.stderr || JSON.stringify(data);
 
       return res.status(200).json({
-        success: response.ok && data.run?.code === 0,
+        success: data.run?.code === 0,
         status: response.status,
         output: output.trim(),
         version: data.version,
@@ -61,6 +83,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         success: false,
         error: testErr.message,
+        output: `Connection Error: ${testErr.message}`,
       });
     }
   }

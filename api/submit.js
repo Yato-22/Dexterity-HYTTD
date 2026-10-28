@@ -44,18 +44,21 @@ export default async function handler(req, res) {
 
   // 2. Fetch private hidden tests from Firestore
   let hiddenTests = [];
-  let timeLimitMs = problem.timeLimitMs || 2000;
+  let rawTimeLimit = problem.timeLimitMs || 2000;
 
   try {
     const privDoc = await db.collection('problems_private').doc(problemId).get();
     if (privDoc.exists) {
       const pData = privDoc.data();
       hiddenTests = pData.hiddenTests || [];
-      if (pData.timeLimitMs) timeLimitMs = pData.timeLimitMs;
+      if (pData.timeLimitMs) rawTimeLimit = pData.timeLimitMs;
     }
   } catch (err) {
     console.error('Failed to load private tests for', problemId, err.message);
   }
+
+  // Use run_timeout = min(problem.timeLimitMs, 3000). Keep 2s target for normal problems.
+  const timeLimitMs = Math.min(Number(rawTimeLimit) || 2000, 3000);
 
   const sampleTests = (problem.samples || []).map((s) => ({
     ...s,
@@ -163,6 +166,7 @@ export default async function handler(req, res) {
       passedCount,
       totalCount,
       failingCase: failureDetails,
+      error: failureDetails?.message,
     });
   }
 
@@ -262,3 +266,4 @@ export default async function handler(req, res) {
     });
   }
 }
+

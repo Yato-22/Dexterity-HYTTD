@@ -25,18 +25,22 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Code size exceeds maximum 64KB.' });
   }
 
+  // Enforce run_timeout = min(problem.timeLimitMs, 3000). Keep 2s target for normal problems.
+  const effectiveTimeLimit = Math.min(Number(timeLimitMs) || 2000, 3000);
+
   try {
     const result = await executePiston({
       language,
       code,
       stdin,
-      timeLimitMs: Math.min(5000, Number(timeLimitMs) || 2000),
+      timeLimitMs: effectiveTimeLimit,
     });
 
     return res.status(200).json(result);
   } catch (err) {
-    console.error('Run execution error:', err);
-    return res.status(500).json({
+    console.error('Run execution error:', err.message);
+    const statusCode = err.status === 400 ? 400 : (err.status || 500);
+    return res.status(statusCode).json({
       error: err.message,
       stdout: '',
       stderr: err.message,
@@ -44,3 +48,4 @@ export default async function handler(req, res) {
     });
   }
 }
+

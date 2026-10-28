@@ -147,11 +147,16 @@ export default function CodingScreen() {
             language,
             code,
             stdin: tc.input || '',
-            timeLimitMs: problem.timeLimitMs || 2000,
+            timeLimitMs: Math.min(problem.timeLimitMs || 2000, 3000),
           }),
         });
 
         const res = await response.json();
+
+        if (!response.ok || res.error) {
+          fatalError = { type: 'RUNTIME_ERROR', message: res.error || res.stderr || 'Execution failed' };
+          break;
+        }
 
         if (res.compileError) {
           fatalError = { type: 'COMPILATION_ERROR', message: res.compileError };
@@ -221,6 +226,12 @@ export default function CodingScreen() {
 
       const res = await response.json();
       setIsRunning(false);
+
+      if (!response.ok || res.error) {
+        setVerdict('RUNTIME_ERROR');
+        setResultData({ mode: 'test', error: res.error || res.stderr || 'Execution failed', timeMs: res.timeMs });
+        return;
+      }
 
       if (res.compileError) {
         setVerdict('COMPILATION_ERROR');
