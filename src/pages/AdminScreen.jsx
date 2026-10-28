@@ -416,7 +416,7 @@ export default function AdminScreen() {
           </div>
         )}
 
-        {/* Top 2 Columns: Battle Controls & Piston Runner */}
+        {/* Top 2 Columns: Battle Controls & Runner Engine */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Panel 1: Battle Controls */}
           <div className="compact-wood-board border-[2px] border-[#684C35] rounded-xl p-5 shadow-solid-board space-y-4">
@@ -490,12 +490,12 @@ export default function AdminScreen() {
             </div>
           </div>
 
-          {/* Panel 2: Piston Code Execution Runner */}
+          {/* Panel 2: Code Execution Engine */}
           <div className="compact-wood-board border-[2px] border-[#684C35] rounded-xl p-5 shadow-solid-board space-y-4">
             <div className="flex items-center justify-between border-b border-[#4A3423] pb-2.5">
               <div className="flex items-center gap-2 font-heading font-bold text-base text-[#FFD700]">
                 <Terminal className="w-5 h-5 text-[#FF7A1A]" />
-                <span>PISTON CODE RUNNER URL</span>
+                <span>CODE RUNNER ENGINE URL</span>
               </div>
               <span className="text-[10px] text-[#A68F74] font-bold">Stored in config/runner</span>
             </div>
@@ -507,7 +507,7 @@ export default function AdminScreen() {
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="https://piston.yourdomain.com or http://localhost:2000"
+                  placeholder="http://localhost:2000"
                   value={runnerUrl}
                   onChange={(e) => setRunnerUrl(e.target.value)}
                   className="flex-1 px-3 py-2 bg-[#140E0A] border border-[#5A402E] focus:border-[#FF7A1A] focus:outline-none rounded text-xs text-[#FFF] font-mono"
@@ -529,7 +529,7 @@ export default function AdminScreen() {
                 </button>
               </div>
               <p className="text-[10px] text-[#8C745E]">
-                Must implement Piston v2 API: <code className="text-[#FFB347]">POST /api/v2/execute</code>. Supports Python, C, C++, and Java.
+                Backend routes code executions to this endpoint. Supports Python, C, C++, and Java.
               </p>
             </div>
 
@@ -660,3 +660,4 @@ export default function AdminScreen() {
     </div>
   );
 }
+

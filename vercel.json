@@ -1,3 +1,11 @@
 {
-  "framework": "vite"
+  "framework": "vite",
+  "functions": {
+    "api/submit.js": {
+      "maxDuration": 60
+    },
+    "api/run.js": {
+      "maxDuration": 60
+    }
+  }
 }

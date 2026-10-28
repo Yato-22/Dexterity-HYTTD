@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import { useGame } from '../context/GameContext';
 import { PROBLEMS_BY_ID } from '../data/problems';
-import { runCode, compareOutputs } from '../services/judge';
+import { compareOutputs } from '../services/judge';
 import HPBar from '../components/HPBar';
 import { RopeSegment, RopeKnot } from '../components/RopeGraphic';
 import {

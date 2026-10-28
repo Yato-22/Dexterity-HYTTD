@@ -40,18 +40,38 @@ const LANGUAGE_MAP = {
   java: { pistonLang: 'java', fileName: 'Main.java' },
 };
 
+/**
+ * Builds the Piston request payload with enforced timeouts:
+ * - allowed = timeLimitMs, Java gets timeLimitMs * 2 (JVM startup)
+ * - run_timeout = min(allowed, 3000)
+ * - compile_timeout = 10000
+ * - memory limit fields omitted
+ */
 export function buildPistonPayload({ language, code, stdin = '', timeLimitMs = 2000 }) {
   const langConfig = LANGUAGE_MAP[language?.toLowerCase()] || LANGUAGE_MAP.python;
+  const isJava = langConfig.pistonLang === 'java';
+  const baseTimeLimit = Number(timeLimitMs) > 0 ? Number(timeLimitMs) : 2000;
+  const allowed = isJava ? baseTimeLimit * 2 : baseTimeLimit;
+  const runTimeout = Math.min(allowed, 3000);
+
   return {
-    language: langConfig.pistonLang,
-    version: '*',
-    files: [{ name: langConfig.fileName, content: code }],
-    stdin: stdin || '',
-    run_timeout: Math.min(timeLimitMs || 2000, 3000),
-    compile_timeout: 10000,
+    payload: {
+      language: langConfig.pistonLang,
+      version: '*',
+      files: [{ name: langConfig.fileName, content: code }],
+      stdin: stdin || '',
+      run_timeout: runTimeout,
+      compile_timeout: 10000,
+    },
+    allowed,
+    runTimeout,
   };
 }
 
+/**
+ * Executes code on Piston using Piston's own run measurements.
+ * All Piston requests (/api/run, /api/submit, admin Test runner) must use this helper.
+ */
 export async function executePiston({
   language,
   code,
@@ -67,16 +87,18 @@ export async function executePiston({
   // Normalize URL in case user pasted with /api/v2/execute or trailing slashes
   runnerUrl = runnerUrl.replace(/\/+$/, '').replace(/\/api\/v2\/execute\/?$/, '');
 
-  const payload = buildPistonPayload({ language, code, stdin, timeLimitMs });
-  const runTimeout = payload.run_timeout;
-  const isPython = payload.language === 'python';
+  const { payload, allowed, runTimeout } = buildPistonPayload({
+    language,
+    code,
+    stdin,
+    timeLimitMs,
+  });
 
-  // Maximum HTTP request timeout: compile timeout (up to 10s) + run timeout (up to 3s) + network buffer
-  const httpTimeoutMs = (isPython ? runTimeout : runTimeout + 10000) + 3000;
+  // Generous HTTP timeout for compile (up to 10s) + run (up to 3s) + network tunnel latency
+  const httpTimeoutMs = 25000;
   const controller = new AbortController();
   const timeoutTimer = setTimeout(() => controller.abort(), httpTimeoutMs);
 
-  const startTime = Date.now();
   let response;
   try {
     response = await fetch(`${runnerUrl}/api/v2/execute`, {
@@ -90,11 +112,11 @@ export async function executePiston({
     if (err.name === 'AbortError') {
       return {
         stdout: '',
-        stderr: `Time Limit Exceeded (> ${runTimeout}ms)`,
+        stderr: `Time Limit Exceeded (> ${allowed}ms)`,
         exitCode: 124,
         compileError: null,
         isTimeout: true,
-        timeMs: runTimeout,
+        timeMs: allowed,
       };
     }
     throw new Error(`Runner connection error (${runnerUrl}): ${err.message}`);
@@ -102,9 +124,7 @@ export async function executePiston({
     clearTimeout(timeoutTimer);
   }
 
-  const elapsedMs = Date.now() - startTime;
-
-  // If Piston returns non-2xx (especially HTTP 400), extract its exact error message
+  // If Piston returns non-2xx (e.g. HTTP 400), surface its message directly
   if (!response.ok) {
     let errorDetail = `Piston HTTP ${response.status}`;
     try {
@@ -136,15 +156,28 @@ export async function executePiston({
       exitCode: data.compile.code || 1,
       compileError: data.compile.stderr || data.compile.output || 'Compilation error',
       isTimeout: false,
-      timeMs: elapsedMs,
+      timeMs: 0,
     };
   }
 
   const runResult = data.run || {};
+
+  // Extract Piston's own run measurement: runResult.wall_time (fall back to cpu_time)
+  let rawRunTime = runResult.wall_time ?? runResult.cpu_time ?? 0;
+  // If reported in seconds (e.g. 0.045s), convert to integer milliseconds
+  let runTimeMs = 0;
+  if (typeof rawRunTime === 'number' && rawRunTime > 0) {
+    runTimeMs = (rawRunTime < 20 && !Number.isInteger(rawRunTime))
+      ? Math.round(rawRunTime * 1000)
+      : Math.round(rawRunTime);
+  }
+
+  // Mark Time Limit Exceeded only if the signal is SIGKILL or SIGTERM,
+  // or run wall_time > allowed + 200 ms
   const isTimeout =
     runResult.signal === 'SIGKILL' ||
     runResult.signal === 'SIGTERM' ||
-    elapsedMs > timeLimitMs + 500;
+    (runTimeMs > 0 && runTimeMs > allowed + 200);
 
   return {
     stdout: runResult.stdout || '',
@@ -152,6 +185,6 @@ export async function executePiston({
     exitCode: runResult.code !== undefined ? runResult.code : 0,
     compileError: null,
     isTimeout,
-    timeMs: elapsedMs,
+    timeMs: runTimeMs || (isTimeout ? allowed : 0),
   };
 }

@@ -31,7 +31,7 @@ const GameContext = createContext(null);
 
 const STORAGE_KEY_TOKEN = 'techflix_token';
 const STORAGE_KEY_TEAM = 'techflix_team';
-const STORAGE_KEY_CODE = 'techflix_hyttd_user_code_v1';
+const STORAGE_KEY_CODE = 'techflix_hyttd_user_code_v2';
 const STORAGE_KEY_INVENTORY = 'techflix_hyttd_inventory_v1';
 
 export function GameProvider({ children }) {
