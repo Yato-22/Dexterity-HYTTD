@@ -201,7 +201,7 @@ export async function runCode({ language, code, stdin }) {
           files: [{ name: fileName, content: code }],
           stdin: stdin || "",
           run_timeout: 2000,
-          run_memory_limit: 256 * 1024 * 1024,
+          compile_timeout: 10000,
         }),
       });
 

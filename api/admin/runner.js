@@ -32,58 +32,37 @@ export default async function handler(req, res) {
 
     try {
       const testPythonCode = 'import sys\nprint("Piston Runner Online! Python", sys.version.split()[0])';
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 8000);
-
-      // run_timeout <= 3000, compile_timeout <= 10000, memory limits omitted
-      const response = await fetch(`${testUrl}/api/v2/execute`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        signal: controller.signal,
-        body: JSON.stringify({
-          language: 'python',
-          version: '*',
-          files: [{ name: 'main.py', content: testPythonCode }],
-          stdin: '',
-          run_timeout: 2000,
-          compile_timeout: 10000,
-        }),
+      const result = await executePiston({
+        language: 'python',
+        code: testPythonCode,
+        stdin: '',
+        timeLimitMs: 2000,
+        runnerUrl: testUrl,
       });
 
-      clearTimeout(timer);
-
-      // If Piston returns 400 or other non-2xx, extract its exact message instead of failing silently
-      if (!response.ok) {
-        let errorMsg = `HTTP ${response.status}`;
-        try {
-          const errData = await response.json();
-          errorMsg = errData.message || errData.error || JSON.stringify(errData);
-        } catch (_) {
-          const txt = await response.text().catch(() => '');
-          if (txt) errorMsg = txt.trim();
-        }
+      if (result.compileError) {
         return res.status(200).json({
           success: false,
-          status: response.status,
-          error: errorMsg,
-          output: `Piston Error (${response.status}): ${errorMsg}`,
+          status: 200,
+          error: result.compileError,
+          output: `Compilation Error: ${result.compileError}`,
         });
       }
 
-      const data = await response.json();
-      const output = data.run?.stdout || data.run?.output || data.run?.stderr || JSON.stringify(data);
+      const isSuccess = result.exitCode === 0;
+      const output = (result.stdout || result.stderr || '').trim();
 
       return res.status(200).json({
-        success: data.run?.code === 0,
-        status: response.status,
-        output: output.trim(),
-        version: data.version,
+        success: isSuccess,
+        status: 200,
+        output: output || (isSuccess ? 'Piston Runner Online!' : 'Execution failed'),
       });
     } catch (testErr) {
       return res.status(200).json({
         success: false,
+        status: testErr.status || 400,
         error: testErr.message,
-        output: `Connection Error: ${testErr.message}`,
+        output: `Runner Error (${testErr.status || 400}): ${testErr.message}`,
       });
     }
   }

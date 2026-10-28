@@ -40,6 +40,18 @@ const LANGUAGE_MAP = {
   java: { pistonLang: 'java', fileName: 'Main.java' },
 };
 
+export function buildPistonPayload({ language, code, stdin = '', timeLimitMs = 2000 }) {
+  const langConfig = LANGUAGE_MAP[language?.toLowerCase()] || LANGUAGE_MAP.python;
+  return {
+    language: langConfig.pistonLang,
+    version: '*',
+    files: [{ name: langConfig.fileName, content: code }],
+    stdin: stdin || '',
+    run_timeout: Math.min(timeLimitMs || 2000, 3000),
+    compile_timeout: 10000,
+  };
+}
+
 export async function executePiston({
   language,
   code,
@@ -55,38 +67,23 @@ export async function executePiston({
   // Normalize URL in case user pasted with /api/v2/execute or trailing slashes
   runnerUrl = runnerUrl.replace(/\/+$/, '').replace(/\/api\/v2\/execute\/?$/, '');
 
-  const langConfig = LANGUAGE_MAP[language?.toLowerCase()] || LANGUAGE_MAP.python;
-
-  // Enforce run_timeout = min(problem.timeLimitMs, 3000). Keep 2000ms target for normal problems.
-  const targetTimeLimit = Number(timeLimitMs) > 0 ? Number(timeLimitMs) : 2000;
-  const runTimeout = Math.min(targetTimeLimit, 3000);
+  const payload = buildPistonPayload({ language, code, stdin, timeLimitMs });
+  const runTimeout = payload.run_timeout;
+  const isPython = payload.language === 'python';
 
   // Maximum HTTP request timeout: compile timeout (up to 10s) + run timeout (up to 3s) + network buffer
-  const httpTimeoutMs = (langConfig.pistonLang === 'python' ? runTimeout : runTimeout + 10000) + 3000;
+  const httpTimeoutMs = (isPython ? runTimeout : runTimeout + 10000) + 3000;
   const controller = new AbortController();
   const timeoutTimer = setTimeout(() => controller.abort(), httpTimeoutMs);
 
   const startTime = Date.now();
   let response;
   try {
-    // Piston POST /api/v2/execute
-    // - run_timeout <= 3000
-    // - compile_timeout <= 10000
-    // - run_memory_limit and compile_memory_limit omitted
-    const requestBody = {
-      language: langConfig.pistonLang,
-      version: '*',
-      files: [{ name: langConfig.fileName, content: code }],
-      stdin: stdin || '',
-      run_timeout: runTimeout,
-      compile_timeout: 10000,
-    };
-
     response = await fetch(`${runnerUrl}/api/v2/execute`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       signal: controller.signal,
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify(payload),
     });
   } catch (err) {
     clearTimeout(timeoutTimer);
