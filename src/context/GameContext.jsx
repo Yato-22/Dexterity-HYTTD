@@ -106,7 +106,6 @@ export function GameProvider({ children }) {
   const [sparks, setSparks] = useState([]);
   const [isScreenShaking, setIsScreenShaking] = useState(false);
   const [isRoaring, setIsRoaring] = useState(false);
-  const [autoSimulate, setAutoSimulate] = useState(false);
 
   // Weapon firing state
   const [pendingFireEvents, setPendingFireEvents] = useState([]);
@@ -126,12 +125,12 @@ export function GameProvider({ children }) {
     }, 450);
   }, []);
 
-  // Spawn floating damage text
-  const spawnFloatingDamage = useCallback((damage, crit = false, x = 50, y = 45) => {
+  // Spawn floating damage text (exact damage, no crit text)
+  const spawnFloatingDamage = useCallback((damage, x = 50, y = 45) => {
     const id = Date.now() + Math.random();
     setFloatingDamages((prev) => [
       ...prev.slice(-6),
-      { id, damage, crit, x, y },
+      { id, damage, x, y },
     ]);
     setTimeout(() => {
       setFloatingDamages((prev) => prev.filter((d) => d.id !== id));
@@ -191,7 +190,7 @@ export function GameProvider({ children }) {
       const impactX = coords?.x || 50;
       const impactY = coords?.y || 45;
 
-      spawnFloatingDamage(event.actualDamage, event.isCrit, impactX, impactY);
+      spawnFloatingDamage(event.actualDamage, impactX, impactY);
       spawnSparkBurst(impactX, impactY);
     },
     [spawnFloatingDamage, spawnSparkBurst]
@@ -338,8 +337,7 @@ export function GameProvider({ children }) {
                   id: 'fire-feed-' + newDoc.id + '-' + Date.now(),
                   weaponKey,
                   targetZone,
-                  actualDamage: data.damage || 5,
-                  isCrit: true,
+                  actualDamage: data.damage || WEAPONS[weaponKey]?.damage || 5,
                   actingTeam: { name: data.teamName || 'Viking' },
                   teamId: 'live',
                   weaponVerb: WEAPONS[weaponKey]?.verb || 'struck',
@@ -426,8 +424,7 @@ export function GameProvider({ children }) {
       }));
 
       const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
-      const isCrit = Math.random() < weapon.critRate;
-      const actualDamage = isCrit ? weapon.damage + 3 : weapon.damage;
+      const actualDamage = weapon.damage; // Damage equals exact weapon/problem damage
       const targetPart =
         DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
       const actingTeam = userTeam || teams[0];
@@ -441,7 +438,6 @@ export function GameProvider({ children }) {
         weaponKey,
         targetZone,
         actualDamage,
-        isCrit,
         actingTeam,
         teamId: userTeam?.id || teamId,
         weaponVerb: weapon.verb,
@@ -500,8 +496,6 @@ export function GameProvider({ children }) {
     sparks,
     isScreenShaking,
     isRoaring,
-    autoSimulate,
-    setAutoSimulate,
 
     // Projectile Animation State
     activeFlashZone,

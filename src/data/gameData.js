@@ -91,7 +91,6 @@ export const WEAPONS = {
     damage: 2,
     soundName: 'slash',
     verb: 'sliced',
-    critRate: 0.1,
     desc: 'Swift precision strikes on unarmored scales',
   },
   axe: {
@@ -102,7 +101,6 @@ export const WEAPONS = {
     damage: 5,
     soundName: 'cleave',
     verb: 'cleaved',
-    critRate: 0.15,
     desc: 'Heavy iron blow shattering thick dragon hide',
   },
   catapult: {
@@ -113,7 +111,6 @@ export const WEAPONS = {
     damage: 7,
     soundName: 'smash',
     verb: 'bombarded',
-    critRate: 0.2,
     desc: 'Brimstone boulders targeting dragon wings',
   },
   ballista: {
@@ -124,7 +121,6 @@ export const WEAPONS = {
     damage: 10,
     soundName: 'pierce',
     verb: 'impaled',
-    critRate: 0.25,
     desc: 'Black iron bolt aimed straight at the heart',
   },
 };
@@ -286,7 +282,6 @@ export const INITIAL_FEED = [
     damage: 5,
     text: "Night Raiders's battleaxe cleaved the left wing for 5!",
     time: "32s ago",
-    crit: false,
   },
   {
     id: "f-2",
@@ -296,7 +291,6 @@ export const INITIAL_FEED = [
     damage: 7,
     text: "Team Alpha's catapult bombarded the fiery maw for 7!",
     time: "24s ago",
-    crit: false,
   },
   {
     id: "f-3",
@@ -306,7 +300,6 @@ export const INITIAL_FEED = [
     damage: 2,
     text: "Ragnarok Devs's dagger sliced the chest crest for 2!",
     time: "18s ago",
-    crit: false,
   },
   {
     id: "f-4",
@@ -314,9 +307,8 @@ export const INITIAL_FEED = [
     weapon: "ballista",
     part: "the neck spine",
     damage: 10,
-    text: "Viking Byte's ballista impaled the neck spine for 10! CRITICAL STRIKE!",
+    text: "Viking Byte's ballista impaled the neck spine for 10!",
     time: "11s ago",
-    crit: true,
   },
   {
     id: "f-5",
@@ -326,7 +318,6 @@ export const INITIAL_FEED = [
     damage: 2,
     text: "Night Raiders's dagger sliced the barbed tail for 2!",
     time: "6s ago",
-    crit: false,
   },
   {
     id: "f-6",
@@ -336,7 +327,6 @@ export const INITIAL_FEED = [
     damage: 5,
     text: "Iron Forgers's battleaxe cleaved the underbelly scales for 5!",
     time: "Just now",
-    crit: false,
   },
 ];
 

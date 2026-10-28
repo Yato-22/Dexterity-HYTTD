@@ -35,10 +35,8 @@ export default function ArenaScreen() {
     isRoaring,
     lastFeedId,
     lastLeaderboardUpdate,
-    setAutoSimulate,
     inventory,
     dealDamage,
-    resetDragon,
     zoneHits,
     activeFlashZone,
     stuckBolts,
@@ -70,28 +68,6 @@ export default function ArenaScreen() {
     window.addEventListener('resize', updateMeasurements);
     return () => window.removeEventListener('resize', updateMeasurements);
   }, []);
-
-  // Keyboard Shortcuts: S = fire random weapon, R = reset dragon, P = pause auto-battle
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
-
-      if (e.key === 's' || e.key === 'S') {
-        const priorityOrder = ['ballista', 'catapult', 'axe', 'dagger'];
-        const weaponToFire = priorityOrder.find((w) => (inventory?.[w] || 0) > 0);
-        if (weaponToFire) {
-          dealDamage(userTeam.id, weaponToFire);
-        }
-      } else if (e.key === 'r' || e.key === 'R') {
-        resetDragon();
-      } else if (e.key === 'p' || e.key === 'P') {
-        setAutoSimulate((prev) => !prev);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [dealDamage, resetDragon, setAutoSimulate, userTeam.id, inventory]);
 
   return (
     <div

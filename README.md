@@ -221,15 +221,14 @@ All requests and responses use JSON. Authenticated endpoints require the header 
 
 ---
 
-## 🎮 Arena Hotkeys & Controls
+## 🎮 Arena Controls & Submissions
 
-| Key / Action | Target | Description |
+| Action | Target | Description |
 | :--- | :--- | :--- |
-| <kbd>S</kbd> | Arena Stage | Simulates instant battleaxe strike (-5 HP) with recoil & particle bursts. |
-| <kbd>R</kbd> | Arena Stage | Quick resets battle arena state to 100 HP. |
-| <kbd>P</kbd> | Arena Stage | Toggles battle simulation pause / resume. |
-| **Dragon Click** | The Red Death | Deals interactive damage from your warband with audio/visual feedback. |
-| **Weapon Cards** | Tome of Trials | Opens the problem solving screen for the selected challenge. |
+| **Solve Challenges** | Tome of Trials Cards | Opens the coding workspace for the selected trial. |
+| **Accepted Submissions** | Coding Workspace | Deals deterministic damage equal to the problem XP directly to the dragon. |
+| **Inventory Weapon Stations** | Weapon Stations / Stage | Fires crafted weapons unlocked by your warband. |
+| **Toggle Audio** | Event Plaque Horn | Mutes or unmutes arena combat audio effects. |
 
 ---
 

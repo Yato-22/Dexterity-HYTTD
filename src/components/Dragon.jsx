@@ -159,7 +159,7 @@ export default function Dragon({
               <motion.div
                 key={dmg.id}
                 initial={{ opacity: 0, y: 0, scale: 0.6 }}
-                animate={{ opacity: 1, y: -65, scale: dmg.crit ? 1.5 : 1.25 }}
+                animate={{ opacity: 1, y: -65, scale: 1.25 }}
                 exit={{ opacity: 0, y: -95, scale: 0.9 }}
                 transition={{ duration: 0.85, ease: "easeOut" }}
                 style={{
@@ -173,15 +173,12 @@ export default function Dragon({
               >
                 <span
                   className={`heading-shadow ${
-                    dmg.crit
-                      ? 'text-[#FFD700] text-2xl 2xl:text-3xl'
-                      : dmg.damage >= 7
+                    dmg.damage >= 7
                       ? 'text-[#FF6B6B] text-xl 2xl:text-2xl'
                       : 'text-[#FFB347] text-lg 2xl:text-xl'
                   }`}
                 >
                   -{dmg.damage}
-                  {dmg.crit && " CRIT!"}
                 </span>
               </motion.div>
             ))}

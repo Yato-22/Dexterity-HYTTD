@@ -60,7 +60,7 @@ export default function LiveFeed({ feed = [], lastFeedId = null, isHit = false }
                   }`}
                 >
                   <div className="flex items-center gap-1.5 min-w-0 font-sans">
-                    <span className="text-xs flex-shrink-0">{item.crit ? '💥' : '⚔️'}</span>
+                    <span className="text-xs flex-shrink-0">⚔️</span>
                     <span className="truncate text-[#FFF8ED]">
                       {item.customText ? (
                         <span>{item.customText}</span>
