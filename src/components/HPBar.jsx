@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Flame, Skull } from 'lucide-react';
 import { RopeSegment, RopeKnot } from './RopeGraphic';
 
-export default function HPBar({ currentHp, maxHp = 100, dragonName = "THE RED DEATH", isDefeated = false, isHit = false }) {
+export default function HPBar({ currentHp, maxHp = 200, dragonName = "THE RED DEATH", isDefeated = false, isHit = false }) {
   const hpBarRef = useRef(null);
   const [topOffset, setTopOffset] = useState(14);
 

@@ -13,9 +13,9 @@ export const ASSET_PATHS = {
 export const DRAGON_CONFIG = {
   name: "THE RED DEATH",
   title: "Gargantuan Sovereign of Dragon Mountain",
-  maxHp: 100,
-  initialHp: 84,
-  roarThresholds: [75, 50, 25],
+  maxHp: 200,
+  initialHp: 200,
+  roarThresholds: [150, 100, 50],
 };
 
 // 4 adjustable hit zones as percent-based rectangles over the dragon image
@@ -70,7 +70,7 @@ export const ANIMATION_TIMINGS = {
   ballistaFlightMs: 380,
   queueStaggerMs: 220,
   maxActiveProjectiles: 6,
-  hitFlinchMs: 350,
+  hitFlinchMs: 520,
   zoneFlashMs: 400,
   stuckBoltDurationMs: 4000,
   roarDurationMs: 2400,

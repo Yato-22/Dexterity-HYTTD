@@ -9,7 +9,7 @@ import {
 
 export default function Dragon({
   hp,
-  maxHp = 100,
+  maxHp = 200,
   isHit = false,
   floatingDamages = [],
   sparks = [],
@@ -52,6 +52,22 @@ export default function Dragon({
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-end select-none overflow-visible pb-12 sm:pb-16 2xl:pb-20">
       
+      {/* SVG Filter for Radiant Crimson Red Damage Flash */}
+      <svg className="absolute w-0 h-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <defs>
+          <filter id="dragon-red-flash" colorInterpolationFilters="sRGB">
+            <feColorMatrix
+              type="matrix"
+              values="
+                2.0  0.3  0.3  0   0.55
+                0.05 0.0  0.0  0   0.0
+                0.05 0.0  0.0  0   0.0
+                0    0    0    1   0"
+            />
+          </filter>
+        </defs>
+      </svg>
+      
       {/* Roar Announcement Banner on threshold hit (75%, 50%, 25%) */}
       <AnimatePresence>
         {isRoaring && (
@@ -73,69 +89,43 @@ export default function Dragon({
         )}
       </AnimatePresence>
 
-      {/* Main Half-Body Dragon Container */}
+      {/* Main Dragon Container: Stays continuously visible, NO infinite loop, disappears ONLY when defeated */}
       <motion.div
         onClick={onDragonClick}
-        animate={
-          isDefeated
-            ? {
-                y: 220,
-                rotate: 6,
-                scale: 0.85,
-                opacity: 0.15,
-                filter: "grayscale(80%) brightness(0.4)",
-              }
-            : isRoaring
-            ? {
-                y: -24,
-                scale: 1.04,
-                rotate: [-0.5, 0.5, -0.5],
-              }
-            : isHit
-            ? {
-                x: [-10, 12, -8, 6, -3, 0],
-                y: [4, -6, 5, -2, 1, 0],
-                scale: 0.98,
-              }
-            : {
-                scale: [1, 1.018, 1],
-                y: [0, -6, 0],
-                rotate: [-0.5, 0.5, -0.5],
-              }
-        }
+        initial={{ opacity: 1, y: 0, scale: 1 }}
+        animate={{
+          opacity: isDefeated ? 0 : 1,
+          y: isDefeated ? 350 : isRoaring ? -14 : 0,
+          scale: isDefeated ? 0.82 : isRoaring ? 1.03 : 1,
+        }}
         transition={
           isDefeated
-            ? { duration: 2.5, ease: "easeInOut" }
-            : isRoaring
-            ? { duration: 0.6, ease: "easeOut" }
-            : isHit
-            ? { duration: 0.35, ease: "easeInOut" }
-            : {
-                repeat: Infinity,
-                duration: 5.2,
-                ease: "easeInOut",
-              }
+            ? { duration: 2.8, ease: "easeInOut" }
+            : { duration: 0.5, ease: "easeOut" }
         }
         className="relative z-10 w-full flex items-end justify-center sword-cursor"
         style={{ transformOrigin: "bottom center" }}
       >
-        {/* Dragon Graphic Wrapper with 4 Hit Zones and Overlays */}
-        <div className="relative w-auto max-w-full flex items-end justify-center">
-          {/* Dragon Image (about 55% of screen height) - turns red on hit */}
+        {/* Dragon Graphic Wrapper with continuous GPU-accelerated breathing */}
+        <div className={`relative w-auto max-w-full flex items-end justify-center ${isDefeated ? '' : 'dragon-breathing'}`}>
+          {/* Base Dragon Image: Stays solidly visible without blinking */}
           <img
             src={ASSET_PATHS.dragonHalf || '/dragon.png'}
             alt="The Dreaded Red Death"
-            style={{
-              maskImage: 'linear-gradient(to bottom, black 92%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 92%, transparent 100%)',
-            }}
-            className={`h-[48vh] sm:h-[52vh] 2xl:h-[56vh] max-h-[580px] w-auto object-contain transition-all duration-150 pointer-events-none drop-shadow-[0_8px_24px_rgba(0,0,0,0.85)] ${
-              isHit
-                ? 'filter brightness-110 contrast-125 sepia hue-rotate-[315deg] saturate-[800%] drop-shadow-[0_0_35px_rgba(239,68,68,0.95)]'
-                : hpPercent <= 25
-                ? 'drop-shadow-[0_0_24px_rgba(217,48,37,0.7)]'
-                : ''
+            className="h-[48vh] sm:h-[52vh] 2xl:h-[56vh] max-h-[580px] w-auto object-contain pointer-events-none drop-shadow-[0_8px_24px_rgba(0,0,0,0.85)]"
+          />
+
+          {/* Red Hit Overlay: Fades in/out smoothly via opacity only (zero blinking, zero re-rasterization) */}
+          <img
+            src={ASSET_PATHS.dragonHalf || '/dragon.png'}
+            alt=""
+            aria-hidden="true"
+            className={`absolute inset-0 h-[48vh] sm:h-[52vh] 2xl:h-[56vh] max-h-[580px] w-auto object-contain pointer-events-none transition-opacity duration-150 ${
+              isHit ? 'opacity-100' : 'opacity-0'
             }`}
+            style={{
+              filter: 'url(#dragon-red-flash) drop-shadow(0 0 45px rgba(255,30,30,1))',
+            }}
           />
 
           {/* =============================================================== */}

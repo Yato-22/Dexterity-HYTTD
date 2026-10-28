@@ -93,6 +93,28 @@
   z-index: 10;
 }
 
+/* Dragon gentle breathing and head sway (pure CSS, continuous, never blinks or disappears) */
+@keyframes dragonBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1) rotate(-0.8deg);
+  }
+  35% {
+    transform: translateY(-8px) scale(1.02) rotate(0.4deg);
+  }
+  50% {
+    transform: translateY(-14px) scale(1.035) rotate(1.1deg);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.018) rotate(-0.2deg);
+  }
+}
+
+.dragon-breathing {
+  animation: dragonBreathe 4.6s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
 /* ========================================================================= */
 /* BROKEN OLD WOODEN PLANK SYSTEM */
 /* ========================================================================= */

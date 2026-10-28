@@ -23,10 +23,10 @@ export function GameProvider({ children }) {
       const saved = localStorage.getItem(STORAGE_KEY_STATE);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (typeof parsed.hp === 'number') return parsed.hp;
+        if (typeof parsed.hp === 'number' && parsed.maxHp === DRAGON_CONFIG.maxHp) return parsed.hp;
       }
     } catch {}
-    return DRAGON_CONFIG.initialHp;
+    return DRAGON_CONFIG.maxHp;
   });
 
   const [teams, setTeams] = useState(() => {
@@ -92,7 +92,7 @@ export function GameProvider({ children }) {
   const [isRoaring, setIsRoaring] = useState(false);
   const [lastFeedId, setLastFeedId] = useState(null);
   const [lastLeaderboardUpdate, setLastLeaderboardUpdate] = useState(null);
-  const [autoSimulate, setAutoSimulate] = useState(true);
+  const [autoSimulate, setAutoSimulate] = useState(false);
 
   // Weapon firing & dragon damage reaction state
   const [pendingFireEvents, setPendingFireEvents] = useState([]);
@@ -107,7 +107,7 @@ export function GameProvider({ children }) {
     try {
       localStorage.setItem(
         STORAGE_KEY_STATE,
-        JSON.stringify({ hp, teams, feed, solvedProblems, zoneHits })
+        JSON.stringify({ hp, maxHp: DRAGON_CONFIG.maxHp, teams, feed, solvedProblems, zoneHits })
       );
     } catch (e) {
       console.warn("Could not save game state to localStorage:", e);
