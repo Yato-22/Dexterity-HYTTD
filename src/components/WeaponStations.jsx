@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 export default function WeaponStations({
   recoilingStation = null, // 'dagger' | 'axe' | 'catapult' | 'ballista'
   isDefeated = false,
+  inventory = { dagger: 0, axe: 0, catapult: 0, ballista: 0 },
   onStationClick,
 }) {
   const stations = [
@@ -128,6 +129,19 @@ export default function WeaponStations({
           <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
             2 XP
           </span>
+          {/* Inventory Count Pill */}
+          <div
+            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
+              (inventory.dagger || 0) > 0
+                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
+                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
+            }`}
+          >
+            <span>x{inventory.dagger || 0}</span>
+            {(inventory.dagger || 0) > 0 && (
+              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
+            )}
+          </div>
         </div>
       </div>
 
@@ -231,6 +245,19 @@ export default function WeaponStations({
           <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
             5 XP
           </span>
+          {/* Inventory Count Pill */}
+          <div
+            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
+              (inventory.axe || 0) > 0
+                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
+                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
+            }`}
+          >
+            <span>x{inventory.axe || 0}</span>
+            {(inventory.axe || 0) > 0 && (
+              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
+            )}
+          </div>
         </div>
       </div>
 
@@ -378,6 +405,19 @@ export default function WeaponStations({
           <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
             7 XP
           </span>
+          {/* Inventory Count Pill */}
+          <div
+            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
+              (inventory.catapult || 0) > 0
+                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
+                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
+            }`}
+          >
+            <span>x{inventory.catapult || 0}</span>
+            {(inventory.catapult || 0) > 0 && (
+              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
+            )}
+          </div>
         </div>
       </div>
 
@@ -515,6 +555,19 @@ export default function WeaponStations({
           <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
             10 XP
           </span>
+          {/* Inventory Count Pill */}
+          <div
+            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
+              (inventory.ballista || 0) > 0
+                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
+                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
+            }`}
+          >
+            <span>x{inventory.ballista || 0}</span>
+            {(inventory.ballista || 0) > 0 && (
+              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
+            )}
+          </div>
         </div>
       </div>
     </div>

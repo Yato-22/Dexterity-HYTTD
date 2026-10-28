@@ -35,6 +35,7 @@ export default function ArenaScreen() {
     lastFeedId,
     lastLeaderboardUpdate,
     setAutoSimulate,
+    inventory,
     dealDamage,
     resetDragon,
     zoneHits,
@@ -75,9 +76,11 @@ export default function ArenaScreen() {
       if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
       if (e.key === 's' || e.key === 'S') {
-        const weapons = ['dagger', 'axe', 'catapult', 'ballista'];
-        const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
-        dealDamage(userTeam.id, randomWeapon);
+        const priorityOrder = ['ballista', 'catapult', 'axe', 'dagger'];
+        const weaponToFire = priorityOrder.find((w) => (inventory?.[w] || 0) > 0);
+        if (weaponToFire) {
+          dealDamage(userTeam.id, weaponToFire);
+        }
       } else if (e.key === 'r' || e.key === 'R') {
         resetDragon();
       } else if (e.key === 'p' || e.key === 'P') {
@@ -87,7 +90,7 @@ export default function ArenaScreen() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [dealDamage, resetDragon, setAutoSimulate, userTeam.id]);
+  }, [dealDamage, resetDragon, setAutoSimulate, userTeam.id, inventory]);
 
   return (
     <div
@@ -298,9 +301,11 @@ export default function ArenaScreen() {
                 activeFlashZone={activeFlashZone}
                 stuckBolts={stuckBolts}
                 onDragonClick={() => {
-                  const weapons = ['dagger', 'axe', 'catapult', 'ballista'];
-                  const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
-                  dealDamage(userTeam.id, randomWeapon);
+                  const priorityOrder = ['ballista', 'catapult', 'axe', 'dagger'];
+                  const weaponToFire = priorityOrder.find((w) => (inventory?.[w] || 0) > 0);
+                  if (weaponToFire) {
+                    dealDamage(userTeam.id, weaponToFire);
+                  }
                 }}
               />
             </div>
@@ -310,6 +315,7 @@ export default function ArenaScreen() {
               <WeaponStations
                 recoilingStation={recoilingStation}
                 isDefeated={isDefeated}
+                inventory={inventory}
                 onStationClick={(weaponKey) => dealDamage(userTeam.id, weaponKey)}
               />
             </div>

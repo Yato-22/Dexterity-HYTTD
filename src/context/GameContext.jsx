@@ -83,6 +83,18 @@ export function GameProvider({ children }) {
     return {};
   });
 
+  // Weapon Inventory: weapons earned from solving trials, ready to fire at will
+  const [inventory, setInventory] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_STATE);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.inventory && typeof parsed.inventory === 'object') return parsed.inventory;
+      }
+    } catch {}
+    return { dagger: 2, axe: 1, catapult: 0, ballista: 0 };
+  });
+
   // Visual effects state
   const [soundMuted, setSoundMuted] = useState(false);
   const [isHit, setIsHit] = useState(false);
@@ -107,12 +119,12 @@ export function GameProvider({ children }) {
     try {
       localStorage.setItem(
         STORAGE_KEY_STATE,
-        JSON.stringify({ hp, maxHp: DRAGON_CONFIG.maxHp, teams, feed, solvedProblems, zoneHits })
+        JSON.stringify({ hp, maxHp: DRAGON_CONFIG.maxHp, teams, feed, solvedProblems, zoneHits, inventory })
       );
     } catch (e) {
       console.warn("Could not save game state to localStorage:", e);
     }
-  }, [hp, teams, feed, solvedProblems, zoneHits]);
+  }, [hp, teams, feed, solvedProblems, zoneHits, inventory]);
 
   // Save code changes to localStorage
   useEffect(() => {
@@ -297,10 +309,24 @@ export function GameProvider({ children }) {
     [spawnFloatingDamage, spawnSparkBurst]
   );
 
-  // Manual or simulated hit: queues projectile launch from weapon station
+  // Manual or inventory firing: checks ammo and queues projectile launch
   const dealDamage = useCallback(
     (teamId = USER_TEAM_ID, weaponKey = 'axe') => {
-      if (hp <= 0) return;
+      if (hp <= 0) return { success: false, reason: "Dragon defeated" };
+
+      // If user team, check and consume 1 ammo from inventory
+      if (teamId === USER_TEAM_ID) {
+        const available = inventory[weaponKey] || 0;
+        if (available <= 0) {
+          return { success: false, reason: "Out of ammo" };
+        }
+
+        setInventory((prev) => ({
+          ...prev,
+          [weaponKey]: Math.max(0, (prev[weaponKey] || 0) - 1),
+        }));
+      }
+
       const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
       const isCrit = Math.random() < weapon.critRate;
       const actualDamage = isCrit ? weapon.damage + 3 : weapon.damage;
@@ -328,23 +354,22 @@ export function GameProvider({ children }) {
       };
 
       setPendingFireEvents((prev) => [...prev.slice(-10), fireEvent]);
+      return { success: true };
     },
-    [hp, teams]
+    [hp, inventory, teams]
   );
 
-  // Solved problem by team: maps problem difficulty to weapon and deals damage
+  // Solved problem by team: awards crafted weapon to inventory
   const recordAcceptedSubmission = useCallback(
     (problemId) => {
       const problem = PROBLEMS_BY_ID[problemId];
-      if (!problem) return false;
-
-      // Check if already solved
-      if (solvedProblems.includes(problemId)) {
-        return false;
-      }
+      if (!problem) return null;
 
       // Mark solved
-      setSolvedProblems((prev) => [...prev, problemId]);
+      const isFirstSolve = !solvedProblems.includes(problemId);
+      if (isFirstSolve) {
+        setSolvedProblems((prev) => [...prev, problemId]);
+      }
 
       // Weapon chosen from problem difficulty
       const diffToWeapon = {
@@ -356,35 +381,36 @@ export function GameProvider({ children }) {
       const weaponKey = diffToWeapon[problem.difficulty] || 'axe';
       const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
 
+      // Add weapon to inventory so user can use it whenever they want!
+      setInventory((prev) => ({
+        ...prev,
+        [weaponKey]: (prev[weaponKey] || 0) + 1,
+      }));
+
+      // Log weapon craft to live feed
       const userTeam =
         teams.find((t) => t.id === USER_TEAM_ID || t.isUserTeam) || teams[2];
-      const targetPart =
-        DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
-      const customFeed = `${userTeam.name} solved "${problem.title}" with ${weapon.name} for ${problem.xp} XP!`;
-
-      const candidateZones = WEAPON_ZONE_MAPPING[weaponKey] || ['chest'];
-      const targetZone =
-        candidateZones[Math.floor(Math.random() * candidateZones.length)];
-
-      const fireEvent = {
-        id: "fire-solve-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7),
-        weaponKey,
-        targetZone,
-        actualDamage: problem.xp,
-        isCrit: true, // Solve critical highlight
-        actingTeam: userTeam,
-        teamId: userTeam.id,
-        weaponVerb: weapon.verb,
-        targetPart,
-        customFeedText: customFeed,
+      const feedItemId = "feed-" + Date.now() + Math.random();
+      const newFeedItem = {
+        id: feedItemId,
+        teamName: userTeam.name,
+        weapon: weaponKey,
+        verb: "forged",
+        part: "Arsenal",
+        damage: problem.xp,
+        customText: `${userTeam.name} solved "${problem.title}" and crafted a ${weapon.name}!`,
         timestamp: Date.now(),
       };
+      setFeed((prevFeed) => [newFeedItem, ...prevFeed.slice(0, 19)]);
 
-      // Queue event for arena animation while also registering impact
-      onProjectileImpact(fireEvent);
-      return true;
+      return {
+        weaponKey,
+        weapon,
+        problem,
+        isFirstSolve,
+      };
     },
-    [solvedProblems, teams, onProjectileImpact]
+    [solvedProblems, teams]
   );
 
   // Reset dragon, battle, and persistent damage overlays
@@ -401,6 +427,7 @@ export function GameProvider({ children }) {
     setPendingFireEvents([]);
     setActiveFlashZone(null);
     setRecoilingStation(null);
+    setInventory({ dagger: 2, axe: 1, catapult: 0, ballista: 0 });
   }, []);
 
   // Background fake-data timer: generates weapon hits
@@ -456,6 +483,8 @@ export function GameProvider({ children }) {
     lastLeaderboardUpdate,
     autoSimulate,
     setAutoSimulate,
+    inventory,
+    setInventory,
     dealDamage,
     resetDragon,
     recordAcceptedSubmission,

@@ -61,6 +61,7 @@ export default function CodingScreen() {
   const [verdict, setVerdict] = useState(null); // 'ACCEPTED', 'WRONG_ANSWER', 'RUNTIME_ERROR', 'TIME_LIMIT_EXCEEDED', 'COMPILATION_ERROR'
   const [resultData, setResultData] = useState(null);
   const [acceptedBanner, setAcceptedBanner] = useState(false);
+  const [craftedWeapon, setCraftedWeapon] = useState(null);
 
   // Synchronize code when problem or language changes
   useEffect(() => {
@@ -262,12 +263,17 @@ export default function CodingScreen() {
       setVerdict('ACCEPTED');
       setResultData({ mode: 'submit', passedCount, totalCount });
 
-      // Record first-time solve and damage the dragon!
-      const isFirstSolve = recordAcceptedSubmission(problem.id);
-      if (isFirstSolve) {
-        setAcceptedBanner(true);
-        setTimeout(() => setAcceptedBanner(false), 5000);
+      // Award crafted weapon to arsenal inventory!
+      const solveResult = recordAcceptedSubmission(problem.id);
+      if (solveResult?.weapon) {
+        setCraftedWeapon(solveResult.weapon.name);
       }
+      setAcceptedBanner(true);
+
+      // Redirect to the arena after submitting so user can inspect arsenal
+      setTimeout(() => {
+        navigate('/');
+      }, 1300);
     } else {
       setVerdict('WRONG_ANSWER');
       setResultData({ mode: 'submit', passedCount, totalCount, failingCase });
@@ -334,12 +340,12 @@ export default function CodingScreen() {
         </div>
       </header>
 
-      {/* Accepted First-Time Solve Flash Banner */}
+      {/* Accepted Solve Flash Banner */}
       {acceptedBanner && (
-        <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 px-6 py-2 bg-[#14532D] border-2 border-[#4ADE80] rounded-lg shadow-solid-board flex items-center gap-2 animate-bounce">
+        <div className="absolute top-14 left-1/2 -translate-x-1/2 z-50 px-6 py-2.5 bg-[#14532D] border-2 border-[#4ADE80] rounded-lg shadow-solid-board flex items-center gap-2.5 animate-bounce">
           <Sparkles className="w-5 h-5 text-[#4ADE80]" />
           <span className="font-heading text-[14px] 2xl:text-[16px] font-bold text-[#FFF]">
-            ACCEPTED! -{problem.xp} HP DEALT TO THE RED DEATH!
+            ACCEPTED! +1 {craftedWeapon ? craftedWeapon.toUpperCase() : 'WEAPON'} STORED IN YOUR ARSENAL!
           </span>
         </div>
       )}
