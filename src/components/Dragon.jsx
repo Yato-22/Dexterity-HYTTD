@@ -1,54 +1,58 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame, Skull, Crown } from 'lucide-react';
+import {
+  ASSET_PATHS,
+  DRAGON_HIT_ZONES,
+  DRAGON_EYES,
+} from '../data/gameData';
 
 export default function Dragon({
   hp,
   maxHp = 100,
-  isHit,
+  isHit = false,
   floatingDamages = [],
   sparks = [],
   isRoaring = false,
   roarText = "THE RED DEATH ROARS!",
   isDefeated = false,
   winnerTeam = "Team Alpha",
+  zoneHits = { head: 0, chest: 0, leftWing: 0, rightWing: 0 },
+  activeFlashZone = null, // { zone: 'head'|'chest'|'leftWing'|'rightWing', id }
+  stuckBolts = [], // [{ id, x, y, angle }]
   onDragonClick,
 }) {
   const hpPercent = Math.max(0, Math.min(100, (hp / maxHp) * 100));
 
-  // Determine back glow aura intensity and anger color
-  let auraGradient = "radial-gradient(circle, rgba(255, 122, 26, 0.42) 0%, rgba(255, 80, 0, 0.18) 40%, transparent 70%)";
-  let pulseSpeed = 4.2;
+  // Determine dragon eye glow color & intensity based on HP thresholds & roar
+  let eyeGlowColor = '#FF9D43';
+  let eyeGlowRadius = 6;
+  let eyeOpacity = 0.7;
 
   if (hpPercent <= 25) {
-    auraGradient = "radial-gradient(circle, rgba(217, 48, 37, 0.72) 0%, rgba(255, 40, 20, 0.4) 40%, rgba(139, 0, 0, 0.18) 65%, transparent 80%)";
-    pulseSpeed = 2.0;
+    eyeGlowColor = '#FF1A1A';
+    eyeGlowRadius = 16;
+    eyeOpacity = 1.0;
   } else if (hpPercent <= 50) {
-    auraGradient = "radial-gradient(circle, rgba(255, 100, 0, 0.55) 0%, rgba(255, 140, 20, 0.3) 45%, transparent 75%)";
-    pulseSpeed = 3.0;
+    eyeGlowColor = '#FF4500';
+    eyeGlowRadius = 12;
+    eyeOpacity = 0.9;
   } else if (hpPercent <= 75) {
-    auraGradient = "radial-gradient(circle, rgba(255, 140, 30, 0.45) 0%, rgba(255, 100, 10, 0.22) 45%, transparent 72%)";
-    pulseSpeed = 3.6;
+    eyeGlowColor = '#FF7A1A';
+    eyeGlowRadius = 9;
+    eyeOpacity = 0.8;
+  }
+
+  if (isRoaring) {
+    eyeGlowRadius = 22;
+    eyeOpacity = 1.0;
+    eyeGlowColor = '#FF0000';
   }
 
   return (
-    <div className="relative flex-1 w-full h-full flex flex-col items-center justify-center select-none overflow-visible">
-      {/* Background Fire Glow Aura behind the dragon */}
-      <motion.div
-        animate={isDefeated ? { opacity: 0.1, scale: 0.8 } : {
-          scale: [1, 1.15, 1],
-          opacity: [0.75, 1, 0.75],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: pulseSpeed,
-          ease: "easeInOut",
-        }}
-        className="absolute w-[400px] 2xl:w-[580px] h-[400px] 2xl:h-[580px] rounded-full pointer-events-none z-0"
-        style={{ background: auraGradient }}
-      />
-
-      {/* Roar Announcement Banner on threshold hit */}
+    <div className="relative w-full h-full flex flex-col items-center justify-end select-none overflow-visible pb-12 sm:pb-16 2xl:pb-20">
+      
+      {/* Roar Announcement Banner on threshold hit (75%, 50%, 25%) */}
       <AnimatePresence>
         {isRoaring && (
           <motion.div
@@ -69,63 +73,74 @@ export default function Dragon({
         )}
       </AnimatePresence>
 
-      {/* Main Dragon Container with Breathing Animation */}
+      {/* Main Half-Body Dragon Container */}
       <motion.div
         onClick={onDragonClick}
         animate={
           isDefeated
-            ? { y: 50, opacity: 0.25, filter: "grayscale(100%) brightness(0.4)", rotate: 4 }
+            ? {
+                y: 220,
+                rotate: 6,
+                scale: 0.85,
+                opacity: 0.15,
+                filter: "grayscale(80%) brightness(0.4)",
+              }
+            : isRoaring
+            ? {
+                y: -24,
+                scale: 1.04,
+                rotate: [-0.5, 0.5, -0.5],
+              }
             : isHit
             ? {
                 x: [-10, 12, -8, 6, -3, 0],
-                y: [3, -5, 4, -2, 1, 0],
-                scale: 0.97,
+                y: [4, -6, 5, -2, 1, 0],
+                scale: 0.98,
               }
             : {
-                scale: [1, 1.025, 1],
-                y: [0, -7, 0],
+                scale: [1, 1.018, 1],
+                y: [0, -6, 0],
+                rotate: [-0.5, 0.5, -0.5],
               }
         }
         transition={
           isDefeated
-            ? { duration: 1.5, ease: "easeOut" }
+            ? { duration: 2.5, ease: "easeInOut" }
+            : isRoaring
+            ? { duration: 0.6, ease: "easeOut" }
             : isHit
             ? { duration: 0.35, ease: "easeInOut" }
             : {
                 repeat: Infinity,
-                duration: pulseSpeed,
+                duration: 5.2,
                 ease: "easeInOut",
               }
         }
-        className="relative z-10 w-full max-w-xl 2xl:max-w-2xl flex items-center justify-center sword-cursor"
+        className="relative z-10 w-full flex items-end justify-center sword-cursor"
+        style={{ transformOrigin: "bottom center" }}
       >
-        <div className="relative">
+        {/* Dragon Graphic Wrapper with 4 Hit Zones and Overlays */}
+        <div className="relative w-auto max-w-full flex items-end justify-center">
+          {/* Dragon Image (about 55% of screen height) - turns red on hit */}
           <img
-            src="/dragon.png"
-            alt="The Dreaded Red Death Dragon"
-            className={`w-full max-h-[340px] 2xl:max-h-[460px] object-contain transition-all duration-150 ${
+            src={ASSET_PATHS.dragonHalf || '/dragon.png'}
+            alt="The Dreaded Red Death"
+            style={{
+              maskImage: 'linear-gradient(to bottom, black 92%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 92%, transparent 100%)',
+            }}
+            className={`h-[48vh] sm:h-[52vh] 2xl:h-[56vh] max-h-[580px] w-auto object-contain transition-all duration-150 pointer-events-none drop-shadow-[0_8px_24px_rgba(0,0,0,0.85)] ${
               isHit
-                ? 'filter brightness-150 contrast-125 drop-shadow-[0_0_30px_rgba(239,68,68,0.95)]'
+                ? 'filter brightness-110 contrast-125 sepia hue-rotate-[315deg] saturate-[800%] drop-shadow-[0_0_35px_rgba(239,68,68,0.95)]'
                 : hpPercent <= 25
-                ? 'drop-shadow-[0_0_28px_rgba(217,48,37,0.7)]'
-                : 'drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]'
+                ? 'drop-shadow-[0_0_24px_rgba(217,48,37,0.7)]'
+                : ''
             }`}
           />
 
-          {/* Hit Red Flash Overlay */}
-          <AnimatePresence>
-            {isHit && (
-              <motion.div
-                initial={{ opacity: 0.8 }}
-                animate={{ opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-red-600/30 rounded-full mix-blend-color-dodge pointer-events-none"
-              />
-            )}
-          </AnimatePresence>
-
-          {/* Spark Burst at Impact Spot */}
+          {/* =============================================================== */}
+          {/* 1. IMPACT SPARKS BURST                                           */}
+          {/* =============================================================== */}
           <AnimatePresence>
             {sparks.map((spark) => (
               <motion.div
@@ -139,28 +154,32 @@ export default function Dragon({
                   left: `${spark.x}%`,
                   top: `${spark.y}%`,
                   pointerEvents: 'none',
+                  zIndex: 45,
                 }}
-                className="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-amber-200 via-orange-400 to-red-600 shadow-[0_0_10px_#ff7a1a] z-30"
+                className="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-amber-200 via-orange-400 to-red-600 shadow-[0_0_10px_#ff7a1a]"
               />
             ))}
           </AnimatePresence>
 
-          {/* Floating Damage Numbers */}
+          {/* =============================================================== */}
+          {/* 2. FLOATING DAMAGE NUMBERS                                      */}
+          {/* =============================================================== */}
           <AnimatePresence>
             {floatingDamages.map((dmg) => (
               <motion.div
                 key={dmg.id}
                 initial={{ opacity: 0, y: 0, scale: 0.6 }}
-                animate={{ opacity: 1, y: -60, scale: dmg.crit ? 1.5 : 1.25 }}
-                exit={{ opacity: 0, y: -90, scale: 0.9 }}
+                animate={{ opacity: 1, y: -65, scale: dmg.crit ? 1.5 : 1.25 }}
+                exit={{ opacity: 0, y: -95, scale: 0.9 }}
                 transition={{ duration: 0.85, ease: "easeOut" }}
                 style={{
                   position: 'absolute',
                   left: `${dmg.x}%`,
                   top: `${dmg.y}%`,
                   pointerEvents: 'none',
+                  zIndex: 50,
                 }}
-                className="z-40 font-heading font-extrabold flex items-center gap-1 select-none whitespace-nowrap"
+                className="font-heading font-extrabold flex items-center gap-1 select-none whitespace-nowrap"
               >
                 <span
                   className={`heading-shadow ${
@@ -180,13 +199,15 @@ export default function Dragon({
         </div>
       </motion.div>
 
-      {/* 0 HP Defeat Overlay */}
+      {/* =================================================================== */}
+      {/* 6. 0 HP DEFEAT OVERLAY (Preserved victory screen)                   */}
+      {/* =================================================================== */}
       <AnimatePresence>
         {isDefeated && (
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: 25 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="absolute z-50 p-5 2xl:p-6 max-w-md w-full text-center compact-wood-board border-[3px] border-[#8B1C1C] shadow-solid-board"
           >
             <div className="compact-nail top-1.5 left-1.5" />

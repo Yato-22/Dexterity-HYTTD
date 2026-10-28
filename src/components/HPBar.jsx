@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Flame, Skull } from 'lucide-react';
 import { RopeSegment, RopeKnot } from './RopeGraphic';
 
 export default function HPBar({ currentHp, maxHp = 100, dragonName = "THE RED DEATH", isDefeated = false, isHit = false }) {
+  const hpBarRef = useRef(null);
+  const [topOffset, setTopOffset] = useState(14);
+
+  // Measure distance to screen top on mount and every window resize
+  useEffect(() => {
+    const update = () => {
+      if (hpBarRef.current) {
+        const rect = hpBarRef.current.getBoundingClientRect();
+        setTopOffset(rect.top);
+      }
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   const hpPercent = Math.max(0, Math.min(100, (currentHp / maxHp) * 100));
 
   let fillGradient = "";
@@ -25,16 +41,32 @@ export default function HPBar({ currentHp, maxHp = 100, dragonName = "THE RED DE
   }
 
   return (
-    <div className="relative z-30 max-w-xl 2xl:max-w-2xl w-full mx-auto" style={{ rotate: '0.2deg' }}>
-      {/* Two Short Hanging Ropes Going Up and Off Top Edge */}
-      <div className="absolute -top-10 left-12 z-0 pointer-events-none flex flex-col items-center">
-        <RopeSegment height="42px" width={11} />
+    <div
+      ref={hpBarRef}
+      className="relative z-30 max-w-xl 2xl:max-w-2xl w-full mx-auto"
+      style={{ rotate: '0deg' }}
+    >
+      {/* Two Hanging Ropes Running From Top Edge of Screen with No Gap */}
+      <div
+        className="absolute left-12 z-0 pointer-events-none flex flex-col items-center"
+        style={{
+          top: `${-topOffset - 6}px`,
+          height: `${topOffset + 14}px`,
+        }}
+      >
+        <RopeSegment height="100%" width={11} />
         <div className="-mt-2">
           <RopeKnot size="sm" />
         </div>
       </div>
-      <div className="absolute -top-10 right-12 z-0 pointer-events-none flex flex-col items-center">
-        <RopeSegment height="42px" width={11} />
+      <div
+        className="absolute right-12 z-0 pointer-events-none flex flex-col items-center"
+        style={{
+          top: `${-topOffset - 6}px`,
+          height: `${topOffset + 14}px`,
+        }}
+      >
+        <RopeSegment height="100%" width={11} />
         <div className="-mt-2">
           <RopeKnot size="sm" />
         </div>

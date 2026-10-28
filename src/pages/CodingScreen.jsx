@@ -277,9 +277,14 @@ export default function CodingScreen() {
   const isSolved = solvedProblems.includes(problem.id);
 
   return (
-    <div className="h-screen max-h-screen w-screen overflow-hidden hall-bg relative select-none flex flex-col justify-between font-sans">
-      <div className="absolute inset-0 wood-grain-overlay pointer-events-none z-0" />
-      <div className="fixed inset-0 vignette pointer-events-none z-40" />
+    <div
+      className="h-screen max-h-screen w-screen overflow-hidden relative select-none flex flex-col justify-between font-sans bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/field.png'), linear-gradient(to bottom, #1c152b 0%, #4a2835 30%, #a85834 50%, #4a5c2d 65%, #1e2e14 100%)",
+      }}
+    >
+      {/* 55% dark overlay + 6px blur so editor stays easy to read */}
+      <div className="absolute inset-0 bg-black/55 backdrop-blur-[6px] pointer-events-none z-0" />
 
       {/* ===================================================================== */}
       {/* 1. TOP BAR (Full Width, Thin) */}

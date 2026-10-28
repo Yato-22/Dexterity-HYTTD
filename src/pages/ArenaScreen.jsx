@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGame } from '../context/GameContext';
 import HPBar from '../components/HPBar';
@@ -8,8 +8,9 @@ import ChallengeScroll from '../components/ChallengeScroll';
 import LiveFeed from '../components/LiveFeed';
 import RankBadge from '../components/RankBadge';
 import Embers from '../components/Embers';
-import TorchGlow from '../components/TorchGlow';
-import { RopeSegment, RopeKnot } from '../components/RopeGraphic';
+import WeaponStations from '../components/WeaponStations';
+import FlyingProjectiles from '../components/FlyingProjectiles';
+import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
 import { Volume2, VolumeX, Flame } from 'lucide-react';
 
 export default function ArenaScreen() {
@@ -36,15 +37,47 @@ export default function ArenaScreen() {
     setAutoSimulate,
     dealDamage,
     resetDragon,
+    zoneHits,
+    activeFlashZone,
+    stuckBolts,
+    pendingFireEvents,
+    recoilingStation,
+    triggerStationRecoil,
+    onProjectileImpact,
   } = useGame();
 
-  // Hidden Keyboard Shortcuts (S = simulate hit, R = reset dragon, P = pause auto-battle)
+  // Dynamic rope measurement so ropes NEVER float or have gaps at 1920x1080, 1366x768, etc.
+  const leftColRef = useRef(null);
+  const plaqueRef = useRef(null);
+  const [leftTopOffset, setLeftTopOffset] = useState(100);
+  const [plaqueTopOffset, setPlaqueTopOffset] = useState(14);
+
+  useEffect(() => {
+    const updateMeasurements = () => {
+      if (leftColRef.current) {
+        const rect = leftColRef.current.getBoundingClientRect();
+        setLeftTopOffset(rect.top);
+      }
+      if (plaqueRef.current) {
+        const rect = plaqueRef.current.getBoundingClientRect();
+        setPlaqueTopOffset(rect.top);
+      }
+    };
+
+    updateMeasurements();
+    window.addEventListener('resize', updateMeasurements);
+    return () => window.removeEventListener('resize', updateMeasurements);
+  }, []);
+
+  // Keyboard Shortcuts: S = fire random weapon, R = reset dragon, P = pause auto-battle
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
       if (e.key === 's' || e.key === 'S') {
-        dealDamage(userTeam.id, 'axe');
+        const weapons = ['dagger', 'axe', 'catapult', 'ballista'];
+        const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
+        dealDamage(userTeam.id, randomWeapon);
       } else if (e.key === 'r' || e.key === 'R') {
         resetDragon();
       } else if (e.key === 'p' || e.key === 'P') {
@@ -58,35 +91,47 @@ export default function ArenaScreen() {
 
   return (
     <div
-      className={`h-screen max-h-screen w-screen overflow-hidden hall-bg relative select-none ${
+      className={`h-screen max-h-screen w-screen overflow-hidden relative select-none bg-cover bg-center ${
         isScreenShaking ? 'screen-shake' : ''
       }`}
+      style={{
+        backgroundImage: "url('/field.png'), linear-gradient(to bottom, #1c152b 0%, #4a2835 30%, #a85834 50%, #4a5c2d 65%, #1e2e14 100%)",
+      }}
     >
-      {/* Procedural Wood Grain Filter Overlay */}
-      <div className="absolute inset-0 wood-grain-overlay pointer-events-none z-0" />
-
-      {/* Screen Edge Vignette */}
-      <div className="fixed inset-0 vignette pointer-events-none z-40" />
-
-      {/* Corner Torch Glows & Sconces */}
-      <TorchGlow />
+      {/* Very light 15% dark overlay so panels stand out crisply */}
+      <div className="absolute inset-0 bg-black/15 pointer-events-none z-0" />
 
       {/* Floating Ember Particles */}
       <Embers />
 
       {/* ===================================================================== */}
-      {/* TOP-RIGHT EVENT PLAQUE (Hanging from two short ropes off top edge)     */}
+      {/* TOP-RIGHT EVENT PLAQUE (Ropes start at top edge of screen, zero gap)  */}
       {/* ===================================================================== */}
-      <div className="absolute top-2 right-2.5 2xl:top-3.5 2xl:right-4 z-40">
-        {/* Two Short Hanging Ropes Going Up and Off Top Edge */}
-        <div className="absolute -top-10 left-3 z-0 pointer-events-none flex flex-col items-center">
-          <RopeSegment height="42px" width={10} />
+      <div
+        ref={plaqueRef}
+        className="absolute top-2 right-2.5 2xl:top-3.5 2xl:right-4 z-40"
+      >
+        {/* Two Ropes Running From Top Edge of Screen Down to Plaque */}
+        <div
+          className="absolute left-3 z-0 pointer-events-none flex flex-col items-center"
+          style={{
+            top: `${-plaqueTopOffset - 6}px`,
+            height: `${plaqueTopOffset + 12}px`,
+          }}
+        >
+          <RopeSegment height="100%" width={10} />
           <div className="-mt-1.5">
             <RopeKnot size="sm" />
           </div>
         </div>
-        <div className="absolute -top-10 right-3 z-0 pointer-events-none flex flex-col items-center">
-          <RopeSegment height="42px" width={10} />
+        <div
+          className="absolute right-3 z-0 pointer-events-none flex flex-col items-center"
+          style={{
+            top: `${-plaqueTopOffset - 6}px`,
+            height: `${plaqueTopOffset + 12}px`,
+          }}
+        >
+          <RopeSegment height="100%" width={10} />
           <div className="-mt-1.5">
             <RopeKnot size="sm" />
           </div>
@@ -97,7 +142,7 @@ export default function ArenaScreen() {
           className={`relative broken-plank-shadow transition-transform duration-300 ${
             isHit ? 'plank-hit-shake' : ''
           }`}
-          style={{ rotate: '0.6deg' }}
+          style={{ rotate: '0deg' }}
         >
           <div className="relative clip-broken-plank-1 border-[3px] border-[#4A3A2C] px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-[#2A211B] flex items-center gap-2 overflow-hidden">
             <div className="absolute inset-0 flex flex-col pointer-events-none z-0">
@@ -157,17 +202,18 @@ export default function ArenaScreen() {
           {/* LEFT COLUMN: TWO PARALLEL ROPES PASSING THROUGH ALL 3 PANELS      */}
           {/* ================================================================= */}
           <motion.section
-            animate={{ rotate: [-0.5, 0.5, -0.5] }}
+            ref={leftColRef}
+            animate={{ rotate: [-0.35, 0.35, -0.35] }}
             transition={{ repeat: Infinity, duration: 8.5, ease: "easeInOut" }}
             style={{ transformOrigin: "top center" }}
             className="w-[20%] min-w-[270px] max-w-[340px] h-full flex flex-col justify-between gap-1.5 2xl:gap-2 flex-shrink-0 relative"
           >
-            {/* TWO CONTINUOUS PARALLEL ROPES RUNNING FROM ABOVE SCREEN TO BOTTOM */}
+            {/* TWO CONTINUOUS PARALLEL ROPES RUNNING FROM VERY TOP EDGE OF SCREEN DOWN TO BOTTOM */}
             {/* Left Strand */}
             <div
               className="absolute pointer-events-none z-0"
               style={{
-                top: "-50px", // Starts above screen edge
+                top: `${-leftTopOffset - 6}px`,
                 bottom: "22px",
                 left: "22px",
               }}
@@ -179,12 +225,20 @@ export default function ArenaScreen() {
             <div
               className="absolute pointer-events-none z-0"
               style={{
-                top: "-50px", // Starts above screen edge
+                top: `${-leftTopOffset - 6}px`,
                 bottom: "22px",
                 right: "22px",
               }}
             >
               <RopeSegment height="100%" width={12} />
+            </div>
+
+            {/* Bottom Knots below bottom panel */}
+            <div className="absolute -bottom-6 left-[16px] pointer-events-none z-10">
+              <TerminalRopeKnot />
+            </div>
+            <div className="absolute -bottom-6 right-[16px] pointer-events-none z-10">
+              <TerminalRopeKnot />
             </div>
 
             {/* 1. Rank Badge, Compact Broken Planks */}
@@ -220,42 +274,56 @@ export default function ArenaScreen() {
           {/* ================================================================= */}
           {/* CENTER COLUMN: Dragon Clean & Completely Unobstructed             */}
           {/* ================================================================= */}
-          <section className="flex-1 min-w-0 h-full flex items-center justify-center relative px-2 overflow-visible">
-            <Dragon
-              hp={hp}
-              maxHp={maxHp}
-              isHit={isHit}
-              floatingDamages={floatingDamages}
-              sparks={sparks}
-              isRoaring={isRoaring}
-              roarText="THE RED DEATH ROARS!"
-              isDefeated={isDefeated}
-              winnerTeam={winnerTeam}
-              onDragonClick={() => dealDamage(userTeam.id, 'axe')}
+          <section className="flex-1 min-w-0 h-full flex flex-col items-center justify-between relative px-2 overflow-visible">
+            {/* Flying Projectiles Layer */}
+            <FlyingProjectiles
+              pendingFireEvents={pendingFireEvents}
+              onProjectileImpact={onProjectileImpact}
+              onStationRecoil={triggerStationRecoil}
             />
+
+            {/* Dragon Half-Body blended into the field */}
+            <div className="flex-1 w-full flex items-center justify-center relative min-h-0">
+              <Dragon
+                hp={hp}
+                maxHp={maxHp}
+                isHit={isHit}
+                floatingDamages={floatingDamages}
+                sparks={sparks}
+                isRoaring={isRoaring}
+                roarText="THE RED DEATH ROARS!"
+                isDefeated={isDefeated}
+                winnerTeam={winnerTeam}
+                zoneHits={zoneHits}
+                activeFlashZone={activeFlashZone}
+                stuckBolts={stuckBolts}
+                onDragonClick={() => {
+                  const weapons = ['dagger', 'axe', 'catapult', 'ballista'];
+                  const randomWeapon = weapons[Math.floor(Math.random() * weapons.length)];
+                  dealDamage(userTeam.id, randomWeapon);
+                }}
+              />
+            </div>
+
+            {/* Four Weapon Stations in open bottom-center */}
+            <div className="w-full flex-shrink-0 z-30 pb-0.5">
+              <WeaponStations
+                recoilingStation={recoilingStation}
+                isDefeated={isDefeated}
+                onStationClick={(weaponKey) => dealDamage(userTeam.id, weaponKey)}
+              />
+            </div>
           </section>
 
           {/* ================================================================= */}
-          {/* RIGHT COLUMN: ONE CONTINUOUS ROPE DOWN THROUGH TOME OF TRIALS     */}
+          {/* RIGHT COLUMN: TWO CORNER ROPES DOWN THROUGH TOME OF TRIALS (Flat)  */}
           {/* ================================================================= */}
           <motion.section
-            animate={{ rotate: [0.5, -0.5, 0.5] }}
+            animate={{ rotate: [-0.15, 0.15, -0.15] }}
             transition={{ repeat: Infinity, duration: 9.2, delay: 0.8, ease: "easeInOut" }}
             style={{ transformOrigin: "top center" }}
             className="w-[24%] min-w-[320px] max-w-[400px] h-full flex flex-col justify-center flex-shrink-0 relative"
           >
-            {/* CONTINUOUS ROPE RUNNING FROM ABOVE SCREEN DOWN THROUGH RIGHT PANEL */}
-            <div
-              className="absolute pointer-events-none z-0"
-              style={{
-                top: "-50px", // Starts above screen edge
-                bottom: "22px",
-                right: "30px",
-              }}
-            >
-              <RopeSegment height="100%" width={12} />
-            </div>
-
             <div className="relative z-10">
               <ChallengeScroll
                 solvedProblems={solvedProblems}

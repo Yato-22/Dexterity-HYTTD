@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Sword, Axe, Target, Crosshair, CheckCircle2 } from 'lucide-react';
 import { PROBLEMS_BY_WEAPON } from '../data/problems';
-import { RopeKnot, TerminalRopeKnot } from './RopeGraphic';
+import { RopeSegment, RopeKnot, TerminalRopeKnot } from './RopeGraphic';
 
 export default function ChallengeScroll({ solvedProblems = [], isHit = false }) {
   const [activeTab, setActiveTab] = useState('dagger');
   const navigate = useNavigate();
+  const panelRef = useRef(null);
+  const [topOffset, setTopOffset] = useState(120);
+
+  // Measure distance to screen top on mount and window resize so ropes never gap or float
+  useEffect(() => {
+    const update = () => {
+      if (panelRef.current) {
+        const rect = panelRef.current.getBoundingClientRect();
+        setTopOffset(rect.top);
+      }
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   const tabList = [
     { key: 'dagger', name: 'Dagger', xp: '2 XP', icon: Sword, accentColor: '#16A34A', difficulty: 'Easy' },
@@ -19,9 +34,39 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
   const activeTabMeta = tabList.find((t) => t.key === activeTab);
 
   return (
-    <div className="relative w-full z-20 flex flex-col justify-center" style={{ rotate: '0.3deg' }}>
-      {/* Top Knot above the frame hole */}
-      <div className="absolute -top-2 right-[24px] z-30 pointer-events-none">
+    <div
+      ref={panelRef}
+      className="relative w-full z-20 flex flex-col justify-center"
+      style={{ rotate: '0deg' }}
+    >
+      {/* =================================================================== */}
+      {/* TWO CORNER ROPES (Left & Right) Starting at Top Edge of Screen      */}
+      {/* =================================================================== */}
+      {/* 1. Left Rope (holding left corner) */}
+      <div
+        className="absolute left-[24px] z-0 pointer-events-none flex flex-col items-center"
+        style={{
+          top: `${-topOffset - 6}px`,
+          height: `${topOffset + 14}px`,
+        }}
+      >
+        <RopeSegment height="100%" width={11} />
+      </div>
+      <div className="absolute -top-2 left-[18px] z-30 pointer-events-none">
+        <RopeKnot size="md" />
+      </div>
+
+      {/* 2. Right Rope (holding right corner) */}
+      <div
+        className="absolute right-[24px] z-0 pointer-events-none flex flex-col items-center"
+        style={{
+          top: `${-topOffset - 6}px`,
+          height: `${topOffset + 14}px`,
+        }}
+      >
+        <RopeSegment height="100%" width={11} />
+      </div>
+      <div className="absolute -top-2 right-[18px] z-30 pointer-events-none">
         <RopeKnot size="md" />
       </div>
 
@@ -31,11 +76,12 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
           isHit ? 'plank-hit-shake' : ''
         }`}
       >
-        {/* Drilled rope hole at top right */}
+        {/* Two Drilled Rope Holes: Left corner & Right corner */}
+        <div className="drilled-hole absolute top-2 left-6 pointer-events-none z-20" />
         <div className="drilled-hole absolute top-2 right-6 pointer-events-none z-20" />
 
         {/* Header */}
-        <div className="text-center pb-1.5 mb-2 border-b-2 border-[#E5E7EB] pr-6">
+        <div className="text-center pb-1.5 mb-2 border-b-2 border-[#E5E7EB] px-8">
           <h3 className="font-heading text-[17px] 2xl:text-[21px] font-bold tracking-wider uppercase text-[#1F1F1F] leading-tight">
             TOME OF TRIALS
           </h3>
@@ -164,7 +210,10 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
         </div>
       </div>
 
-      {/* Bottom Terminal Knot */}
+      {/* Bottom Terminal Knots for Corner Ropes */}
+      <div className="absolute -bottom-7 left-[18px] z-30 pointer-events-none">
+        <TerminalRopeKnot />
+      </div>
       <div className="absolute -bottom-7 right-[18px] z-30 pointer-events-none">
         <TerminalRopeKnot />
       </div>

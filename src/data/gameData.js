@@ -4,6 +4,12 @@
 
 export const USER_TEAM_ID = "team-3"; // The user's team (e.g. "Viking Byte" or "Team Alpha")
 
+export const ASSET_PATHS = {
+  arenaBackground: '/field.png',
+  codingBackground: '/field.png',
+  dragonHalf: '/dragon.png',
+};
+
 export const DRAGON_CONFIG = {
   name: "THE RED DEATH",
   title: "Gargantuan Sovereign of Dragon Mountain",
@@ -11,6 +17,70 @@ export const DRAGON_CONFIG = {
   initialHp: 84,
   roarThresholds: [75, 50, 25],
 };
+
+// 4 adjustable hit zones as percent-based rectangles over the dragon image
+export const DRAGON_HIT_ZONES = {
+  head: {
+    id: 'head',
+    name: 'Head',
+    x: 43, // percent left
+    y: 16, // percent top
+    width: 18, // percent width
+    height: 22, // percent height
+  },
+  chest: {
+    id: 'chest',
+    name: 'Chest',
+    x: 44,
+    y: 38,
+    width: 20,
+    height: 28,
+  },
+  leftWing: {
+    id: 'leftWing',
+    name: 'Left Wing',
+    x: 4,
+    y: 6,
+    width: 36,
+    height: 48,
+  },
+  rightWing: {
+    id: 'rightWing',
+    name: 'Right Wing',
+    x: 62,
+    y: 6,
+    width: 36,
+    height: 48,
+  },
+};
+
+// Weapon to hit-zone mapping
+export const WEAPON_ZONE_MAPPING = {
+  dagger: ['chest'],
+  axe: ['chest'],
+  catapult: ['leftWing', 'rightWing'],
+  ballista: ['head'],
+};
+
+// Animation timings and projectile queue settings
+export const ANIMATION_TIMINGS = {
+  daggerFlightMs: 450,
+  axeFlightMs: 650,
+  catapultFlightMs: 900,
+  ballistaFlightMs: 380,
+  queueStaggerMs: 220,
+  maxActiveProjectiles: 6,
+  hitFlinchMs: 350,
+  zoneFlashMs: 400,
+  stuckBoltDurationMs: 4000,
+  roarDurationMs: 2400,
+  defeatSinkMs: 2500,
+};
+
+// Dragon eye coordinates (% of dragon image) for glowing eyes reaction
+export const DRAGON_EYES = [
+  { x: 53.0, y: 23.5, r: 1.4 },
+];
 
 export const WEAPONS = {
   dagger: {

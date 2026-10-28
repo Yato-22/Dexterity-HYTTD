@@ -6,6 +6,8 @@ import {
   INITIAL_TEAMS,
   INITIAL_FEED,
   USER_TEAM_ID,
+  WEAPON_ZONE_MAPPING,
+  ANIMATION_TIMINGS,
 } from '../data/gameData';
 import { PROBLEMS_BY_ID } from '../data/problems';
 
@@ -60,6 +62,18 @@ export function GameProvider({ children }) {
     return [];
   });
 
+  // Persistent hit counts per dragon body zone (head, chest, leftWing, rightWing)
+  const [zoneHits, setZoneHits] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_STATE);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.zoneHits && typeof parsed.zoneHits === 'object') return parsed.zoneHits;
+      }
+    } catch {}
+    return { head: 0, chest: 0, leftWing: 0, rightWing: 0 };
+  });
+
   // User code storage: { [problemId_language]: string }
   const [userCode, setUserCode] = useState(() => {
     try {
@@ -80,6 +94,12 @@ export function GameProvider({ children }) {
   const [lastLeaderboardUpdate, setLastLeaderboardUpdate] = useState(null);
   const [autoSimulate, setAutoSimulate] = useState(true);
 
+  // Weapon firing & dragon damage reaction state
+  const [pendingFireEvents, setPendingFireEvents] = useState([]);
+  const [activeFlashZone, setActiveFlashZone] = useState(null);
+  const [stuckBolts, setStuckBolts] = useState([]);
+  const [recoilingStation, setRecoilingStation] = useState(null);
+
   const triggeredRoarsRef = useRef(new Set());
 
   // Save game state changes to localStorage
@@ -87,12 +107,12 @@ export function GameProvider({ children }) {
     try {
       localStorage.setItem(
         STORAGE_KEY_STATE,
-        JSON.stringify({ hp, teams, feed, solvedProblems })
+        JSON.stringify({ hp, teams, feed, solvedProblems, zoneHits })
       );
     } catch (e) {
       console.warn("Could not save game state to localStorage:", e);
     }
-  }, [hp, teams, feed, solvedProblems]);
+  }, [hp, teams, feed, solvedProblems, zoneHits]);
 
   // Save code changes to localStorage
   useEffect(() => {
@@ -120,11 +140,11 @@ export function GameProvider({ children }) {
   );
 
   // Spawn floating damage text
-  const spawnFloatingDamage = useCallback((damage, crit = false, x = 48, y = 42) => {
+  const spawnFloatingDamage = useCallback((damage, crit = false, x = 50, y = 45) => {
     const id = Date.now() + Math.random();
     setFloatingDamages((prev) => [
       ...prev.slice(-3),
-      { id, damage, crit, x: x + (Math.random() * 14 - 7), y: y + (Math.random() * 8 - 4) },
+      { id, damage, crit, x: x + (Math.random() * 10 - 5), y: y + (Math.random() * 6 - 3) },
     ]);
     setTimeout(() => {
       setFloatingDamages((prev) => prev.filter((d) => d.id !== id));
@@ -151,37 +171,101 @@ export function GameProvider({ children }) {
     }, 600);
   }, []);
 
-  // Core damage calculation and phase checking
-  const applyDamage = useCallback(
-    (actualDamage, isCrit, teamName, teamId, weaponVerb, targetPart, customFeedText = null) => {
+  // Recoil station trigger with auto-reset
+  const triggerStationRecoil = useCallback((weaponKey) => {
+    setRecoilingStation(weaponKey);
+    setTimeout(() => {
+      setRecoilingStation((current) => (current === weaponKey ? null : current));
+    }, 450);
+  }, []);
+
+  // Triggered on projectile arrival / impact at the dragon
+  const onProjectileImpact = useCallback(
+    (event, coords = null) => {
+      if (!event) return;
+
+      // 1. Dragon flinch recoil
       setIsHit(true);
-      setTimeout(() => setIsHit(false), 260);
+      setTimeout(() => setIsHit(false), ANIMATION_TIMINGS.hitFlinchMs || 350);
 
-      const hitX = Math.floor(Math.random() * 22 + 39);
-      const hitY = Math.floor(Math.random() * 22 + 36);
-      spawnFloatingDamage(actualDamage, isCrit, hitX, hitY);
-      spawnSparkBurst(hitX, hitY);
+      // 2. Target hit zone flashes white then red
+      setActiveFlashZone({ zone: event.targetZone, id: Date.now() });
+      setTimeout(() => setActiveFlashZone(null), ANIMATION_TIMINGS.zoneFlashMs || 400);
 
+      // 3. Persistent damage increment per zone (scales up to 3 levels)
+      setZoneHits((prev) => ({
+        ...prev,
+        [event.targetZone]: (prev[event.targetZone] || 0) + 1,
+      }));
+
+      // 4. Stuck ballista bolt on head
+      if (event.weaponKey === 'ballista' && event.targetZone === 'head') {
+        const boltId = 'bolt-' + Date.now() + Math.random();
+        const boltX = coords?.x ? Math.max(46, Math.min(58, coords.x)) : 52;
+        const boltY = coords?.y ? Math.max(22, Math.min(32, coords.y)) : 27;
+        const boltAngle = Math.floor(Math.random() * 24 - 12) + 25;
+
+        setStuckBolts((prev) => [
+          ...prev.slice(-3),
+          { id: boltId, x: boltX, y: boltY, angle: boltAngle },
+        ]);
+        setTimeout(() => {
+          setStuckBolts((prev) => prev.filter((b) => b.id !== boltId));
+        }, ANIMATION_TIMINGS.stuckBoltDurationMs || 4000);
+      }
+
+      // 5. Floating damage and sparks at impact point
+      const impactX =
+        coords?.x ||
+        (event.targetZone === 'head'
+          ? 52
+          : event.targetZone === 'leftWing'
+          ? 28
+          : event.targetZone === 'rightWing'
+          ? 72
+          : 50);
+      const impactY =
+        coords?.y ||
+        (event.targetZone === 'head'
+          ? 28
+          : event.targetZone === 'leftWing'
+          ? 32
+          : event.targetZone === 'rightWing'
+          ? 32
+          : 46);
+
+      spawnFloatingDamage(event.actualDamage, event.isCrit, impactX, impactY);
+      spawnSparkBurst(impactX, impactY);
+
+      // 6. Deduct HP & check roar thresholds (75%, 50%, 25%)
       setHp((prevHp) => {
-        const nextHp = Math.max(0, prevHp - actualDamage);
+        const nextHp = Math.max(0, prevHp - event.actualDamage);
         DRAGON_CONFIG.roarThresholds.forEach((threshold) => {
-          if (prevHp > threshold && nextHp <= threshold && !triggeredRoarsRef.current.has(threshold)) {
+          if (
+            prevHp > threshold &&
+            nextHp <= threshold &&
+            !triggeredRoarsRef.current.has(threshold)
+          ) {
             triggeredRoarsRef.current.add(threshold);
             setIsScreenShaking(true);
-            setTimeout(() => setIsScreenShaking(false), 600);
+            setTimeout(() => setIsScreenShaking(false), 700);
             setIsRoaring(true);
-            setTimeout(() => setIsRoaring(false), 2400);
+            setTimeout(
+              () => setIsRoaring(false),
+              ANIMATION_TIMINGS.roarDurationMs || 2400
+            );
           }
         });
         return nextHp;
       });
 
+      // 7. Update acting team scores & leaderboard
       setTeams((prevTeams) =>
         prevTeams.map((team) => {
-          if (team.id === teamId) {
+          if (team.id === event.teamId) {
             return {
               ...team,
-              score: team.score + actualDamage,
+              score: team.score + event.actualDamage,
               hits: (team.hits || 0) + 1,
             };
           }
@@ -190,41 +274,65 @@ export function GameProvider({ children }) {
       );
       setLastLeaderboardUpdate(Date.now());
 
+      // 8. Update live battle log feed
       const feedItemId = "feed-" + Date.now() + Math.random();
       const newFeedItem = {
         id: feedItemId,
-        teamName,
-        weapon: "axe",
-        verb: weaponVerb,
-        part: targetPart,
-        damage: actualDamage,
-        crit: isCrit,
+        teamName: event.actingTeam.name,
+        weapon: event.weaponKey,
+        verb: event.weaponVerb,
+        part: event.targetPart,
+        damage: event.actualDamage,
+        crit: event.isCrit,
         time: "Just now",
-        customText: customFeedText,
+        customText: event.customFeedText,
       };
 
       setFeed((prevFeed) => [newFeedItem, ...prevFeed.slice(0, 3)]);
       setLastFeedId(feedItemId);
+
+      // Clean up from pendingFireEvents
+      setPendingFireEvents((prev) => prev.filter((e) => e.id !== event.id));
     },
     [spawnFloatingDamage, spawnSparkBurst]
   );
 
-  // Manual or simulated hit
+  // Manual or simulated hit: queues projectile launch from weapon station
   const dealDamage = useCallback(
     (teamId = USER_TEAM_ID, weaponKey = 'axe') => {
       if (hp <= 0) return;
       const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
       const isCrit = Math.random() < weapon.critRate;
       const actualDamage = isCrit ? weapon.damage + 3 : weapon.damage;
-      const targetPart = DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
+      const targetPart =
+        DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
       const actingTeam = teams.find((t) => t.id === teamId) || teams[0];
 
-      applyDamage(actualDamage, isCrit, actingTeam.name, teamId, weapon.verb, targetPart);
+      // Map weapon to hit zone
+      const candidateZones = WEAPON_ZONE_MAPPING[weaponKey] || ['chest'];
+      const targetZone =
+        candidateZones[Math.floor(Math.random() * candidateZones.length)];
+
+      const fireEvent = {
+        id: "fire-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7),
+        weaponKey,
+        targetZone,
+        actualDamage,
+        isCrit,
+        actingTeam,
+        teamId,
+        weaponVerb: weapon.verb,
+        targetPart,
+        customFeedText: null,
+        timestamp: Date.now(),
+      };
+
+      setPendingFireEvents((prev) => [...prev.slice(-10), fireEvent]);
     },
-    [hp, teams, applyDamage]
+    [hp, teams]
   );
 
-  // Solved problem by team
+  // Solved problem by team: maps problem difficulty to weapon and deals damage
   const recordAcceptedSubmission = useCallback(
     (problemId) => {
       const problem = PROBLEMS_BY_ID[problemId];
@@ -232,33 +340,54 @@ export function GameProvider({ children }) {
 
       // Check if already solved
       if (solvedProblems.includes(problemId)) {
-        return false; // Repeat solve gives no additional dragon damage or points
+        return false;
       }
 
       // Mark solved
       setSolvedProblems((prev) => [...prev, problemId]);
 
-      // Apply problem XP as damage
-      const userTeam = teams.find((t) => t.id === USER_TEAM_ID || t.isUserTeam) || teams[2];
-      const targetPart = DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
-      const customFeed = `${userTeam.name} solved "${problem.title}" for ${problem.xp} XP!`;
+      // Weapon chosen from problem difficulty
+      const diffToWeapon = {
+        Easy: 'dagger',
+        Medium: 'axe',
+        Hard: 'catapult',
+        Extreme: 'ballista',
+      };
+      const weaponKey = diffToWeapon[problem.difficulty] || 'axe';
+      const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
 
-      applyDamage(
-        problem.xp,
-        true, // Crit highlight
-        userTeam.name,
-        userTeam.id,
-        "pierced",
+      const userTeam =
+        teams.find((t) => t.id === USER_TEAM_ID || t.isUserTeam) || teams[2];
+      const targetPart =
+        DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
+      const customFeed = `${userTeam.name} solved "${problem.title}" with ${weapon.name} for ${problem.xp} XP!`;
+
+      const candidateZones = WEAPON_ZONE_MAPPING[weaponKey] || ['chest'];
+      const targetZone =
+        candidateZones[Math.floor(Math.random() * candidateZones.length)];
+
+      const fireEvent = {
+        id: "fire-solve-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7),
+        weaponKey,
+        targetZone,
+        actualDamage: problem.xp,
+        isCrit: true, // Solve critical highlight
+        actingTeam: userTeam,
+        teamId: userTeam.id,
+        weaponVerb: weapon.verb,
         targetPart,
-        customFeed
-      );
+        customFeedText: customFeed,
+        timestamp: Date.now(),
+      };
 
+      // Queue event for arena animation while also registering impact
+      onProjectileImpact(fireEvent);
       return true;
     },
-    [solvedProblems, teams, applyDamage]
+    [solvedProblems, teams, onProjectileImpact]
   );
 
-  // Reset dragon and battle
+  // Reset dragon, battle, and persistent damage overlays
   const resetDragon = useCallback(() => {
     setHp(DRAGON_CONFIG.maxHp);
     triggeredRoarsRef.current.clear();
@@ -267,15 +396,20 @@ export function GameProvider({ children }) {
     setTeams(INITIAL_TEAMS);
     setFeed(INITIAL_FEED);
     setSolvedProblems([]);
+    setZoneHits({ head: 0, chest: 0, leftWing: 0, rightWing: 0 });
+    setStuckBolts([]);
+    setPendingFireEvents([]);
+    setActiveFlashZone(null);
+    setRecoilingStation(null);
   }, []);
 
-  // Slower background fake-data timer (every 8-12 seconds)
+  // Background fake-data timer: generates weapon hits
   useEffect(() => {
     if (!autoSimulate || hp <= 0) return;
 
     let timeoutId;
     const triggerNext = () => {
-      const delay = Math.floor(Math.random() * 4000 + 8000); // 8,000ms - 12,000ms
+      const delay = Math.floor(Math.random() * 4000 + 7500); // 7.5s - 11.5s
       timeoutId = setTimeout(() => {
         if (hp > 0) {
           const randomTeam = teams[Math.floor(Math.random() * teams.length)];
@@ -327,6 +461,14 @@ export function GameProvider({ children }) {
     recordAcceptedSubmission,
     saveUserCode,
     getUserCode,
+    // Firing and persistent reaction states
+    zoneHits,
+    activeFlashZone,
+    stuckBolts,
+    pendingFireEvents,
+    recoilingStation,
+    triggerStationRecoil,
+    onProjectileImpact,
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
