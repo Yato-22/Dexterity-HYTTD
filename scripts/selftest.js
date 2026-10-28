@@ -255,3 +255,4 @@ async function runSelfTest() {
 }
 
 runSelfTest().catch(console.error);
+
