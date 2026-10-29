@@ -1,0 +1,1313 @@
+[
+  {
+    "id": "sum-of-two-numbers",
+    "tier": "dagger",
+    "title": "Sum of Two Numbers",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Viking warriors combine their spoils of battle into a single chest.",
+    "task": "Given two integers A and B, print their sum.",
+    "inputFormat": "A single line containing two space-separated integers A and B.",
+    "outputFormat": "Print the sum A + B.",
+    "constraints": [
+      "-1000 <= A, B <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 5",
+        "expectedOutput": "8",
+        "explanation": "3 + 5 = 8",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "-10 4",
+        "expectedOutput": "-6",
+        "explanation": "-10 + 4 = -6",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int a, b;\n    if (scanf(\"%d %d\", &a, &b) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    if (cin >> a >> b) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a, b = int(tokens[0]), int(tokens[1])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "even-or-odd",
+    "tier": "dagger",
+    "title": "Even or Odd",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "The seer divides the clan into two scouting parties based on numbers.",
+    "task": "Given an integer N, print 'EVEN' if N is even, or 'ODD' if N is odd.",
+    "inputFormat": "A single integer N.",
+    "outputFormat": "Print EVEN or ODD.",
+    "constraints": [
+      "-1000 <= N <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4",
+        "expectedOutput": "EVEN",
+        "explanation": "4 is divisible by 2.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "7",
+        "expectedOutput": "ODD",
+        "explanation": "7 is not divisible by 2.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "largest-of-three",
+    "tier": "dagger",
+    "title": "Largest of Three",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Three clan champions boast of their battle strength; find the mightiest.",
+    "task": "Given three integers A, B, and C, find and print the largest value.",
+    "inputFormat": "Three space-separated integers A, B, and C.",
+    "outputFormat": "Print the maximum of the three numbers.",
+    "constraints": [
+      "-1000 <= A, B, C <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "1 5 3",
+        "expectedOutput": "5",
+        "explanation": "5 is the largest.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "10 10 2",
+        "expectedOutput": "10",
+        "explanation": "10 is the largest.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int a, b, c;\n    if (scanf(\"%d %d %d\", &a, &b, &c) != 3) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    if (cin >> a >> b >> c) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            int c = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a, b, c = int(tokens[0]), int(tokens[1]), int(tokens[2])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "count-vowels",
+    "tier": "dagger",
+    "title": "Count Vowels",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Chant the sacred runes to invoke Thor's blessing.",
+    "task": "Given a single word S consisting of lowercase English letters, count the total number of vowels ('a', 'e', 'i', 'o', 'u').",
+    "inputFormat": "A single string S.",
+    "outputFormat": "Print the number of vowels.",
+    "constraints": [
+      "1 <= |S| <= 100",
+      "S contains only lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "viking",
+        "expectedOutput": "2",
+        "explanation": "'i' and 'i' are 2 vowels.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "dragon",
+        "expectedOutput": "2",
+        "explanation": "'a' and 'o' are 2 vowels.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "reverse-a-string",
+    "tier": "dagger",
+    "title": "Reverse a String",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "The sea witch whispers a mirrored runic incantation.",
+    "task": "Given a string S consisting of printable non-whitespace characters, print the string reversed.",
+    "inputFormat": "A single string S.",
+    "outputFormat": "Print the reversed string.",
+    "constraints": [
+      "1 <= |S| <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "viking",
+        "expectedOutput": "gnikiv",
+        "explanation": "Reversing 'viking' produces 'gnikiv'.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "shield",
+        "expectedOutput": "dleihs",
+        "explanation": "Reversing 'shield' produces 'dleihs'.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "sum-of-digits",
+    "tier": "dagger",
+    "title": "Sum of Digits",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Calculate the mystical rune sum of a sacred talisman.",
+    "task": "Given a non-negative integer N, calculate the sum of its decimal digits.",
+    "inputFormat": "A single non-negative integer N.",
+    "outputFormat": "Print the sum of the digits.",
+    "constraints": [
+      "0 <= N <= 10^9"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "123",
+        "expectedOutput": "6",
+        "explanation": "1 + 2 + 3 = 6.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "405",
+        "expectedOutput": "9",
+        "explanation": "4 + 0 + 5 = 9.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    long long n;\n    if (scanf(\"%lld\", &n) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    long long n;\n    if (cin >> n) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextLong()) {\n            long n = sc.nextLong();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "leap-year",
+    "tier": "dagger",
+    "title": "Leap Year",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Align the clan calendar with the celestial winter solstices.",
+    "task": "Given a year Y, determine if it is a leap year. A year is a leap year if it is divisible by 4, except end-of-century years, which must be divisible by 400. Print YES if leap year, else NO.",
+    "inputFormat": "A single integer Y.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "1 <= Y <= 3000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "2024",
+        "expectedOutput": "YES",
+        "explanation": "2024 is divisible by 4.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "1900",
+        "expectedOutput": "NO",
+        "explanation": "1900 is divisible by 100 but not 400.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int y;\n    if (scanf(\"%d\", &y) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int y;\n    if (cin >> y) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int y = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    y = int(tokens[0])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "sum-of-an-array",
+    "tier": "dagger",
+    "title": "Sum of an Array",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Tally the weight of dragon scales collected by the war party.",
+    "task": "Given an array of N integers, compute and print the sum of all elements.",
+    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers A[1], A[2], ..., A[N].",
+    "outputFormat": "Print the total sum.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= A[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4\n1 2 3 4",
+        "expectedOutput": "10",
+        "explanation": "1 + 2 + 3 + 4 = 10.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3\n10 -5 2",
+        "expectedOutput": "7",
+        "explanation": "10 + (-5) + 2 = 7.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "palindrome-string",
+    "tier": "axe",
+    "title": "Palindrome String",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "The carving on the war horn reads identical from both ends.",
+    "task": "Given a single word S consisting of lowercase letters, check if it reads the same forwards and backwards. Print YES if it is a palindrome, NO otherwise.",
+    "inputFormat": "A single non-empty string S.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "1 <= |S| <= 100",
+      "S consists of lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "radar",
+        "expectedOutput": "YES",
+        "explanation": "'radar' reversed is 'radar'.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "viking",
+        "expectedOutput": "NO",
+        "explanation": "'viking' reversed is 'gnikiv'.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "prime-check",
+    "tier": "axe",
+    "title": "Prime Check",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Only indivisible iron ore can forge the chief's battle axe.",
+    "task": "Given an integer N, determine if it is a prime number (an integer greater than 1 with no positive divisors other than 1 and itself). Print YES if prime, else NO.",
+    "inputFormat": "A single integer N.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "1 <= N <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "7",
+        "expectedOutput": "YES",
+        "explanation": "7 has only divisors 1 and 7.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "10",
+        "expectedOutput": "NO",
+        "explanation": "10 is divisible by 2 and 5.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "second-largest-number",
+    "tier": "axe",
+    "title": "Second Largest Number",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "The second greatest archer is chosen as vice-chieftain.",
+    "task": "Given N distinct integers, find the second largest value in the array.",
+    "inputFormat": "Line 1: An integer N (2 <= N <= 100).\nLine 2: N space-separated distinct integers.",
+    "outputFormat": "Print the second largest integer.",
+    "constraints": [
+      "2 <= N <= 100",
+      "All elements are distinct",
+      "-1000 <= A[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4\n1 5 3 2",
+        "expectedOutput": "3",
+        "explanation": "Sorted array is 1, 2, 3, 5. Second largest is 3.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3\n10 20 30",
+        "expectedOutput": "20",
+        "explanation": "Second largest is 20.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "most-frequent-character",
+    "tier": "axe",
+    "title": "Most Frequent Character",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Decipher the dominant clan sigil in the runic tapestry.",
+    "task": "Given a string S of lowercase English letters, find the character that appears most frequently. If there is a tie, output the one that appears earliest in alphabetical order.",
+    "inputFormat": "A single non-empty string S.",
+    "outputFormat": "Print the most frequent character.",
+    "constraints": [
+      "1 <= |S| <= 100",
+      "S consists of lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "banana",
+        "expectedOutput": "a",
+        "explanation": "'a' appears 3 times.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "bbccaa",
+        "expectedOutput": "a",
+        "explanation": "'a', 'b', and 'c' all appear 2 times. 'a' is first alphabetically.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "two-sum",
+    "tier": "axe",
+    "title": "Two Sum",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Select two anchor weights that match the exact balance requirement.",
+    "task": "Given an array of N integers and a target T, find the 1-based indices (i < j) of the two elements that sum to T. If multiple pairs exist, print the pair with the smallest first index; if still tied, smallest second index.",
+    "inputFormat": "Line 1: Two integers N and T (2 <= N <= 100).\nLine 2: N space-separated integers A[1], ..., A[N].",
+    "outputFormat": "Print two 1-based indices i and j separated by a space.",
+    "constraints": [
+      "2 <= N <= 100",
+      "-1000 <= A[i], T <= 1000",
+      "At least one valid pair exists."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4 9\n2 7 11 15",
+        "expectedOutput": "1 2",
+        "explanation": "A[1] + A[2] = 2 + 7 = 9.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3 6\n3 2 4",
+        "expectedOutput": "2 3",
+        "explanation": "A[2] + A[3] = 2 + 4 = 6.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n, t;\n    if (scanf(\"%d %d\", &n, &t) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, t;\n    if (cin >> n >> t) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int t = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, t = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "valid-anagram",
+    "tier": "axe",
+    "title": "Valid Anagram",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Check if two war banners use the exact same runes rearranged.",
+    "task": "Given two strings S and T consisting of lowercase letters, determine if T is an anagram of S (contains the same characters with the same frequencies). Print YES if valid, else NO.",
+    "inputFormat": "Two space-separated strings S and T.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "1 <= |S|, |T| <= 100",
+      "S and T consist of lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "listen silent",
+        "expectedOutput": "YES",
+        "explanation": "'silent' is an anagram of 'listen'.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "viking raider",
+        "expectedOutput": "NO",
+        "explanation": "The letters do not match.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105], t[105];\n    if (scanf(\"%s %s\", s, t) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s, t;\n    if (cin >> s >> t) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            String t = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if len(tokens) < 2:\n        return\n    s, t = tokens[0], tokens[1]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "remove-duplicates",
+    "tier": "axe",
+    "title": "Remove Duplicates",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Purge duplicate scouts from the muster roll while preserving order.",
+    "task": "Given an array of N integers, remove all duplicate occurrences, keeping only the first occurrence of each number, preserving their original order.",
+    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers.",
+    "outputFormat": "Print the resulting numbers separated by a space.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= A[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "6\n1 2 2 3 4 4",
+        "expectedOutput": "1 2 3 4",
+        "explanation": "2 and 4 appeared twice.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "5\n5 5 5 5 5",
+        "expectedOutput": "5",
+        "explanation": "Only one unique element remains.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "gcd-and-lcm",
+    "tier": "axe",
+    "title": "GCD and LCM",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Calculate the greatest common rhythm and least common cycle for the rowing drums.",
+    "task": "Given two positive integers A and B, compute their Greatest Common Divisor (GCD) and Least Common Multiple (LCM).",
+    "inputFormat": "Two space-separated positive integers A and B.",
+    "outputFormat": "Print GCD and LCM separated by a space.",
+    "constraints": [
+      "1 <= A, B <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "12 18",
+        "expectedOutput": "6 36",
+        "explanation": "GCD(12, 18) = 6, LCM(12, 18) = 36.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "5 7",
+        "expectedOutput": "1 35",
+        "explanation": "GCD(5, 7) = 1, LCM(5, 7) = 35.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int a, b;\n    if (scanf(\"%d %d\", &a, &b) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    if (cin >> a >> b) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a, b = int(tokens[0]), int(tokens[1])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "valid-parentheses",
+    "tier": "catapult",
+    "title": "Valid Parentheses",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Verify the nested rune brackets guarding the catapult trigger.",
+    "task": "Given a string S consisting of brackets '()[]{}', determine if it is valid (brackets close in correct order and type). Print YES if valid, else NO.",
+    "inputFormat": "A single string S.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "1 <= |S| <= 100",
+      "S consists only of '()[]{}'."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "()[]{}",
+        "expectedOutput": "YES",
+        "explanation": "All brackets match properly.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "(]",
+        "expectedOutput": "NO",
+        "explanation": "'(' does not match ']'.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "binary-search",
+    "tier": "catapult",
+    "title": "Binary Search",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Locate the enchanted quiver in the sorted armory vault.",
+    "task": "Given a sorted array of N distinct integers in ascending order and a target value K, find the 1-based index of K. If K is not present, print -1.",
+    "inputFormat": "Line 1: Two integers N and K (1 <= N <= 100).\nLine 2: N space-separated integers in strictly increasing order.",
+    "outputFormat": "Print the 1-based index of K, or -1 if not found.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= A[i], K <= 1000",
+      "A is sorted in ascending order."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5 7\n1 3 5 7 9",
+        "expectedOutput": "4",
+        "explanation": "7 is at index 4.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4 6\n2 4 8 10",
+        "expectedOutput": "-1",
+        "explanation": "6 is not in the array.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, k;\n    if (cin >> n >> k) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int k = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, k = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "longest-substring-without-repeating-characters",
+    "tier": "catapult",
+    "title": "Longest Substring Without Repeating Characters",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Find the longest sequence of distinct victory runes carved along the catapult arm.",
+    "task": "Given a string S of lowercase English letters, find the length of the longest contiguous substring without any repeating characters.",
+    "inputFormat": "A single non-empty string S.",
+    "outputFormat": "Print an integer: length of the longest substring with all unique characters.",
+    "constraints": [
+      "1 <= |S| <= 100",
+      "S consists of lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "abcabcbb",
+        "expectedOutput": "3",
+        "explanation": "'abc' with length 3.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "bbbbb",
+        "expectedOutput": "1",
+        "explanation": "'b' with length 1.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "maximum-subarray-sum",
+    "tier": "catapult",
+    "title": "Maximum Subarray Sum",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Find the contiguous sequence of combat clashes yielding maximum momentum.",
+    "task": "Given an array of N integers, find the maximum sum of a non-empty contiguous subarray.",
+    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers.",
+    "outputFormat": "Print the maximum contiguous subarray sum.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= A[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n-2 1 -3 4 -1",
+        "expectedOutput": "4",
+        "explanation": "[4] has sum 4.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4\n1 2 3 4",
+        "expectedOutput": "10",
+        "explanation": "Whole array sums to 10.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "merge-intervals",
+    "tier": "catapult",
+    "title": "Merge Intervals",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Consolidate overlapping catapult bombardment time intervals into unified barrages.",
+    "task": "Given N intervals [start, end], merge all overlapping intervals. Print the merged intervals sorted by start time, each on a new line as 'start end'.",
+    "inputFormat": "Line 1: An integer N (1 <= N <= 50).\nNext N lines: Two integers start and end (0 <= start <= end <= 1000).",
+    "outputFormat": "Print each merged interval's start and end separated by a space, one per line.",
+    "constraints": [
+      "1 <= N <= 50",
+      "0 <= start <= end <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4\n1 3\n2 6\n8 10\n15 18",
+        "expectedOutput": "1 6\n8 10\n15 18",
+        "explanation": "[1,3] and [2,6] overlap into [1,6].",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "2\n1 4\n4 5",
+        "expectedOutput": "1 5",
+        "explanation": "Touching intervals [1,4] and [4,5] merge to [1,5].",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int s[55], e[55];\n    for (int i = 0; i < n; i++) scanf(\"%d %d\", &s[i], &e[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<pair<int, int>> intervals(n);\n        for (int i = 0; i < n; i++) cin >> intervals[i].first >> intervals[i].second;\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[][] intervals = new int[n][2];\n            for (int i = 0; i < n; i++) {\n                intervals[i][0] = sc.nextInt();\n                intervals[i][1] = sc.nextInt();\n            }\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    intervals = []\n    for i in range(n):\n        intervals.append([int(tokens[1 + 2*i]), int(tokens[2 + 2*i])])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "rotate-array-by-k",
+    "tier": "catapult",
+    "title": "Rotate Array by K",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Rotate the perimeter shield guard positions clockwise by K steps.",
+    "task": "Given an array of N integers and a non-negative integer K, rotate the array to the right (clockwise) by K steps.",
+    "inputFormat": "Line 1: Two integers N and K (1 <= N <= 100, 0 <= K <= 1000).\nLine 2: N space-separated integers.",
+    "outputFormat": "Print the rotated array elements separated by a space.",
+    "constraints": [
+      "1 <= N <= 100",
+      "0 <= K <= 1000",
+      "-1000 <= A[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5 2\n1 2 3 4 5",
+        "expectedOutput": "4 5 1 2 3",
+        "explanation": "Rotating right by 2 moves 4, 5 to the front.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4 4\n10 20 30 40",
+        "expectedOutput": "10 20 30 40",
+        "explanation": "Rotating by N gives original array.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, k;\n    if (cin >> n >> k) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int k = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, k = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "number-of-islands",
+    "tier": "catapult",
+    "title": "Number of Islands",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Count isolated volcanic islands in the archipelago from the dragon's aerial view.",
+    "task": "Given an R x C grid of '1's (land) and '0's (water), count the number of islands. An island is formed by connecting adjacent land cells horizontally or vertically.",
+    "inputFormat": "Line 1: Two integers R and C (1 <= R, C <= 10).\nNext R lines: A string of C characters ('0' or '1').",
+    "outputFormat": "Print a single integer: total number of islands.",
+    "constraints": [
+      "1 <= R, C <= 10",
+      "Grid contains only '0' and '1'."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 3\n110\n010\n001",
+        "expectedOutput": "2",
+        "explanation": "One island at top-center and another at bottom-right.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "2 2\n00\n00",
+        "expectedOutput": "0",
+        "explanation": "No land cells.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    char grid[15][15];\n    for (int i = 0; i < r; i++) scanf(\"%s\", grid[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nint main() {\n    int r, c;\n    if (cin >> r >> c) {\n        vector<string> grid(r);\n        for (int i = 0; i < r; i++) cin >> grid[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int r = sc.nextInt();\n            int c = sc.nextInt();\n            String[] grid = new String[r];\n            for (int i = 0; i < r; i++) grid[i] = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r, c = int(tokens[0]), int(tokens[1])\n    grid = tokens[2:2+r]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "subarray-sum-equals-k",
+    "tier": "catapult",
+    "title": "Subarray Sum Equals K",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Count how many contiguous patrols achieve target tactical power K.",
+    "task": "Given an array of N integers and an integer K, find the total number of continuous subarrays whose sum equals K.",
+    "inputFormat": "Line 1: Two integers N and K (1 <= N <= 100, -10^5 <= K <= 10^5).\nLine 2: N space-separated integers A[1], ..., A[N].",
+    "outputFormat": "Print the number of subarrays summing to K.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= A[i] <= 1000",
+      "-10^5 <= K <= 10^5"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 2\n1 1 1",
+        "expectedOutput": "2",
+        "explanation": "[1,1] at indices 1-2 and 2-3 both sum to 2.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3 3\n1 2 3",
+        "expectedOutput": "2",
+        "explanation": "[1,2] and [3] both sum to 3.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, k;\n    if (cin >> n >> k) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int k = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, k = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "coin-change",
+    "tier": "ballista",
+    "title": "Coin Change",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Melt down the fewest silver coins to pay the dragon tribute amount A.",
+    "task": "Given N distinct coin denominations and an amount A, find the minimum number of coins needed to make up amount A. You may use each coin infinitely many times. If amount cannot be made up, print -1.",
+    "inputFormat": "Line 1: Two integers N and A (1 <= N <= 10, 0 <= A <= 1000).\nLine 2: N space-separated positive integers (coin values).",
+    "outputFormat": "Print the minimum coins, or -1.",
+    "constraints": [
+      "1 <= N <= 10",
+      "0 <= A <= 1000",
+      "1 <= coin[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 11\n1 2 5",
+        "expectedOutput": "3",
+        "explanation": "5 + 5 + 1 = 11 (3 coins).",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "1 3\n2",
+        "expectedOutput": "-1",
+        "explanation": "Cannot make 3 using only 2s.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n, a;\n    if (scanf(\"%d %d\", &n, &a) != 2) return 0;\n    int coins[15];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &coins[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, a;\n    if (cin >> n >> a) {\n        vector<int> coins(n);\n        for (int i = 0; i < n; i++) cin >> coins[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int a = sc.nextInt();\n            int[] coins = new int[n];\n            for (int i = 0; i < n; i++) coins[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, a = int(tokens[0]), int(tokens[1])\n    coins = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "longest-increasing-subsequence",
+    "tier": "ballista",
+    "title": "Longest Increasing Subsequence",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Find the longest ascending sequence of ballista bolt calibers.",
+    "task": "Given an array of N integers, find the length of the longest strictly increasing subsequence.",
+    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers.",
+    "outputFormat": "Print the length of the longest strictly increasing subsequence.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= A[i] <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "6\n10 9 2 5 3 7",
+        "expectedOutput": "3",
+        "explanation": "[2, 5, 7] or [2, 3, 7] has length 3.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4\n0 1 0 3",
+        "expectedOutput": "3",
+        "explanation": "[0, 1, 3] has length 3.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "edit-distance",
+    "tier": "ballista",
+    "title": "Edit Distance",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Find minimum rune scribing operations (insert, delete, replace) to convert word A into word B.",
+    "task": "Given two strings word1 and word2 consisting of lowercase English letters, compute the minimum number of operations required to convert word1 to word2.",
+    "inputFormat": "Two space-separated strings word1 and word2.",
+    "outputFormat": "Print the minimum edit distance.",
+    "constraints": [
+      "1 <= |word1|, |word2| <= 50",
+      "Strings consist of lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "horse ros",
+        "expectedOutput": "3",
+        "explanation": "horse -> rorse -> rose -> ros (3 operations).",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "intention execution",
+        "expectedOutput": "5",
+        "explanation": "5 operations required.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char w1[60], w2[60];\n    if (scanf(\"%s %s\", w1, w2) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string w1, w2;\n    if (cin >> w1 >> w2) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String w1 = sc.next();\n            String w2 = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if len(tokens) < 2:\n        return\n    w1, w2 = tokens[0], tokens[1]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "shortest-path-in-a-grid",
+    "tier": "ballista",
+    "title": "Shortest Path in a Grid",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Navigate the dragon cavern grid from top-left (0,0) to bottom-right (R-1, C-1) avoiding fiery obstacles.",
+    "task": "Given an R x C grid where 0 is walkable and 1 is blocked, find the shortest path length (number of cells visited including start and end) from (0,0) to (R-1, C-1) moving up/down/left/right. If blocked at start/end or no path exists, print -1.",
+    "inputFormat": "Line 1: Two integers R and C (1 <= R, C <= 10).\nNext R lines: C space-separated integers (0 or 1).",
+    "outputFormat": "Print the shortest path length, or -1.",
+    "constraints": [
+      "1 <= R, C <= 10",
+      "Grid cells are 0 or 1."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 3\n0 0 0\n1 1 0\n0 0 0",
+        "expectedOutput": "5",
+        "explanation": "(0,0)->(0,1)->(0,2)->(1,2)->(2,2) takes 5 cells.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "2 2\n0 1\n1 0",
+        "expectedOutput": "-1",
+        "explanation": "Path is completely blocked.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    int grid[15][15];\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) scanf(\"%d\", &grid[i][j]);\n    }\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int r, c;\n    if (cin >> r >> c) {\n        vector<vector<int>> grid(r, vector<int>(c));\n        for (int i = 0; i < r; i++) {\n            for (int j = 0; j < c; j++) cin >> grid[i][j];\n        }\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int r = sc.nextInt();\n            int c = sc.nextInt();\n            int[][] grid = new int[r][c];\n            for (int i = 0; i < r; i++) {\n                for (int j = 0; j < c; j++) grid[i][j] = sc.nextInt();\n            }\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r, c = int(tokens[0]), int(tokens[1])\n    grid = []\n    idx = 2\n    for i in range(r):\n        grid.append([int(x) for x in tokens[idx:idx+c]])\n        idx += c\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "knapsack-01",
+    "tier": "ballista",
+    "title": "0/1 Knapsack",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Pack the most valuable dragon relics into your longship cargo hold without exceeding weight capacity W.",
+    "task": "Given N items with weights and values, and a maximum weight capacity W, find the maximum total value possible without exceeding W. Each item can be chosen at most once.",
+    "inputFormat": "Line 1: Two integers N and W (1 <= N <= 50, 1 <= W <= 500).\nLine 2: N space-separated weights wt[i].\nLine 3: N space-separated values val[i].",
+    "outputFormat": "Print the maximum total value.",
+    "constraints": [
+      "1 <= N <= 50",
+      "1 <= W <= 500",
+      "1 <= wt[i], val[i] <= 500"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 4\n1 2 3\n10 15 40",
+        "expectedOutput": "50",
+        "explanation": "Pick item 1 and item 3 for weight 1+3=4 and value 10+40=50.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3 3\n4 5 6\n1 2 3",
+        "expectedOutput": "0",
+        "explanation": "All items exceed capacity 3.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int n, w;\n    if (scanf(\"%d %d\", &n, &w) != 2) return 0;\n    int wt[55], val[55];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &wt[i]);\n    for (int i = 0; i < n; i++) scanf(\"%d\", &val[i]);\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, w;\n    if (cin >> n >> w) {\n        vector<int> wt(n), val(n);\n        for (int i = 0; i < n; i++) cin >> wt[i];\n        for (int i = 0; i < n; i++) cin >> val[i];\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int w = sc.nextInt();\n            int[] wt = new int[n];\n            int[] val = new int[n];\n            for (int i = 0; i < n; i++) wt[i] = sc.nextInt();\n            for (int i = 0; i < n; i++) val[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, w = int(tokens[0]), int(tokens[1])\n    wt = [int(x) for x in tokens[2:2+n]]\n    val = [int(x) for x in tokens[2+n:2+2*n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "longest-common-subsequence",
+    "tier": "ballista",
+    "title": "Longest Common Subsequence",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Find the longest matching battle command sequence shared between two elder skalds.",
+    "task": "Given two strings S1 and S2 of lowercase English letters, find the length of their longest common subsequence.",
+    "inputFormat": "Two space-separated strings S1 and S2.",
+    "outputFormat": "Print the length of their longest common subsequence.",
+    "constraints": [
+      "1 <= |S1|, |S2| <= 100",
+      "Strings contain lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "abcde ace",
+        "expectedOutput": "3",
+        "explanation": "'ace' is a common subsequence of length 3.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "abc def",
+        "expectedOutput": "0",
+        "explanation": "No common characters.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s1[105], s2[105];\n    if (scanf(\"%s %s\", s1, s2) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s1, s2;\n    if (cin >> s1 >> s2) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s1 = sc.next();\n            String s2 = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if len(tokens) < 2:\n        return\n    s1, s2 = tokens[0], tokens[1]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "grid-paths-with-obstacles",
+    "tier": "ballista",
+    "title": "Grid Paths with Obstacles",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Count all valid tactical advance routes from top-left (0,0) to bottom-right (R-1, C-1) moving only right and down.",
+    "task": "Given an R x C grid where 0 indicates an empty space and 1 indicates an obstacle, count the number of unique paths from (0,0) to (R-1, C-1). At each cell you can only move right or down.",
+    "inputFormat": "Line 1: Two integers R and C (1 <= R, C <= 10).\nNext R lines: C space-separated integers (0 or 1).",
+    "outputFormat": "Print the number of unique paths.",
+    "constraints": [
+      "1 <= R, C <= 10",
+      "Grid cells are 0 or 1."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3 3\n0 0 0\n0 1 0\n0 0 0",
+        "expectedOutput": "2",
+        "explanation": "Only 2 paths avoid the obstacle at (1,1).",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "2 2\n0 1\n0 0",
+        "expectedOutput": "1",
+        "explanation": "Only down-then-right is possible.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    int grid[15][15];\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) scanf(\"%d\", &grid[i][j]);\n    }\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int r, c;\n    if (cin >> r >> c) {\n        vector<vector<int>> grid(r, vector<int>(c));\n        for (int i = 0; i < r; i++) {\n            for (int j = 0; j < c; j++) cin >> grid[i][j];\n        }\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int r = sc.nextInt();\n            int c = sc.nextInt();\n            int[][] grid = new int[r][c];\n            for (int i = 0; i < r; i++) {\n                for (int j = 0; j < c; j++) grid[i][j] = sc.nextInt();\n            }\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r, c = int(tokens[0]), int(tokens[1])\n    grid = []\n    idx = 2\n    for i in range(r):\n        grid.append([int(x) for x in tokens[idx:idx+c]])\n        idx += c\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "longest-palindromic-substring",
+    "tier": "ballista",
+    "title": "Longest Palindromic Substring",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Find the longest symmetrical runic inscription on the ballista chassis.",
+    "task": "Given a string S of lowercase English letters, find the longest palindromic substring. If multiple palindromic substrings have the same maximum length, output the one that occurs earliest in S.",
+    "inputFormat": "A single non-empty string S.",
+    "outputFormat": "Print the longest palindromic substring.",
+    "constraints": [
+      "1 <= |S| <= 100",
+      "S consists of lowercase English letters."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "babad",
+        "expectedOutput": "bab",
+        "explanation": "'bab' is the earliest longest palindrome of length 3.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "cbbd",
+        "expectedOutput": "bb",
+        "explanation": "'bb' has length 2.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
+      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
+      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+    }
+  }
+]

@@ -11,7 +11,7 @@ import Embers from '../components/Embers';
 import WeaponStations from '../components/WeaponStations';
 import FlyingProjectiles from '../components/FlyingProjectiles';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
-import { Volume2, VolumeX, Flame, LogOut } from 'lucide-react';
+import { Volume2, VolumeX, Flame, LogOut, PauseCircle, AlertTriangle, WifiOff } from 'lucide-react';
 
 export default function ArenaScreen() {
   const {
@@ -19,6 +19,10 @@ export default function ArenaScreen() {
     hp,
     maxHp,
     dragonName,
+    dragonStatus,
+    isPaused,
+    runnerOk,
+    isReconnecting,
     teams,
     feed,
     solvedProblems,
@@ -46,7 +50,6 @@ export default function ArenaScreen() {
     onProjectileImpact,
   } = useGame();
 
-  // Dynamic rope measurement so ropes NEVER float or have gaps at 1920x1080, 1366x768, etc.
   const leftColRef = useRef(null);
   const plaqueRef = useRef(null);
   const [leftTopOffset, setLeftTopOffset] = useState(100);
@@ -78,20 +81,56 @@ export default function ArenaScreen() {
         backgroundImage: "url('/field.png'), linear-gradient(to bottom, #1c152b 0%, #4a2835 30%, #a85834 50%, #4a5c2d 65%, #1e2e14 100%)",
       }}
     >
-      {/* Very light 15% dark overlay so panels stand out crisply */}
+      {/* 15% dark overlay so panels stand out */}
       <div className="absolute inset-0 bg-black/15 pointer-events-none z-0" />
 
       {/* Floating Ember Particles */}
       <Embers />
 
-      {/* ===================================================================== */}
-      {/* TOP-RIGHT EVENT PLAQUE (Ropes start at top edge of screen, zero gap)  */}
-      {/* ===================================================================== */}
+      {/* Reconnecting Banner */}
+      {isReconnecting && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-50 bg-[#7F1D1D]/90 border border-[#EF4444] px-4 py-1.5 rounded-full shadow-lg flex items-center gap-2 text-xs font-bold text-[#FEE2E2] animate-pulse">
+          <WifiOff className="w-3.5 h-3.5 text-[#FCA5A5]" />
+          <span>Reconnecting to the Viking battle network...</span>
+        </div>
+      )}
+
+      {/* Runner Outage Warning Banner */}
+      {!runnerOk && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-50 bg-[#9A3412]/95 border-2 border-[#F97316] px-5 py-2 rounded-lg shadow-2xl flex items-center gap-2 text-xs font-bold text-[#FFF8ED]">
+          <AlertTriangle className="w-4 h-4 text-[#FDE047] animate-bounce" />
+          <span>The forge is down, please wait for repairs...</span>
+        </div>
+      )}
+
+      {/* Full-Screen Viking Pause Overlay */}
+      {isPaused && (
+        <div className="absolute inset-0 z-50 bg-[#0C0806]/85 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center select-none">
+          <div className="compact-wood-board border-[4px] border-[#8C6F54] rounded-2xl p-8 max-w-lg shadow-[0_0_50px_rgba(0,0,0,0.9)] relative">
+            <div className="compact-nail top-3 left-3" />
+            <div className="compact-nail top-3 right-3" />
+            <div className="compact-nail bottom-3 left-3" />
+            <div className="compact-nail bottom-3 right-3" />
+
+            <PauseCircle className="w-16 h-16 text-[#FF7A1A] mx-auto mb-4 animate-pulse" />
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#FFF8ED] tracking-widest uppercase heading-shadow mb-2">
+              BATTLE PAUSED
+            </h2>
+            <p className="font-sans text-base text-[#D8C39F] font-semibold mb-4">
+              The chieftain has halted the siege. The battle will resume shortly.
+            </p>
+            <div className="inline-block px-4 py-1.5 bg-[#140E0A] border border-[#5A4331] rounded-lg text-xs font-heading font-bold text-[#FFB347] tracking-wider uppercase">
+              All clan progress and code are preserved
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Top-Right Event Plaque */}
       <div
         ref={plaqueRef}
         className="absolute top-2 right-2.5 2xl:top-3.5 2xl:right-4 z-40"
       >
-        {/* Two Ropes Running From Top Edge of Screen Down to Plaque */}
         <div
           className="absolute left-3 z-0 pointer-events-none flex flex-col items-center"
           style={{
@@ -117,7 +156,7 @@ export default function ArenaScreen() {
           </div>
         </div>
 
-        {/* Broken Wooden Plaque Housing */}
+        {/* Plaque Housing */}
         <div
           className={`relative broken-plank-shadow transition-transform duration-300 ${
             isHit ? 'plank-hit-shake' : ''
@@ -160,7 +199,7 @@ export default function ArenaScreen() {
             <button
               onClick={logout}
               className="relative z-10 compact-iron-btn p-1 2xl:p-1.5 sword-cursor hover:text-[#EF4444]"
-              title={`Logged in as ${userTeam?.name || 'Viking'} - Click to Logout`}
+              title={`Logged in as ${userTeam?.name || 'Viking'} (${userTeam?.memberName || 'Warrior'}) - Logout`}
             >
               <LogOut className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-[#FFB347]" />
             </button>
@@ -168,12 +207,10 @@ export default function ArenaScreen() {
         </div>
       </div>
 
-      {/* ===================================================================== */}
-      {/* MAIN SINGLE-SCREEN BATTLE ARENA (No Page Scrolling)                  */}
-      {/* ===================================================================== */}
+      {/* Main Single-Screen Battle Arena */}
       <div className="relative z-20 h-full w-full max-w-[1920px] mx-auto p-2 md:p-2.5 2xl:p-3.5 flex flex-col justify-between">
         
-        {/* TOP CENTER: Dragon HP Bar (Hanging from two short ropes) */}
+        {/* Dragon HP Bar */}
         <header className="w-full flex justify-center mb-1 flex-shrink-0">
           <HPBar
             currentHp={hp}
@@ -184,12 +221,10 @@ export default function ArenaScreen() {
           />
         </header>
 
-        {/* 3-COLUMN ARENA LAYOUT */}
+        {/* 3-Column Arena Layout */}
         <main className="flex-1 min-h-0 w-full flex items-stretch gap-2.5 2xl:gap-5 my-auto">
           
-          {/* ================================================================= */}
-          {/* LEFT COLUMN: TWO PARALLEL ROPES PASSING THROUGH ALL 3 PANELS      */}
-          {/* ================================================================= */}
+          {/* Left Column: Rank, Leaderboard, Feed */}
           <motion.section
             ref={leftColRef}
             animate={{ rotate: [-0.35, 0.35, -0.35] }}
@@ -197,7 +232,6 @@ export default function ArenaScreen() {
             style={{ transformOrigin: "top center" }}
             className="w-[20%] min-w-[270px] max-w-[340px] h-full flex flex-col justify-between gap-1.5 2xl:gap-2 flex-shrink-0 relative"
           >
-            {/* TWO CONTINUOUS PARALLEL ROPES RUNNING FROM VERY TOP EDGE OF SCREEN DOWN TO BOTTOM */}
             {/* Left Strand */}
             <div
               className="absolute pointer-events-none z-0"
@@ -222,7 +256,6 @@ export default function ArenaScreen() {
               <RopeSegment height="100%" width={12} />
             </div>
 
-            {/* Bottom Knots below bottom panel */}
             <div className="absolute -bottom-6 left-[16px] pointer-events-none z-10">
               <TerminalRopeKnot />
             </div>
@@ -230,27 +263,28 @@ export default function ArenaScreen() {
               <TerminalRopeKnot />
             </div>
 
-            {/* 1. Rank Badge, Compact Broken Planks */}
+            {/* 1. Rank Badge */}
             <div className="flex-shrink-0 relative z-10">
               <RankBadge
                 rank={userTeamRank}
-                teamName={userTeam.name}
-                score={userTeam.score}
+                teamName={userTeam?.name || "Viking Clan"}
+                memberName={userTeam?.memberName}
+                score={userTeam?.totalDamage ?? userTeam?.score ?? 0}
                 isHit={isHit}
               />
             </div>
 
-            {/* 2. Top 10 Leaderboard Broken Planks */}
+            {/* 2. Top 10 Leaderboard */}
             <div className="flex-1 min-h-0 flex flex-col justify-center relative z-10">
               <Leaderboard
                 teams={teams}
-                userTeamId={userTeam.id}
+                userTeamId={userTeam?.id}
                 lastUpdated={lastLeaderboardUpdate}
                 isHit={isHit}
               />
             </div>
 
-            {/* 3. Live Feed Broken Planks */}
+            {/* 3. Live Feed */}
             <div className="flex-shrink-0 relative z-10">
               <LiveFeed
                 feed={feed}
@@ -260,18 +294,14 @@ export default function ArenaScreen() {
             </div>
           </motion.section>
 
-          {/* ================================================================= */}
-          {/* CENTER COLUMN: Dragon Clean & Completely Unobstructed             */}
-          {/* ================================================================= */}
+          {/* Center Column: Dragon & Weapons */}
           <section className="flex-1 min-w-0 h-full flex flex-col items-center justify-between relative px-2 overflow-visible">
-            {/* Flying Projectiles Layer */}
             <FlyingProjectiles
               pendingFireEvents={pendingFireEvents}
               onProjectileImpact={onProjectileImpact}
               onStationRecoil={triggerStationRecoil}
             />
 
-            {/* Dragon Half-Body blended into the field */}
             <div className="flex-1 w-full flex items-center justify-center relative min-h-0">
               <Dragon
                 hp={hp}
@@ -290,26 +320,23 @@ export default function ArenaScreen() {
                   const priorityOrder = ['ballista', 'catapult', 'axe', 'dagger'];
                   const weaponToFire = priorityOrder.find((w) => (inventory?.[w] || 0) > 0);
                   if (weaponToFire) {
-                    dealDamage(userTeam.id, weaponToFire);
+                    dealDamage(userTeam?.id, weaponToFire);
                   }
                 }}
               />
             </div>
 
-            {/* Four Weapon Stations in open bottom-center */}
             <div className="w-full flex-shrink-0 z-30 pb-0.5">
               <WeaponStations
                 recoilingStation={recoilingStation}
                 isDefeated={isDefeated}
                 inventory={inventory}
-                onStationClick={(weaponKey) => dealDamage(userTeam.id, weaponKey)}
+                onStationClick={(weaponKey) => dealDamage(userTeam?.id, weaponKey)}
               />
             </div>
           </section>
 
-          {/* ================================================================= */}
-          {/* RIGHT COLUMN: TWO CORNER ROPES DOWN THROUGH TOME OF TRIALS (Flat)  */}
-          {/* ================================================================= */}
+          {/* Right Column: Tome of Trials */}
           <motion.section
             animate={{ rotate: [-0.15, 0.15, -0.15] }}
             transition={{ repeat: Infinity, duration: 9.2, delay: 0.8, ease: "easeInOut" }}
@@ -327,9 +354,9 @@ export default function ArenaScreen() {
 
         {/* Screen Bottom Minimal Status Line */}
         <footer className="w-full flex-shrink-0 pt-0.5 flex items-center justify-between text-[11px] 2xl:text-[13px] font-bold text-[#A89078] px-2 font-sans">
-          <span>TechFlix Battle Arena</span>
+          <span>Dexterity Battle Arena • Viking Coding Clash</span>
           <span className="font-heading tracking-wider text-[#FFB347] text-[10px] 2xl:text-[12px]">
-            [S] Strike • [R] Reset • [P] Pause
+            {userTeam?.name ? `Clan: ${userTeam.name} | Warrior: ${userTeam.memberName || 'Leader'}` : 'Viking Warband'}
           </span>
           <span>Click dragon or attempt trials to deal damage</span>
         </footer>
@@ -337,4 +364,3 @@ export default function ArenaScreen() {
     </div>
   );
 }
-

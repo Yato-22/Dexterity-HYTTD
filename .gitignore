@@ -5,3 +5,7 @@ node_modules
 dist
 
 .vercel
+scripts/hidden_tests.json
+data/hidden_tests.json
+data/reference_solutions.json
+

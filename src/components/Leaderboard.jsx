@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import BrokenPlankPanel from './BrokenPlankPanel';
 import { RopeKnot } from './RopeGraphic';
+import { Flame } from 'lucide-react';
 
 export default function Leaderboard({
   teams = [],
@@ -9,14 +10,13 @@ export default function Leaderboard({
   lastUpdated = null,
   isHit = false,
 }) {
-  const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
-  const userTeamIndex = sortedTeams.findIndex((t) => t.id === userTeamId || t.isUserTeam);
+  const userTeamIndex = teams.findIndex((t) => t.id === userTeamId || t.isUserTeam);
   const isUserOutsideTop10 = userTeamIndex >= 10;
-  const userTeam = userTeamIndex !== -1 ? sortedTeams[userTeamIndex] : null;
+  const userTeam = userTeamIndex !== -1 ? teams[userTeamIndex] : null;
 
   const displayTeams = isUserOutsideTop10
-    ? sortedTeams.slice(0, 9)
-    : sortedTeams.slice(0, 10);
+    ? teams.slice(0, 9)
+    : teams.slice(0, 10);
 
   return (
     <div className="relative w-full">
@@ -25,14 +25,6 @@ export default function Leaderboard({
         <RopeKnot size="md" />
       </div>
       <div className="absolute -top-2 right-[16px] z-30 pointer-events-none">
-        <RopeKnot size="md" />
-      </div>
-
-      {/* Knots below the two panel holes */}
-      <div className="absolute -bottom-2 left-[16px] z-30 pointer-events-none">
-        <RopeKnot size="md" />
-      </div>
-      <div className="absolute -bottom-2 right-[16px] z-30 pointer-events-none">
         <RopeKnot size="md" />
       </div>
 
@@ -54,9 +46,10 @@ export default function Leaderboard({
 
         {/* Rows */}
         <div className="space-y-0.5">
-          {displayTeams.map((team, index) => {
+          {displayTeams.map((team) => {
             const isUser = team.id === userTeamId || team.isUserTeam;
-            const rank = index + 1;
+            const rank = team.rank || 1;
+            const score = team.totalDamage ?? team.score ?? 0;
 
             return (
               <motion.div
@@ -80,6 +73,14 @@ export default function Leaderboard({
                   <span className="text-[12px] 2xl:text-[15px] font-bold truncate text-[#FFF8ED] leading-none font-sans">
                     {team.name}
                   </span>
+
+                  {team.isDragonSlayer && (
+                    <span className="font-heading text-[8px] uppercase tracking-wide text-[#FFD700] bg-[#451A03] border border-[#F59E0B] px-1 py-0.2 rounded font-extrabold flex items-center gap-0.5 flex-shrink-0" title="Delivered the Final Blow!">
+                      <Flame className="w-2.5 h-2.5 text-[#F59E0B]" />
+                      SLAYER
+                    </span>
+                  )}
+
                   {isUser && (
                     <span className="font-heading text-[8px] uppercase tracking-wide text-[#14100D] bg-[#FF7A1A] px-1 py-0.2 rounded font-extrabold flex-shrink-0">
                       YOU
@@ -89,7 +90,7 @@ export default function Leaderboard({
 
                 <div className="flex items-center gap-1 flex-shrink-0 pl-1">
                   <span className="font-heading text-[12px] 2xl:text-[14px] font-bold text-[#FFB347] leading-none heading-shadow">
-                    {team.score}
+                    {score}
                   </span>
                   <span className="text-[9px] 2xl:text-[10px] font-bold text-[#D8C39F] uppercase font-sans">
                     XP
@@ -111,11 +112,17 @@ export default function Leaderboard({
               >
                 <div className="flex items-center gap-1.5 min-w-0">
                   <span className="font-heading text-[11px] 2xl:text-[13px] font-bold text-[#FF7A1A] w-4 text-right leading-none">
-                    #{userTeamIndex + 1}
+                    #{userTeam.rank || userTeamIndex + 1}
                   </span>
                   <span className="text-[12px] 2xl:text-[15px] font-bold truncate text-[#FFF8ED] leading-none font-sans">
                     {userTeam.name}
                   </span>
+                  {userTeam.isDragonSlayer && (
+                    <span className="font-heading text-[8px] uppercase tracking-wide text-[#FFD700] bg-[#451A03] border border-[#F59E0B] px-1 py-0.2 rounded font-extrabold flex items-center gap-0.5 flex-shrink-0">
+                      <Flame className="w-2.5 h-2.5 text-[#F59E0B]" />
+                      SLAYER
+                    </span>
+                  )}
                   <span className="font-heading text-[8px] uppercase tracking-wide text-[#14100D] bg-[#FF7A1A] px-1 py-0.2 rounded font-extrabold flex-shrink-0">
                     YOU
                   </span>
@@ -123,7 +130,7 @@ export default function Leaderboard({
 
                 <div className="flex items-center gap-1 flex-shrink-0 pl-1">
                   <span className="font-heading text-[12px] 2xl:text-[14px] font-bold text-[#FFB347] leading-none heading-shadow">
-                    {userTeam.score}
+                    {userTeam.totalDamage ?? userTeam.score ?? 0}
                   </span>
                   <span className="text-[9px] 2xl:text-[10px] font-bold text-[#D8C39F] uppercase font-sans">
                     XP

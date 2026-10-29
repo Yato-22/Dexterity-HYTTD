@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Client read-only collections
+    match /public/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /dragon/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /teams/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /feed/{doc} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Block client access to server-only collections (registry, pool, problems_private, config, etc.)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

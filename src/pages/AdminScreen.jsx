@@ -16,9 +16,12 @@ import {
   ArrowLeft,
   RefreshCw,
   ExternalLink,
+  Flame,
+  PauseCircle,
 } from 'lucide-react';
 import { db } from '../services/firebase';
-import { collection, onSnapshot, query, orderBy, doc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { computeRankings } from '../utils/rankings';
 
 export default function AdminScreen() {
   const [adminPassword, setAdminPassword] = useState(() => {
@@ -30,9 +33,10 @@ export default function AdminScreen() {
   const [loginInput, setLoginInput] = useState('');
   const [loginError, setLoginError] = useState(null);
 
-  // Dragon state
+  // Dragon state (from public/state)
   const [dragon, setDragon] = useState({ hp: 100, maxHp: 100, status: 'waiting' });
   const [maxHpInput, setMaxHpInput] = useState('100');
+  const [runnerOk, setRunnerOk] = useState(true);
 
   // Runner state
   const [runnerUrl, setRunnerUrl] = useState('');
@@ -40,44 +44,36 @@ export default function AdminScreen() {
   const [isTestingRunner, setIsTestingRunner] = useState(false);
   const [isSavingRunner, setIsSavingRunner] = useState(false);
 
-  // Teams live table
+  // Teams live summary (from public/state.teams)
   const [teams, setTeams] = useState([]);
   const [csvText, setCsvText] = useState(
-    'teamName,teamCode,members\nTeam Alpha,ALPHA-123,Hiccup & Astrid\nTeam Bravo,BRAVO-456,Snotlout & Fishlegs\nTeam Berserker,BERSERK-789,Dagur the Deranged'
+    'teamName,leaderPhone,leaderName,member2Name\nBerk Vikings,9876543210,Hiccup,Astrid\nDragon Riders,9876543211,Fishlegs,Snotlout\nThor Clan,9876543212,Ragnar,Lagertha'
   );
   const [importStatus, setImportStatus] = useState(null);
   const [actionMessage, setActionMessage] = useState(null);
   const [isLoadingAction, setIsLoadingAction] = useState(false);
 
-  // Live listener for dragon state
+  // Part 5: Listen ONLY to public/state
   useEffect(() => {
     if (!db) return;
-    const unsub = onSnapshot(doc(db, 'dragon', 'main'), (snap) => {
+    const unsub = onSnapshot(doc(db, 'public', 'state'), (snap) => {
       if (snap.exists()) {
         const d = snap.data();
+        const dragonData = d.dragon || {};
         setDragon({
-          hp: d.hp ?? 100,
-          maxHp: d.maxHp ?? 100,
-          status: d.status || 'waiting',
-          winnerTeamId: d.winnerTeamId || null,
+          hp: dragonData.hp ?? 100,
+          maxHp: dragonData.maxHp ?? 100,
+          status: dragonData.status || 'waiting',
+          winnerTeamId: dragonData.winnerTeamId || null,
+          winnerTeamName: dragonData.winnerTeamName || null,
         });
-        setMaxHpInput(String(d.maxHp || 100));
-      }
-    });
-    return () => unsub();
-  }, []);
+        if (dragonData.maxHp) setMaxHpInput(String(dragonData.maxHp));
+        if (typeof d.runnerOk === 'boolean') setRunnerOk(d.runnerOk);
 
-  // Live listener for all teams
-  useEffect(() => {
-    if (!db) return;
-    const q = query(collection(db, 'teams'), orderBy('totalDamage', 'desc'));
-    const unsub = onSnapshot(q, (snap) => {
-      const list = snap.docs.map((d, idx) => ({
-        id: d.id,
-        rank: idx + 1,
-        ...d.data(),
-      }));
-      setTeams(list);
+        const rawTeams = Array.isArray(d.teams) ? d.teams : [];
+        const ranked = computeRankings(rawTeams, dragonData.status, dragonData.winnerTeamId);
+        setTeams(ranked);
+      }
     });
     return () => unsub();
   }, []);
@@ -101,21 +97,16 @@ export default function AdminScreen() {
       setLoginError('Password is required');
       return;
     }
-    // Verify password by testing a lightweight request
-    fetch('/api/admin/runner', {
-      headers: { 'x-admin-password': loginInput.trim() },
-    }).then((res) => {
-      if (res.status === 401) {
-        setLoginError('Incorrect admin password');
-      } else {
-        setAdminPassword(loginInput.trim());
-        sessionStorage.setItem('techflix_admin_pass', loginInput.trim());
-        setIsAuthenticated(true);
-        setLoginError(null);
-      }
-    }).catch((err) => {
-      setLoginError('Error connecting to admin API: ' + err.message);
-    });
+    sessionStorage.setItem('techflix_admin_pass', loginInput.trim());
+    setAdminPassword(loginInput.trim());
+    setIsAuthenticated(true);
+    setLoginError(null);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('techflix_admin_pass');
+    setAdminPassword('');
+    setIsAuthenticated(false);
   };
 
   const handleStart = async () => {
@@ -124,11 +115,14 @@ export default function AdminScreen() {
     try {
       const res = await fetch('/api/admin/start', {
         method: 'POST',
-        headers: { 'x-admin-password': adminPassword },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to start battle');
-      setActionMessage({ type: 'success', text: 'Battle started! Dragon is now LIVE.' });
+      setActionMessage({ type: 'success', text: 'Battle is now LIVE! Dragonslayer submissions open.' });
     } catch (err) {
       setActionMessage({ type: 'error', text: err.message });
     } finally {
@@ -142,11 +136,14 @@ export default function AdminScreen() {
     try {
       const res = await fetch('/api/admin/pause', {
         method: 'POST',
-        headers: { 'x-admin-password': adminPassword },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-password': adminPassword,
+        },
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to pause battle');
-      setActionMessage({ type: 'success', text: 'Battle paused! Status set to WAITING.' });
+      setActionMessage({ type: 'success', text: 'Battle is now PAUSED! Full-screen pause overlay active.' });
     } catch (err) {
       setActionMessage({ type: 'error', text: err.message });
     } finally {
@@ -156,7 +153,7 @@ export default function AdminScreen() {
 
   const handleReset = async () => {
     const confirmReset = window.confirm(
-      'Are you sure you want to reset the battle? This will reset Dragon HP and clear the live feed!'
+      'Are you sure you want to reset the battle? This will reset Dragon HP, clear the live feed, and refresh team boards!'
     );
     if (!confirmReset) return;
 
@@ -178,7 +175,7 @@ export default function AdminScreen() {
       if (!res.ok) throw new Error(data.error || 'Failed to reset battle');
       setActionMessage({
         type: 'success',
-        text: `Battle reset successfully! HP set to ${data.hp}, live feed cleared.`,
+        text: `Battle reset successfully! HP set to ${data.hp}, live feed cleared, team boards rerolled.`,
       });
     } catch (err) {
       setActionMessage({ type: 'error', text: err.message });
@@ -262,7 +259,7 @@ export default function AdminScreen() {
       if (!res.ok) throw new Error(data.error || 'Failed to import teams');
       setImportStatus({
         type: 'success',
-        message: `✓ Successfully imported ${data.count} team(s)!`,
+        message: `✓ Successfully imported ${data.importedCount} teams into registry!`,
       });
     } catch (err) {
       setImportStatus({ type: 'error', message: err.message });
@@ -272,49 +269,32 @@ export default function AdminScreen() {
   };
 
   const handleExportCSV = () => {
-    // Direct fetch with password header and trigger download
-    fetch('/api/admin/export', {
-      headers: { 'x-admin-password': adminPassword },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to export CSV');
-        return res.blob();
-      })
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `techflix-teams-export-${Date.now()}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      })
-      .catch((err) => alert(err.message));
+    window.open(`/api/admin/export?adminPassword=${encodeURIComponent(adminPassword)}`, '_blank');
   };
 
-  // Password gate screen
   if (!isAuthenticated) {
     return (
       <div
-        className="h-screen max-h-screen w-screen overflow-hidden relative flex items-center justify-center p-4 bg-cover bg-center font-sans select-none"
+        className="min-h-screen w-screen flex items-center justify-center p-4 bg-cover bg-center font-sans"
         style={{
           backgroundImage: "url('/field.png'), linear-gradient(to bottom, #1c152b 0%, #4a2835 30%, #a85834 50%, #4a5c2d 65%, #1e2e14 100%)",
         }}
       >
-        <div className="absolute inset-0 bg-[#0C0806]/75 backdrop-blur-[8px]" />
-        <div className="relative z-10 w-full max-w-sm compact-wood-board border-[3px] border-[#684C35] rounded-xl shadow-solid-board p-6 text-center">
-          <div className="p-3 w-14 h-14 rounded-full bg-[#1A110B] border-2 border-[#FF7A1A] mx-auto mb-3 flex items-center justify-center shadow-solid-ticket">
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        <div className="relative z-10 w-full max-w-sm compact-wood-board border-[3px] border-[#684C35] rounded-xl p-6 text-center shadow-2xl">
+          <div className="compact-nail top-2 left-2" />
+          <div className="compact-nail top-2 right-2" />
+          <div className="compact-nail bottom-2 left-2" />
+          <div className="compact-nail bottom-2 right-2" />
+
+          <div className="p-3 bg-[#1A110B] rounded-full w-14 h-14 mx-auto mb-3 flex items-center justify-center border-2 border-[#FF7A1A]">
             <Lock className="w-7 h-7 text-[#FFB347]" />
           </div>
-          <h1 className="font-heading text-2xl font-extrabold text-[#FFF8ED] tracking-wider mb-1">
-            WAR COMMAND
-          </h1>
-          <p className="text-xs text-[#FFB347] font-bold uppercase tracking-widest mb-5">
-            ORGANIZER ADMIN GATE
-          </p>
+          <h2 className="font-heading text-xl font-bold uppercase text-[#FFF8ED] mb-1">CHIEFTAIN GATE</h2>
+          <p className="text-xs text-[#A89078] mb-4">Enter master password to access battle controls</p>
 
           {loginError && (
-            <div className="mb-4 px-3 py-2 bg-[#7F1D1D] border border-[#EF4444] rounded text-xs text-[#FEE2E2] font-bold">
+            <div className="mb-3 p-2 bg-[#7F1D1D] border border-[#EF4444] rounded text-xs text-[#FEE2E2] font-bold">
               {loginError}
             </div>
           )}
@@ -322,23 +302,23 @@ export default function AdminScreen() {
           <form onSubmit={handleAdminLogin} className="space-y-3">
             <input
               type="password"
-              placeholder="Admin Password"
               value={loginInput}
               onChange={(e) => setLoginInput(e.target.value)}
-              className="w-full px-4 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-sm text-[#FFF] placeholder-[#66503E] text-center"
+              placeholder="Admin Password"
               autoFocus
+              className="w-full px-3 py-2 bg-[#140E0A] border-2 border-[#5A4331] rounded-lg text-sm font-bold text-[#FFF8ED] text-center focus:border-[#FF7A1A] focus:outline-none"
             />
             <button
               type="submit"
-              className="w-full py-2.5 bg-[#C2410C] hover:bg-[#EA580C] text-[#FFF] font-heading font-bold uppercase tracking-wider rounded-lg border-2 border-[#FFB347] shadow-solid-ticket text-sm"
+              className="w-full py-2.5 bg-[#9A3412] hover:bg-[#C2410C] text-[#FFF8ED] font-heading font-bold rounded-lg border border-[#FFB347] transition-all sword-cursor uppercase"
             >
-              UNLOCK WAR CONSOLE
+              Enter Sanctum
             </button>
           </form>
 
-          <div className="mt-5 pt-3 border-t border-[#4A3423] text-left">
-            <Link to="/" className="text-xs text-[#D8C39F] hover:text-[#FFF] flex items-center gap-1">
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Arena
+          <div className="mt-4 pt-3 border-t border-[#4A3423]">
+            <Link to="/" className="text-xs text-[#A89078] hover:text-[#FFB347] flex items-center justify-center gap-1">
+              <ArrowLeft className="w-3.5 h-3.5" /> Return to Arena
             </Link>
           </div>
         </div>
@@ -346,55 +326,42 @@ export default function AdminScreen() {
     );
   }
 
-  // Admin Dashboard
   return (
     <div
-      className="min-h-screen w-screen overflow-y-auto bg-cover bg-center p-4 sm:p-6 font-sans select-none text-[#FFF8ED]"
+      className="min-h-screen w-screen bg-cover bg-center overflow-y-auto text-[#FFF8ED] p-4 sm:p-6 font-sans select-none"
       style={{
         backgroundImage: "url('/field.png'), linear-gradient(to bottom, #1c152b 0%, #4a2835 30%, #a85834 50%, #4a5c2d 65%, #1e2e14 100%)",
       }}
     >
-      <div className="fixed inset-0 bg-[#0C0806]/85 backdrop-blur-[6px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-6xl mx-auto space-y-6">
-        {/* Top Header */}
-        <header className="flex flex-wrap items-center justify-between gap-4 p-4 compact-wood-board border-[2px] border-[#684C35] rounded-xl shadow-solid-board">
+      <div className="max-w-6xl mx-auto space-y-6 pb-12">
+        {/* Header */}
+        <header className="flex items-center justify-between bg-[#140E0A]/90 border-2 border-[#5A4331] rounded-xl p-4 shadow-xl">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#1A110B] border-2 border-[#FF7A1A] rounded-lg">
-              <Shield className="w-6 h-6 text-[#FFB347]" />
-            </div>
+            <Link to="/" className="p-2 bg-[#2E241C] border border-[#5A4331] rounded-lg hover:border-[#FF7A1A] transition-colors">
+              <ArrowLeft className="w-5 h-5 text-[#FFB347]" />
+            </Link>
             <div>
-              <h1 className="font-heading text-xl sm:text-2xl font-extrabold text-[#FFF8ED] tracking-wider leading-none">
-                TECHFLIX WAR CONSOLE
+              <h1 className="font-heading text-xl sm:text-2xl font-extrabold uppercase text-[#FFF8ED] flex items-center gap-2">
+                <Shield className="w-6 h-6 text-[#FF7A1A]" />
+                CHIEFTAIN CONTROL SANCTUM
               </h1>
-              <span className="text-[11px] font-bold text-[#FFB347] uppercase tracking-widest">
-                REAL-TIME TOURNAMENT OPERATIONS
-              </span>
+              <p className="text-xs text-[#A89078]">Battle Orchestration, Piston Runner & Warband Registry</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <Link
               to="/display"
               target="_blank"
-              className="px-3 py-1.5 bg-[#1E293B] hover:bg-[#334155] border border-[#64748B] rounded text-xs font-bold text-[#94A3B8] hover:text-[#FFF] flex items-center gap-1.5 transition-colors"
+              className="px-3 py-1.5 bg-[#2E241C] border border-[#5A4331] rounded-lg text-xs font-heading font-bold text-[#FFB347] flex items-center gap-1.5 hover:border-[#FF7A1A]"
             >
-              <ExternalLink className="w-3.5 h-3.5" /> Projector View
-            </Link>
-            <Link
-              to="/"
-              className="px-3 py-1.5 bg-[#2E2017] hover:bg-[#443022] border border-[#7A5A41] rounded text-xs font-bold text-[#D8C39F] hover:text-[#FFF] flex items-center gap-1.5 transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Arena
+              <ExternalLink className="w-3.5 h-3.5" /> Spectator Display
             </Link>
             <button
-              onClick={() => {
-                sessionStorage.removeItem('techflix_admin_pass');
-                setIsAuthenticated(false);
-              }}
-              className="px-3 py-1.5 bg-[#7F1D1D] hover:bg-[#991B1B] border border-[#EF4444] rounded text-xs font-bold text-[#FEE2E2]"
+              onClick={handleLogout}
+              className="px-3 py-1.5 bg-[#7F1D1D] hover:bg-[#991B1B] border border-[#EF4444] rounded-lg text-xs font-heading font-bold text-[#FEE2E2]"
             >
-              Lock
+              Lock Sanctum
             </button>
           </div>
         </header>
@@ -403,261 +370,254 @@ export default function AdminScreen() {
           <div
             className={`p-3 rounded-lg border text-xs font-bold flex items-center gap-2 ${
               actionMessage.type === 'success'
-                ? 'bg-[#14532D] border-[#22C55E] text-[#DCFCE7]'
-                : 'bg-[#7F1D1D] border-[#EF4444] text-[#FEE2E2]'
+                ? 'bg-[#14532D]/90 border-[#22C55E] text-[#DCFCE7]'
+                : 'bg-[#7F1D1D]/90 border-[#EF4444] text-[#FEE2E2]'
             }`}
           >
-            {actionMessage.type === 'success' ? (
-              <CheckCircle2 className="w-4 h-4 text-[#4ADE80]" />
-            ) : (
-              <AlertTriangle className="w-4 h-4 text-[#F87171]" />
-            )}
+            {actionMessage.type === 'success' ? <CheckCircle2 className="w-4 h-4 flex-shrink-0" /> : <AlertTriangle className="w-4 h-4 flex-shrink-0" />}
             <span>{actionMessage.text}</span>
           </div>
         )}
 
-        {/* Top 2 Columns: Battle Controls & Runner Engine */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Panel 1: Battle Controls */}
-          <div className="compact-wood-board border-[2px] border-[#684C35] rounded-xl p-5 shadow-solid-board space-y-4">
-            <div className="flex items-center justify-between border-b border-[#4A3423] pb-2.5">
-              <div className="flex items-center gap-2 font-heading font-bold text-base text-[#FFD700]">
-                <Server className="w-5 h-5 text-[#FF7A1A]" />
-                <span>DRAGON BATTLE CONTROLS</span>
-              </div>
+        {/* 1. BATTLE ENGINE CONTROLS */}
+        <section className="bg-[#18110B]/95 border-2 border-[#5A4331] rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-[#3A2D22] pb-3">
+            <h2 className="font-heading text-lg font-bold uppercase text-[#FFB347] flex items-center gap-2">
+              <Play className="w-5 h-5 text-[#FF7A1A]" />
+              Battle State Engine
+            </h2>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-[#A89078]">Current Status:</span>
               <span
-                className={`text-[10px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider ${
+                className={`px-2.5 py-0.5 rounded text-xs font-heading font-extrabold uppercase tracking-wider ${
                   dragon.status === 'live'
-                    ? 'bg-[#15803D] text-[#DCFCE7]'
+                    ? 'bg-[#15803D] text-[#DCFCE7] animate-pulse'
                     : dragon.status === 'defeated'
                     ? 'bg-[#B91C1C] text-[#FEE2E2]'
+                    : dragon.status === 'paused'
+                    ? 'bg-[#9A3412] text-[#FFEDD5] border border-[#F97316]'
                     : 'bg-[#B45309] text-[#FEF3C7]'
                 }`}
               >
-                Status: {dragon.status}
+                {dragon.status}
               </span>
             </div>
+          </div>
 
-            {/* Live HP Status */}
-            <div className="p-3 bg-[#140E0A] border border-[#443022] rounded-lg flex items-center justify-between">
-              <div>
-                <span className="text-[10px] uppercase font-bold text-[#A68F74] block">Current Health</span>
-                <span className="font-heading text-2xl font-extrabold text-[#EF4444]">
-                  {dragon.hp} <span className="text-sm text-[#A68F74]">/ {dragon.maxHp} HP</span>
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <label className="text-[11px] font-bold text-[#D8C39F]">Set Max HP:</label>
-                <input
-                  type="number"
-                  value={maxHpInput}
-                  onChange={(e) => setMaxHpInput(e.target.value)}
-                  min="10"
-                  max="10000"
-                  className="w-20 px-2 py-1 bg-[#1F150E] border border-[#5A402E] rounded text-sm text-[#FFF] text-center"
-                />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+            {/* Start / Live Button */}
+            <button
+              onClick={handleStart}
+              disabled={isLoadingAction}
+              className="py-3 px-4 bg-[#15803D] hover:bg-[#16A34A] border-2 border-[#86EFAC] rounded-lg font-heading font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 sword-cursor"
+            >
+              <Play className="w-4 h-4" />
+              <span>START / RESUME BATTLE</span>
+            </button>
 
-            {/* Control Buttons */}
-            <div className="grid grid-cols-3 gap-3">
-              <button
-                onClick={handleStart}
-                disabled={isLoadingAction || dragon.status === 'live'}
-                className="py-2.5 px-3 bg-[#15803D] hover:bg-[#16A34A] disabled:opacity-40 text-[#FFF] font-heading font-bold text-xs uppercase tracking-wider rounded border border-[#4ADE80] shadow flex items-center justify-center gap-1.5"
-              >
-                <Play className="w-4 h-4 fill-current" />
-                <span>START</span>
-              </button>
+            {/* Pause Button */}
+            <button
+              onClick={handlePause}
+              disabled={isLoadingAction}
+              className="py-3 px-4 bg-[#C2410C] hover:bg-[#EA580C] border-2 border-[#FDBA74] rounded-lg font-heading font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 sword-cursor"
+            >
+              <Pause className="w-4 h-4" />
+              <span>PAUSE BATTLE</span>
+            </button>
 
-              <button
-                onClick={handlePause}
-                disabled={isLoadingAction || dragon.status === 'waiting'}
-                className="py-2.5 px-3 bg-[#B45309] hover:bg-[#D97706] disabled:opacity-40 text-[#FFF] font-heading font-bold text-xs uppercase tracking-wider rounded border border-[#FBBF24] shadow flex items-center justify-center gap-1.5"
-              >
-                <Pause className="w-4 h-4 fill-current" />
-                <span>PAUSE</span>
-              </button>
+            {/* Emergency Runner Down: Pause Everyone Button */}
+            <button
+              onClick={handlePause}
+              disabled={isLoadingAction}
+              className="py-3 px-4 bg-[#7F1D1D] hover:bg-[#991B1B] border-2 border-[#FCA5A5] rounded-lg font-heading font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 sword-cursor"
+              title="Click if runner goes down to freeze countdown and submissions"
+            >
+              <AlertTriangle className="w-4 h-4 text-[#FDE047]" />
+              <span>RUNNER DOWN: PAUSE EVERYONE</span>
+            </button>
 
+            {/* Reset Form */}
+            <div className="flex items-center gap-2">
+              <input
+                type="number"
+                value={maxHpInput}
+                onChange={(e) => setMaxHpInput(e.target.value)}
+                placeholder="Max HP"
+                className="w-20 px-2 py-2.5 bg-[#140E0A] border border-[#5A4331] rounded-lg text-sm text-center font-bold text-[#FFF8ED]"
+              />
               <button
                 onClick={handleReset}
                 disabled={isLoadingAction}
-                className="py-2.5 px-3 bg-[#991B1B] hover:bg-[#DC2626] disabled:opacity-40 text-[#FFF] font-heading font-bold text-xs uppercase tracking-wider rounded border border-[#F87171] shadow flex items-center justify-center gap-1.5"
+                className="flex-1 py-2.5 px-3 bg-[#3F3F46] hover:bg-[#52525B] border border-[#71717A] rounded-lg font-heading font-bold text-xs uppercase flex items-center justify-center gap-1.5 shadow-md disabled:opacity-50 sword-cursor"
               >
-                <RotateCcw className="w-4 h-4" />
-                <span>RESET</span>
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>RESET DRAGON</span>
               </button>
             </div>
           </div>
+        </section>
 
-          {/* Panel 2: Code Execution Engine */}
-          <div className="compact-wood-board border-[2px] border-[#684C35] rounded-xl p-5 shadow-solid-board space-y-4">
-            <div className="flex items-center justify-between border-b border-[#4A3423] pb-2.5">
-              <div className="flex items-center gap-2 font-heading font-bold text-base text-[#FFD700]">
-                <Terminal className="w-5 h-5 text-[#FF7A1A]" />
-                <span>CODE RUNNER ENGINE URL</span>
-              </div>
-              <span className="text-[10px] text-[#A68F74] font-bold">Stored in config/runner</span>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-[#D8C39F]">
-                Runner Server Address:
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="http://localhost:2000"
-                  value={runnerUrl}
-                  onChange={(e) => setRunnerUrl(e.target.value)}
-                  className="flex-1 px-3 py-2 bg-[#140E0A] border border-[#5A402E] focus:border-[#FF7A1A] focus:outline-none rounded text-xs text-[#FFF] font-mono"
-                />
-                <button
-                  onClick={handleSaveRunner}
-                  disabled={isSavingRunner}
-                  className="px-4 py-2 bg-[#C2410C] hover:bg-[#EA580C] disabled:opacity-50 text-[#FFF] text-xs font-bold uppercase rounded border border-[#FFB347]"
-                >
-                  {isSavingRunner ? 'Saving...' : 'Save'}
-                </button>
-                <button
-                  onClick={handleTestRunner}
-                  disabled={isTestingRunner}
-                  className="px-4 py-2 bg-[#1E293B] hover:bg-[#334155] border border-[#64748B] text-xs font-bold uppercase rounded text-[#E2E8F0] flex items-center gap-1.5"
-                >
-                  <RefreshCw className={`w-3.5 h-3.5 ${isTestingRunner ? 'animate-spin' : ''}`} />
-                  <span>Test</span>
-                </button>
-              </div>
-              <p className="text-[10px] text-[#8C745E]">
-                Backend routes code executions to this endpoint. Supports Python, C, C++, and Java.
-              </p>
-            </div>
-
-            {runnerTestResult && (
-              <div
-                className={`p-3 rounded border font-mono text-xs whitespace-pre-wrap ${
-                  runnerTestResult.type === 'success'
-                    ? 'bg-[#052E16] border-[#22C55E] text-[#86EFAC]'
-                    : 'bg-[#450A0A] border-[#EF4444] text-[#FCA5A5]'
+        {/* 2. PISTON RUNNER CONFIGURATION */}
+        <section className="bg-[#18110B]/95 border-2 border-[#5A4331] rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-[#3A2D22] pb-3">
+            <h2 className="font-heading text-lg font-bold uppercase text-[#FFB347] flex items-center gap-2">
+              <Server className="w-5 h-5 text-[#FF7A1A]" />
+              Piston Runner Endpoint
+            </h2>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-[#A89078]">Runner Health:</span>
+              <span
+                className={`px-2.5 py-0.5 rounded text-xs font-heading font-extrabold uppercase tracking-wider ${
+                  runnerOk ? 'bg-[#15803D] text-[#DCFCE7]' : 'bg-[#B91C1C] text-[#FEE2E2] animate-pulse'
                 }`}
               >
-                {runnerTestResult.message}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Panel 3: Team Management & CSV Import / Export */}
-        <div className="compact-wood-board border-[2px] border-[#684C35] rounded-xl p-5 shadow-solid-board space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#4A3423] pb-2.5">
-            <div className="flex items-center gap-2 font-heading font-bold text-base text-[#FFD700]">
-              <Users className="w-5 h-5 text-[#FF7A1A]" />
-              <span>TEAM MANAGEMENT &amp; CSV IMPORT/EXPORT</span>
+                {runnerOk ? 'Online' : 'Unreachable'}
+              </span>
             </div>
+          </div>
+
+          <p className="text-xs text-[#A89078]">
+            Paste Cloudflare tunnel or self-hosted Piston server URL. Stored in Firestore document{' '}
+            <code className="text-[#FFB347]">config/runner</code> and cached in memory.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="text"
+              value={runnerUrl}
+              onChange={(e) => setRunnerUrl(e.target.value)}
+              placeholder="e.g. https://my-piston-tunnel.trycloudflare.com"
+              className="flex-1 px-3 py-2 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-sm font-mono text-[#FFF8ED]"
+            />
+            <button
+              onClick={handleSaveRunner}
+              disabled={isSavingRunner}
+              className="px-4 py-2 bg-[#9A3412] hover:bg-[#C2410C] border border-[#FFB347] rounded-lg text-xs font-heading font-bold uppercase tracking-wider disabled:opacity-50 sword-cursor"
+            >
+              {isSavingRunner ? 'Saving...' : 'Save URL'}
+            </button>
+            <button
+              onClick={handleTestRunner}
+              disabled={isTestingRunner}
+              className="px-4 py-2 bg-[#2E241C] hover:bg-[#3E3126] border border-[#5A4331] rounded-lg text-xs font-heading font-bold uppercase tracking-wider flex items-center gap-1.5 disabled:opacity-50 sword-cursor"
+            >
+              <Terminal className="w-3.5 h-3.5 text-[#FFB347]" />
+              <span>{isTestingRunner ? 'Testing...' : 'Test Runner'}</span>
+            </button>
+          </div>
+
+          {runnerTestResult && (
+            <div
+              className={`p-3 rounded-lg border text-xs font-mono whitespace-pre-wrap ${
+                runnerTestResult.type === 'success'
+                  ? 'bg-[#14532D]/70 border-[#22C55E] text-[#DCFCE7]'
+                  : 'bg-[#7F1D1D]/70 border-[#EF4444] text-[#FEE2E2]'
+              }`}
+            >
+              {runnerTestResult.message}
+            </div>
+          )}
+        </section>
+
+        {/* 3. CSV IMPORT & EXPORT */}
+        <section className="bg-[#18110B]/95 border-2 border-[#5A4331] rounded-xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center justify-between border-b border-[#3A2D22] pb-3">
+            <h2 className="font-heading text-lg font-bold uppercase text-[#FFB347] flex items-center gap-2">
+              <Users className="w-5 h-5 text-[#FF7A1A]" />
+              Warband Registry & CSV Manager
+            </h2>
             <button
               onClick={handleExportCSV}
-              className="py-1.5 px-3 bg-[#047857] hover:bg-[#059669] text-[#FFF] text-xs font-bold uppercase tracking-wider rounded border border-[#34D399] flex items-center gap-1.5 shadow"
+              className="px-3.5 py-1.5 bg-[#2E241C] hover:bg-[#3E3126] border border-[#5A4331] rounded-lg text-xs font-heading font-bold text-[#FFB347] flex items-center gap-1.5 sword-cursor"
             >
-              <Download className="w-4 h-4" />
-              <span>EXPORT RESULTS (CSV)</span>
+              <Download className="w-3.5 h-3.5" />
+              <span>Export Standings CSV</span>
             </button>
           </div>
 
           <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-[11px] font-bold text-[#D8C39F] uppercase">
-                Import Teams CSV (Format: <code className="text-[#FFB347]">teamName, teamCode, members</code>):
-              </label>
-            </div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-[#D8C39F] font-heading">
+              Import Teams CSV (Columns: teamName, leaderPhone, leaderName, member2Name)
+            </label>
             <textarea
               rows={4}
               value={csvText}
               onChange={(e) => setCsvText(e.target.value)}
-              className="w-full p-2.5 bg-[#140E0A] border border-[#5A402E] focus:border-[#FF7A1A] focus:outline-none rounded text-xs font-mono text-[#E2E8F0]"
+              className="w-full p-2.5 bg-[#140E0A] border-2 border-[#5A4331] rounded-lg text-xs font-mono text-[#FFF8ED] focus:border-[#FF7A1A] focus:outline-none"
             />
             <div className="flex items-center justify-between">
-              <p className="text-[10px] text-[#8C745E]">
-                Codes are stored in <code className="text-[#FFB347]">teamCodes/&#123;code&#125;</code> and never exposed to client browsers.
-              </p>
+              <span className="text-[11px] text-[#A89078]">
+                Stores in server-only collection <code>registry</code>. Phone numbers are never exposed to clients.
+              </span>
               <button
                 onClick={handleImportTeams}
                 disabled={isLoadingAction}
-                className="py-1.5 px-4 bg-[#C2410C] hover:bg-[#EA580C] text-[#FFF] text-xs font-bold uppercase tracking-wider rounded border border-[#FFB347] flex items-center gap-1.5"
+                className="px-4 py-2 bg-[#9A3412] hover:bg-[#C2410C] border border-[#FFB347] rounded-lg text-xs font-heading font-bold uppercase tracking-wider flex items-center gap-1.5 disabled:opacity-50 sword-cursor"
               >
                 <Upload className="w-3.5 h-3.5" />
-                <span>IMPORT TEAMS</span>
+                <span>Import Registry</span>
               </button>
             </div>
           </div>
 
           {importStatus && (
             <div
-              className={`p-2.5 rounded border text-xs font-bold ${
+              className={`p-3 rounded-lg border text-xs font-bold ${
                 importStatus.type === 'success'
-                  ? 'bg-[#14532D] border-[#22C55E] text-[#DCFCE7]'
-                  : 'bg-[#7F1D1D] border-[#EF4444] text-[#FEE2E2]'
+                  ? 'bg-[#14532D]/80 border-[#22C55E] text-[#DCFCE7]'
+                  : 'bg-[#7F1D1D]/80 border-[#EF4444] text-[#FEE2E2]'
               }`}
             >
               {importStatus.message}
             </div>
           )}
-        </div>
 
-        {/* Panel 4: Live Teams & Solves Table */}
-        <div className="compact-wood-board border-[2px] border-[#684C35] rounded-xl p-5 shadow-solid-board space-y-3">
-          <div className="flex items-center justify-between border-b border-[#4A3423] pb-2.5">
-            <div className="flex items-center gap-2 font-heading font-bold text-base text-[#FFD700]">
-              <Shield className="w-5 h-5 text-[#FF7A1A]" />
-              <span>LIVE TOURNAMENT STANDINGS ({teams.length} TEAMS)</span>
-            </div>
-            <span className="text-[10px] text-[#A68F74] font-bold">Auto-updates from Firestore</span>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="border-b border-[#4A3423] text-[#A68F74] uppercase text-[10px] font-heading font-bold">
-                  <th className="py-2 px-3">Rank</th>
-                  <th className="py-2 px-3">Team Name</th>
-                  <th className="py-2 px-3">Members</th>
-                  <th className="py-2 px-3 text-center">Damage Dealt</th>
-                  <th className="py-2 px-3 text-center">Solves Count</th>
-                  <th className="py-2 px-3">Solved Problem IDs</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#2B1D14]">
-                {teams.length === 0 ? (
+          {/* Active Teams Table */}
+          <div className="pt-2">
+            <h3 className="font-heading text-xs font-bold uppercase tracking-wider text-[#D8C39F] mb-2">
+              Registered Teams Overview ({teams.length} Warbands)
+            </h3>
+            <div className="max-h-60 overflow-y-auto rounded-lg border border-[#3A2D22] bg-[#140E0A]">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-[#1E1914] text-[#D8C39F] font-heading uppercase text-[10px] tracking-wider sticky top-0 border-b border-[#3A2D22]">
                   <tr>
-                    <td colSpan={6} className="py-6 text-center text-[#8C745E] italic">
-                      No teams registered yet. Use the CSV import tool above to register teams.
-                    </td>
+                    <th className="p-2">Rank</th>
+                    <th className="p-2">Team Name</th>
+                    <th className="p-2">Total Damage</th>
+                    <th className="p-2">Trials Solved</th>
+                    <th className="p-2">Badge</th>
                   </tr>
-                ) : (
-                  teams.map((t) => (
-                    <tr key={t.id} className="hover:bg-[#1E150F] transition-colors">
-                      <td className="py-2 px-3 font-heading font-bold text-[#FFB347]">#{t.rank}</td>
-                      <td className="py-2 px-3 font-bold text-[#FFF8ED]">{t.name}</td>
-                      <td className="py-2 px-3 text-[#A68F74]">{t.members || '—'}</td>
-                      <td className="py-2 px-3 text-center font-heading font-bold text-[#EF4444]">
-                        {t.totalDamage || 0} HP
-                      </td>
-                      <td className="py-2 px-3 text-center font-bold text-[#FFD700]">
-                        {t.solvedProblemIds?.length || 0}
-                      </td>
-                      <td className="py-2 px-3 text-[#A68F74] font-mono text-[11px]">
-                        {t.solvedProblemIds && t.solvedProblemIds.length > 0
-                          ? t.solvedProblemIds.join(', ')
-                          : 'None yet'}
+                </thead>
+                <tbody className="divide-y divide-[#2A2018] font-sans">
+                  {teams.map((t) => (
+                    <tr key={t.id} className="hover:bg-[#1E140E]/60">
+                      <td className="p-2 font-heading font-bold text-[#FFB347]">#{t.rank}</td>
+                      <td className="p-2 font-bold text-[#FFF8ED]">{t.name}</td>
+                      <td className="p-2 font-mono text-[#4ADE80] font-bold">{t.totalDamage ?? t.score ?? 0} XP</td>
+                      <td className="p-2 text-[#A89078]">{t.solvedCount ?? (t.solvedProblemIds?.length || 0)}</td>
+                      <td className="p-2">
+                        {t.isDragonSlayer && (
+                          <span className="px-1.5 py-0.5 rounded bg-[#451A03] border border-[#F59E0B] text-[#FFD700] text-[9px] font-heading font-bold flex items-center gap-1 w-max">
+                            <Flame className="w-2.5 h-2.5 text-[#F59E0B]" />
+                            DRAGON SLAYER
+                          </span>
+                        )}
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ))}
+                  {teams.length === 0 && (
+                    <tr>
+                      <td colSpan={5} className="p-4 text-center text-[#8A7B6A]">
+                        No teams recorded in state.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );
 }
-

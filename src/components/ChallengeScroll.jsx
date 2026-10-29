@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Sword, Axe, Target, Crosshair, CheckCircle2 } from 'lucide-react';
-import { PROBLEMS_BY_WEAPON } from '../data/problems';
+import { Sword, Axe, Target, Crosshair, CheckCircle2, RotateCcw } from 'lucide-react';
+import { useGame } from '../context/GameContext';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from './RopeGraphic';
 
 export default function ChallengeScroll({ solvedProblems = [], isHit = false }) {
   const [activeTab, setActiveTab] = useState('dagger');
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshError, setRefreshError] = useState(null);
   const navigate = useNavigate();
   const panelRef = useRef(null);
   const [topOffset, setTopOffset] = useState(120);
 
-  // Measure distance to screen top on mount and window resize so ropes never gap or float
+  const { problemsByWeapon, refreshToken, refreshTier } = useGame();
+
   useEffect(() => {
     const update = () => {
       if (panelRef.current) {
@@ -30,8 +33,22 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
     { key: 'ballista', name: 'Ballista', xp: '10 XP', icon: Crosshair, accentColor: '#DC2626', difficulty: 'Extreme' },
   ];
 
-  const currentProblems = PROBLEMS_BY_WEAPON[activeTab] || [];
+  const currentProblems = problemsByWeapon?.[activeTab] || [];
   const activeTabMeta = tabList.find((t) => t.key === activeTab);
+
+  const handleRefreshClick = async () => {
+    if (!refreshToken || isRefreshing) return;
+    setIsRefreshing(true);
+    setRefreshError(null);
+    try {
+      await refreshTier(activeTab);
+    } catch (err) {
+      setRefreshError(err.message || 'Refresh failed');
+      setTimeout(() => setRefreshError(null), 3500);
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
 
   return (
     <div
@@ -39,9 +56,6 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
       className="relative w-full z-20 flex flex-col justify-center"
       style={{ rotate: '0deg' }}
     >
-      {/* =================================================================== */}
-      {/* TWO CORNER ROPES (Left & Right) Starting at Top Edge of Screen      */}
-      {/* =================================================================== */}
       {/* 1. Left Rope (holding left corner) */}
       <div
         className="absolute left-[24px] z-0 pointer-events-none flex flex-col items-center"
@@ -90,8 +104,8 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
           </p>
         </div>
 
-        {/* 4 Weapon Tabs (Compact, Preserving Colors) */}
-        <div className="grid grid-cols-4 gap-1 2xl:gap-1.5 mb-2.5">
+        {/* 4 Weapon Tabs */}
+        <div className="grid grid-cols-4 gap-1 2xl:gap-1.5 mb-2">
           {tabList.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.key;
@@ -131,8 +145,50 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
           })}
         </div>
 
+        {/* Tier Refresh Bar */}
+        <div className="flex items-center justify-between bg-[#F9FAFB] border border-[#E5E7EB] rounded-md px-2 py-1 mb-2">
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-heading font-bold text-[#374151] uppercase">
+              {activeTabMeta?.name} Tier
+            </span>
+            <span
+              className={`text-[9.5px] px-1.5 py-0.2 rounded font-bold uppercase tracking-wider ${
+                refreshToken
+                  ? 'bg-[#DCFCE7] text-[#15803D] border border-[#86EFAC]'
+                  : 'bg-[#F3F4F6] text-[#9CA3AF] border border-[#E5E7EB]'
+              }`}
+            >
+              {refreshToken ? '1 Token Ready' : '0 Tokens'}
+            </span>
+          </div>
+
+          <button
+            onClick={handleRefreshClick}
+            disabled={!refreshToken || isRefreshing}
+            title={
+              refreshToken
+                ? `Redraw 3 new unsolved ${activeTabMeta?.name} trials`
+                : 'Solve any trial to earn your next tier refresh token'
+            }
+            className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10.5px] font-heading font-bold uppercase tracking-wider transition-all ${
+              refreshToken && !isRefreshing
+                ? 'bg-[#1F1F1F] text-[#FFF8ED] hover:bg-[#374151] sword-cursor shadow-sm'
+                : 'bg-[#E5E7EB] text-[#9CA3AF] cursor-not-allowed opacity-60'
+            }`}
+          >
+            <RotateCcw className={`w-3 h-3 ${isRefreshing ? 'animate-spin text-[#FFB347]' : ''}`} />
+            <span>{isRefreshing ? 'REDRAWING...' : 'REFRESH TIER'}</span>
+          </button>
+        </div>
+
+        {refreshError && (
+          <div className="mb-2 p-1.5 bg-[#FEE2E2] border border-[#F87171] rounded text-[10.5px] font-bold text-[#991B1B] text-center">
+            {refreshError}
+          </div>
+        )}
+
         {/* 3 Problems List */}
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {currentProblems.map((problem) => {
             const isSolved = solvedProblems.includes(problem.id);
 
@@ -140,7 +196,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
               <div
                 key={problem.id}
                 onClick={() => navigate(`/problem/${problem.id}`)}
-                className={`p-2 2xl:p-2.5 rounded-lg border-2 transition-all cursor-pointer sword-cursor flex flex-col justify-between gap-1.5 ${
+                className={`p-2 rounded-lg border-2 transition-all cursor-pointer sword-cursor flex flex-col justify-between gap-1 ${
                   isSolved
                     ? 'bg-[#F0FDF4] border-[#86EFAC] shadow-sm'
                     : 'bg-[#FAFAFA] hover:bg-[#F4F4F5] border-[#E5E7EB] hover:border-[#1F1F1F] shadow-sm'
@@ -152,7 +208,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                       {isSolved && (
                         <CheckCircle2 className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
                       )}
-                      <h4 className="font-heading text-[14px] 2xl:text-[17px] font-bold text-[#1F1F1F] leading-tight truncate">
+                      <h4 className="font-heading text-[13px] 2xl:text-[15px] font-bold text-[#1F1F1F] leading-tight truncate">
                         {problem.title}
                       </h4>
                     </div>
@@ -172,15 +228,15 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                     </div>
                   </div>
 
-                  <p className="text-[12px] 2xl:text-[13.5px] font-bold text-[#4B5563] leading-snug mt-0.5 line-clamp-1 font-sans">
-                    {problem.task}
+                  <p className="text-[11.5px] 2xl:text-[12.5px] font-bold text-[#4B5563] leading-snug mt-0.5 line-clamp-1 font-sans">
+                    {problem.task || problem.story}
                   </p>
                 </div>
 
                 {/* Attempt / Enter Button */}
                 <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[10px] 2xl:text-[11px] font-bold text-[#6B7280]">
-                    Click to code in C / C++ / Java / Python
+                  <span className="text-[10px] 2xl:text-[10.5px] font-bold text-[#6B7280]">
+                    C • C++ • Java • Python
                   </span>
 
                   <button
@@ -192,7 +248,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                   >
                     <div className="ticket-notch-left" />
                     <div className="ticket-notch-right" />
-                    <span className="font-heading text-[10.5px] 2xl:text-[12px] font-bold tracking-wider uppercase text-[#14100D] leading-none">
+                    <span className="font-heading text-[10px] 2xl:text-[11px] font-bold tracking-wider uppercase text-[#14100D] leading-none">
                       {isSolved ? 'REVIEW' : `ATTEMPT +${problem.xp} XP`}
                     </span>
                   </button>
@@ -203,9 +259,12 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
         </div>
 
         {/* Bottom Status */}
-        <div className="mt-2 pt-1 border-t border-[#E5E7EB] text-center">
+        <div className="mt-2 pt-1 border-t border-[#E5E7EB] text-center flex items-center justify-between px-1">
           <span className="font-heading text-[9px] 2xl:text-[10px] font-bold text-[#6B7280] uppercase tracking-wider">
-            {solvedProblems.length} OF 12 TRIALS CONQUERED
+            {solvedProblems.length} TRIALS CONQUERED
+          </span>
+          <span className="text-[9px] font-bold text-[#9CA3AF]">
+            Board shared with clan
           </span>
         </div>
       </div>

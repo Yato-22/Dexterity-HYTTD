@@ -1,12 +1,12 @@
-import { db, admin } from '../_lib/firebaseAdmin.js';
-import { verifyAdmin } from '../_lib/auth.js';
+import { db, admin } from '../firebaseAdmin.js';
+import { verifyAdmin } from '../auth.js';
+import { drawInitialBoard } from '../pool.js';
 
 function parseCSV(text) {
   const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
   const rows = [];
 
   for (const line of lines) {
-    // Simple CSV parser handling quotes
     const cols = [];
     let current = '';
     let inQuotes = false;
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
   // Check if first line is a header
   let startIdx = 0;
   const firstRow = rows[0].map((c) => c.toLowerCase());
-  if (firstRow.some((c) => c.includes('name') || c.includes('code') || c.includes('team'))) {
+  if (firstRow.some((c) => c.includes('name') || c.includes('phone') || c.includes('team') || c.includes('leader'))) {
     startIdx = 1;
   }
 
@@ -58,11 +58,15 @@ export default async function handler(req, res) {
     const row = rows[i];
     if (row.length < 2) continue;
 
+    // Columns: teamName, leaderPhone, [leaderName], [member2Name]
     const teamName = row[0].replace(/^["']|["']$/g, '').trim();
-    const teamCode = row[1].replace(/^["']|["']$/g, '').trim().toUpperCase();
-    const members = row[2] ? row[2].replace(/^["']|["']$/g, '').trim() : '';
+    const leaderPhoneRaw = row[1].replace(/^["']|["']$/g, '').trim();
+    const leaderPhone = leaderPhoneRaw.replace(/\D/g, ''); // digits only
 
-    if (!teamName || !teamCode) continue;
+    const leaderName = row[2] ? row[2].replace(/^["']|["']$/g, '').trim() : '';
+    const member2Name = row[3] ? row[3].replace(/^["']|["']$/g, '').trim() : '';
+
+    if (!teamName || !leaderPhone) continue;
 
     // Generate safe deterministic teamId
     const teamId =
@@ -72,41 +76,52 @@ export default async function handler(req, res) {
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '') || 'team-' + Date.now() + '-' + i;
 
-    const teamRef = db.collection('teams').doc(teamId);
+    // 1. Store in server-only collection 'registry'
+    const regRef = db.collection('registry').doc(teamId);
     batch.set(
-      teamRef,
+      regRef,
       {
-        name: teamName,
-        members,
-        totalDamage: 0,
-        solvedProblemIds: [],
-        lastSolveAt: null,
+        teamId,
+        teamName,
+        teamNameLower: teamName.trim().replace(/\s+/g, ' ').toLowerCase(),
+        leaderPhone, // digits only, server-only
+        leaderName: leaderName || null,
+        member2Name: member2Name || null,
+        registeredMembers: leaderName ? [leaderName, ...(member2Name ? [member2Name] : [])] : [],
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       },
       { merge: true }
     );
 
-    const codeRef = db.collection('teamCodes').doc(teamCode);
-    batch.set(codeRef, {
-      teamId,
-      teamName,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    // 2. Also prepare initial team document in 'teams'
+    const teamRef = db.collection('teams').doc(teamId);
+    const { board, seenIds } = await drawInitialBoard();
+    batch.set(
+      teamRef,
+      {
+        name: teamName,
+        totalDamage: 0,
+        solvedProblemIds: [],
+        lastSolveAt: null,
+        board,
+        seenIds,
+        refreshToken: true,
+        members: leaderName ? [leaderName, ...(member2Name ? [member2Name] : [])] : [],
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
 
+    importedTeams.push({ teamName, teamId });
     importedCount++;
-    importedTeams.push({ teamId, teamName, teamCode, members });
   }
 
-  try {
-    await batch.commit();
-    return res.status(200).json({
-      success: true,
-      count: importedCount,
-      teams: importedTeams,
-    });
-  } catch (err) {
-    console.error('Import teams failed:', err);
-    return res.status(500).json({ error: err.message });
-  }
+  await batch.commit();
+
+  return res.status(200).json({
+    success: true,
+    importedCount,
+    teams: importedTeams,
+  });
 }
-

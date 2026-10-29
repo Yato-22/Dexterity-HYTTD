@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useGame } from '../context/GameContext';
-import { Shield, Flame, Sword, AlertCircle, ArrowRight, Monitor, Settings } from 'lucide-react';
+import { Shield, Flame, User, Phone, Users, AlertCircle, ArrowRight, Monitor, Settings } from 'lucide-react';
 
 export default function LoginScreen() {
-  const [teamCode, setTeamCode] = useState('');
+  const [teamName, setTeamName] = useState('');
+  const [leaderPhone, setLeaderPhone] = useState('');
+  const [yourName, setYourName] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useGame();
@@ -12,8 +14,16 @@ export default function LoginScreen() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!teamCode.trim()) {
-      setError('Please enter your team code.');
+    if (!teamName.trim()) {
+      setError('Please enter your Team Name.');
+      return;
+    }
+    if (!leaderPhone.trim()) {
+      setError('Please enter Team Leader Phone Number.');
+      return;
+    }
+    if (!yourName.trim()) {
+      setError('Please enter Your Name.');
       return;
     }
 
@@ -21,10 +31,14 @@ export default function LoginScreen() {
     setError(null);
 
     try {
-      await login(teamCode.trim());
+      await login({
+        teamName: teamName.trim(),
+        leaderPhone: leaderPhone.trim(),
+        yourName: yourName.trim(),
+      });
       navigate('/');
     } catch (err) {
-      setError(err.message || 'Invalid team code');
+      setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setIsLoading(false);
     }
@@ -37,11 +51,11 @@ export default function LoginScreen() {
         backgroundImage: "url('/field.png'), linear-gradient(to bottom, #1c152b 0%, #4a2835 30%, #a85834 50%, #4a5c2d 65%, #1e2e14 100%)",
       }}
     >
-      {/* 55% Dark overlay + blur to match coding theme */}
+      {/* 65% Dark overlay + blur */}
       <div className="absolute inset-0 bg-[#0C0806]/65 backdrop-blur-[6px] pointer-events-none" />
 
       {/* Main Viking Login Board */}
-      <div className="relative z-10 w-full max-w-md compact-wood-board border-[3px] border-[#684C35] rounded-xl shadow-solid-board p-6 sm:p-8 text-center">
+      <div className="relative z-10 w-full max-w-md compact-wood-board border-[3px] border-[#684C35] rounded-xl shadow-solid-board p-6 sm:p-7 text-center">
         {/* Corner Nails */}
         <div className="compact-nail top-2 left-2" />
         <div className="compact-nail top-2 right-2" />
@@ -49,62 +63,93 @@ export default function LoginScreen() {
         <div className="compact-nail bottom-2 right-2" />
 
         {/* Dragon Crest */}
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <Flame className="w-7 h-7 text-[#FF7A1A] animate-pulse" />
-          <div className="p-3 rounded-full bg-[#1A110B] border-2 border-[#FF7A1A] shadow-solid-ticket">
-            <Shield className="w-8 h-8 text-[#FFB347]" />
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <Flame className="w-6 h-6 text-[#FF7A1A] animate-pulse" />
+          <div className="p-2.5 rounded-full bg-[#1A110B] border-2 border-[#FF7A1A] shadow-solid-ticket">
+            <Shield className="w-7 h-7 text-[#FFB347]" />
           </div>
-          <Flame className="w-7 h-7 text-[#FF7A1A] animate-pulse" />
+          <Flame className="w-6 h-6 text-[#FF7A1A] animate-pulse" />
         </div>
 
-        <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#FFF8ED] tracking-wider heading-shadow uppercase mb-1">
+        <h1 className="font-heading text-xl sm:text-2xl font-extrabold text-[#FFF8ED] tracking-wider heading-shadow uppercase mb-0.5">
           TECHFLIX ARENA
         </h1>
-        <p className="font-heading text-xs sm:text-sm text-[#FFB347] font-bold uppercase tracking-widest mb-6">
+        <p className="font-heading text-xs text-[#FFB347] font-bold uppercase tracking-widest mb-4">
           BATTLE OF THE RED DEATH
         </p>
 
         {error && (
-          <div className="mb-4 px-3 py-2 bg-[#7F1D1D]/90 border border-[#EF4444] rounded-lg text-xs font-bold text-[#FEE2E2] flex items-center gap-2 text-left">
+          <div className="mb-3 px-3 py-2 bg-[#7F1D1D]/90 border border-[#EF4444] rounded-lg text-xs font-bold text-[#FEE2E2] flex items-center gap-2 text-left">
             <AlertCircle className="w-4 h-4 text-[#F87171] flex-shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-3">
+          {/* Field 1: Team Name */}
           <div className="text-left">
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#D8C39F] mb-1.5 font-heading">
-              ENTER TEAM CODE
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#D8C39F] mb-1 font-heading flex items-center gap-1.5">
+              <Users className="w-3.5 h-3.5 text-[#FFB347]" />
+              <span>TEAM NAME</span>
             </label>
-            <div className="relative">
-              <input
-                type="text"
-                value={teamCode}
-                onChange={(e) => setTeamCode(e.target.value.toUpperCase())}
-                placeholder="e.g. VIKING-ALPHA"
-                maxLength={24}
-                autoFocus
-                className="w-full px-4 py-3 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-lg font-heading font-extrabold text-[#FFF8ED] placeholder-[#66503E] tracking-wider uppercase text-center shadow-inner transition-colors"
-              />
-              <Sword className="w-5 h-5 text-[#8C6F54] absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            </div>
-            <p className="text-[10px] text-[#A68F74] mt-1 font-sans">
-              Enter the unique secret code given to your team.
+            <input
+              type="text"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              placeholder="e.g. Clan of Berk"
+              maxLength={40}
+              autoFocus
+              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-inter font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+            />
+          </div>
+
+          {/* Field 2: Team Leader Phone Number */}
+          <div className="text-left">
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#D8C39F] mb-1 font-heading flex items-center gap-1.5">
+              <Phone className="w-3.5 h-3.5 text-[#FFB347]" />
+              <span>TEAM LEADER PHONE NUMBER</span>
+            </label>
+            <input
+              type="tel"
+              value={leaderPhone}
+              onChange={(e) => setLeaderPhone(e.target.value)}
+              placeholder="e.g. 9876543210"
+              maxLength={20}
+              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-inter font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+            />
+          </div>
+
+          {/* Field 3: Your Name */}
+          <div className="text-left">
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#D8C39F] mb-1 font-heading flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5 text-[#FFB347]" />
+              <span>YOUR NAME</span>
+            </label>
+            <input
+              type="text"
+              value={yourName}
+              onChange={(e) => setYourName(e.target.value)}
+              placeholder="e.g. Hiccup"
+              maxLength={30}
+              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-inter font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+            />
+            <p className="text-[11px] text-[#A68F74] mt-1.5 font-inter">
+              Casing does not matter (uppercase or lowercase). Max 2 members per team share the board.
             </p>
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 px-6 bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#EA580C] hover:from-[#C2410C] hover:to-[#F97316] text-[#FFF8ED] font-heading text-base font-bold uppercase tracking-wider rounded-lg border-2 border-[#FFB347] shadow-solid-ticket flex items-center justify-center gap-2 transition-all disabled:opacity-50 sword-cursor"
+            className="w-full mt-2 py-3 px-6 bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#EA580C] hover:from-[#C2410C] hover:to-[#F97316] text-[#FFF8ED] font-heading text-sm font-bold uppercase tracking-wider rounded-lg border-2 border-[#FFB347] shadow-solid-ticket flex items-center justify-center gap-2 transition-all disabled:opacity-50 sword-cursor"
           >
-            <span>{isLoading ? 'VERIFYING...' : 'ENTER THE ARENA'}</span>
-            <ArrowRight className="w-5 h-5 text-[#FFF8ED]" />
+            <span>{isLoading ? 'VERIFYING WITH THE SEER...' : 'ENTER THE ARENA'}</span>
+            <ArrowRight className="w-4 h-4 text-[#FFF8ED]" />
           </button>
         </form>
 
         {/* Footer shortcuts */}
-        <div className="mt-8 pt-4 border-t border-[#4A3423] flex items-center justify-between text-[11px] text-[#A68F74] font-bold">
+        <div className="mt-5 pt-3 border-t border-[#4A3423] flex items-center justify-between text-[11px] text-[#A68F74] font-bold">
           <Link
             to="/display"
             className="flex items-center gap-1.5 hover:text-[#FFB347] transition-colors"
@@ -124,4 +169,3 @@ export default function LoginScreen() {
     </div>
   );
 }
-

@@ -22,6 +22,11 @@ export async function getRunnerUrl() {
     if (!cachedRunnerUrl) cachedRunnerUrl = '';
   }
 
+  // Fallback to local Piston runner if no URL configured
+  if (!cachedRunnerUrl) {
+    cachedRunnerUrl = 'http://localhost:2000';
+  }
+
   lastRunnerUrlFetch = now;
   return cachedRunnerUrl;
 }
@@ -69,8 +74,7 @@ export function buildPistonPayload({ language, code, stdin = '', timeLimitMs = 2
 }
 
 /**
- * Executes code on Piston using Piston's own run measurements.
- * All Piston requests (/api/run, /api/submit, admin Test runner) must use this helper.
+ * Executes code on Piston with single retry on 5xx / 429 / connection drop.
  */
 export async function executePiston({
   language,
@@ -84,47 +88,89 @@ export async function executePiston({
     throw new Error('Piston runner URL is not configured. Please set it in /admin.');
   }
 
-  // Normalize URL in case user pasted with /api/v2/execute or trailing slashes
   runnerUrl = runnerUrl.replace(/\/+$/, '').replace(/\/api\/v2\/execute\/?$/, '');
 
-  const { payload, allowed, runTimeout } = buildPistonPayload({
+  const { payload, allowed } = buildPistonPayload({
     language,
     code,
     stdin,
     timeLimitMs,
   });
 
-  // Generous HTTP timeout for compile (up to 10s) + run (up to 3s) + network tunnel latency
   const httpTimeoutMs = 25000;
-  const controller = new AbortController();
-  const timeoutTimer = setTimeout(() => controller.abort(), httpTimeoutMs);
 
-  let response;
-  try {
-    response = await fetch(`${runnerUrl}/api/v2/execute`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: controller.signal,
-      body: JSON.stringify(payload),
-    });
-  } catch (err) {
-    clearTimeout(timeoutTimer);
-    if (err.name === 'AbortError') {
-      return {
-        stdout: '',
-        stderr: `Time Limit Exceeded (> ${allowed}ms)`,
-        exitCode: 124,
-        compileError: null,
-        isTimeout: true,
-        timeMs: allowed,
-      };
+  async function performAttempt() {
+    const controller = new AbortController();
+    const timeoutTimer = setTimeout(() => controller.abort(), httpTimeoutMs);
+
+    let response;
+    try {
+      response = await fetch(`${runnerUrl}/api/v2/execute`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify(payload),
+      });
+    } catch (err) {
+      clearTimeout(timeoutTimer);
+      if (err.name === 'AbortError') {
+        return {
+          timeoutResult: {
+            stdout: '',
+            stderr: `Time Limit Exceeded (> ${allowed}ms)`,
+            exitCode: 124,
+            compileError: null,
+            isTimeout: true,
+            timeMs: allowed,
+          },
+        };
+      }
+      throw err;
+    } finally {
+      clearTimeout(timeoutTimer);
     }
-    throw new Error(`Runner connection error (${runnerUrl}): ${err.message}`);
-  } finally {
-    clearTimeout(timeoutTimer);
+
+    return { response };
   }
 
-  // If Piston returns non-2xx (e.g. HTTP 400), surface its message directly
+  let attemptResult;
+  let lastError;
+
+  // Attempt 1
+  try {
+    attemptResult = await performAttempt();
+  } catch (err) {
+    lastError = err;
+  }
+
+  // If failed with retryable status or network error, retry once after short backoff
+  const isRetryable =
+    lastError ||
+    (attemptResult?.response &&
+      (attemptResult.response.status === 429 ||
+        attemptResult.response.status >= 500));
+
+  if (isRetryable) {
+    await new Promise((r) => setTimeout(r, 400));
+    try {
+      attemptResult = await performAttempt();
+      lastError = null;
+    } catch (retryErr) {
+      lastError = retryErr;
+    }
+  }
+
+  if (lastError) {
+    throw new Error(`Runner connection error (${runnerUrl}): ${lastError.message}`);
+  }
+
+  if (attemptResult.timeoutResult) {
+    return attemptResult.timeoutResult;
+  }
+
+  const response = attemptResult.response;
+
+  // Surface Piston error message if not ok
   if (!response.ok) {
     let errorDetail = `Piston HTTP ${response.status}`;
     try {
@@ -148,7 +194,7 @@ export async function executePiston({
 
   const data = await response.json();
 
-  // Check compile phase (C/C++/Java)
+  // Check compile phase
   if (data.compile && data.compile.code !== 0) {
     return {
       stdout: data.compile.stdout || '',
@@ -161,10 +207,7 @@ export async function executePiston({
   }
 
   const runResult = data.run || {};
-
-  // Extract Piston's own run measurement: runResult.wall_time (fall back to cpu_time)
   let rawRunTime = runResult.wall_time ?? runResult.cpu_time ?? 0;
-  // If reported in seconds (e.g. 0.045s), convert to integer milliseconds
   let runTimeMs = 0;
   if (typeof rawRunTime === 'number' && rawRunTime > 0) {
     runTimeMs = (rawRunTime < 20 && !Number.isInteger(rawRunTime))
@@ -172,8 +215,6 @@ export async function executePiston({
       : Math.round(rawRunTime);
   }
 
-  // Mark Time Limit Exceeded only if the signal is SIGKILL or SIGTERM,
-  // or run wall_time > allowed + 200 ms
   const isTimeout =
     runResult.signal === 'SIGKILL' ||
     runResult.signal === 'SIGTERM' ||
@@ -187,4 +228,41 @@ export async function executePiston({
     isTimeout,
     timeMs: runTimeMs || (isTimeout ? allowed : 0),
   };
+}
+
+/**
+ * Health check Piston runner by pinging /api/v2/runtimes
+ */
+export async function checkRunnerHealth(runnerUrlOverride = null) {
+  let runnerUrl = runnerUrlOverride || (await getRunnerUrl());
+  if (!runnerUrl) return false;
+  runnerUrl = runnerUrl.replace(/\/+$/, '').replace(/\/api\/v2\/execute\/?$/, '');
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 6000);
+
+  try {
+    const res = await fetch(`${runnerUrl}/api/v2/runtimes`, {
+      method: 'GET',
+      signal: controller.signal,
+    });
+    if (res.ok) return true;
+  } catch (err) {
+    if (runnerUrl !== 'http://localhost:2000') {
+      try {
+        const localRes = await fetch('http://localhost:2000/api/v2/runtimes', {
+          method: 'GET',
+          signal: controller.signal,
+        });
+        if (localRes.ok) {
+          cachedRunnerUrl = 'http://localhost:2000';
+          return true;
+        }
+      } catch (_) {}
+    }
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+  return false;
 }

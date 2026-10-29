@@ -1,7 +1,8 @@
-import { db, admin } from './_lib/firebaseAdmin.js';
+import { db } from './_lib/firebaseAdmin.js';
 import { verifyToken, checkRateLimit } from './_lib/auth.js';
 import { executePiston } from './_lib/runner.js';
-import { PROBLEMS_BY_ID } from '../src/data/problems.js';
+import { loadPool } from './_lib/pool.js';
+import { getPublicState, processAcceptedSubmission } from './_lib/gameState.js';
 
 function normalizeOutput(str) {
   if (typeof str !== 'string') return '';
@@ -27,14 +28,24 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized: Valid team session token required.' });
   }
 
-  const { teamId } = session;
+  const { teamId, memberName = 'Unknown Member' } = session;
 
-  // Single active submission at a time per team on the server
+  // 2. Check if contest is paused
+  try {
+    const state = await getPublicState();
+    if (state.dragon?.status === 'paused') {
+      return res.status(403).json({ error: 'The battle is currently paused. Please wait for the chieftain to resume.' });
+    }
+  } catch (err) {
+    console.warn('Could not check pause state:', err.message);
+  }
+
+  // 3. Single active submission at a time per team on the server
   if (activeTeamSubmissions.has(teamId)) {
     return res.status(429).json({ error: 'A submission is currently being evaluated for your team. Please wait.' });
   }
 
-  // 5 second cooldown per team
+  // 4. 5 second cooldown per team
   if (!checkRateLimit(`submit-${teamId}`, 5000)) {
     return res.status(429).json({ error: 'Please wait 5 seconds between submissions.' });
   }
@@ -45,15 +56,36 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'language, code, and problemId are all required.' });
   }
 
-  const problem = PROBLEMS_BY_ID[problemId];
+  // 5. Load problem from memory cache
+  const { byId } = await loadPool();
+  const problem = byId[problemId];
   if (!problem) {
     return res.status(404).json({ error: 'Unknown problem: ' + problemId });
+  }
+
+  // 6. Check that the problem is on the team's active board
+  const teamDoc = await db.collection('teams').doc(teamId).get();
+  if (!teamDoc.exists) {
+    return res.status(404).json({ error: 'Team record not found.' });
+  }
+
+  const teamData = teamDoc.data();
+  const board = teamData.board || {};
+  const allBoardIds = [
+    ...(board.dagger || []),
+    ...(board.axe || []),
+    ...(board.catapult || []),
+    ...(board.ballista || []),
+  ];
+
+  if (!allBoardIds.includes(problemId)) {
+    return res.status(403).json({ error: 'This problem is not on your team active board.' });
   }
 
   activeTeamSubmissions.add(teamId);
 
   try {
-    // 2. Fetch private hidden tests from Firestore
+    // 7. Load private hidden tests from Firestore
     let hiddenTests = [];
     let rawTimeLimit = problem.timeLimitMs || 2000;
 
@@ -79,7 +111,7 @@ export default async function handler(req, res) {
     let verdict = 'ACCEPTED';
     let failureDetails = null;
 
-    // 3. Run test cases with limited concurrency (3 at a time), stop at first failure
+    // 8. Run test cases with concurrency 3, stopping at first failure
     const CONCURRENCY = 3;
     for (let i = 0; i < allTests.length; i += CONCURRENCY) {
       const batch = allTests.slice(i, i + CONCURRENCY);
@@ -107,6 +139,7 @@ export default async function handler(req, res) {
 
       const batchResults = await Promise.all(batchPromises);
 
+      // Evaluate batch in strict sequential order
       let batchFailed = false;
       for (const resItem of batchResults) {
         const { caseIdx, tc, runRes, error } = resItem;
@@ -114,8 +147,10 @@ export default async function handler(req, res) {
         if (error) {
           verdict = 'RUNTIME_ERROR';
           failureDetails = {
-            caseNum: caseIdx + 1,
-            message: error.message || 'Execution error',
+            caseNumber: caseIdx + 1,
+            caseName: tc.isHidden ? `Hidden Case #${caseIdx + 1}` : tc.name || `Sample Case #${caseIdx + 1}`,
+            error: error.message || 'Execution error',
+            isHidden: tc.isHidden,
           };
           batchFailed = true;
           break;
@@ -124,8 +159,11 @@ export default async function handler(req, res) {
         if (runRes.compileError) {
           verdict = 'COMPILATION_ERROR';
           failureDetails = {
-            caseNum: caseIdx + 1,
-            message: runRes.compileError,
+            caseNumber: caseIdx + 1,
+            caseName: tc.isHidden ? `Hidden Case #${caseIdx + 1}` : tc.name || `Sample Case #${caseIdx + 1}`,
+            compileError: runRes.compileError,
+            stderr: runRes.stderr,
+            isHidden: tc.isHidden,
           };
           batchFailed = true;
           break;
@@ -134,179 +172,109 @@ export default async function handler(req, res) {
         if (runRes.isTimeout) {
           verdict = 'TIME_LIMIT_EXCEEDED';
           failureDetails = {
-            caseNum: caseIdx + 1,
+            caseNumber: caseIdx + 1,
+            caseName: tc.isHidden ? `Hidden Case #${caseIdx + 1}` : tc.name || `Sample Case #${caseIdx + 1}`,
             timeMs: runRes.timeMs,
-            message: `Time limit exceeded (> ${rawTimeLimit}ms)`,
+            timeLimitMs: rawTimeLimit,
+            isHidden: tc.isHidden,
           };
           batchFailed = true;
           break;
         }
 
-        if (runRes.exitCode !== 0 && runRes.stderr) {
+        if (runRes.exitCode !== 0) {
           verdict = 'RUNTIME_ERROR';
           failureDetails = {
-            caseNum: caseIdx + 1,
-            message: runRes.stderr,
+            caseNumber: caseIdx + 1,
+            caseName: tc.isHidden ? `Hidden Case #${caseIdx + 1}` : tc.name || `Sample Case #${caseIdx + 1}`,
+            stderr: tc.isHidden ? 'Runtime error occurred during hidden execution.' : (runRes.stderr || 'Runtime error'),
             exitCode: runRes.exitCode,
+            isHidden: tc.isHidden,
           };
           batchFailed = true;
           break;
         }
 
-        const actualNorm = normalizeOutput(runRes.stdout);
-        const expectedNorm = normalizeOutput(tc.expectedOutput);
+        const actualOut = normalizeOutput(runRes.stdout);
+        const expectedOut = normalizeOutput(tc.expectedOutput);
 
-        if (actualNorm === expectedNorm) {
-          passedCount++;
-        } else {
+        if (actualOut !== expectedOut) {
           verdict = 'WRONG_ANSWER';
           failureDetails = {
-            caseNum: caseIdx + 1,
-            isHidden: Boolean(tc.isHidden),
-            input: tc.isHidden ? '[Hidden Test Case]' : tc.input,
-            expected: tc.isHidden ? '[Hidden Output]' : tc.expectedOutput,
-            actual: tc.isHidden ? '[Wrong Output]' : runRes.stdout,
-            timeMs: runRes.timeMs,
+            caseNumber: caseIdx + 1,
+            caseName: tc.isHidden ? `Hidden Case #${caseIdx + 1}` : tc.name || `Sample Case #${caseIdx + 1}`,
+            input: tc.isHidden ? undefined : tc.input,
+            expected: tc.isHidden ? undefined : tc.expectedOutput,
+            got: tc.isHidden ? undefined : runRes.stdout,
+            isHidden: tc.isHidden,
           };
           batchFailed = true;
           break;
         }
+
+        passedCount++;
       }
 
       if (batchFailed) {
-        break;
+        break; // Stop evaluation at first failure
       }
     }
 
-    const passedSummary = `Passed ${passedCount} / ${totalCount}`;
+    // 9. Format display verdict
+    const displayVerdicts = {
+      ACCEPTED: 'Accepted',
+      WRONG_ANSWER: 'Wrong Answer',
+      TIME_LIMIT_EXCEEDED: 'Time Limit Exceeded',
+      COMPILATION_ERROR: 'Compilation Error',
+      RUNTIME_ERROR: 'Runtime Error',
+    };
+    const humanVerdict = displayVerdicts[verdict] || verdict;
 
-    // 4. Log submission record in submissions collection
+    // 10. Record submission in submissions collection
     try {
       await db.collection('submissions').add({
         teamId,
+        teamName: teamData.name,
+        submittingMember: memberName,
         problemId,
         language,
-        verdict,
-        passedCount,
-        totalCount,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        verdict: humanVerdict,
+        passed: passedCount,
+        total: totalCount,
+        createdAt: new Date().toISOString(),
       });
     } catch (subErr) {
-      console.error('Failed to log submission record:', subErr.message);
+      console.warn('Failed to log submission record:', subErr.message);
     }
 
-    // 5. If not fully accepted, return verdict and "Passed X / Y" immediately
-    if (verdict !== 'ACCEPTED') {
-      return res.status(200).json({
-        verdict,
-        passedCount,
-        totalCount,
-        passedSummary,
-        message: passedSummary,
-        failingCase: failureDetails,
-        error: failureDetails?.message,
-      });
+    // 11. If all tests pass, process atomic transaction
+    let solveResult = null;
+    if (verdict === 'ACCEPTED') {
+      try {
+        solveResult = await processAcceptedSubmission({
+          teamId,
+          memberName,
+          problem,
+          language,
+          code,
+        });
+      } catch (transErr) {
+        console.error('Solve transaction error:', transErr);
+      }
     }
 
-    // 6. ALL TESTS PASSED: Execute single Firestore transaction
-    let isFirstSolve = false;
-    let damageDealt = 0;
-    let dragonStatusAfter = 'live';
-
-    try {
-      const txResult = await db.runTransaction(async (transaction) => {
-        const dragonRef = db.collection('dragon').doc('main');
-        const teamRef = db.collection('teams').doc(teamId);
-
-        const dragonDoc = await transaction.get(dragonRef);
-        const teamDoc = await transaction.get(teamRef);
-
-        if (!dragonDoc.exists) {
-          throw new Error('dragon/main document does not exist');
-        }
-        if (!teamDoc.exists) {
-          throw new Error(`teams/${teamId} document does not exist`);
-        }
-
-        const dragonData = dragonDoc.data() || {};
-        const teamData = teamDoc.data() || {};
-
-        const solvedProblemIds = teamData.solvedProblemIds || [];
-        const alreadySolved = solvedProblemIds.includes(problemId);
-        const isDragonLive = dragonData.status === 'live';
-
-        if (!alreadySolved && isDragonLive) {
-          isFirstSolve = true;
-          damageDealt = problem.xp;
-
-          const currentHp = typeof dragonData.hp === 'number' ? dragonData.hp : 100;
-          const newHp = Math.max(0, currentHp - damageDealt);
-
-          // Update dragon
-          const dragonUpdates = {
-            hp: newHp,
-            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-          };
-
-          if (newHp === 0 && currentHp > 0) {
-            dragonUpdates.status = 'defeated';
-            dragonUpdates.winnerTeamId = teamId;
-            dragonStatusAfter = 'defeated';
-          } else {
-            dragonStatusAfter = dragonData.status;
-          }
-
-          transaction.update(dragonRef, dragonUpdates);
-
-          // Update team
-          transaction.update(teamRef, {
-            totalDamage: (teamData.totalDamage || 0) + damageDealt,
-            solvedProblemIds: [...solvedProblemIds, problemId],
-            lastSolveAt: admin.firestore.FieldValue.serverTimestamp(),
-          });
-
-          // Write feed entry
-          const feedRef = db.collection('feed').doc();
-          transaction.set(feedRef, {
-            teamName: teamData.name || teamId,
-            problemId,
-            weapon: problem.weapon || 'axe',
-            damage: damageDealt,
-            createdAt: admin.firestore.FieldValue.serverTimestamp(),
-          });
-        }
-
-        return {
-          isFirstSolve,
-          damageDealt,
-          dragonStatus: dragonStatusAfter,
-        };
-      });
-
-      return res.status(200).json({
-        verdict: 'ACCEPTED',
-        passedCount,
-        totalCount,
-        passedSummary,
-        message: passedSummary,
-        xp: problem.xp,
-        isFirstSolve: txResult.isFirstSolve,
-        damageDealt: txResult.damageDealt,
-        dragonStatus: txResult.dragonStatus,
-      });
-    } catch (txErr) {
-      console.error('Transaction failed during submit:', txErr);
-      return res.status(200).json({
-        verdict: 'ACCEPTED',
-        passedCount,
-        totalCount,
-        passedSummary,
-        message: passedSummary,
-        xp: problem.xp,
-        isFirstSolve: false,
-        txError: txErr.message,
-      });
-    }
+    return res.status(200).json({
+      verdict: humanVerdict,
+      passed: passedCount,
+      total: totalCount,
+      passedSummary: `Passed ${passedCount} / ${totalCount}`,
+      allPassed: verdict === 'ACCEPTED',
+      failureDetails,
+      solveResult,
+    });
+  } catch (err) {
+    console.error('Submit evaluation error:', err);
+    return res.status(500).json({ error: 'Evaluation failed: ' + err.message });
   } finally {
     activeTeamSubmissions.delete(teamId);
   }

@@ -1,5 +1,11 @@
 {
   "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/api/admin/:action",
+      "destination": "/api/admin.js"
+    }
+  ],
   "functions": {
     "api/submit.js": {
       "maxDuration": 60

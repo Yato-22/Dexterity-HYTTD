@@ -81,23 +81,44 @@ VITE_FIREBASE_APP_ID=1:1234567890:web:abcdef123456
 
 | Collection / Path | Purpose & Access Level | Schema |
 | :--- | :--- | :--- |
-| `dragon/main` | Real-time dragon status (Client Read, Server Write) | `{ hp: number, maxHp: number, status: 'waiting' \| 'live' \| 'defeated', winnerTeamId: string \| null }` |
-| `teams/{teamId}` | Team profiles & leaderboard (Client Read, Server Write) | `{ name: string, totalDamage: number, solvedProblemIds: string[], lastSolveAt: Timestamp }` |
-| `teamCodes/{code}` | Team authentication map (**Server-Only**, restricted) | `{ teamId: string }` |
-| `feed/{id}` | Live combat action ticker (Client Read, Server Write) | `{ teamName: string, problemId: string, weapon: string, damage: number, createdAt: Timestamp }` |
-| `submissions/{id}` | Historical submission audit log (**Server-Only**) | `{ teamId: string, problemId: string, language: string, verdict: string, createdAt: Timestamp }` |
-| `problems_private/{id}` | Hidden test suite & constraints (**Server-Only**) | `{ hiddenTests: [{ input: string, expectedOutput: string }], timeLimitMs: number }` |
+| `public/state` | **Single source of live contest truth** (Client Read, Server Write) | `{ dragon: { hp, maxHp, status: 'waiting'\|'live'\|'defeated'\|'paused', winnerTeamId, winnerTeamName }, feed: Array(4), teams: Array<{ id, name, totalDamage, lastSolveAt, solvedCount }>, runnerOk: boolean, updatedAt }` |
+| `pool/{id}` | Full 32-problem pool statements & starter templates (**Server-Only**) | `{ id, tier, title, difficulty, xp, weapon, story, task, inputFormat, outputFormat, constraints, timeLimitMs, samples, starterCode }` |
+| `problems_private/{id}` | Hidden test suite (6 per problem) & time limits (**Server-Only**) | `{ hiddenTests: [{ input: string, expectedOutput: string }], timeLimitMs: number }` |
+| `registry/{teamId}` | Clan registry with leader phone & claimed members (**Server-Only**) | `{ teamId, teamName, teamNameLower, leaderPhone, leaderName, member2Name, registeredMembers: string[], createdAt }` |
+| `teams/{teamId}` | Active team document (Client Read, Server Write) | `{ name, totalDamage, solvedProblemIds: string[], lastSolveAt, board: { dagger: string[3], axe: string[3], catapult: string[3], ballista: string[3] }, seenIds: string[], refreshToken: boolean, members: string[] }` |
+| `acceptedCode/{id}` | Archive of all accepted solutions for dispute review (**Server-Only**) | `{ teamId, teamName, submittingMember, problemId, language, code, firstSolve: boolean, createdAt }` |
+| `submissions/{id}` | Audit log of all submission attempts (**Server-Only**) | `{ teamId, teamName, submittingMember, problemId, language, verdict, passed, total, createdAt }` |
 | `config/runner` | Dynamic Piston runner configuration (**Server-Only**) | `{ url: string, updatedAt: Timestamp }` |
+| `dragon/main` | Legacy compatibility mirror document (Client Read, Server Write) | `{ hp: number, maxHp: number, status, winnerTeamId, winnerTeamName }` |
+
+---
+
+## 🛠️ Verification, Seeding & Load Testing Scripts
+
+| Script | Command | Purpose |
+| :--- | :--- | :--- |
+| `scripts/verifyPool.js` | `node scripts/verifyPool.js` | Runs both independent reference Python solutions on all 8 test cases across all 32 problems (256 executions total) and verifies 100% agreement. |
+| `scripts/seedPool.js` | `node scripts/seedPool.js` | Seeds Firestore `pool` with all 32 public problems, `problems_private` with hidden test cases, and initializes `public/state`. |
+| `scripts/system_test.js` | `node scripts/system_test.js` | Automated end-to-end test verifying: 2-member login limit, board stability across reloads, single-use refresh token, isolated team solve state, and tie-break rankings. |
+| `scripts/loadtest.js` | `node scripts/loadtest.js` | Simulates 40 concurrent fake teams (`TEST_`) submitting Python, C++, and Java solutions to live `/api/submit` and prints min/avg/p95/max latency stats. |
+| `scripts/cleanupTestTeams.js` | `node scripts/cleanupTestTeams.js` | Purges all `TEST_` teams from `registry`, `teams`, `submissions`, and `acceptedCode`, and resets dragon HP to 100. |
 
 ---
 
 ## ⚙️ Initial Database Seeding
 
-Before running the battle arena for the first time, populate the 12 problems' hidden test cases and create the initial `dragon/main` document:
+Before running the battle arena for the first time, populate the 32-problem pool and initialize `public/state`:
 
 ```bash
-# Seed problems_private and initialize dragon/main & config/runner
-npm run seed
+# Seed pool (32 problems), problems_private (hidden tests), and public/state
+node scripts/seedPool.js
+
+# Verify all 32 problems against dual Python reference solutions
+node scripts/verifyPool.js
+
+# Run comprehensive system verification
+node scripts/system_test.js
+```
 ```
 
 What `scripts/seed.js` does:
@@ -218,6 +239,16 @@ All requests and responses use JSON. Authenticated endpoints require the header 
 - `POST /api/admin/runner` $\rightarrow$ `{ "action": "save" | "test", "url": "..." }`
 - `POST /api/admin/import-teams` $\rightarrow$ `{ "csv": "teamName,teamCode,members\n..." }`
 - `GET /api/admin/export` $\rightarrow$ Returns downloadable CSV string.
+
+---
+
+## 🛠️ Management & Seeding Scripts
+
+- `node scripts/seedPool.js`: Seeds the 32 problem statements and hidden test suites into Firestore `pool` and `problems_private`.
+- `node scripts/seedRegistry.js`: Seeds default contest teams into `registry` with login phone numbers and member names, ensuring initial 12-problem boards exist.
+- `node scripts/deployRules.js`: Deploys Firestore Security Rules via Firebase Rules API, granting read-only access to `public/*`, `dragon/*`, `teams/*`, `feed/*` while blocking access to sensitive collections.
+- `node scripts/verifyPool.js`: Runs dual independent Python reference solutions across all 256 test cases to verify problem correctness.
+- `node scripts/system_test.js`: Runs end-to-end integration tests (login, board retrieval, runner, submissions, refresh).
 
 ---
 

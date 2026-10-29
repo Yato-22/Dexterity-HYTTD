@@ -9,7 +9,7 @@ import Embers from '../components/Embers';
 import WeaponStations from '../components/WeaponStations';
 import FlyingProjectiles from '../components/FlyingProjectiles';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
-import { Volume2, VolumeX, Flame, Monitor } from 'lucide-react';
+import { Volume2, VolumeX, Flame, Monitor, PauseCircle } from 'lucide-react';
 
 export default function DisplayScreen() {
   const {
@@ -17,6 +17,7 @@ export default function DisplayScreen() {
     maxHp,
     dragonName,
     dragonStatus,
+    isPaused,
     teams,
     feed,
     isDefeated,
@@ -67,6 +68,29 @@ export default function DisplayScreen() {
       {/* Floating Fiery Embers */}
       <Embers count={14} />
 
+      {/* Full-Screen Viking Pause Overlay */}
+      {isPaused && (
+        <div className="absolute inset-0 z-50 bg-[#0C0806]/85 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center select-none">
+          <div className="compact-wood-board border-[4px] border-[#8C6F54] rounded-2xl p-8 max-w-lg shadow-[0_0_50px_rgba(0,0,0,0.9)] relative">
+            <div className="compact-nail top-3 left-3" />
+            <div className="compact-nail top-3 right-3" />
+            <div className="compact-nail bottom-3 left-3" />
+            <div className="compact-nail bottom-3 right-3" />
+
+            <PauseCircle className="w-16 h-16 text-[#FF7A1A] mx-auto mb-4 animate-pulse" />
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#FFF8ED] tracking-widest uppercase heading-shadow mb-2">
+              BATTLE PAUSED
+            </h2>
+            <p className="font-sans text-base text-[#D8C39F] font-semibold mb-4">
+              The chieftain has halted the siege. The battle will resume shortly.
+            </p>
+            <div className="inline-block px-4 py-1.5 bg-[#140E0A] border border-[#5A4331] rounded-lg text-xs font-heading font-bold text-[#FFB347] tracking-wider uppercase">
+              All clan progress and scores are frozen in place
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Banner: Spectator Bar */}
       <div className="absolute top-2 left-4 z-40 flex items-center gap-2 px-3 py-1 bg-[#140E0A]/85 border border-[#5A4331] rounded-lg shadow-md pointer-events-auto">
         <Monitor className="w-4 h-4 text-[#FFB347]" />
@@ -79,6 +103,8 @@ export default function DisplayScreen() {
               ? 'bg-[#15803D] text-[#DCFCE7]'
               : dragonStatus === 'defeated'
               ? 'bg-[#B91C1C] text-[#FEE2E2]'
+              : dragonStatus === 'paused'
+              ? 'bg-[#9A3412] text-[#FFEDD5]'
               : 'bg-[#B45309] text-[#FEF3C7]'
           }`}
         >
@@ -97,7 +123,7 @@ export default function DisplayScreen() {
         </button>
       </div>
 
-      {/* TOP CENTER: Dragon HP Bar (Anchored seamlessly from screen top) */}
+      {/* Dragon HP Bar */}
       <header className="w-full flex justify-center pt-2 2xl:pt-3 z-30 pointer-events-none">
         <div className="w-[480px] sm:w-[560px] 2xl:w-[680px] pointer-events-auto">
           <HPBar
@@ -110,11 +136,8 @@ export default function DisplayScreen() {
         </div>
       </header>
 
-      {/* ===================================================================== */}
-      {/* MAIN BATTLEFIELD GRID: Left Column (Feed/Board) + Center (Dragon)    */}
-      {/* ===================================================================== */}
+      {/* Main Battlefield Grid */}
       <div className="h-[calc(100vh-84px)] 2xl:h-[calc(100vh-96px)] w-full flex items-stretch px-4 2xl:px-8 pb-3 gap-6 relative">
-        {/* LEFT COLUMN: Parallel Continuous Ropes holding Leaderboard & Feed */}
         <motion.section
           ref={leftColRef}
           animate={{ rotate: [-0.18, 0.18, -0.18] }}
@@ -122,13 +145,11 @@ export default function DisplayScreen() {
           style={{ transformOrigin: 'top center' }}
           className="w-[30%] min-w-[340px] max-w-[420px] h-full flex flex-col justify-between flex-shrink-0 relative z-20 pt-4"
         >
-          {/* Continuous Left Rope starting at viewport top edge */}
           <div className="absolute left-6 pointer-events-none z-30" style={{ top: `-${leftTopOffset + 6}px` }}>
             <RopeSegment length={leftTopOffset + 18} />
             <RopeKnot style={{ top: `${leftTopOffset + 6}px` }} />
           </div>
 
-          {/* Continuous Right Rope starting at viewport top edge */}
           <div className="absolute right-6 pointer-events-none z-30" style={{ top: `-${leftTopOffset + 6}px` }}>
             <RopeSegment length={leftTopOffset + 18} />
             <RopeKnot style={{ top: `${leftTopOffset + 6}px` }} />
@@ -142,22 +163,19 @@ export default function DisplayScreen() {
           {/* Live Feed Panel */}
           <div className="w-full flex-1 max-h-[46%] min-h-0 relative">
             <LiveFeed feed={feed} />
-            {/* Terminal bottom knots */}
             <TerminalRopeKnot style={{ bottom: '-14px', left: '20px' }} />
             <TerminalRopeKnot style={{ bottom: '-14px', right: '20px' }} />
           </div>
         </motion.section>
 
-        {/* CENTER COLUMN: Dragon Clean & Completely Unobstructed */}
+        {/* Center Column: Dragon & Weapons */}
         <section className="flex-1 min-w-0 h-full flex flex-col items-center justify-between relative px-2 overflow-visible">
-          {/* Flying Projectiles Layer */}
           <FlyingProjectiles
             pendingFireEvents={pendingFireEvents}
             onProjectileImpact={onProjectileImpact}
             onStationRecoil={triggerStationRecoil}
           />
 
-          {/* Dragon Half-Body blended into the field */}
           <div className="flex-1 w-full flex items-center justify-center relative min-h-0">
             <Dragon
               hp={hp}
@@ -175,7 +193,6 @@ export default function DisplayScreen() {
             />
           </div>
 
-          {/* Four Weapon Stations in open bottom-center */}
           <div className="w-full flex-shrink-0 z-30 pb-0.5">
             <WeaponStations
               recoilingStation={recoilingStation}
@@ -188,4 +205,3 @@ export default function DisplayScreen() {
     </div>
   );
 }
-

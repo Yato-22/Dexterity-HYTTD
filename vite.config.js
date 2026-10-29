@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import fs from 'fs';
 import url from 'url';
 
 // Vite middleware to execute /api serverless functions during local 'vite' dev
@@ -18,7 +19,10 @@ function vercelApiDevPlugin() {
 
         // Route mapping
         const routePath = pathname.replace(/^\/api\//, '');
-        const handlerFile = path.resolve(process.cwd(), 'api', routePath + '.js');
+        let handlerFile = path.resolve(process.cwd(), 'api', routePath + '.js');
+        if (!fs.existsSync(handlerFile) && (routePath.startsWith('admin/') || routePath === 'admin')) {
+          handlerFile = path.resolve(process.cwd(), 'api', 'admin.js');
+        }
 
         // Parse query
         req.query = Object.fromEntries(parsedUrl.searchParams.entries());

@@ -1,6 +1,6 @@
-import { db, admin } from '../_lib/firebaseAdmin.js';
-import { verifyAdmin } from '../_lib/auth.js';
-import { getRunnerUrl, invalidateRunnerUrlCache, executePiston } from '../_lib/runner.js';
+import { db, admin } from '../firebaseAdmin.js';
+import { verifyAdmin } from '../auth.js';
+import { getRunnerUrl, invalidateRunnerUrlCache, executePiston } from '../runner.js';
 
 export default async function handler(req, res) {
   if (!verifyAdmin(req)) {
