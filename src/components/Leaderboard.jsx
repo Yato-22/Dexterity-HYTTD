@@ -88,12 +88,15 @@ export default function Leaderboard({
                   )}
                 </div>
 
-                <div className="flex items-center gap-1 flex-shrink-0 pl-1">
-                  <span className="font-heading text-[12px] 2xl:text-[14px] font-bold text-[#FFB347] leading-none heading-shadow">
-                    {score}
+                <div className="flex items-center gap-1.5 flex-shrink-0 pl-1 text-[10px] 2xl:text-[12px] font-sans">
+                  <span className="font-heading text-[11px] 2xl:text-[13px] font-bold text-[#FFB347] leading-none heading-shadow">
+                    {score} XP
                   </span>
-                  <span className="text-[9px] 2xl:text-[10px] font-bold text-[#D8C39F] uppercase font-sans">
-                    XP
+                  <span className="text-[#86EFAC] font-bold leading-none" title="Accuracy">
+                    {team.accuracy ?? 0}%
+                  </span>
+                  <span className="text-[#FCA5A5] font-bold leading-none" title="Penalties">
+                    {team.penalties ?? 0}P
                   </span>
                 </div>
               </motion.div>
@@ -128,12 +131,15 @@ export default function Leaderboard({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1 flex-shrink-0 pl-1">
-                  <span className="font-heading text-[12px] 2xl:text-[14px] font-bold text-[#FFB347] leading-none heading-shadow">
-                    {userTeam.totalDamage ?? userTeam.score ?? 0}
+                <div className="flex items-center gap-1.5 flex-shrink-0 pl-1 text-[10px] 2xl:text-[12px] font-sans">
+                  <span className="font-heading text-[11px] 2xl:text-[13px] font-bold text-[#FFB347] leading-none heading-shadow">
+                    {userTeam.totalDamage ?? userTeam.score ?? 0} XP
                   </span>
-                  <span className="text-[9px] 2xl:text-[10px] font-bold text-[#D8C39F] uppercase font-sans">
-                    XP
+                  <span className="text-[#86EFAC] font-bold leading-none" title="Accuracy">
+                    {userTeam.accuracy ?? 0}%
+                  </span>
+                  <span className="text-[#FCA5A5] font-bold leading-none" title="Penalties">
+                    {userTeam.penalties ?? 0}P
                   </span>
                 </div>
               </motion.div>

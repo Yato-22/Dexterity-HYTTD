@@ -14,6 +14,37 @@ async function seedPool() {
 
   const pool = JSON.parse(fs.readFileSync(poolPath, 'utf8'));
   const hiddenData = JSON.parse(fs.readFileSync(hiddenPath, 'utf8'));
+  const validProblemIds = new Set(pool.map((p) => p.id));
+
+  // 1. Wipe any old problems from pool not in the 48-problem set
+  const oldPoolSnap = await db.collection('pool').get();
+  const poolDeleteBatch = db.batch();
+  let deletedPoolDocs = 0;
+  for (const doc of oldPoolSnap.docs) {
+    if (!validProblemIds.has(doc.id)) {
+      poolDeleteBatch.delete(doc.ref);
+      deletedPoolDocs++;
+    }
+  }
+  if (deletedPoolDocs > 0) {
+    await poolDeleteBatch.commit();
+    console.log(`Cleaned up ${deletedPoolDocs} legacy problem documents from 'pool'.`);
+  }
+
+  // 2. Wipe any old private test sets
+  const oldPrivSnap = await db.collection('problems_private').get();
+  const privDeleteBatch = db.batch();
+  let deletedPrivDocs = 0;
+  for (const doc of oldPrivSnap.docs) {
+    if (!validProblemIds.has(doc.id)) {
+      privDeleteBatch.delete(doc.ref);
+      deletedPrivDocs++;
+    }
+  }
+  if (deletedPrivDocs > 0) {
+    await privDeleteBatch.commit();
+    console.log(`Cleaned up ${deletedPrivDocs} legacy private test documents from 'problems_private'.`);
+  }
 
   console.log(`Seeding ${pool.length} problems into 'pool' collection (server-only)...`);
   const batch1 = db.batch();

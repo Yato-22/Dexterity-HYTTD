@@ -8,7 +8,6 @@ import ChallengeScroll from '../components/ChallengeScroll';
 import LiveFeed from '../components/LiveFeed';
 import RankBadge from '../components/RankBadge';
 import Embers from '../components/Embers';
-import WeaponStations from '../components/WeaponStations';
 import FlyingProjectiles from '../components/FlyingProjectiles';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
 import { Volume2, VolumeX, Flame, LogOut, PauseCircle, AlertTriangle, WifiOff } from 'lucide-react';
@@ -39,8 +38,8 @@ export default function ArenaScreen() {
     isRoaring,
     lastFeedId,
     lastLeaderboardUpdate,
-    inventory,
     dealDamage,
+    triggerWeaponAttack,
     zoneHits,
     activeFlashZone,
     stuckBolts,
@@ -54,6 +53,23 @@ export default function ArenaScreen() {
   const plaqueRef = useRef(null);
   const [leftTopOffset, setLeftTopOffset] = useState(100);
   const [plaqueTopOffset, setPlaqueTopOffset] = useState(14);
+
+  // Delayed damage after returning from solve (~1.5s delay, consumed once)
+  useEffect(() => {
+    const rawPending = sessionStorage.getItem('techflix_pending_attack');
+    if (rawPending) {
+      sessionStorage.removeItem('techflix_pending_attack');
+      try {
+        const attack = JSON.parse(rawPending);
+        const timer = setTimeout(() => {
+          if (triggerWeaponAttack) {
+            triggerWeaponAttack(attack.tier || 'dagger');
+          }
+        }, 1500);
+        return () => clearTimeout(timer);
+      } catch {}
+    }
+  }, [triggerWeaponAttack]);
 
   useEffect(() => {
     const updateMeasurements = () => {
@@ -302,37 +318,23 @@ export default function ArenaScreen() {
               onStationRecoil={triggerStationRecoil}
             />
 
-            <div className="flex-1 w-full flex items-center justify-center relative min-h-0">
-              <Dragon
-                hp={hp}
-                maxHp={maxHp}
-                isHit={isHit}
-                floatingDamages={floatingDamages}
-                sparks={sparks}
-                isRoaring={isRoaring}
-                roarText="THE RED DEATH ROARS!"
-                isDefeated={isDefeated}
-                winnerTeam={winnerTeam}
-                zoneHits={zoneHits}
-                activeFlashZone={activeFlashZone}
-                stuckBolts={stuckBolts}
-                onDragonClick={() => {
-                  const priorityOrder = ['ballista', 'catapult', 'axe', 'dagger'];
-                  const weaponToFire = priorityOrder.find((w) => (inventory?.[w] || 0) > 0);
-                  if (weaponToFire) {
-                    dealDamage(userTeam?.id, weaponToFire);
-                  }
-                }}
-              />
-            </div>
-
-            <div className="w-full flex-shrink-0 z-30 pb-0.5">
-              <WeaponStations
-                recoilingStation={recoilingStation}
-                isDefeated={isDefeated}
-                inventory={inventory}
-                onStationClick={(weaponKey) => dealDamage(userTeam?.id, weaponKey)}
-              />
+            <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-4">
+              <div className="translate-y-6 2xl:translate-y-10 w-full flex justify-center">
+                <Dragon
+                  hp={hp}
+                  maxHp={maxHp}
+                  isHit={isHit}
+                  floatingDamages={floatingDamages}
+                  sparks={sparks}
+                  isRoaring={isRoaring}
+                  roarText="THE RED DEATH ROARS!"
+                  isDefeated={isDefeated}
+                  winnerTeam={winnerTeam}
+                  zoneHits={zoneHits}
+                  activeFlashZone={activeFlashZone}
+                  stuckBolts={stuckBolts}
+                />
+              </div>
             </div>
           </section>
 

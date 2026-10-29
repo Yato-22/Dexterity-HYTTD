@@ -6,7 +6,6 @@ import Dragon from '../components/Dragon';
 import Leaderboard from '../components/Leaderboard';
 import LiveFeed from '../components/LiveFeed';
 import Embers from '../components/Embers';
-import WeaponStations from '../components/WeaponStations';
 import FlyingProjectiles from '../components/FlyingProjectiles';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
 import { Volume2, VolumeX, Flame, Monitor, PauseCircle } from 'lucide-react';
@@ -176,29 +175,23 @@ export default function DisplayScreen() {
             onStationRecoil={triggerStationRecoil}
           />
 
-          <div className="flex-1 w-full flex items-center justify-center relative min-h-0">
-            <Dragon
-              hp={hp}
-              maxHp={maxHp}
-              isHit={isHit}
-              floatingDamages={floatingDamages}
-              sparks={sparks}
-              isRoaring={isRoaring}
-              roarText="THE RED DEATH ROARS!"
-              isDefeated={isDefeated}
-              winnerTeam={winnerTeam}
-              zoneHits={{ head: 0, chest: 0, leftWing: 0, rightWing: 0 }}
-              activeFlashZone={activeFlashZone}
-              stuckBolts={stuckBolts}
-            />
-          </div>
-
-          <div className="w-full flex-shrink-0 z-30 pb-0.5">
-            <WeaponStations
-              recoilingStation={recoilingStation}
-              isDefeated={isDefeated}
-              inventory={{ dagger: 0, axe: 0, catapult: 0, ballista: 0 }}
-            />
+          <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-4">
+            <div className="translate-y-6 2xl:translate-y-10 w-full flex justify-center">
+              <Dragon
+                hp={hp}
+                maxHp={maxHp}
+                isHit={isHit}
+                floatingDamages={floatingDamages}
+                sparks={sparks}
+                isRoaring={isRoaring}
+                roarText="THE RED DEATH ROARS!"
+                isDefeated={isDefeated}
+                winnerTeam={winnerTeam}
+                zoneHits={{ head: 0, chest: 0, leftWing: 0, rightWing: 0 }}
+                activeFlashZone={activeFlashZone}
+                stuckBolts={stuckBolts}
+              />
+            </div>
           </div>
         </section>
       </div>

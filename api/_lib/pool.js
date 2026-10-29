@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { db } from './firebaseAdmin.js';
 
-// In-memory cache for problem pool
 let cachedPool = null;
 let cachedPoolById = null;
 let cachedPoolByTier = null;
@@ -12,7 +11,6 @@ export async function loadPool() {
     return { pool: cachedPool, byId: cachedPoolById, byTier: cachedPoolByTier };
   }
 
-  // Check if data/problems_pool.json exists locally (pre-bundled on server)
   const localPoolPath = path.resolve(process.cwd(), 'data/problems_pool.json');
   let problems = [];
 
@@ -24,10 +22,9 @@ export async function loadPool() {
     }
   }
 
-  // If local file not present or empty, fetch from Firestore 'pool' collection
   if (!problems || problems.length === 0) {
     const snapshot = await db.collection('pool').get();
-    problems = snapshot.docs.map(doc => doc.data());
+    problems = snapshot.docs.map((doc) => doc.data());
   }
 
   cachedPool = problems;
@@ -50,8 +47,10 @@ export async function loadPool() {
   return { pool: cachedPool, byId: cachedPoolById, byTier: cachedPoolByTier };
 }
 
-// Draw initial 3 problems per tier
-export async function drawInitialBoard() {
+/**
+ * Draw 5 problems per tier for a member board, avoiding teammate's board where possible.
+ */
+export async function drawMemberBoard(existingTeammateBoard = null, solvedIds = []) {
   const { byTier } = await loadPool();
   const board = {
     dagger: [],
@@ -60,13 +59,32 @@ export async function drawInitialBoard() {
     ballista: [],
   };
   const seenIds = [];
+  const solvedSet = new Set(solvedIds || []);
 
   const tiers = ['dagger', 'axe', 'catapult', 'ballista'];
+
   for (const tier of tiers) {
-    const tierProblems = [...(byTier[tier] || [])];
-    // Shuffle
-    tierProblems.sort(() => Math.random() - 0.5);
-    const chosen = tierProblems.slice(0, 3).map(p => p.id);
+    const allInTier = (byTier[tier] || []).filter((p) => !solvedSet.has(p.id));
+    const teammateIds = new Set(existingTeammateBoard?.[tier] || []);
+
+    // 1. Prioritize problems NOT on teammate's board
+    const nonTeammate = allInTier.filter((p) => !teammateIds.has(p.id)).sort(() => Math.random() - 0.5);
+    const teammateOverlap = allInTier.filter((p) => teammateIds.has(p.id)).sort(() => Math.random() - 0.5);
+
+    const chosen = [];
+    // Draw up to 5 avoiding teammate
+    for (const p of nonTeammate) {
+      if (chosen.length >= 5) break;
+      chosen.push(p.id);
+    }
+    // If not enough (e.g. pool shrinking), share as few as possible
+    if (chosen.length < 5) {
+      for (const p of teammateOverlap) {
+        if (chosen.length >= 5) break;
+        chosen.push(p.id);
+      }
+    }
+
     board[tier] = chosen;
     seenIds.push(...chosen);
   }
@@ -74,81 +92,105 @@ export async function drawInitialBoard() {
   return { board, seenIds };
 }
 
-// Replace a single problem when solved
-export async function getReplacementForProblem(tier, currentTierIds, seenIds = [], solvedIds = []) {
+// Legacy initial board fallback (draws 5 per tier)
+export async function drawInitialBoard() {
+  return drawMemberBoard(null, []);
+}
+
+/**
+ * Replace a solved problem on a member's board.
+ */
+export async function getReplacementForProblem(
+  tier,
+  currentMemberTierIds = [],
+  teammateTierIds = [],
+  memberSeenIds = [],
+  solvedIds = []
+) {
   const { byTier } = await loadPool();
   const allInTier = byTier[tier] || [];
 
-  const seenSet = new Set(seenIds);
-  const solvedSet = new Set(solvedIds);
-  const currentSet = new Set(currentTierIds);
+  const solvedSet = new Set(solvedIds || []);
+  const currentSet = new Set(currentMemberTierIds || []);
+  const teammateSet = new Set(teammateTierIds || []);
+  const seenSet = new Set(memberSeenIds || []);
 
-  // 1. Prefer problems neither seen nor solved nor currently on board
-  let candidates = allInTier.filter(p => !seenSet.has(p.id) && !solvedSet.has(p.id) && !currentSet.has(p.id));
+  // Filter out solved and currently on board
+  const available = allInTier.filter((p) => !solvedSet.has(p.id) && !currentSet.has(p.id));
+  if (available.length === 0) return null;
 
-  // 2. If pool runs out, allow seen but unsolved and not currently on board
+  // 1. Unseen by this member AND not on teammate's board
+  let candidates = available.filter((p) => !seenSet.has(p.id) && !teammateSet.has(p.id));
+
+  // 2. Unseen by this member (even if on teammate's board)
   if (candidates.length === 0) {
-    candidates = allInTier.filter(p => !solvedSet.has(p.id) && !currentSet.has(p.id));
+    candidates = available.filter((p) => !seenSet.has(p.id));
   }
 
-  // 3. Fallback (if team solved everything in tier)
+  // 3. Not on teammate's board (even if seen before)
   if (candidates.length === 0) {
-    candidates = allInTier.filter(p => !currentSet.has(p.id));
+    candidates = available.filter((p) => !teammateSet.has(p.id));
   }
 
-  if (candidates.length === 0) return null;
+  // 4. Any remaining available unsolved in tier
+  if (candidates.length === 0) {
+    candidates = available;
+  }
 
-  // Pick random candidate
   const picked = candidates[Math.floor(Math.random() * candidates.length)];
-  return picked.id;
+  return picked ? picked.id : null;
 }
 
-// Refresh 3 problems for a selected tier
-export async function refreshTierProblems(tier, currentTierIds, seenIds = [], solvedIds = []) {
+/**
+ * Redraw 5 problems for a tier during member refresh.
+ */
+export async function refreshMemberTier(
+  tier,
+  currentMemberTierIds = [],
+  teammateTierIds = [],
+  memberSeenIds = [],
+  solvedIds = []
+) {
   const { byTier } = await loadPool();
   const allInTier = byTier[tier] || [];
 
-  const seenSet = new Set(seenIds);
-  const solvedSet = new Set(solvedIds);
-  const currentSet = new Set(currentTierIds);
+  const solvedSet = new Set(solvedIds || []);
+  const teammateSet = new Set(teammateTierIds || []);
+  const seenSet = new Set(memberSeenIds || []);
 
-  // 1. Unseen, unsolved, and not currently on board
-  let pool = allInTier.filter(p => !seenSet.has(p.id) && !solvedSet.has(p.id) && !currentSet.has(p.id));
+  const available = allInTier.filter((p) => !solvedSet.has(p.id));
+  if (available.length === 0) return [];
 
-  // 2. If not enough to pick 3, allow seen but unsolved
-  if (pool.length < 3) {
-    const backup = allInTier.filter(p => !solvedSet.has(p.id) && !currentSet.has(p.id));
-    for (const b of backup) {
-      if (!pool.some(p => p.id === b.id)) {
-        pool.push(b);
-      }
+  // Prioritize unseen by member and not on teammate's board
+  const tierNonTeammateUnseen = available
+    .filter((p) => !seenSet.has(p.id) && !teammateSet.has(p.id))
+    .sort(() => Math.random() - 0.5);
+
+  const tierUnseen = available
+    .filter((p) => !seenSet.has(p.id) && teammateSet.has(p.id))
+    .sort(() => Math.random() - 0.5);
+
+  const tierBackup = available
+    .filter((p) => seenSet.has(p.id))
+    .sort(() => Math.random() - 0.5);
+
+  const picked = [];
+  for (const p of tierNonTeammateUnseen) {
+    if (picked.length >= 5) break;
+    picked.push(p.id);
+  }
+  if (picked.length < 5) {
+    for (const p of tierUnseen) {
+      if (picked.length >= 5) break;
+      picked.push(p.id);
+    }
+  }
+  if (picked.length < 5) {
+    for (const p of tierBackup) {
+      if (picked.length >= 5) break;
+      if (!picked.includes(p.id)) picked.push(p.id);
     }
   }
 
-  // 3. If still not enough, allow anything not on current board
-  if (pool.length < 3) {
-    const backup = allInTier.filter(p => !currentSet.has(p.id));
-    for (const b of backup) {
-      if (!pool.some(p => p.id === b.id)) {
-        pool.push(b);
-      }
-    }
-  }
-
-  // Shuffle and pick 3 (or as many as available)
-  pool.sort(() => Math.random() - 0.5);
-  const newIds = pool.slice(0, 3).map(p => p.id);
-
-  // If pool was smaller than 3, keep some current to fill 3
-  if (newIds.length < 3) {
-    for (const id of currentTierIds) {
-      if (!newIds.includes(id)) {
-        newIds.push(id);
-        if (newIds.length === 3) break;
-      }
-    }
-  }
-
-  return newIds;
+  return picked;
 }
-

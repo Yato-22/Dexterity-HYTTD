@@ -146,13 +146,13 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
         </div>
 
         {/* Tier Refresh Bar */}
-        <div className="flex items-center justify-between bg-[#F9FAFB] border border-[#E5E7EB] rounded-md px-2 py-1 mb-2">
+        <div className="flex items-center justify-between bg-[#F9FAFB] border border-[#E5E7EB] rounded-md px-2.5 py-1.5 mb-2 shadow-sm">
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] font-heading font-bold text-[#374151] uppercase">
+            <span className="text-[12px] font-heading font-bold text-[#374151] uppercase">
               {activeTabMeta?.name} Tier
             </span>
             <span
-              className={`text-[9.5px] px-1.5 py-0.2 rounded font-bold uppercase tracking-wider ${
+              className={`text-[10px] px-2 py-0.5 rounded font-extrabold uppercase tracking-wider ${
                 refreshToken
                   ? 'bg-[#DCFCE7] text-[#15803D] border border-[#86EFAC]'
                   : 'bg-[#F3F4F6] text-[#9CA3AF] border border-[#E5E7EB]'
@@ -167,16 +167,16 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
             disabled={!refreshToken || isRefreshing}
             title={
               refreshToken
-                ? `Redraw 3 new unsolved ${activeTabMeta?.name} trials`
-                : 'Solve any trial to earn your next tier refresh token'
+                ? `Redraw up to 5 new unsolved ${activeTabMeta?.name} trials`
+                : 'No refresh token available. Solve any trial to earn your next tier refresh token.'
             }
-            className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10.5px] font-heading font-bold uppercase tracking-wider transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-[11px] 2xl:text-[12px] font-heading font-extrabold uppercase tracking-wider transition-all ${
               refreshToken && !isRefreshing
-                ? 'bg-[#1F1F1F] text-[#FFF8ED] hover:bg-[#374151] sword-cursor shadow-sm'
-                : 'bg-[#E5E7EB] text-[#9CA3AF] cursor-not-allowed opacity-60'
+                ? 'bg-gradient-to-r from-[#EA580C] to-[#F97316] text-[#FFF8ED] border-2 border-[#FDBA74] shadow-[0_0_12px_rgba(234,88,12,0.5)] hover:shadow-[0_0_18px_rgba(234,88,12,0.7)] hover:scale-105 active:scale-95 cursor-pointer'
+                : 'bg-[#E5E7EB] text-[#9CA3AF] border border-[#D1D5DB] cursor-not-allowed opacity-50'
             }`}
           >
-            <RotateCcw className={`w-3 h-3 ${isRefreshing ? 'animate-spin text-[#FFB347]' : ''}`} />
+            <RotateCcw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-[#FFE8D6]' : ''}`} />
             <span>{isRefreshing ? 'REDRAWING...' : 'REFRESH TIER'}</span>
           </button>
         </div>
@@ -187,31 +187,42 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
           </div>
         )}
 
-        {/* 3 Problems List */}
+        {/* 5 Problems List (or remaining / All Cleared) */}
         <div className="space-y-1.5">
-          {currentProblems.map((problem) => {
-            const isSolved = solvedProblems.includes(problem.id);
+          {currentProblems.length === 0 ? (
+            <div className="p-4 rounded-lg border-2 border-dashed border-[#86EFAC] bg-[#F0FDF4] text-center">
+              <CheckCircle2 className="w-6 h-6 text-[#16A34A] mx-auto mb-1 animate-bounce" />
+              <h4 className="font-heading text-sm font-bold text-[#16A34A] uppercase tracking-wider">
+                All Cleared
+              </h4>
+              <p className="text-xs text-[#15803D] font-sans">
+                Your warband has vanquished all trials in this tier!
+              </p>
+            </div>
+          ) : (
+            currentProblems.map((problem) => {
+              const isSolved = solvedProblems.includes(problem.id);
 
-            return (
-              <div
-                key={problem.id}
-                onClick={() => navigate(`/problem/${problem.id}`)}
-                className={`p-2 rounded-lg border-2 transition-all cursor-pointer sword-cursor flex flex-col justify-between gap-1 ${
-                  isSolved
-                    ? 'bg-[#F0FDF4] border-[#86EFAC] shadow-sm'
-                    : 'bg-[#FAFAFA] hover:bg-[#F4F4F5] border-[#E5E7EB] hover:border-[#1F1F1F] shadow-sm'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-1.5">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      {isSolved && (
-                        <CheckCircle2 className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
-                      )}
-                      <h4 className="font-heading text-[13px] 2xl:text-[15px] font-bold text-[#1F1F1F] leading-tight truncate">
-                        {problem.title}
-                      </h4>
-                    </div>
+              return (
+                <div
+                  key={problem.id}
+                  onClick={() => navigate(`/problem/${problem.id}`)}
+                  className={`p-2 rounded-lg border-2 transition-all cursor-pointer flex flex-col justify-between gap-1 ${
+                    isSolved
+                      ? 'bg-[#F0FDF4] border-[#86EFAC] shadow-sm'
+                      : 'bg-[#FAFAFA] hover:bg-[#F4F4F5] border-[#E5E7EB] hover:border-[#1F1F1F] shadow-sm'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        {isSolved && (
+                          <CheckCircle2 className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
+                        )}
+                        <h4 className="font-heading text-[13px] 2xl:text-[15px] font-bold text-[#1F1F1F] leading-tight truncate">
+                          {problem.title}
+                        </h4>
+                      </div>
 
                     <div className="flex items-center gap-1 flex-shrink-0">
                       {isSolved && (
@@ -244,7 +255,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                       e.stopPropagation();
                       navigate(`/problem/${problem.id}`);
                     }}
-                    className="compact-ticket-btn px-2.5 py-0.5 flex items-center gap-1 sword-cursor flex-shrink-0"
+                    className="compact-ticket-btn px-2.5 py-0.5 flex items-center gap-1 flex-shrink-0"
                   >
                     <div className="ticket-notch-left" />
                     <div className="ticket-notch-right" />
@@ -255,7 +266,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                 </div>
               </div>
             );
-          })}
+          }))}
         </div>
 
         {/* Bottom Status */}

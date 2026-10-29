@@ -24,17 +24,19 @@ export default async function handler(req, res) {
     }
 
     const teamData = teamDoc.data();
-    const board = teamData.board || {};
+    const normMemberKey = String(session.memberName || '').trim().replace(/\s+/g, ' ').toLowerCase();
+    const memberBoard = teamData.members?.[normMemberKey]?.board || teamData.board || {};
+
     const allBoardIds = [
-      ...(board.dagger || []),
-      ...(board.axe || []),
-      ...(board.catapult || []),
-      ...(board.ballista || []),
+      ...(memberBoard.dagger || []),
+      ...(memberBoard.axe || []),
+      ...(memberBoard.catapult || []),
+      ...(memberBoard.ballista || []),
     ];
 
     if (!allBoardIds.includes(problemId)) {
       return res.status(403).json({
-        error: 'Problem statement is not available: this problem is not on your team board.',
+        error: 'Problem statement is not available: this problem is not on your battle board.',
       });
     }
 
@@ -52,4 +54,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Failed to fetch problem statement: ' + err.message });
   }
 }
-

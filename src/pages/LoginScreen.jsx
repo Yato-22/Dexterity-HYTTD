@@ -99,7 +99,8 @@ export default function LoginScreen() {
               placeholder="e.g. Clan of Berk"
               maxLength={40}
               autoFocus
-              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-inter font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-sans font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+              style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
             />
           </div>
 
@@ -115,7 +116,8 @@ export default function LoginScreen() {
               onChange={(e) => setLeaderPhone(e.target.value)}
               placeholder="e.g. 9876543210"
               maxLength={20}
-              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-inter font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-sans font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+              style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
             />
           </div>
 
@@ -131,9 +133,10 @@ export default function LoginScreen() {
               onChange={(e) => setYourName(e.target.value)}
               placeholder="e.g. Hiccup"
               maxLength={30}
-              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-inter font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+              className="w-full px-3.5 py-2.5 bg-[#140E0A] border-2 border-[#5A4331] focus:border-[#FF7A1A] focus:outline-none rounded-lg text-base font-sans font-medium text-[#FFF8ED] placeholder-[#786450] shadow-inner transition-colors"
+              style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
             />
-            <p className="text-[11px] text-[#A68F74] mt-1.5 font-inter">
+            <p className="text-[11px] text-[#A68F74] mt-1.5 font-sans">
               Casing does not matter (uppercase or lowercase). Max 2 members per team share the board.
             </p>
           </div>
@@ -141,7 +144,7 @@ export default function LoginScreen() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 py-3 px-6 bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#EA580C] hover:from-[#C2410C] hover:to-[#F97316] text-[#FFF8ED] font-heading text-sm font-bold uppercase tracking-wider rounded-lg border-2 border-[#FFB347] shadow-solid-ticket flex items-center justify-center gap-2 transition-all disabled:opacity-50 sword-cursor"
+            className="w-full mt-2 py-3 px-6 bg-gradient-to-r from-[#9A3412] via-[#C2410C] to-[#EA580C] hover:from-[#C2410C] hover:to-[#F97316] text-[#FFF8ED] font-heading text-sm font-bold uppercase tracking-wider rounded-lg border-2 border-[#FFB347] shadow-solid-ticket flex items-center justify-center gap-2 transition-all disabled:opacity-50"
           >
             <span>{isLoading ? 'VERIFYING WITH THE SEER...' : 'ENTER THE ARENA'}</span>
             <ArrowRight className="w-4 h-4 text-[#FFF8ED]" />

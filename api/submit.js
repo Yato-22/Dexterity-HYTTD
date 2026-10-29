@@ -1,4 +1,4 @@
-import { db } from './_lib/firebaseAdmin.js';
+import { db, admin } from './_lib/firebaseAdmin.js';
 import { verifyToken, checkRateLimit } from './_lib/auth.js';
 import { executePiston } from './_lib/runner.js';
 import { loadPool } from './_lib/pool.js';
@@ -29,8 +29,9 @@ export default async function handler(req, res) {
   }
 
   const { teamId, memberName = 'Unknown Member' } = session;
+  const normMemberKey = String(memberName || '').trim().replace(/\s+/g, ' ').toLowerCase();
 
-  // 2. Check if contest is paused
+  // 2. Check if contest is paused (never counted as a submit)
   try {
     const state = await getPublicState();
     if (state.dragon?.status === 'paused') {
@@ -45,7 +46,7 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'A submission is currently being evaluated for your team. Please wait.' });
   }
 
-  // 4. 5 second cooldown per team
+  // 4. 5 second cooldown per team (never counted as a submit)
   if (!checkRateLimit(`submit-${teamId}`, 5000)) {
     return res.status(429).json({ error: 'Please wait 5 seconds between submissions.' });
   }
@@ -63,24 +64,27 @@ export default async function handler(req, res) {
     return res.status(404).json({ error: 'Unknown problem: ' + problemId });
   }
 
-  // 6. Check that the problem is on the team's active board
+  // 6. Check that the problem is on the member's active board
   const teamDoc = await db.collection('teams').doc(teamId).get();
   if (!teamDoc.exists) {
     return res.status(404).json({ error: 'Team record not found.' });
   }
 
   const teamData = teamDoc.data();
-  const board = teamData.board || {};
+  const memberBoard = teamData.members?.[normMemberKey]?.board || teamData.board || {};
   const allBoardIds = [
-    ...(board.dagger || []),
-    ...(board.axe || []),
-    ...(board.catapult || []),
-    ...(board.ballista || []),
+    ...(memberBoard.dagger || []),
+    ...(memberBoard.axe || []),
+    ...(memberBoard.catapult || []),
+    ...(memberBoard.ballista || []),
   ];
 
   if (!allBoardIds.includes(problemId)) {
-    return res.status(403).json({ error: 'This problem is not on your team active board.' });
+    return res.status(403).json({ error: 'This problem is not on your active battle board.' });
   }
+
+  const solvedList = teamData.solvedProblemIds || [];
+  const isAlreadySolved = solvedList.includes(problemId);
 
   activeTeamSubmissions.add(teamId);
 
@@ -145,6 +149,10 @@ export default async function handler(req, res) {
         const { caseIdx, tc, runRes, error } = resItem;
 
         if (error) {
+          // If runner itself failed (5xx, network error, timeout of runner infra), do not count as submit
+          if (error.status && error.status >= 500) {
+            throw error;
+          }
           verdict = 'RUNTIME_ERROR';
           failureDetails = {
             caseNumber: caseIdx + 1,
@@ -247,19 +255,54 @@ export default async function handler(req, res) {
       console.warn('Failed to log submission record:', subErr.message);
     }
 
-    // 11. If all tests pass, process atomic transaction
+    // 11. Counted Submit evaluation & Stats updating
+    // A counted submit = a Submit on a problem the team has not yet solved.
+    // Re-submitting a solved problem never counts.
     let solveResult = null;
-    if (verdict === 'ACCEPTED') {
-      try {
-        solveResult = await processAcceptedSubmission({
-          teamId,
-          memberName,
-          problem,
-          language,
-          code,
-        });
-      } catch (transErr) {
-        console.error('Solve transaction error:', transErr);
+
+    if (!isAlreadySolved) {
+      if (verdict === 'ACCEPTED') {
+        // Accepted solve transaction: increments acceptedSolves, totalSubmits, awards XP, replaces boards
+        try {
+          solveResult = await processAcceptedSubmission({
+            teamId,
+            memberName,
+            problem,
+            language,
+            code,
+          });
+        } catch (transErr) {
+          console.error('Solve transaction error:', transErr);
+        }
+      } else {
+        // Failed attempt: increment totalSubmits, and increment penalties
+        // Check compilationPenalty setting from config/settings (default ON)
+        let compilationPenaltyOn = true;
+        try {
+          const settingsSnap = await db.collection('config').doc('settings').get();
+          if (settingsSnap.exists) {
+            const sData = settingsSnap.data();
+            if (sData.compilationPenalty === false) {
+              compilationPenaltyOn = false;
+            }
+          }
+        } catch (err) {
+          console.warn('Failed to read config/settings:', err.message);
+        }
+
+        const isCompileError = verdict === 'COMPILATION_ERROR';
+        const addPenalty = !(isCompileError && !compilationPenaltyOn);
+
+        try {
+          const teamRef = db.collection('teams').doc(teamId);
+          await teamRef.update({
+            totalSubmits: admin.firestore.FieldValue.increment(1),
+            ...(addPenalty ? { penalties: admin.firestore.FieldValue.increment(1) } : {}),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+          });
+        } catch (updateErr) {
+          console.warn('Failed to update team penalties/submits:', updateErr.message);
+        }
       }
     }
 
@@ -271,6 +314,7 @@ export default async function handler(req, res) {
       allPassed: verdict === 'ACCEPTED',
       failureDetails,
       solveResult,
+      tier: (problem.tier || 'dagger').toLowerCase(),
     });
   } catch (err) {
     console.error('Submit evaluation error:', err);

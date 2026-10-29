@@ -1,8 +1,4 @@
-// ============================================================================
-// 32 VIKING CODING CHALLENGES (CLIENT SAMPLES & STARTER TEMPLATES ONLY)
-// Server-only hidden tests and problem pool reside in Firestore 'pool' and 'problems_private'
-// ============================================================================
-
+// AUTO-GENERATED 48-PROBLEM POOL (NO HIDDEN TESTS)
 export const PROBLEMS = [
   {
     "id": "sum-of-two-numbers",
@@ -38,10 +34,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int a, b;\n    if (scanf(\"%d %d\", &a, &b) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    if (cin >> a >> b) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a, b = int(tokens[0]), int(tokens[1])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -52,7 +48,7 @@ export const PROBLEMS = [
     "xp": 2,
     "weapon": "dagger",
     "story": "The seer divides the clan into two scouting parties based on numbers.",
-    "task": "Given an integer N, print 'EVEN' if N is even, or 'ODD' if N is odd.",
+    "task": "Given an integer N, print 'EVEN' if N is even, otherwise print 'ODD'.",
     "inputFormat": "A single integer N.",
     "outputFormat": "Print EVEN or ODD.",
     "constraints": [
@@ -78,10 +74,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -91,10 +87,10 @@ export const PROBLEMS = [
     "difficulty": "Easy",
     "xp": 2,
     "weapon": "dagger",
-    "story": "Three clan champions boast of their battle strength; find the mightiest.",
-    "task": "Given three integers A, B, and C, find and print the largest value.",
-    "inputFormat": "Three space-separated integers A, B, and C.",
-    "outputFormat": "Print the maximum of the three numbers.",
+    "story": "Three chieftains bring their trophies; only the largest claims the high seat.",
+    "task": "Given three integers A, B, and C, find and print the largest number.",
+    "inputFormat": "A single line containing three space-separated integers A, B, and C.",
+    "outputFormat": "Print the largest number among A, B, and C.",
     "constraints": [
       "-1000 <= A, B, C <= 1000"
     ],
@@ -103,25 +99,25 @@ export const PROBLEMS = [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "1 5 3",
-        "expectedOutput": "5",
-        "explanation": "5 is the largest.",
+        "input": "10 45 23",
+        "expectedOutput": "45",
+        "explanation": "45 is greater than 10 and 23.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "10 10 2",
-        "expectedOutput": "10",
-        "explanation": "10 is the largest.",
+        "input": "-5 -15 -2",
+        "expectedOutput": "-2",
+        "explanation": "-2 is greater than -5 and -15.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int a, b, c;\n    if (scanf(\"%d %d %d\", &a, &b, &c) != 3) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c;\n    if (cin >> a >> b >> c) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            int c = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a, b, c = int(tokens[0]), int(tokens[1]), int(tokens[2])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -131,12 +127,12 @@ export const PROBLEMS = [
     "difficulty": "Easy",
     "xp": 2,
     "weapon": "dagger",
-    "story": "Chant the sacred runes to invoke Thor's blessing.",
-    "task": "Given a single word S consisting of lowercase English letters, count the total number of vowels ('a', 'e', 'i', 'o', 'u').",
-    "inputFormat": "A single string S.",
-    "outputFormat": "Print the number of vowels.",
+    "story": "A runic scribe counts the sacred breath marks (vowels) in an ancient chant.",
+    "task": "Given a lowercase string S, count the vowels (a, e, i, o, u) in it.",
+    "inputFormat": "A single line containing a lowercase string S.",
+    "outputFormat": "Print the number of vowels in S.",
     "constraints": [
-      "1 <= |S| <= 100",
+      "1 <= length of S <= 100",
       "S contains only lowercase English letters."
     ],
     "timeLimitMs": 2000,
@@ -146,7 +142,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "viking",
         "expectedOutput": "2",
-        "explanation": "'i' and 'i' are 2 vowels.",
+        "explanation": "'i' and 'i' are vowels.",
         "isHidden": false
       },
       {
@@ -154,15 +150,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "dragon",
         "expectedOutput": "2",
-        "explanation": "'a' and 'o' are 2 vowels.",
+        "explanation": "'a' and 'o' are vowels.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -172,37 +168,37 @@ export const PROBLEMS = [
     "difficulty": "Easy",
     "xp": 2,
     "weapon": "dagger",
-    "story": "The sea witch whispers a mirrored runic incantation.",
-    "task": "Given a string S consisting of printable non-whitespace characters, print the string reversed.",
-    "inputFormat": "A single string S.",
+    "story": "To decipher the dragon scroll, the text must be mirrored backwards.",
+    "task": "Given a string S, print the string in reverse order.",
+    "inputFormat": "A single line containing string S.",
     "outputFormat": "Print the reversed string.",
     "constraints": [
-      "1 <= |S| <= 100"
+      "1 <= length of S <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "viking",
-        "expectedOutput": "gnikiv",
-        "explanation": "Reversing 'viking' produces 'gnikiv'.",
+        "input": "shield",
+        "expectedOutput": "dleihs",
+        "explanation": "'shield' reversed is 'dleihs'.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "shield",
-        "expectedOutput": "dleihs",
-        "explanation": "Reversing 'shield' produces 'dleihs'.",
+        "input": "axe",
+        "expectedOutput": "exa",
+        "explanation": "'axe' reversed is 'exa'.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -212,10 +208,10 @@ export const PROBLEMS = [
     "difficulty": "Easy",
     "xp": 2,
     "weapon": "dagger",
-    "story": "Calculate the mystical rune sum of a sacred talisman.",
-    "task": "Given a non-negative integer N, calculate the sum of its decimal digits.",
+    "story": "Count the tally notches carved along the handle of a hunting spear.",
+    "task": "Given a non-negative integer N, calculate and print the sum of its digits.",
     "inputFormat": "A single non-negative integer N.",
-    "outputFormat": "Print the sum of the digits.",
+    "outputFormat": "Print the sum of the digits of N.",
     "constraints": [
       "0 <= N <= 10^9"
     ],
@@ -224,25 +220,25 @@ export const PROBLEMS = [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "123",
-        "expectedOutput": "6",
-        "explanation": "1 + 2 + 3 = 6.",
+        "input": "1234",
+        "expectedOutput": "10",
+        "explanation": "1 + 2 + 3 + 4 = 10",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "405",
-        "expectedOutput": "9",
-        "explanation": "4 + 0 + 5 = 9.",
+        "input": "905",
+        "expectedOutput": "14",
+        "explanation": "9 + 0 + 5 = 14",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    long long n;\n    if (scanf(\"%lld\", &n) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    long long n;\n    if (cin >> n) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextLong()) {\n            long n = sc.nextLong();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -252,12 +248,12 @@ export const PROBLEMS = [
     "difficulty": "Easy",
     "xp": 2,
     "weapon": "dagger",
-    "story": "Align the clan calendar with the celestial winter solstices.",
-    "task": "Given a year Y, determine if it is a leap year. A year is a leap year if it is divisible by 4, except end-of-century years, which must be divisible by 400. Print YES if leap year, else NO.",
+    "story": "The elder determines if an extra solstice day must be celebrated this winter.",
+    "task": "Given a year Y, print 'YES' if it is a leap year, otherwise print 'NO'. A year is a leap year if it is divisible by 4, except end-of-century years which must be divisible by 400.",
     "inputFormat": "A single integer Y.",
     "outputFormat": "Print YES or NO.",
     "constraints": [
-      "1 <= Y <= 3000"
+      "1 <= Y <= 9999"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -266,7 +262,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "2024",
         "expectedOutput": "YES",
-        "explanation": "2024 is divisible by 4.",
+        "explanation": "2024 is divisible by 4 and not by 100.",
         "isHidden": false
       },
       {
@@ -274,15 +270,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "1900",
         "expectedOutput": "NO",
-        "explanation": "1900 is divisible by 100 but not 400.",
+        "explanation": "1900 is divisible by 100 but not by 400.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int y;\n    if (scanf(\"%d\", &y) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int y;\n    if (cin >> y) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int y = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    y = int(tokens[0])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -292,13 +288,13 @@ export const PROBLEMS = [
     "difficulty": "Easy",
     "xp": 2,
     "weapon": "dagger",
-    "story": "Tally the weight of dragon scales collected by the war party.",
-    "task": "Given an array of N integers, compute and print the sum of all elements.",
-    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers A[1], A[2], ..., A[N].",
-    "outputFormat": "Print the total sum.",
+    "story": "Gather the weight of all fish caught during the Great Hunt.",
+    "task": "Given an array of N integers, calculate and print their sum.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the sum of the array elements.",
     "constraints": [
       "1 <= N <= 100",
-      "-1000 <= A[i] <= 1000"
+      "-1000 <= each element <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -307,7 +303,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "4\n1 2 3 4",
         "expectedOutput": "10",
-        "explanation": "1 + 2 + 3 + 4 = 10.",
+        "explanation": "1 + 2 + 3 + 4 = 10",
         "isHidden": false
       },
       {
@@ -315,15 +311,176 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "3\n10 -5 2",
         "expectedOutput": "7",
-        "explanation": "10 + (-5) + 2 = 7.",
+        "explanation": "10 + (-5) + 2 = 7",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "print-a-number-pattern",
+    "tier": "dagger",
+    "title": "Print a Number Pattern",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Carve the sacred stepped pyramid pattern on the Great Hall wall.",
+    "task": "Given an integer N, print a pattern where the i-th row (from 1 to N) contains the digit i, repeated i times.",
+    "inputFormat": "A single integer N.",
+    "outputFormat": "Print N lines representing the pattern.",
+    "constraints": [
+      "1 <= N <= 9"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3",
+        "expectedOutput": "1\n22\n333",
+        "explanation": "Row 1: 1 once, Row 2: 2 twice, Row 3: 3 three times.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "5",
+        "expectedOutput": "1\n22\n333\n4444\n55555",
+        "explanation": "Pattern for N = 5.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "find-the-smallest-number",
+    "tier": "dagger",
+    "title": "Find the Smallest Number",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Find the lightest arrow in the quiver for long-distance signals.",
+    "task": "Given an array of N integers, find and print the smallest element.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the smallest element in the array.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n4 2 9 1 7",
+        "expectedOutput": "1",
+        "explanation": "1 is the smallest number.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3\n-5 -2 -10",
+        "expectedOutput": "-10",
+        "explanation": "-10 is the smallest.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "count-digits",
+    "tier": "dagger",
+    "title": "Count Digits",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "Count how many digits make up the royal dragon seal code.",
+    "task": "Given a non-negative integer N, count and print the number of digits in it.",
+    "inputFormat": "A single non-negative integer N.",
+    "outputFormat": "Print the count of digits in N.",
+    "constraints": [
+      "0 <= N <= 10^9"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "42",
+        "expectedOutput": "2",
+        "explanation": "42 has 2 digits.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "1000",
+        "expectedOutput": "4",
+        "explanation": "1000 has 4 digits.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "multiplication-table",
+    "tier": "dagger",
+    "title": "Multiplication Table",
+    "difficulty": "Easy",
+    "xp": 2,
+    "weapon": "dagger",
+    "story": "The Viking quartermaster tabulates supply rations for 1 to 10 boat crews.",
+    "task": "Given an integer N, print its multiplication table from 1 to 10 as 10 space-separated integers on a single line (N*1 N*2 ... N*10).",
+    "inputFormat": "A single integer N.",
+    "outputFormat": "Print the 10 products space-separated on one line.",
+    "constraints": [
+      "1 <= N <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5",
+        "expectedOutput": "5 10 15 20 25 30 35 40 45 50",
+        "explanation": "Multiples of 5 from 1 to 10.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "2",
+        "expectedOutput": "2 4 6 8 10 12 14 16 18 20",
+        "explanation": "Multiples of 2 from 1 to 10.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -333,38 +490,37 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "The carving on the war horn reads identical from both ends.",
-    "task": "Given a single word S consisting of lowercase letters, check if it reads the same forwards and backwards. Print YES if it is a palindrome, NO otherwise.",
-    "inputFormat": "A single non-empty string S.",
+    "story": "Symmetrical runes carved on a battle axe grant magical balance.",
+    "task": "Given a lowercase string S, print 'YES' if it reads the same forwards and backwards, otherwise print 'NO'.",
+    "inputFormat": "A single lowercase string S.",
     "outputFormat": "Print YES or NO.",
     "constraints": [
-      "1 <= |S| <= 100",
-      "S consists of lowercase English letters."
+      "1 <= length of S <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "radar",
+        "input": "racecar",
         "expectedOutput": "YES",
-        "explanation": "'radar' reversed is 'radar'.",
+        "explanation": "'racecar' reads the same forwards and backwards.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "viking",
+        "input": "dragon",
         "expectedOutput": "NO",
-        "explanation": "'viking' reversed is 'gnikiv'.",
+        "explanation": "'dragon' backwards is 'nogard'.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -374,12 +530,12 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "Only indivisible iron ore can forge the chief's battle axe.",
-    "task": "Given an integer N, determine if it is a prime number (an integer greater than 1 with no positive divisors other than 1 and itself). Print YES if prime, else NO.",
+    "story": "Only weapons tempered with a prime number of strikes withstand dragon fire.",
+    "task": "Given an integer N, print 'YES' if it is prime, otherwise print 'NO'. A prime number is greater than 1 and has no positive divisors other than 1 and itself.",
     "inputFormat": "A single integer N.",
     "outputFormat": "Print YES or NO.",
     "constraints": [
-      "1 <= N <= 1000"
+      "1 <= N <= 10000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -388,23 +544,23 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "7",
         "expectedOutput": "YES",
-        "explanation": "7 has only divisors 1 and 7.",
+        "explanation": "7 is only divisible by 1 and 7.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "10",
+        "input": "12",
         "expectedOutput": "NO",
-        "explanation": "10 is divisible by 2 and 5.",
+        "explanation": "12 is divisible by 2, 3, 4, 6.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -414,39 +570,39 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "The second greatest archer is chosen as vice-chieftain.",
-    "task": "Given N distinct integers, find the second largest value in the array.",
-    "inputFormat": "Line 1: An integer N (2 <= N <= 100).\nLine 2: N space-separated distinct integers.",
-    "outputFormat": "Print the second largest integer.",
+    "story": "The second strongest warrior takes command of the flank vanguard.",
+    "task": "Given an array of N distinct integers, find and print the second largest number.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated distinct integers.",
+    "outputFormat": "Print the second largest number.",
     "constraints": [
       "2 <= N <= 100",
-      "All elements are distinct",
-      "-1000 <= A[i] <= 1000"
+      "-1000 <= each element <= 1000",
+      "All elements are distinct."
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "4\n1 5 3 2",
-        "expectedOutput": "3",
-        "explanation": "Sorted array is 1, 2, 3, 5. Second largest is 3.",
+        "input": "5\n10 20 4 45 99",
+        "expectedOutput": "45",
+        "explanation": "Sorted: [4, 10, 20, 45, 99]. Second largest is 45.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "3\n10 20 30",
-        "expectedOutput": "20",
-        "explanation": "Second largest is 20.",
+        "input": "3\n-1 -5 -3",
+        "expectedOutput": "-3",
+        "explanation": "Sorted: [-5, -3, -1]. Second largest is -3.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -456,38 +612,37 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "Decipher the dominant clan sigil in the runic tapestry.",
-    "task": "Given a string S of lowercase English letters, find the character that appears most frequently. If there is a tie, output the one that appears earliest in alphabetical order.",
-    "inputFormat": "A single non-empty string S.",
+    "story": "Discover the most repeated war horn battle signal.",
+    "task": "Given a lowercase string S, find the character that appears most frequently. If multiple characters have the same highest frequency, choose the alphabetically smallest one.",
+    "inputFormat": "A single lowercase string S.",
     "outputFormat": "Print the most frequent character.",
     "constraints": [
-      "1 <= |S| <= 100",
-      "S consists of lowercase English letters."
+      "1 <= length of S <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "banana",
-        "expectedOutput": "a",
-        "explanation": "'a' appears 3 times.",
+        "input": "battle",
+        "expectedOutput": "t",
+        "explanation": "'t' appears 2 times, more than any other.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "bbccaa",
+        "input": "dragon",
         "expectedOutput": "a",
-        "explanation": "'a', 'b', and 'c' all appear 2 times. 'a' is first alphabetically.",
+        "explanation": "All letters appear once; 'a' is alphabetically first.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -497,14 +652,13 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "Select two anchor weights that match the exact balance requirement.",
-    "task": "Given an array of N integers and a target T, find the 1-based indices (i < j) of the two elements that sum to T. If multiple pairs exist, print the pair with the smallest first index; if still tied, smallest second index.",
-    "inputFormat": "Line 1: Two integers N and T (2 <= N <= 100).\nLine 2: N space-separated integers A[1], ..., A[N].",
-    "outputFormat": "Print two 1-based indices i and j separated by a space.",
+    "story": "Pair two warrior shields whose combined crest weights hit the target balance.",
+    "task": "Given an array of N integers and a target T, find the 1-based indices of two elements whose sum equals T. If multiple pairs exist, choose the pair with the smallest first index, then the smallest second index. Guaranteed to have an answer.",
+    "inputFormat": "The first line contains N and T. The second line contains N space-separated integers.",
+    "outputFormat": "Print the two 1-based indices separated by a space.",
     "constraints": [
       "2 <= N <= 100",
-      "-1000 <= A[i], T <= 1000",
-      "At least one valid pair exists."
+      "-1000 <= each element, T <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -513,7 +667,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "4 9\n2 7 11 15",
         "expectedOutput": "1 2",
-        "explanation": "A[1] + A[2] = 2 + 7 = 9.",
+        "explanation": "arr[1] + arr[2] = 2 + 7 = 9.",
         "isHidden": false
       },
       {
@@ -521,15 +675,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "3 6\n3 2 4",
         "expectedOutput": "2 3",
-        "explanation": "A[2] + A[3] = 2 + 4 = 6.",
+        "explanation": "arr[2] + arr[3] = 2 + 4 = 6.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n, t;\n    if (scanf(\"%d %d\", &n, &t) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, t;\n    if (cin >> n >> t) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int t = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, t = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -539,38 +693,37 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "Check if two war banners use the exact same runes rearranged.",
-    "task": "Given two strings S and T consisting of lowercase letters, determine if T is an anagram of S (contains the same characters with the same frequencies). Print YES if valid, else NO.",
-    "inputFormat": "Two space-separated strings S and T.",
+    "story": "Check if two war banners rearrange the exact same set of runic letters.",
+    "task": "Given two lowercase strings S and T, print 'YES' if they contain the exact same characters with the same frequencies, otherwise print 'NO'.",
+    "inputFormat": "Two space-separated or line-separated lowercase strings S and T.",
     "outputFormat": "Print YES or NO.",
     "constraints": [
-      "1 <= |S|, |T| <= 100",
-      "S and T consist of lowercase English letters."
+      "1 <= length of S, T <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "listen silent",
+        "input": "anagram nagaram",
         "expectedOutput": "YES",
-        "explanation": "'silent' is an anagram of 'listen'.",
+        "explanation": "Both contain three 'a's, one 'g', 'm', 'n', 'r'.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "viking raider",
+        "input": "rat car",
         "expectedOutput": "NO",
-        "explanation": "The letters do not match.",
+        "explanation": "'rat' and 'car' have different letters.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105], t[105];\n    if (scanf(\"%s %s\", s, t) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s, t;\n    if (cin >> s >> t) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            String t = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if len(tokens) < 2:\n        return\n    s, t = tokens[0], tokens[1]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -580,13 +733,13 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "Purge duplicate scouts from the muster roll while preserving order.",
-    "task": "Given an array of N integers, remove all duplicate occurrences, keeping only the first occurrence of each number, preserving their original order.",
-    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers.",
-    "outputFormat": "Print the resulting numbers separated by a space.",
+    "story": "Purge duplicate supplies from the longship manifest while keeping order.",
+    "task": "Given an array of N integers, remove duplicate elements while preserving the order of their first occurrences. Print the resulting elements space-separated on one line.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the unique elements space-separated on a single line.",
     "constraints": [
       "1 <= N <= 100",
-      "-1000 <= A[i] <= 1000"
+      "-1000 <= each element <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -595,7 +748,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "6\n1 2 2 3 4 4",
         "expectedOutput": "1 2 3 4",
-        "explanation": "2 and 4 appeared twice.",
+        "explanation": "Duplicates of 2 and 4 removed.",
         "isHidden": false
       },
       {
@@ -603,15 +756,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "5\n5 5 5 5 5",
         "expectedOutput": "5",
-        "explanation": "Only one unique element remains.",
+        "explanation": "All duplicate 5s collapsed to one.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -621,12 +774,12 @@ export const PROBLEMS = [
     "difficulty": "Medium",
     "xp": 5,
     "weapon": "axe",
-    "story": "Calculate the greatest common rhythm and least common cycle for the rowing drums.",
-    "task": "Given two positive integers A and B, compute their Greatest Common Divisor (GCD) and Least Common Multiple (LCM).",
-    "inputFormat": "Two space-separated positive integers A and B.",
+    "story": "Synchronize the firing rates and shared gear ratios of the coastal catapults.",
+    "task": "Given two positive integers A and B, calculate and print their greatest common divisor (GCD) and least common multiple (LCM) space-separated on one line.",
+    "inputFormat": "A single line containing two space-separated integers A and B.",
     "outputFormat": "Print GCD and LCM separated by a space.",
     "constraints": [
-      "1 <= A, B <= 1000"
+      "1 <= A, B <= 10000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -643,15 +796,179 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "5 7",
         "expectedOutput": "1 35",
-        "explanation": "GCD(5, 7) = 1, LCM(5, 7) = 35.",
+        "explanation": "Coprime numbers: GCD = 1, LCM = 35.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int a, b;\n    if (scanf(\"%d %d\", &a, &b) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    if (cin >> a >> b) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int a = sc.nextInt();\n            int b = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a, b = int(tokens[0]), int(tokens[1])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "missing-number",
+    "tier": "axe",
+    "title": "Missing Number",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "A longship crew roll call from 1 to N is missing exactly one warrior.",
+    "task": "Given an array containing N-1 distinct integers from 1 to N, find and print the missing number.",
+    "inputFormat": "The first line contains integer N. The second line contains N-1 space-separated integers.",
+    "outputFormat": "Print the missing integer.",
+    "constraints": [
+      "2 <= N <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n1 2 4 5",
+        "expectedOutput": "3",
+        "explanation": "3 is missing from 1..5.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4\n2 3 4",
+        "expectedOutput": "1",
+        "explanation": "1 is missing.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "move-zeros",
+    "tier": "axe",
+    "title": "Move Zeros",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Consolidate depleted powder kegs (zeros) to the rear of the siege line.",
+    "task": "Given an array of N integers, move all zeros to the end of the array while maintaining the relative order of the non-zero elements. Print the resulting array space-separated on one line.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the elements space-separated on a single line.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n0 1 0 3 12",
+        "expectedOutput": "1 3 12 0 0",
+        "explanation": "Non-zeros 1, 3, 12 kept in order, zeros shifted to end.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3\n0 0 1",
+        "expectedOutput": "1 0 0",
+        "explanation": "1 moves to front, zeros to end.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "character-frequency",
+    "tier": "axe",
+    "title": "Character Frequency",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Count how many times a target runic mark appears on an inscription.",
+    "task": "Given a lowercase string S and a character C, count and print how many times C appears in S.",
+    "inputFormat": "The first line contains string S. The second line contains a single character C (or space-separated on one line).",
+    "outputFormat": "Print the integer count of occurrences of C in S.",
+    "constraints": [
+      "1 <= length of S <= 100",
+      "C is a lowercase letter."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "dragon d",
+        "expectedOutput": "1",
+        "explanation": "'d' appears once in 'dragon'.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "vikingwarrior i",
+        "expectedOutput": "3",
+        "explanation": "'i' appears 3 times.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "pair-with-given-difference",
+    "tier": "axe",
+    "title": "Pair with Given Difference",
+    "difficulty": "Medium",
+    "xp": 5,
+    "weapon": "axe",
+    "story": "Find if any two scout towers have an elevation difference of exactly K meters.",
+    "task": "Given an array of N integers and an integer K, determine whether any two distinct elements (different indices) have an absolute difference equal to K (|arr[i] - arr[j]| == K with i != j). Print 'YES' or 'NO'.",
+    "inputFormat": "The first line contains N and K. The second line contains N space-separated integers.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "2 <= N <= 100",
+      "0 <= K <= 1000",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5 45\n10 20 55 80 90",
+        "expectedOutput": "YES",
+        "explanation": "|10 - 55| = 45.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4 10\n1 2 3 4",
+        "expectedOutput": "NO",
+        "explanation": "No two elements have difference 10.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -661,13 +978,12 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Verify the nested rune brackets guarding the catapult trigger.",
-    "task": "Given a string S consisting of brackets '()[]{}', determine if it is valid (brackets close in correct order and type). Print YES if valid, else NO.",
-    "inputFormat": "A single string S.",
+    "story": "Ensure all locking brackets on the siege engine mechanisms are correctly paired.",
+    "task": "Given a string containing brackets '()', '[]', and '{}', determine whether all brackets are correctly matched and closed in the proper order. Print 'YES' if valid, otherwise print 'NO'.",
+    "inputFormat": "A single string containing only characters '(', ')', '[', ']', '{', '}'.",
     "outputFormat": "Print YES or NO.",
     "constraints": [
-      "1 <= |S| <= 100",
-      "S consists only of '()[]{}'."
+      "1 <= length of string <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -676,7 +992,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "()[]{}",
         "expectedOutput": "YES",
-        "explanation": "All brackets match properly.",
+        "explanation": "All brackets matched.",
         "isHidden": false
       },
       {
@@ -684,15 +1000,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "(]",
         "expectedOutput": "NO",
-        "explanation": "'(' does not match ']'.",
+        "explanation": "Mismatched bracket types.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -702,39 +1018,39 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Locate the enchanted quiver in the sorted armory vault.",
-    "task": "Given a sorted array of N distinct integers in ascending order and a target value K, find the 1-based index of K. If K is not present, print -1.",
-    "inputFormat": "Line 1: Two integers N and K (1 <= N <= 100).\nLine 2: N space-separated integers in strictly increasing order.",
-    "outputFormat": "Print the 1-based index of K, or -1 if not found.",
+    "story": "Direct the ballista sights along a sorted range to acquire the dragon target.",
+    "task": "Given a sorted array of N distinct integers and a target K, find and print the 1-based index of K. If K is absent, print -1.",
+    "inputFormat": "The first line contains N and K. The second line contains N space-separated sorted distinct integers.",
+    "outputFormat": "Print the 1-based index of K, or -1 if absent.",
     "constraints": [
       "1 <= N <= 100",
-      "-1000 <= A[i], K <= 1000",
-      "A is sorted in ascending order."
+      "-1000 <= each element, K <= 1000",
+      "Array is strictly sorted in ascending order."
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "5 7\n1 3 5 7 9",
+        "input": "6 7\n1 3 5 7 9 11",
         "expectedOutput": "4",
-        "explanation": "7 is at index 4.",
+        "explanation": "7 is at 1-based index 4.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "4 6\n2 4 8 10",
+        "input": "5 4\n2 3 5 8 10",
         "expectedOutput": "-1",
-        "explanation": "6 is not in the array.",
+        "explanation": "4 is not in the array.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, k;\n    if (cin >> n >> k) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int k = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, k = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -744,13 +1060,12 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Find the longest sequence of distinct victory runes carved along the catapult arm.",
-    "task": "Given a string S of lowercase English letters, find the length of the longest contiguous substring without any repeating characters.",
-    "inputFormat": "A single non-empty string S.",
-    "outputFormat": "Print an integer: length of the longest substring with all unique characters.",
+    "story": "Find the longest uninterrupted streak of unique signal runes in the battle banner.",
+    "task": "Given a lowercase string S, find and print the length of the longest contiguous substring without repeating characters.",
+    "inputFormat": "A single lowercase string S.",
+    "outputFormat": "Print the length as an integer.",
     "constraints": [
-      "1 <= |S| <= 100",
-      "S consists of lowercase English letters."
+      "1 <= length of S <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -759,7 +1074,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "abcabcbb",
         "expectedOutput": "3",
-        "explanation": "'abc' with length 3.",
+        "explanation": "'abc' has length 3.",
         "isHidden": false
       },
       {
@@ -767,15 +1082,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "bbbbb",
         "expectedOutput": "1",
-        "explanation": "'b' with length 1.",
+        "explanation": "'b' has length 1.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -785,38 +1100,38 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Find the contiguous sequence of combat clashes yielding maximum momentum.",
-    "task": "Given an array of N integers, find the maximum sum of a non-empty contiguous subarray.",
-    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers.",
-    "outputFormat": "Print the maximum contiguous subarray sum.",
+    "story": "Find the strongest consecutive surge of momentum in the Viking battle line.",
+    "task": "Given an array of N integers, find the maximum sum of any non-empty contiguous subarray.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the maximum subarray sum.",
     "constraints": [
       "1 <= N <= 100",
-      "-1000 <= A[i] <= 1000"
+      "-1000 <= each element <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "5\n-2 1 -3 4 -1",
-        "expectedOutput": "4",
-        "explanation": "[4] has sum 4.",
+        "input": "9\n-2 1 -3 4 -1 2 1 -5 4",
+        "expectedOutput": "6",
+        "explanation": "[4, -1, 2, 1] sums to 6.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "4\n1 2 3 4",
-        "expectedOutput": "10",
-        "explanation": "Whole array sums to 10.",
+        "input": "5\n5 4 -1 7 8",
+        "expectedOutput": "23",
+        "explanation": "Entire array sums to 23.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -826,13 +1141,13 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Consolidate overlapping catapult bombardment time intervals into unified barrages.",
-    "task": "Given N intervals [start, end], merge all overlapping intervals. Print the merged intervals sorted by start time, each on a new line as 'start end'.",
-    "inputFormat": "Line 1: An integer N (1 <= N <= 50).\nNext N lines: Two integers start and end (0 <= start <= end <= 1000).",
-    "outputFormat": "Print each merged interval's start and end separated by a space, one per line.",
+    "story": "Merge overlapping watch shifts of the Viking defense patrols.",
+    "task": "Given N intervals, merge all overlapping intervals and print the resulting intervals in ascending order of their start values, each interval on its own line as 'start end'.",
+    "inputFormat": "The first line contains integer N. The next N lines each contain two integers: start and end.",
+    "outputFormat": "Print each merged interval on a new line with start and end separated by a space.",
     "constraints": [
-      "1 <= N <= 50",
-      "0 <= start <= end <= 1000"
+      "1 <= N <= 100",
+      "0 <= start <= end <= 10000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -841,7 +1156,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "4\n1 3\n2 6\n8 10\n15 18",
         "expectedOutput": "1 6\n8 10\n15 18",
-        "explanation": "[1,3] and [2,6] overlap into [1,6].",
+        "explanation": "[1, 3] and [2, 6] merge to [1, 6].",
         "isHidden": false
       },
       {
@@ -849,15 +1164,15 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "2\n1 4\n4 5",
         "expectedOutput": "1 5",
-        "explanation": "Touching intervals [1,4] and [4,5] merge to [1,5].",
+        "explanation": "[1, 4] and [4, 5] overlap at 4, merging to [1, 5].",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int s[55], e[55];\n    for (int i = 0; i < n; i++) scanf(\"%d %d\", &s[i], &e[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<pair<int, int>> intervals(n);\n        for (int i = 0; i < n; i++) cin >> intervals[i].first >> intervals[i].second;\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[][] intervals = new int[n][2];\n            for (int i = 0; i < n; i++) {\n                intervals[i][0] = sc.nextInt();\n                intervals[i][1] = sc.nextInt();\n            }\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    intervals = []\n    for i in range(n):\n        intervals.append([int(tokens[1 + 2*i]), int(tokens[2 + 2*i])])\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -867,39 +1182,39 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Rotate the perimeter shield guard positions clockwise by K steps.",
-    "task": "Given an array of N integers and a non-negative integer K, rotate the array to the right (clockwise) by K steps.",
-    "inputFormat": "Line 1: Two integers N and K (1 <= N <= 100, 0 <= K <= 1000).\nLine 2: N space-separated integers.",
-    "outputFormat": "Print the rotated array elements separated by a space.",
+    "story": "Rotate the circular shield wall defense formation clockwise by K guards.",
+    "task": "Given an array of N integers and a non-negative integer K, rotate the array to the right by K positions. Print the resulting array space-separated on one line.",
+    "inputFormat": "The first line contains N and K. The second line contains N space-separated integers.",
+    "outputFormat": "Print the rotated array elements space-separated on a single line.",
     "constraints": [
       "1 <= N <= 100",
       "0 <= K <= 1000",
-      "-1000 <= A[i] <= 1000"
+      "-1000 <= each element <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "5 2\n1 2 3 4 5",
-        "expectedOutput": "4 5 1 2 3",
-        "explanation": "Rotating right by 2 moves 4, 5 to the front.",
+        "input": "7 3\n1 2 3 4 5 6 7",
+        "expectedOutput": "5 6 7 1 2 3 4",
+        "explanation": "Rotate right by 3 brings [5, 6, 7] to front.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "4 4\n10 20 30 40",
-        "expectedOutput": "10 20 30 40",
-        "explanation": "Rotating by N gives original array.",
+        "input": "4 2\n-1 -100 3 99",
+        "expectedOutput": "3 99 -1 -100",
+        "explanation": "Rotate right by 2.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, k;\n    if (cin >> n >> k) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int k = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, k = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -909,38 +1224,38 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Count isolated volcanic islands in the archipelago from the dragon's aerial view.",
-    "task": "Given an R x C grid of '1's (land) and '0's (water), count the number of islands. An island is formed by connecting adjacent land cells horizontally or vertically.",
-    "inputFormat": "Line 1: Two integers R and C (1 <= R, C <= 10).\nNext R lines: A string of C characters ('0' or '1').",
-    "outputFormat": "Print a single integer: total number of islands.",
+    "story": "Survey the archipelago from a scouting dragon and count the distinct island clusters.",
+    "task": "Given a grid where 1 represents land and 0 represents water, count the number of islands. Land cells are connected horizontally or vertically.",
+    "inputFormat": "The first line contains R and C (rows and columns). The next R lines each contain C space-separated binary values (0 or 1).",
+    "outputFormat": "Print the number of islands.",
     "constraints": [
       "1 <= R, C <= 10",
-      "Grid contains only '0' and '1'."
+      "Grid values are 0 or 1."
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "3 3\n110\n010\n001",
+        "input": "3 3\n1 1 0\n0 1 0\n0 0 1",
         "expectedOutput": "2",
-        "explanation": "One island at top-center and another at bottom-right.",
+        "explanation": "One island at top-left, one single-cell island at bottom-right.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "2 2\n00\n00",
-        "expectedOutput": "0",
-        "explanation": "No land cells.",
+        "input": "3 3\n1 0 1\n0 1 0\n1 0 1",
+        "expectedOutput": "5",
+        "explanation": "Five disconnected 1s.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    char grid[15][15];\n    for (int i = 0; i < r; i++) scanf(\"%s\", grid[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nint main() {\n    int r, c;\n    if (cin >> r >> c) {\n        vector<string> grid(r);\n        for (int i = 0; i < r; i++) cin >> grid[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int r = sc.nextInt();\n            int c = sc.nextInt();\n            String[] grid = new String[r];\n            for (int i = 0; i < r; i++) grid[i] = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r, c = int(tokens[0]), int(tokens[1])\n    grid = tokens[2:2+r]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -950,14 +1265,13 @@ export const PROBLEMS = [
     "difficulty": "Hard",
     "xp": 7,
     "weapon": "catapult",
-    "story": "Count how many contiguous patrols achieve target tactical power K.",
-    "task": "Given an array of N integers and an integer K, find the total number of continuous subarrays whose sum equals K.",
-    "inputFormat": "Line 1: Two integers N and K (1 <= N <= 100, -10^5 <= K <= 10^5).\nLine 2: N space-separated integers A[1], ..., A[N].",
-    "outputFormat": "Print the number of subarrays summing to K.",
+    "story": "Count how many tactical sub-units deliver an exact impact damage of K.",
+    "task": "Given an array of N integers and a target K, count the number of contiguous subarrays whose sum equals K.",
+    "inputFormat": "The first line contains N and K. The second line contains N space-separated integers.",
+    "outputFormat": "Print the total count of contiguous subarrays summing to K.",
     "constraints": [
       "1 <= N <= 100",
-      "-1000 <= A[i] <= 1000",
-      "-10^5 <= K <= 10^5"
+      "-1000 <= each element, K <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -966,7 +1280,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "3 2\n1 1 1",
         "expectedOutput": "2",
-        "explanation": "[1,1] at indices 1-2 and 2-3 both sum to 2.",
+        "explanation": "[1, 1] at index 0-1 and 1-2 both sum to 2.",
         "isHidden": false
       },
       {
@@ -974,32 +1288,197 @@ export const PROBLEMS = [
         "name": "Case 2",
         "input": "3 3\n1 2 3",
         "expectedOutput": "2",
-        "explanation": "[1,2] and [3] both sum to 3.",
+        "explanation": "[1, 2] and [3] sum to 3.",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, k;\n    if (cin >> n >> k) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int k = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, k = int(tokens[0]), int(tokens[1])\n    a = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
-    "id": "coin-change",
+    "id": "product-of-array-except-self",
+    "tier": "catapult",
+    "title": "Product of Array Except Self",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Each catapult calculates fire coordinates by combining the multipliers of all other stations.",
+    "task": "Given an array of N integers, create an output array where each element is the product of all the other elements in the array, without using division. Print the result space-separated on one line.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the N product values space-separated on a single line.",
+    "constraints": [
+      "2 <= N <= 20",
+      "-10 <= each element <= 10"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4\n1 2 3 4",
+        "expectedOutput": "24 12 8 6",
+        "explanation": "2*3*4=24, 1*3*4=12, 1*2*4=8, 1*2*3=6.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "5\n-1 1 0 -3 3",
+        "expectedOutput": "0 0 9 0 0",
+        "explanation": "Only index 2 excludes the zero.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "longest-consecutive-sequence",
+    "tier": "catapult",
+    "title": "Longest Consecutive Sequence",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Find the longest chain of consecutive dragon scales regardless of how they are scattered.",
+    "task": "Given an unsorted array of N integers, find the length of the longest sequence of consecutive integer values, regardless of their positions in the array.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the length of the longest consecutive sequence.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "6\n100 4 200 1 3 2",
+        "expectedOutput": "4",
+        "explanation": "[1, 2, 3, 4] has length 4.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "10\n0 3 7 2 5 8 4 6 0 1",
+        "expectedOutput": "9",
+        "explanation": "0 through 8 has length 9.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "search-in-a-rotated-sorted-array",
+    "tier": "catapult",
+    "title": "Search in a Rotated Sorted Array",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Locate an enemy warship on a circular radar array that has been rotated by patrol movement.",
+    "task": "Given a sorted array of N distinct integers that has been rotated at an unknown position and a target K, find and print the 1-based index of K. If K is absent, print -1.",
+    "inputFormat": "The first line contains N and K. The second line contains N space-separated integers.",
+    "outputFormat": "Print the 1-based index of K, or -1 if not found.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element, K <= 1000",
+      "All elements are distinct."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "7 0\n4 5 6 7 0 1 2",
+        "expectedOutput": "5",
+        "explanation": "0 is at 1-based index 5.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "7 3\n4 5 6 7 0 1 2",
+        "expectedOutput": "-1",
+        "explanation": "3 is not in the array.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "majority-element",
+    "tier": "catapult",
+    "title": "Majority Element",
+    "difficulty": "Hard",
+    "xp": 7,
+    "weapon": "catapult",
+    "story": "Determine the dominant dragon species clan inhabiting the northern cliffs.",
+    "task": "Given an array of N integers, find the element that appears more than N/2 times. If no such element exists, print -1.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the majority element, or -1 if none exists.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3\n3 2 3",
+        "expectedOutput": "3",
+        "explanation": "3 appears 2 times (> 3/2 = 1).",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "7\n2 2 1 1 1 2 2",
+        "expectedOutput": "2",
+        "explanation": "2 appears 4 times (> 7/2 = 3).",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "count-coins",
     "tier": "ballista",
-    "title": "Coin Change",
+    "title": "Count Coins",
     "difficulty": "Extreme",
     "xp": 10,
     "weapon": "ballista",
-    "story": "Melt down the fewest silver coins to pay the dragon tribute amount A.",
-    "task": "Given N distinct coin denominations and an amount A, find the minimum number of coins needed to make up amount A. You may use each coin infinitely many times. If amount cannot be made up, print -1.",
-    "inputFormat": "Line 1: Two integers N and A (1 <= N <= 10, 0 <= A <= 1000).\nLine 2: N space-separated positive integers (coin values).",
-    "outputFormat": "Print the minimum coins, or -1.",
+    "story": "Tribute to the Red Death requires exact gold weight with minimum coin pieces.",
+    "task": "Given an array of coin denominations and an amount A, find the minimum number of coins needed to make exactly amount A. Each denomination can be used unlimited times. If impossible, print -1.",
+    "inputFormat": "The first line contains N (number of denominations) and A (target amount). The second line contains N space-separated coin values.",
+    "outputFormat": "Print the minimum number of coins, or -1 if impossible.",
     "constraints": [
       "1 <= N <= 10",
-      "0 <= A <= 1000",
-      "1 <= coin[i] <= 1000"
+      "0 <= A <= 500",
+      "1 <= coin value <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -1021,257 +1500,214 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n, a;\n    if (scanf(\"%d %d\", &n, &a) != 2) return 0;\n    int coins[15];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &coins[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, a;\n    if (cin >> n >> a) {\n        vector<int> coins(n);\n        for (int i = 0; i < n; i++) cin >> coins[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int a = sc.nextInt();\n            int[] coins = new int[n];\n            for (int i = 0; i < n; i++) coins[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, a = int(tokens[0]), int(tokens[1])\n    coins = [int(x) for x in tokens[2:2+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
-    "id": "longest-increasing-subsequence",
+    "id": "longest-increasing-sequence",
     "tier": "ballista",
-    "title": "Longest Increasing Subsequence",
+    "title": "Longest Increasing Sequence",
     "difficulty": "Extreme",
     "xp": 10,
     "weapon": "ballista",
-    "story": "Find the longest ascending sequence of ballista bolt calibers.",
-    "task": "Given an array of N integers, find the length of the longest strictly increasing subsequence.",
-    "inputFormat": "Line 1: An integer N (1 <= N <= 100).\nLine 2: N space-separated integers.",
-    "outputFormat": "Print the length of the longest strictly increasing subsequence.",
+    "story": "Track the longest strictly rising terrain altitude encountered by the dragon.",
+    "task": "Given an array of N integers, find the length of the longest strictly increasing sequence of consecutive elements (contiguous subarray).",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the length of the longest strictly increasing contiguous subarray.",
     "constraints": [
       "1 <= N <= 100",
-      "-1000 <= A[i] <= 1000"
+      "-1000 <= each element <= 1000"
     ],
     "timeLimitMs": 2000,
     "samples": [
       {
         "id": "sample-1",
         "name": "Case 1",
-        "input": "6\n10 9 2 5 3 7",
+        "input": "5\n1 3 5 4 7",
         "expectedOutput": "3",
-        "explanation": "[2, 5, 7] or [2, 3, 7] has length 3.",
+        "explanation": "[1, 3, 5] has length 3.",
         "isHidden": false
       },
       {
         "id": "sample-2",
         "name": "Case 2",
-        "input": "4\n0 1 0 3",
-        "expectedOutput": "3",
-        "explanation": "[0, 1, 3] has length 3.",
-        "isHidden": false
-      }
-    ],
-    "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int a[105];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &a[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n;\n    if (cin >> n) {\n        vector<int> a(n);\n        for (int i = 0; i < n; i++) cin >> a[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int[] a = new int[n];\n            for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    a = [int(x) for x in tokens[1:1+n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
-    }
-  },
-  {
-    "id": "edit-distance",
-    "tier": "ballista",
-    "title": "Edit Distance",
-    "difficulty": "Extreme",
-    "xp": 10,
-    "weapon": "ballista",
-    "story": "Find minimum rune scribing operations (insert, delete, replace) to convert word A into word B.",
-    "task": "Given two strings word1 and word2 consisting of lowercase English letters, compute the minimum number of operations required to convert word1 to word2.",
-    "inputFormat": "Two space-separated strings word1 and word2.",
-    "outputFormat": "Print the minimum edit distance.",
-    "constraints": [
-      "1 <= |word1|, |word2| <= 50",
-      "Strings consist of lowercase English letters."
-    ],
-    "timeLimitMs": 2000,
-    "samples": [
-      {
-        "id": "sample-1",
-        "name": "Case 1",
-        "input": "horse ros",
-        "expectedOutput": "3",
-        "explanation": "horse -> rorse -> rose -> ros (3 operations).",
-        "isHidden": false
-      },
-      {
-        "id": "sample-2",
-        "name": "Case 2",
-        "input": "intention execution",
-        "expectedOutput": "5",
-        "explanation": "5 operations required.",
-        "isHidden": false
-      }
-    ],
-    "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char w1[60], w2[60];\n    if (scanf(\"%s %s\", w1, w2) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string w1, w2;\n    if (cin >> w1 >> w2) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String w1 = sc.next();\n            String w2 = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if len(tokens) < 2:\n        return\n    w1, w2 = tokens[0], tokens[1]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
-    }
-  },
-  {
-    "id": "shortest-path-in-a-grid",
-    "tier": "ballista",
-    "title": "Shortest Path in a Grid",
-    "difficulty": "Extreme",
-    "xp": 10,
-    "weapon": "ballista",
-    "story": "Navigate the dragon cavern grid from top-left (0,0) to bottom-right (R-1, C-1) avoiding fiery obstacles.",
-    "task": "Given an R x C grid where 0 is walkable and 1 is blocked, find the shortest path length (number of cells visited including start and end) from (0,0) to (R-1, C-1) moving up/down/left/right. If blocked at start/end or no path exists, print -1.",
-    "inputFormat": "Line 1: Two integers R and C (1 <= R, C <= 10).\nNext R lines: C space-separated integers (0 or 1).",
-    "outputFormat": "Print the shortest path length, or -1.",
-    "constraints": [
-      "1 <= R, C <= 10",
-      "Grid cells are 0 or 1."
-    ],
-    "timeLimitMs": 2000,
-    "samples": [
-      {
-        "id": "sample-1",
-        "name": "Case 1",
-        "input": "3 3\n0 0 0\n1 1 0\n0 0 0",
-        "expectedOutput": "5",
-        "explanation": "(0,0)->(0,1)->(0,2)->(1,2)->(2,2) takes 5 cells.",
-        "isHidden": false
-      },
-      {
-        "id": "sample-2",
-        "name": "Case 2",
-        "input": "2 2\n0 1\n1 0",
-        "expectedOutput": "-1",
-        "explanation": "Path is completely blocked.",
-        "isHidden": false
-      }
-    ],
-    "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    int grid[15][15];\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) scanf(\"%d\", &grid[i][j]);\n    }\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int r, c;\n    if (cin >> r >> c) {\n        vector<vector<int>> grid(r, vector<int>(c));\n        for (int i = 0; i < r; i++) {\n            for (int j = 0; j < c; j++) cin >> grid[i][j];\n        }\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int r = sc.nextInt();\n            int c = sc.nextInt();\n            int[][] grid = new int[r][c];\n            for (int i = 0; i < r; i++) {\n                for (int j = 0; j < c; j++) grid[i][j] = sc.nextInt();\n            }\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r, c = int(tokens[0]), int(tokens[1])\n    grid = []\n    idx = 2\n    for i in range(r):\n        grid.append([int(x) for x in tokens[idx:idx+c]])\n        idx += c\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
-    }
-  },
-  {
-    "id": "knapsack-01",
-    "tier": "ballista",
-    "title": "0/1 Knapsack",
-    "difficulty": "Extreme",
-    "xp": 10,
-    "weapon": "ballista",
-    "story": "Pack the most valuable dragon relics into your longship cargo hold without exceeding weight capacity W.",
-    "task": "Given N items with weights and values, and a maximum weight capacity W, find the maximum total value possible without exceeding W. Each item can be chosen at most once.",
-    "inputFormat": "Line 1: Two integers N and W (1 <= N <= 50, 1 <= W <= 500).\nLine 2: N space-separated weights wt[i].\nLine 3: N space-separated values val[i].",
-    "outputFormat": "Print the maximum total value.",
-    "constraints": [
-      "1 <= N <= 50",
-      "1 <= W <= 500",
-      "1 <= wt[i], val[i] <= 500"
-    ],
-    "timeLimitMs": 2000,
-    "samples": [
-      {
-        "id": "sample-1",
-        "name": "Case 1",
-        "input": "3 4\n1 2 3\n10 15 40",
-        "expectedOutput": "50",
-        "explanation": "Pick item 1 and item 3 for weight 1+3=4 and value 10+40=50.",
-        "isHidden": false
-      },
-      {
-        "id": "sample-2",
-        "name": "Case 2",
-        "input": "3 3\n4 5 6\n1 2 3",
-        "expectedOutput": "0",
-        "explanation": "All items exceed capacity 3.",
-        "isHidden": false
-      }
-    ],
-    "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int n, w;\n    if (scanf(\"%d %d\", &n, &w) != 2) return 0;\n    int wt[55], val[55];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &wt[i]);\n    for (int i = 0; i < n; i++) scanf(\"%d\", &val[i]);\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int n, w;\n    if (cin >> n >> w) {\n        vector<int> wt(n), val(n);\n        for (int i = 0; i < n; i++) cin >> wt[i];\n        for (int i = 0; i < n; i++) cin >> val[i];\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int n = sc.nextInt();\n            int w = sc.nextInt();\n            int[] wt = new int[n];\n            int[] val = new int[n];\n            for (int i = 0; i < n; i++) wt[i] = sc.nextInt();\n            for (int i = 0; i < n; i++) val[i] = sc.nextInt();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n, w = int(tokens[0]), int(tokens[1])\n    wt = [int(x) for x in tokens[2:2+n]]\n    val = [int(x) for x in tokens[2+n:2+2*n]]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
-    }
-  },
-  {
-    "id": "longest-common-subsequence",
-    "tier": "ballista",
-    "title": "Longest Common Subsequence",
-    "difficulty": "Extreme",
-    "xp": 10,
-    "weapon": "ballista",
-    "story": "Find the longest matching battle command sequence shared between two elder skalds.",
-    "task": "Given two strings S1 and S2 of lowercase English letters, find the length of their longest common subsequence.",
-    "inputFormat": "Two space-separated strings S1 and S2.",
-    "outputFormat": "Print the length of their longest common subsequence.",
-    "constraints": [
-      "1 <= |S1|, |S2| <= 100",
-      "Strings contain lowercase English letters."
-    ],
-    "timeLimitMs": 2000,
-    "samples": [
-      {
-        "id": "sample-1",
-        "name": "Case 1",
-        "input": "abcde ace",
-        "expectedOutput": "3",
-        "explanation": "'ace' is a common subsequence of length 3.",
-        "isHidden": false
-      },
-      {
-        "id": "sample-2",
-        "name": "Case 2",
-        "input": "abc def",
-        "expectedOutput": "0",
-        "explanation": "No common characters.",
-        "isHidden": false
-      }
-    ],
-    "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s1[105], s2[105];\n    if (scanf(\"%s %s\", s1, s2) != 2) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s1, s2;\n    if (cin >> s1 >> s2) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s1 = sc.next();\n            String s2 = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if len(tokens) < 2:\n        return\n    s1, s2 = tokens[0], tokens[1]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
-    }
-  },
-  {
-    "id": "grid-paths-with-obstacles",
-    "tier": "ballista",
-    "title": "Grid Paths with Obstacles",
-    "difficulty": "Extreme",
-    "xp": 10,
-    "weapon": "ballista",
-    "story": "Count all valid tactical advance routes from top-left (0,0) to bottom-right (R-1, C-1) moving only right and down.",
-    "task": "Given an R x C grid where 0 indicates an empty space and 1 indicates an obstacle, count the number of unique paths from (0,0) to (R-1, C-1). At each cell you can only move right or down.",
-    "inputFormat": "Line 1: Two integers R and C (1 <= R, C <= 10).\nNext R lines: C space-separated integers (0 or 1).",
-    "outputFormat": "Print the number of unique paths.",
-    "constraints": [
-      "1 <= R, C <= 10",
-      "Grid cells are 0 or 1."
-    ],
-    "timeLimitMs": 2000,
-    "samples": [
-      {
-        "id": "sample-1",
-        "name": "Case 1",
-        "input": "3 3\n0 0 0\n0 1 0\n0 0 0",
-        "expectedOutput": "2",
-        "explanation": "Only 2 paths avoid the obstacle at (1,1).",
-        "isHidden": false
-      },
-      {
-        "id": "sample-2",
-        "name": "Case 2",
-        "input": "2 2\n0 1\n0 0",
+        "input": "5\n2 2 2 2 2",
         "expectedOutput": "1",
-        "explanation": "Only down-then-right is possible.",
+        "explanation": "Strictly increasing requires arr[i] > arr[i-1].",
         "isHidden": false
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n\nint main() {\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    int grid[15][15];\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) scanf(\"%d\", &grid[i][j]);\n    }\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    int r, c;\n    if (cin >> r >> c) {\n        vector<vector<int>> grid(r, vector<int>(c));\n        for (int i = 0; i < r; i++) {\n            for (int j = 0; j < c; j++) cin >> grid[i][j];\n        }\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNextInt()) {\n            int r = sc.nextInt();\n            int c = sc.nextInt();\n            int[][] grid = new int[r][c];\n            for (int i = 0; i < r; i++) {\n                for (int j = 0; j < c; j++) grid[i][j] = sc.nextInt();\n            }\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r, c = int(tokens[0]), int(tokens[1])\n    grid = []\n    idx = 2\n    for i in range(r):\n        grid.append([int(x) for x in tokens[idx:idx+c]])\n        idx += c\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "compare-strings",
+    "tier": "ballista",
+    "title": "Compare Strings",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Verify if the secret Viking recognition passphrase matches the chieftain's decree.",
+    "task": "Given two strings S and T, determine whether they are identical. Print 'YES' if they are identical, otherwise print 'NO'.",
+    "inputFormat": "Two space-separated or line-separated strings S and T.",
+    "outputFormat": "Print YES or NO.",
+    "constraints": [
+      "1 <= length of S, T <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "viking viking",
+        "expectedOutput": "YES",
+        "explanation": "Both strings match.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "dragon Dragon",
+        "expectedOutput": "NO",
+        "explanation": "Case sensitive comparison ('d' vs 'D').",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "maximum-array-sum",
+    "tier": "ballista",
+    "title": "Maximum Array Sum",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Load the dragon siege wagon with maximum weight without exceeding its structural limit W.",
+    "task": "Given an array of N positive integers and a maximum allowed sum W, find the maximum sum obtainable by selecting elements without exceeding W. Each element can be selected at most once.",
+    "inputFormat": "The first line contains N and W. The second line contains N space-separated positive integers.",
+    "outputFormat": "Print the maximum possible sum <= W.",
+    "constraints": [
+      "1 <= N <= 20",
+      "1 <= W <= 500",
+      "1 <= each element <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "4 10\n3 4 5 6",
+        "expectedOutput": "10",
+        "explanation": "4 + 6 = 10.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3 8\n5 5 5",
+        "expectedOutput": "5",
+        "explanation": "5 <= 8; 5 + 5 = 10 exceeds 8.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "common-characters",
+    "tier": "ballista",
+    "title": "Common Characters",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Count matching runic glyphs carved into twin communication stones.",
+    "task": "Given two lowercase strings S and T, print the number of distinct characters that appear in both strings.",
+    "inputFormat": "Two space-separated or line-separated lowercase strings S and T.",
+    "outputFormat": "Print the number of distinct characters shared by both strings.",
+    "constraints": [
+      "1 <= length of S, T <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "viking dragon",
+        "expectedOutput": "2",
+        "explanation": "'g' and 'n' appear in both.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "shield axe",
+        "expectedOutput": "1",
+        "explanation": "'e' appears in both.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "count-positive-numbers",
+    "tier": "ballista",
+    "title": "Count Positive Numbers",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Count how many tactical wind gauges indicate forward-favorable tailwinds (> 0).",
+    "task": "Given an array of N integers, count how many numbers are strictly greater than zero.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the count of positive numbers.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n-1 2 0 -3 4",
+        "expectedOutput": "2",
+        "explanation": "2 and 4 are strictly greater than zero.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "4\n-5 -2 -1 0",
+        "expectedOutput": "0",
+        "explanation": "No numbers strictly > 0.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   },
   {
@@ -1281,13 +1717,12 @@ export const PROBLEMS = [
     "difficulty": "Extreme",
     "xp": 10,
     "weapon": "ballista",
-    "story": "Find the longest symmetrical runic inscription on the ballista chassis.",
-    "task": "Given a string S of lowercase English letters, find the longest palindromic substring. If multiple palindromic substrings have the same maximum length, output the one that occurs earliest in S.",
-    "inputFormat": "A single non-empty string S.",
+    "story": "Find the longest symmetrical runic incantation carved on the dragon altar.",
+    "task": "Given a lowercase string S, find the longest contiguous substring that is a palindrome. If multiple answers have the same length, choose the earliest occurrence.",
+    "inputFormat": "A single lowercase string S.",
     "outputFormat": "Print the longest palindromic substring.",
     "constraints": [
-      "1 <= |S| <= 100",
-      "S consists of lowercase English letters."
+      "1 <= length of S <= 100"
     ],
     "timeLimitMs": 2000,
     "samples": [
@@ -1296,7 +1731,7 @@ export const PROBLEMS = [
         "name": "Case 1",
         "input": "babad",
         "expectedOutput": "bab",
-        "explanation": "'bab' is the earliest longest palindrome of length 3.",
+        "explanation": "'bab' is a palindrome of length 3 (earliest occurrence).",
         "isHidden": false
       },
       {
@@ -1309,19 +1744,227 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s[105];\n    if (scanf(\"%s\", s) != 1) return 0;\n    // Write your solution here\n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string s;\n    if (cin >> s) {\n        // Write your solution here\n    }\n    return 0;\n}",
-      "java": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (sc.hasNext()) {\n            String s = sc.next();\n            // Write your solution here\n        }\n    }\n}",
-      "python": "import sys\n\ndef main():\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # Write your solution here\n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "second-smallest-number",
+    "tier": "ballista",
+    "title": "Second Smallest Number",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "The second smallest dragon egg is selected for incubation in the hatchery.",
+    "task": "Given an array of N distinct integers, find and print the second smallest number.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated distinct integers.",
+    "outputFormat": "Print the second smallest number.",
+    "constraints": [
+      "2 <= N <= 100",
+      "-1000 <= each element <= 1000",
+      "All elements are distinct."
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n12 1 35 10 34",
+        "expectedOutput": "10",
+        "explanation": "Sorted: [1, 10, 12, 34, 35]. Second smallest is 10.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3\n-1 -5 -3",
+        "expectedOutput": "-3",
+        "explanation": "Sorted: [-5, -3, -1]. Second smallest is -3.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "maximum-difference",
+    "tier": "ballista",
+    "title": "Maximum Difference",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Calculate the highest profit margin buying dragon ore on day i and selling on day j (j > i).",
+    "task": "Given an array of N integers, find the maximum value of arr[j] - arr[i] where j > i. If no positive difference exists, print -1.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the maximum difference, or -1 if no positive difference is possible.",
+    "constraints": [
+      "2 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "6\n7 1 5 3 6 4",
+        "expectedOutput": "5",
+        "explanation": "Buy at 1, sell at 6: 6 - 1 = 5.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "5\n7 6 4 3 1",
+        "expectedOutput": "-1",
+        "explanation": "Decreasing array; no positive profit possible.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "sort-by-frequency",
+    "tier": "ballista",
+    "title": "Sort by Frequency",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Group and organize arrow types by decreasing usage count, smaller types first in ties.",
+    "task": "Given an array of N integers, sort its elements by decreasing frequency. If two elements have the same frequency, place the smaller element first. Print the sorted array space-separated on one line.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the sorted array space-separated on a single line.",
+    "constraints": [
+      "1 <= N <= 100",
+      "-1000 <= each element <= 1000"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "6\n1 1 2 2 2 3",
+        "expectedOutput": "2 2 2 1 1 3",
+        "explanation": "2 appears 3 times, 1 appears 2 times, 3 appears 1 time.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "6\n2 3 1 3 2 1",
+        "expectedOutput": "1 1 2 2 3 3",
+        "explanation": "All appear twice; tied elements sorted ascending (1, then 2, then 3).",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "longest-common-prefix",
+    "tier": "ballista",
+    "title": "Longest Common Prefix",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Find the shared ancestral root prefix among N Viking clan house names.",
+    "task": "Given N lowercase strings, find and print the longest prefix shared by all strings. If no common prefix exists, print an empty string (or empty line).",
+    "inputFormat": "The first line contains integer N. The next N lines (or space-separated tokens) contain the strings.",
+    "outputFormat": "Print the longest common prefix on a single line.",
+    "constraints": [
+      "1 <= N <= 100",
+      "1 <= length of each string <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "3\nflower flow flight",
+        "expectedOutput": "fl",
+        "explanation": "'fl' is shared by all three words.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "3\ndog racecar car",
+        "expectedOutput": "",
+        "explanation": "No common prefix among all words.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+    }
+  },
+  {
+    "id": "minimum-jumps",
+    "tier": "ballista",
+    "title": "Minimum Jumps",
+    "difficulty": "Extreme",
+    "xp": 10,
+    "weapon": "ballista",
+    "story": "Guide a dragon leaping across rocky sea sea-stacks to reach the final island with minimum jumps.",
+    "task": "Given an array of N non-negative integers where each element represents the maximum number of positions you can jump forward from that index, find the minimum number of jumps needed to reach the last index (N-1). If it is impossible to reach the last index, print -1.",
+    "inputFormat": "The first line contains integer N. The second line contains N space-separated integers.",
+    "outputFormat": "Print the minimum number of jumps, or -1 if unreachable.",
+    "constraints": [
+      "1 <= N <= 100",
+      "0 <= each element <= 100"
+    ],
+    "timeLimitMs": 2000,
+    "samples": [
+      {
+        "id": "sample-1",
+        "name": "Case 1",
+        "input": "5\n2 3 1 1 4",
+        "expectedOutput": "2",
+        "explanation": "Jump from index 0 to 1 (step 1), then from 1 to 4 (step 2). Total 2 jumps.",
+        "isHidden": false
+      },
+      {
+        "id": "sample-2",
+        "name": "Case 2",
+        "input": "5\n3 2 1 0 4",
+        "expectedOutput": "-1",
+        "explanation": "Always lands at index 3 with 0 jump length, impossible to reach last index.",
+        "isHidden": false
+      }
+    ],
+    "starterCode": {
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
+      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
     }
   }
 ];
 
-export const PROBLEMS_BY_ID = Object.fromEntries(PROBLEMS.map((p) => [p.id, p]));
+export const PROBLEMS_BY_ID = Object.fromEntries(
+  PROBLEMS.map((p) => [p.id, p])
+);
 
 export const PROBLEMS_BY_WEAPON = {
-  dagger: PROBLEMS.filter((p) => (p.tier || p.weapon) === 'dagger'),
-  axe: PROBLEMS.filter((p) => (p.tier || p.weapon) === 'axe'),
-  catapult: PROBLEMS.filter((p) => (p.tier || p.weapon) === 'catapult'),
-  ballista: PROBLEMS.filter((p) => (p.tier || p.weapon) === 'ballista'),
+  dagger: PROBLEMS.filter((p) => p.tier === 'dagger'),
+  axe: PROBLEMS.filter((p) => p.tier === 'axe'),
+  catapult: PROBLEMS.filter((p) => p.tier === 'catapult'),
+  ballista: PROBLEMS.filter((p) => p.tier === 'ballista'),
 };

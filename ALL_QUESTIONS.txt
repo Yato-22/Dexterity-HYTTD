@@ -1,0 +1,1911 @@
+================================================================================
+                   TECHFLIX ARENA: BATTLE OF THE RED DEATH                      
+                         ALL 32 CODING CHALLENGES                               
+================================================================================
+
+Total Problems: 32 (8 Dagger, 8 Axe, 8 Catapult, 8 Ballista)
+Supported Languages: Python 3, C (gcc), C++ (g++), Java 15 (class Main)
+Execution Environment: Piston Container (Sandbox Isolated)
+
+================================================================================
+### DAGGER TIER (EASY - 2 XP) (8 Problems)
+================================================================================
+
+--------------------------------------------------------------------------------
+[1] SUM OF TWO NUMBERS (ID: sum-of-two-numbers)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        Viking warriors combine their spoils of battle into a single chest.
+
+TASK:
+Given two integers A and B, print their sum.
+
+INPUT FORMAT:
+A single line containing two space-separated integers A and B.
+
+OUTPUT FORMAT:
+Print the sum A + B.
+
+CONSTRAINTS:
+- -1000 <= A, B <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 5
+    Expected Output:
+      8
+    Explanation: 3 + 5 = 8
+
+  Sample Case 2:
+    Input:
+      -10 4
+    Expected Output:
+      -6
+    Explanation: -10 + 4 = -6
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  0 0
+    Output: 0
+  Hidden Test 2:
+    Input:  -50 -20
+    Output: -70
+  Hidden Test 3:
+    Input:  1000 1000
+    Output: 2000
+  Hidden Test 4:
+    Input:  -1000 1000
+    Output: 0
+  Hidden Test 5:
+    Input:  42 -42
+    Output: 0
+  Hidden Test 6:
+    Input:  999 -1
+    Output: 998
+
+
+--------------------------------------------------------------------------------
+[2] EVEN OR ODD (ID: even-or-odd)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        The seer divides the clan into two scouting parties based on numbers.
+
+TASK:
+Given an integer N, print 'EVEN' if N is even, or 'ODD' if N is odd.
+
+INPUT FORMAT:
+A single integer N.
+
+OUTPUT FORMAT:
+Print EVEN or ODD.
+
+CONSTRAINTS:
+- -1000 <= N <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      4
+    Expected Output:
+      EVEN
+    Explanation: 4 is divisible by 2.
+
+  Sample Case 2:
+    Input:
+      7
+    Expected Output:
+      ODD
+    Explanation: 7 is not divisible by 2.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  0
+    Output: EVEN
+  Hidden Test 2:
+    Input:  -2
+    Output: EVEN
+  Hidden Test 3:
+    Input:  -3
+    Output: ODD
+  Hidden Test 4:
+    Input:  100
+    Output: EVEN
+  Hidden Test 5:
+    Input:  999
+    Output: ODD
+  Hidden Test 6:
+    Input:  -1000
+    Output: EVEN
+
+
+--------------------------------------------------------------------------------
+[3] LARGEST OF THREE (ID: largest-of-three)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        Three clan champions boast of their battle strength; find the mightiest.
+
+TASK:
+Given three integers A, B, and C, find and print the largest value.
+
+INPUT FORMAT:
+Three space-separated integers A, B, and C.
+
+OUTPUT FORMAT:
+Print the maximum of the three numbers.
+
+CONSTRAINTS:
+- -1000 <= A, B, C <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      1 5 3
+    Expected Output:
+      5
+    Explanation: 5 is the largest.
+
+  Sample Case 2:
+    Input:
+      10 10 2
+    Expected Output:
+      10
+    Explanation: 10 is the largest.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  -5 -10 -2
+    Output: -2
+  Hidden Test 2:
+    Input:  7 7 7
+    Output: 7
+  Hidden Test 3:
+    Input:  0 0 1
+    Output: 1
+  Hidden Test 4:
+    Input:  1000 -1000 0
+    Output: 1000
+  Hidden Test 5:
+    Input:  -50 0 -50
+    Output: 0
+  Hidden Test 6:
+    Input:  12 99 99
+    Output: 99
+
+
+--------------------------------------------------------------------------------
+[4] COUNT VOWELS (ID: count-vowels)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        Chant the sacred runes to invoke Thor's blessing.
+
+TASK:
+Given a single word S consisting of lowercase English letters, count the total number of vowels ('a', 'e', 'i', 'o', 'u').
+
+INPUT FORMAT:
+A single string S.
+
+OUTPUT FORMAT:
+Print the number of vowels.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+- S contains only lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      viking
+    Expected Output:
+      2
+    Explanation: 'i' and 'i' are 2 vowels.
+
+  Sample Case 2:
+    Input:
+      dragon
+    Expected Output:
+      2
+    Explanation: 'a' and 'o' are 2 vowels.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  rhythm
+    Output: 0
+  Hidden Test 2:
+    Input:  aeiou
+    Output: 5
+  Hidden Test 3:
+    Input:  a
+    Output: 1
+  Hidden Test 4:
+    Input:  z
+    Output: 0
+  Hidden Test 5:
+    Input:  valhalla
+    Output: 3
+  Hidden Test 6:
+    Input:  abracadabra
+    Output: 5
+
+
+--------------------------------------------------------------------------------
+[5] REVERSE A STRING (ID: reverse-a-string)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        The sea witch whispers a mirrored runic incantation.
+
+TASK:
+Given a string S consisting of printable non-whitespace characters, print the string reversed.
+
+INPUT FORMAT:
+A single string S.
+
+OUTPUT FORMAT:
+Print the reversed string.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      viking
+    Expected Output:
+      gnikiv
+    Explanation: Reversing 'viking' produces 'gnikiv'.
+
+  Sample Case 2:
+    Input:
+      shield
+    Expected Output:
+      dleihs
+    Explanation: Reversing 'shield' produces 'dleihs'.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  a
+    Output: a
+  Hidden Test 2:
+    Input:  racecar
+    Output: racecar
+  Hidden Test 3:
+    Input:  12345
+    Output: 54321
+  Hidden Test 4:
+    Input:  Odin
+    Output: nidO
+  Hidden Test 5:
+    Input:  Hello
+    Output: olleH
+  Hidden Test 6:
+    Input:  xy
+    Output: yx
+
+
+--------------------------------------------------------------------------------
+[6] SUM OF DIGITS (ID: sum-of-digits)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        Calculate the mystical rune sum of a sacred talisman.
+
+TASK:
+Given a non-negative integer N, calculate the sum of its decimal digits.
+
+INPUT FORMAT:
+A single non-negative integer N.
+
+OUTPUT FORMAT:
+Print the sum of the digits.
+
+CONSTRAINTS:
+- 0 <= N <= 10^9
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      123
+    Expected Output:
+      6
+    Explanation: 1 + 2 + 3 = 6.
+
+  Sample Case 2:
+    Input:
+      405
+    Expected Output:
+      9
+    Explanation: 4 + 0 + 5 = 9.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  0
+    Output: 0
+  Hidden Test 2:
+    Input:  9
+    Output: 9
+  Hidden Test 3:
+    Input:  9999
+    Output: 36
+  Hidden Test 4:
+    Input:  100000
+    Output: 1
+  Hidden Test 5:
+    Input:  123456789
+    Output: 45
+  Hidden Test 6:
+    Input:  50505
+    Output: 15
+
+
+--------------------------------------------------------------------------------
+[7] LEAP YEAR (ID: leap-year)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        Align the clan calendar with the celestial winter solstices.
+
+TASK:
+Given a year Y, determine if it is a leap year. A year is a leap year if it is divisible by 4, except end-of-century years, which must be divisible by 400. Print YES if leap year, else NO.
+
+INPUT FORMAT:
+A single integer Y.
+
+OUTPUT FORMAT:
+Print YES or NO.
+
+CONSTRAINTS:
+- 1 <= Y <= 3000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      2024
+    Expected Output:
+      YES
+    Explanation: 2024 is divisible by 4.
+
+  Sample Case 2:
+    Input:
+      1900
+    Expected Output:
+      NO
+    Explanation: 1900 is divisible by 100 but not 400.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  2000
+    Output: YES
+  Hidden Test 2:
+    Input:  2023
+    Output: NO
+  Hidden Test 3:
+    Input:  2400
+    Output: YES
+  Hidden Test 4:
+    Input:  1800
+    Output: NO
+  Hidden Test 5:
+    Input:  4
+    Output: YES
+  Hidden Test 6:
+    Input:  100
+    Output: NO
+
+
+--------------------------------------------------------------------------------
+[8] SUM OF AN ARRAY (ID: sum-of-an-array)
+--------------------------------------------------------------------------------
+Tier:        DAGGER (2 XP / Damage)
+Difficulty:  Easy
+Time Limit:  2000 ms
+Lore:        Tally the weight of dragon scales collected by the war party.
+
+TASK:
+Given an array of N integers, compute and print the sum of all elements.
+
+INPUT FORMAT:
+Line 1: An integer N (1 <= N <= 100).
+Line 2: N space-separated integers A[1], A[2], ..., A[N].
+
+OUTPUT FORMAT:
+Print the total sum.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- -1000 <= A[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      4
+      1 2 3 4
+    Expected Output:
+      10
+    Explanation: 1 + 2 + 3 + 4 = 10.
+
+  Sample Case 2:
+    Input:
+      3
+      10 -5 2
+    Expected Output:
+      7
+    Explanation: 10 + (-5) + 2 = 7.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 42
+    Output: 42
+  Hidden Test 2:
+    Input:  5 0 0 0 0 0
+    Output: 0
+  Hidden Test 3:
+    Input:  3 -10 -20 -30
+    Output: -60
+  Hidden Test 4:
+    Input:  6 1 -1 2 -2 3 -3
+    Output: 0
+  Hidden Test 5:
+    Input:  2 1000 1000
+    Output: 2000
+  Hidden Test 6:
+    Input:  4 -100 200 -50 50
+    Output: 100
+
+
+================================================================================
+### AXE TIER (MEDIUM - 5 XP) (8 Problems)
+================================================================================
+
+--------------------------------------------------------------------------------
+[9] PALINDROME STRING (ID: palindrome-string)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        The carving on the war horn reads identical from both ends.
+
+TASK:
+Given a single word S consisting of lowercase letters, check if it reads the same forwards and backwards. Print YES if it is a palindrome, NO otherwise.
+
+INPUT FORMAT:
+A single non-empty string S.
+
+OUTPUT FORMAT:
+Print YES or NO.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+- S consists of lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      radar
+    Expected Output:
+      YES
+    Explanation: 'radar' reversed is 'radar'.
+
+  Sample Case 2:
+    Input:
+      viking
+    Expected Output:
+      NO
+    Explanation: 'viking' reversed is 'gnikiv'.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  a
+    Output: YES
+  Hidden Test 2:
+    Input:  aa
+    Output: YES
+  Hidden Test 3:
+    Input:  ab
+    Output: NO
+  Hidden Test 4:
+    Input:  kayak
+    Output: YES
+  Hidden Test 5:
+    Input:  noon
+    Output: YES
+  Hidden Test 6:
+    Input:  abcdefg
+    Output: NO
+
+
+--------------------------------------------------------------------------------
+[10] PRIME CHECK (ID: prime-check)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        Only indivisible iron ore can forge the chief's battle axe.
+
+TASK:
+Given an integer N, determine if it is a prime number (an integer greater than 1 with no positive divisors other than 1 and itself). Print YES if prime, else NO.
+
+INPUT FORMAT:
+A single integer N.
+
+OUTPUT FORMAT:
+Print YES or NO.
+
+CONSTRAINTS:
+- 1 <= N <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      7
+    Expected Output:
+      YES
+    Explanation: 7 has only divisors 1 and 7.
+
+  Sample Case 2:
+    Input:
+      10
+    Expected Output:
+      NO
+    Explanation: 10 is divisible by 2 and 5.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1
+    Output: NO
+  Hidden Test 2:
+    Input:  2
+    Output: YES
+  Hidden Test 3:
+    Input:  3
+    Output: YES
+  Hidden Test 4:
+    Input:  4
+    Output: NO
+  Hidden Test 5:
+    Input:  97
+    Output: YES
+  Hidden Test 6:
+    Input:  100
+    Output: NO
+
+
+--------------------------------------------------------------------------------
+[11] SECOND LARGEST NUMBER (ID: second-largest-number)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        The second greatest archer is chosen as vice-chieftain.
+
+TASK:
+Given N distinct integers, find the second largest value in the array.
+
+INPUT FORMAT:
+Line 1: An integer N (2 <= N <= 100).
+Line 2: N space-separated distinct integers.
+
+OUTPUT FORMAT:
+Print the second largest integer.
+
+CONSTRAINTS:
+- 2 <= N <= 100
+- All elements are distinct
+- -1000 <= A[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      4
+      1 5 3 2
+    Expected Output:
+      3
+    Explanation: Sorted array is 1, 2, 3, 5. Second largest is 3.
+
+  Sample Case 2:
+    Input:
+      3
+      10 20 30
+    Expected Output:
+      20
+    Explanation: Second largest is 20.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  2 5 10
+    Output: 5
+  Hidden Test 2:
+    Input:  2 10 5
+    Output: 5
+  Hidden Test 3:
+    Input:  5 -5 -2 -10 -1 -8
+    Output: -2
+  Hidden Test 4:
+    Input:  4 100 -50 20 0
+    Output: 20
+  Hidden Test 5:
+    Input:  6 7 2 9 4 1 8
+    Output: 8
+  Hidden Test 6:
+    Input:  3 0 -1 1
+    Output: 0
+
+
+--------------------------------------------------------------------------------
+[12] MOST FREQUENT CHARACTER (ID: most-frequent-character)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        Decipher the dominant clan sigil in the runic tapestry.
+
+TASK:
+Given a string S of lowercase English letters, find the character that appears most frequently. If there is a tie, output the one that appears earliest in alphabetical order.
+
+INPUT FORMAT:
+A single non-empty string S.
+
+OUTPUT FORMAT:
+Print the most frequent character.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+- S consists of lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      banana
+    Expected Output:
+      a
+    Explanation: 'a' appears 3 times.
+
+  Sample Case 2:
+    Input:
+      bbccaa
+    Expected Output:
+      a
+    Explanation: 'a', 'b', and 'c' all appear 2 times. 'a' is first alphabetically.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  z
+    Output: z
+  Hidden Test 2:
+    Input:  viking
+    Output: i
+  Hidden Test 3:
+    Input:  mississippi
+    Output: i
+  Hidden Test 4:
+    Input:  battle
+    Output: t
+  Hidden Test 5:
+    Input:  fedcba
+    Output: a
+  Hidden Test 6:
+    Input:  apple
+    Output: p
+
+
+--------------------------------------------------------------------------------
+[13] TWO SUM (ID: two-sum)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        Select two anchor weights that match the exact balance requirement.
+
+TASK:
+Given an array of N integers and a target T, find the 1-based indices (i < j) of the two elements that sum to T. If multiple pairs exist, print the pair with the smallest first index; if still tied, smallest second index.
+
+INPUT FORMAT:
+Line 1: Two integers N and T (2 <= N <= 100).
+Line 2: N space-separated integers A[1], ..., A[N].
+
+OUTPUT FORMAT:
+Print two 1-based indices i and j separated by a space.
+
+CONSTRAINTS:
+- 2 <= N <= 100
+- -1000 <= A[i], T <= 1000
+- At least one valid pair exists.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      4 9
+      2 7 11 15
+    Expected Output:
+      1 2
+    Explanation: A[1] + A[2] = 2 + 7 = 9.
+
+  Sample Case 2:
+    Input:
+      3 6
+      3 2 4
+    Expected Output:
+      2 3
+    Explanation: A[2] + A[3] = 2 + 4 = 6.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  2 10 5 5
+    Output: 1 2
+  Hidden Test 2:
+    Input:  4 0 -2 1 2 -1
+    Output: 1 3
+  Hidden Test 3:
+    Input:  5 15 1 2 3 4 11
+    Output: 4 5
+  Hidden Test 4:
+    Input:  3 -5 -2 -3 0
+    Output: 1 2
+  Hidden Test 5:
+    Input:  4 8 4 2 6 4
+    Output: 1 4
+  Hidden Test 6:
+    Input:  5 100 10 20 30 70 80
+    Output: 2 5
+
+
+--------------------------------------------------------------------------------
+[14] VALID ANAGRAM (ID: valid-anagram)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        Check if two war banners use the exact same runes rearranged.
+
+TASK:
+Given two strings S and T consisting of lowercase letters, determine if T is an anagram of S (contains the same characters with the same frequencies). Print YES if valid, else NO.
+
+INPUT FORMAT:
+Two space-separated strings S and T.
+
+OUTPUT FORMAT:
+Print YES or NO.
+
+CONSTRAINTS:
+- 1 <= |S|, |T| <= 100
+- S and T consist of lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      listen silent
+    Expected Output:
+      YES
+    Explanation: 'silent' is an anagram of 'listen'.
+
+  Sample Case 2:
+    Input:
+      viking raider
+    Expected Output:
+      NO
+    Explanation: The letters do not match.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  a a
+    Output: YES
+  Hidden Test 2:
+    Input:  rat tar
+    Output: YES
+  Hidden Test 3:
+    Input:  rat car
+    Output: NO
+  Hidden Test 4:
+    Input:  aabb bbaa
+    Output: YES
+  Hidden Test 5:
+    Input:  abc abcd
+    Output: NO
+  Hidden Test 6:
+    Input:  night thing
+    Output: YES
+
+
+--------------------------------------------------------------------------------
+[15] REMOVE DUPLICATES (ID: remove-duplicates)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        Purge duplicate scouts from the muster roll while preserving order.
+
+TASK:
+Given an array of N integers, remove all duplicate occurrences, keeping only the first occurrence of each number, preserving their original order.
+
+INPUT FORMAT:
+Line 1: An integer N (1 <= N <= 100).
+Line 2: N space-separated integers.
+
+OUTPUT FORMAT:
+Print the resulting numbers separated by a space.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- -1000 <= A[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      6
+      1 2 2 3 4 4
+    Expected Output:
+      1 2 3 4
+    Explanation: 2 and 4 appeared twice.
+
+  Sample Case 2:
+    Input:
+      5
+      5 5 5 5 5
+    Expected Output:
+      5
+    Explanation: Only one unique element remains.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 42
+    Output: 42
+  Hidden Test 2:
+    Input:  4 1 2 3 4
+    Output: 1 2 3 4
+  Hidden Test 3:
+    Input:  6 3 1 2 3 1 4
+    Output: 3 1 2 4
+  Hidden Test 4:
+    Input:  5 -1 2 -1 3 2
+    Output: -1 2 3
+  Hidden Test 5:
+    Input:  4 0 0 1 0
+    Output: 0 1
+  Hidden Test 6:
+    Input:  7 10 20 10 30 20 40 50
+    Output: 10 20 30 40 50
+
+
+--------------------------------------------------------------------------------
+[16] GCD AND LCM (ID: gcd-and-lcm)
+--------------------------------------------------------------------------------
+Tier:        AXE (5 XP / Damage)
+Difficulty:  Medium
+Time Limit:  2000 ms
+Lore:        Calculate the greatest common rhythm and least common cycle for the rowing drums.
+
+TASK:
+Given two positive integers A and B, compute their Greatest Common Divisor (GCD) and Least Common Multiple (LCM).
+
+INPUT FORMAT:
+Two space-separated positive integers A and B.
+
+OUTPUT FORMAT:
+Print GCD and LCM separated by a space.
+
+CONSTRAINTS:
+- 1 <= A, B <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      12 18
+    Expected Output:
+      6 36
+    Explanation: GCD(12, 18) = 6, LCM(12, 18) = 36.
+
+  Sample Case 2:
+    Input:
+      5 7
+    Expected Output:
+      1 35
+    Explanation: GCD(5, 7) = 1, LCM(5, 7) = 35.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 1
+    Output: 1 1
+  Hidden Test 2:
+    Input:  10 10
+    Output: 10 10
+  Hidden Test 3:
+    Input:  14 28
+    Output: 14 28
+  Hidden Test 4:
+    Input:  24 60
+    Output: 12 120
+  Hidden Test 5:
+    Input:  17 19
+    Output: 1 323
+  Hidden Test 6:
+    Input:  100 250
+    Output: 50 500
+
+
+================================================================================
+### CATAPULT TIER (HARD - 7 XP) (8 Problems)
+================================================================================
+
+--------------------------------------------------------------------------------
+[17] VALID PARENTHESES (ID: valid-parentheses)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Verify the nested rune brackets guarding the catapult trigger.
+
+TASK:
+Given a string S consisting of brackets '()[]{}', determine if it is valid (brackets close in correct order and type). Print YES if valid, else NO.
+
+INPUT FORMAT:
+A single string S.
+
+OUTPUT FORMAT:
+Print YES or NO.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+- S consists only of '()[]{}'.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      ()[]{}
+    Expected Output:
+      YES
+    Explanation: All brackets match properly.
+
+  Sample Case 2:
+    Input:
+      (]
+    Expected Output:
+      NO
+    Explanation: '(' does not match ']'.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  (
+    Output: NO
+  Hidden Test 2:
+    Input:  ()
+    Output: YES
+  Hidden Test 3:
+    Input:  {[]}
+    Output: YES
+  Hidden Test 4:
+    Input:  ([)]
+    Output: NO
+  Hidden Test 5:
+    Input:  ((()))
+    Output: YES
+  Hidden Test 6:
+    Input:  }{
+    Output: NO
+
+
+--------------------------------------------------------------------------------
+[18] BINARY SEARCH (ID: binary-search)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Locate the enchanted quiver in the sorted armory vault.
+
+TASK:
+Given a sorted array of N distinct integers in ascending order and a target value K, find the 1-based index of K. If K is not present, print -1.
+
+INPUT FORMAT:
+Line 1: Two integers N and K (1 <= N <= 100).
+Line 2: N space-separated integers in strictly increasing order.
+
+OUTPUT FORMAT:
+Print the 1-based index of K, or -1 if not found.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- -1000 <= A[i], K <= 1000
+- A is sorted in ascending order.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      5 7
+      1 3 5 7 9
+    Expected Output:
+      4
+    Explanation: 7 is at index 4.
+
+  Sample Case 2:
+    Input:
+      4 6
+      2 4 8 10
+    Expected Output:
+      -1
+    Explanation: 6 is not in the array.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 5 5
+    Output: 1
+  Hidden Test 2:
+    Input:  1 3 5
+    Output: -1
+  Hidden Test 3:
+    Input:  6 1 1 2 3 4 5 6
+    Output: 1
+  Hidden Test 4:
+    Input:  6 6 1 2 3 4 5 6
+    Output: 6
+  Hidden Test 5:
+    Input:  5 -2 -10 -5 -2 0 4
+    Output: 3
+  Hidden Test 6:
+    Input:  4 0 -5 -3 1 2
+    Output: -1
+
+
+--------------------------------------------------------------------------------
+[19] LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS (ID: longest-substring-without-repeating-characters)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Find the longest sequence of distinct victory runes carved along the catapult arm.
+
+TASK:
+Given a string S of lowercase English letters, find the length of the longest contiguous substring without any repeating characters.
+
+INPUT FORMAT:
+A single non-empty string S.
+
+OUTPUT FORMAT:
+Print an integer: length of the longest substring with all unique characters.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+- S consists of lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      abcabcbb
+    Expected Output:
+      3
+    Explanation: 'abc' with length 3.
+
+  Sample Case 2:
+    Input:
+      bbbbb
+    Expected Output:
+      1
+    Explanation: 'b' with length 1.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  pwwkew
+    Output: 3
+  Hidden Test 2:
+    Input:  a
+    Output: 1
+  Hidden Test 3:
+    Input:  abcdef
+    Output: 6
+  Hidden Test 4:
+    Input:  abba
+    Output: 2
+  Hidden Test 5:
+    Input:  tmmzuxt
+    Output: 5
+  Hidden Test 6:
+    Input:  aab
+    Output: 2
+
+
+--------------------------------------------------------------------------------
+[20] MAXIMUM SUBARRAY SUM (ID: maximum-subarray-sum)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Find the contiguous sequence of combat clashes yielding maximum momentum.
+
+TASK:
+Given an array of N integers, find the maximum sum of a non-empty contiguous subarray.
+
+INPUT FORMAT:
+Line 1: An integer N (1 <= N <= 100).
+Line 2: N space-separated integers.
+
+OUTPUT FORMAT:
+Print the maximum contiguous subarray sum.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- -1000 <= A[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      5
+      -2 1 -3 4 -1
+    Expected Output:
+      4
+    Explanation: [4] has sum 4.
+
+  Sample Case 2:
+    Input:
+      4
+      1 2 3 4
+    Expected Output:
+      10
+    Explanation: Whole array sums to 10.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 -5
+    Output: -5
+  Hidden Test 2:
+    Input:  5 -3 -2 -5 -1 -4
+    Output: -1
+  Hidden Test 3:
+    Input:  8 -2 1 -3 4 -1 2 1 -5
+    Output: 6
+  Hidden Test 4:
+    Input:  3 5 -2 3
+    Output: 6
+  Hidden Test 5:
+    Input:  4 -10 20 -5 15
+    Output: 30
+  Hidden Test 6:
+    Input:  6 2 -1 2 3 -9 5
+    Output: 6
+
+
+--------------------------------------------------------------------------------
+[21] MERGE INTERVALS (ID: merge-intervals)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Consolidate overlapping catapult bombardment time intervals into unified barrages.
+
+TASK:
+Given N intervals [start, end], merge all overlapping intervals. Print the merged intervals sorted by start time, each on a new line as 'start end'.
+
+INPUT FORMAT:
+Line 1: An integer N (1 <= N <= 50).
+Next N lines: Two integers start and end (0 <= start <= end <= 1000).
+
+OUTPUT FORMAT:
+Print each merged interval's start and end separated by a space, one per line.
+
+CONSTRAINTS:
+- 1 <= N <= 50
+- 0 <= start <= end <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      4
+      1 3
+      2 6
+      8 10
+      15 18
+    Expected Output:
+      1 6
+      8 10
+      15 18
+    Explanation: [1,3] and [2,6] overlap into [1,6].
+
+  Sample Case 2:
+    Input:
+      2
+      1 4
+      4 5
+    Expected Output:
+      1 5
+    Explanation: Touching intervals [1,4] and [4,5] merge to [1,5].
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 2 5
+    Output: 2 5
+  Hidden Test 2:
+    Input:  3 1 4 0 4 3 5
+    Output: 0 5
+  Hidden Test 3:
+    Input:  3 1 2 3 4 5 6
+    Output: 1 2 3 4 5 6
+  Hidden Test 4:
+    Input:  4 2 3 4 5 1 10 6 7
+    Output: 1 10
+  Hidden Test 5:
+    Input:  2 1 1 1 1
+    Output: 1 1
+  Hidden Test 6:
+    Input:  3 5 8 1 3 2 4
+    Output: 1 4 5 8
+
+
+--------------------------------------------------------------------------------
+[22] ROTATE ARRAY BY K (ID: rotate-array-by-k)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Rotate the perimeter shield guard positions clockwise by K steps.
+
+TASK:
+Given an array of N integers and a non-negative integer K, rotate the array to the right (clockwise) by K steps.
+
+INPUT FORMAT:
+Line 1: Two integers N and K (1 <= N <= 100, 0 <= K <= 1000).
+Line 2: N space-separated integers.
+
+OUTPUT FORMAT:
+Print the rotated array elements separated by a space.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- 0 <= K <= 1000
+- -1000 <= A[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      5 2
+      1 2 3 4 5
+    Expected Output:
+      4 5 1 2 3
+    Explanation: Rotating right by 2 moves 4, 5 to the front.
+
+  Sample Case 2:
+    Input:
+      4 4
+      10 20 30 40
+    Expected Output:
+      10 20 30 40
+    Explanation: Rotating by N gives original array.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 10 7
+    Output: 7
+  Hidden Test 2:
+    Input:  3 1 1 2 3
+    Output: 3 1 2
+  Hidden Test 3:
+    Input:  4 0 1 2 3 4
+    Output: 1 2 3 4
+  Hidden Test 4:
+    Input:  5 7 1 2 3 4 5
+    Output: 4 5 1 2 3
+  Hidden Test 5:
+    Input:  3 5 10 20 30
+    Output: 20 30 10
+  Hidden Test 6:
+    Input:  6 3 1 2 3 4 5 6
+    Output: 4 5 6 1 2 3
+
+
+--------------------------------------------------------------------------------
+[23] NUMBER OF ISLANDS (ID: number-of-islands)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Count isolated volcanic islands in the archipelago from the dragon's aerial view.
+
+TASK:
+Given an R x C grid of '1's (land) and '0's (water), count the number of islands. An island is formed by connecting adjacent land cells horizontally or vertically.
+
+INPUT FORMAT:
+Line 1: Two integers R and C (1 <= R, C <= 10).
+Next R lines: A string of C characters ('0' or '1').
+
+OUTPUT FORMAT:
+Print a single integer: total number of islands.
+
+CONSTRAINTS:
+- 1 <= R, C <= 10
+- Grid contains only '0' and '1'.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 3
+      110
+      010
+      001
+    Expected Output:
+      2
+    Explanation: One island at top-center and another at bottom-right.
+
+  Sample Case 2:
+    Input:
+      2 2
+      00
+      00
+    Expected Output:
+      0
+    Explanation: No land cells.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 1 1
+    Output: 1
+  Hidden Test 2:
+    Input:  1 4 1010
+    Output: 2
+  Hidden Test 3:
+    Input:  3 3 111 010 111
+    Output: 1
+  Hidden Test 4:
+    Input:  4 4 1001 0110 0110 1001
+    Output: 5
+  Hidden Test 5:
+    Input:  2 3 101 101
+    Output: 2
+  Hidden Test 6:
+    Input:  3 3 101 010 101
+    Output: 5
+
+
+--------------------------------------------------------------------------------
+[24] SUBARRAY SUM EQUALS K (ID: subarray-sum-equals-k)
+--------------------------------------------------------------------------------
+Tier:        CATAPULT (7 XP / Damage)
+Difficulty:  Hard
+Time Limit:  2000 ms
+Lore:        Count how many contiguous patrols achieve target tactical power K.
+
+TASK:
+Given an array of N integers and an integer K, find the total number of continuous subarrays whose sum equals K.
+
+INPUT FORMAT:
+Line 1: Two integers N and K (1 <= N <= 100, -10^5 <= K <= 10^5).
+Line 2: N space-separated integers A[1], ..., A[N].
+
+OUTPUT FORMAT:
+Print the number of subarrays summing to K.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- -1000 <= A[i] <= 1000
+- -10^5 <= K <= 10^5
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 2
+      1 1 1
+    Expected Output:
+      2
+    Explanation: [1,1] at indices 1-2 and 2-3 both sum to 2.
+
+  Sample Case 2:
+    Input:
+      3 3
+      1 2 3
+    Expected Output:
+      2
+    Explanation: [1,2] and [3] both sum to 3.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 0 0
+    Output: 1
+  Hidden Test 2:
+    Input:  4 0 1 -1 1 -1
+    Output: 4
+  Hidden Test 3:
+    Input:  5 5 2 3 5 -5 5
+    Output: 5
+  Hidden Test 4:
+    Input:  3 10 1 2 3
+    Output: 0
+  Hidden Test 5:
+    Input:  4 -2 -1 -1 2 -2
+    Output: 3
+  Hidden Test 6:
+    Input:  5 1 1 0 0 0 1
+    Output: 8
+
+
+================================================================================
+### BALLISTA TIER (EXTREME - 10 XP) (8 Problems)
+================================================================================
+
+--------------------------------------------------------------------------------
+[25] COIN CHANGE (ID: coin-change)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Melt down the fewest silver coins to pay the dragon tribute amount A.
+
+TASK:
+Given N distinct coin denominations and an amount A, find the minimum number of coins needed to make up amount A. You may use each coin infinitely many times. If amount cannot be made up, print -1.
+
+INPUT FORMAT:
+Line 1: Two integers N and A (1 <= N <= 10, 0 <= A <= 1000).
+Line 2: N space-separated positive integers (coin values).
+
+OUTPUT FORMAT:
+Print the minimum coins, or -1.
+
+CONSTRAINTS:
+- 1 <= N <= 10
+- 0 <= A <= 1000
+- 1 <= coin[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 11
+      1 2 5
+    Expected Output:
+      3
+    Explanation: 5 + 5 + 1 = 11 (3 coins).
+
+  Sample Case 2:
+    Input:
+      1 3
+      2
+    Expected Output:
+      -1
+    Explanation: Cannot make 3 using only 2s.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  2 0 1 2
+    Output: 0
+  Hidden Test 2:
+    Input:  1 7 7
+    Output: 1
+  Hidden Test 3:
+    Input:  3 7 2 4 6
+    Output: -1
+  Hidden Test 4:
+    Input:  4 15 1 5 10 25
+    Output: 2
+  Hidden Test 5:
+    Input:  3 30 10 15 25
+    Output: 2
+  Hidden Test 6:
+    Input:  3 8 3 5 7
+    Output: 2
+
+
+--------------------------------------------------------------------------------
+[26] LONGEST INCREASING SUBSEQUENCE (ID: longest-increasing-subsequence)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Find the longest ascending sequence of ballista bolt calibers.
+
+TASK:
+Given an array of N integers, find the length of the longest strictly increasing subsequence.
+
+INPUT FORMAT:
+Line 1: An integer N (1 <= N <= 100).
+Line 2: N space-separated integers.
+
+OUTPUT FORMAT:
+Print the length of the longest strictly increasing subsequence.
+
+CONSTRAINTS:
+- 1 <= N <= 100
+- -1000 <= A[i] <= 1000
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      6
+      10 9 2 5 3 7
+    Expected Output:
+      3
+    Explanation: [2, 5, 7] or [2, 3, 7] has length 3.
+
+  Sample Case 2:
+    Input:
+      4
+      0 1 0 3
+    Expected Output:
+      3
+    Explanation: [0, 1, 3] has length 3.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 5
+    Output: 1
+  Hidden Test 2:
+    Input:  5 7 7 7 7 7
+    Output: 1
+  Hidden Test 3:
+    Input:  5 1 2 3 4 5
+    Output: 5
+  Hidden Test 4:
+    Input:  5 5 4 3 2 1
+    Output: 1
+  Hidden Test 5:
+    Input:  8 10 22 9 33 21 50 41 60
+    Output: 5
+  Hidden Test 6:
+    Input:  6 3 10 2 1 20 4
+    Output: 3
+
+
+--------------------------------------------------------------------------------
+[27] EDIT DISTANCE (ID: edit-distance)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Find minimum rune scribing operations (insert, delete, replace) to convert word A into word B.
+
+TASK:
+Given two strings word1 and word2 consisting of lowercase English letters, compute the minimum number of operations required to convert word1 to word2.
+
+INPUT FORMAT:
+Two space-separated strings word1 and word2.
+
+OUTPUT FORMAT:
+Print the minimum edit distance.
+
+CONSTRAINTS:
+- 1 <= |word1|, |word2| <= 50
+- Strings consist of lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      horse ros
+    Expected Output:
+      3
+    Explanation: horse -> rorse -> rose -> ros (3 operations).
+
+  Sample Case 2:
+    Input:
+      intention execution
+    Expected Output:
+      5
+    Explanation: 5 operations required.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  abc abc
+    Output: 0
+  Hidden Test 2:
+    Input:  a b
+    Output: 1
+  Hidden Test 3:
+    Input:  viking king
+    Output: 2
+  Hidden Test 4:
+    Input:  fast faster
+    Output: 2
+  Hidden Test 5:
+    Input:  dragon dragon
+    Output: 0
+  Hidden Test 6:
+    Input:  kitten sitting
+    Output: 3
+
+
+--------------------------------------------------------------------------------
+[28] SHORTEST PATH IN A GRID (ID: shortest-path-in-a-grid)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Navigate the dragon cavern grid from top-left (0,0) to bottom-right (R-1, C-1) avoiding fiery obstacles.
+
+TASK:
+Given an R x C grid where 0 is walkable and 1 is blocked, find the shortest path length (number of cells visited including start and end) from (0,0) to (R-1, C-1) moving up/down/left/right. If blocked at start/end or no path exists, print -1.
+
+INPUT FORMAT:
+Line 1: Two integers R and C (1 <= R, C <= 10).
+Next R lines: C space-separated integers (0 or 1).
+
+OUTPUT FORMAT:
+Print the shortest path length, or -1.
+
+CONSTRAINTS:
+- 1 <= R, C <= 10
+- Grid cells are 0 or 1.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 3
+      0 0 0
+      1 1 0
+      0 0 0
+    Expected Output:
+      5
+    Explanation: (0,0)->(0,1)->(0,2)->(1,2)->(2,2) takes 5 cells.
+
+  Sample Case 2:
+    Input:
+      2 2
+      0 1
+      1 0
+    Expected Output:
+      -1
+    Explanation: Path is completely blocked.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 1 0
+    Output: 1
+  Hidden Test 2:
+    Input:  1 1 1
+    Output: -1
+  Hidden Test 3:
+    Input:  3 3 0 0 0 0 0 0 0 0 0
+    Output: 5
+  Hidden Test 4:
+    Input:  3 3 0 1 0 0 1 0 0 1 0
+    Output: -1
+  Hidden Test 5:
+    Input:  2 3 0 0 0 1 1 0
+    Output: 4
+  Hidden Test 6:
+    Input:  4 4 0 0 0 0 1 1 1 0 0 0 0 0 0 1 1 0
+    Output: 7
+
+
+--------------------------------------------------------------------------------
+[29] 0/1 KNAPSACK (ID: knapsack-01)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Pack the most valuable dragon relics into your longship cargo hold without exceeding weight capacity W.
+
+TASK:
+Given N items with weights and values, and a maximum weight capacity W, find the maximum total value possible without exceeding W. Each item can be chosen at most once.
+
+INPUT FORMAT:
+Line 1: Two integers N and W (1 <= N <= 50, 1 <= W <= 500).
+Line 2: N space-separated weights wt[i].
+Line 3: N space-separated values val[i].
+
+OUTPUT FORMAT:
+Print the maximum total value.
+
+CONSTRAINTS:
+- 1 <= N <= 50
+- 1 <= W <= 500
+- 1 <= wt[i], val[i] <= 500
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 4
+      1 2 3
+      10 15 40
+    Expected Output:
+      50
+    Explanation: Pick item 1 and item 3 for weight 1+3=4 and value 10+40=50.
+
+  Sample Case 2:
+    Input:
+      3 3
+      4 5 6
+      1 2 3
+    Expected Output:
+      0
+    Explanation: All items exceed capacity 3.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 10 5 10
+    Output: 10
+  Hidden Test 2:
+    Input:  1 5 10 10
+    Output: 0
+  Hidden Test 3:
+    Input:  4 5 2 1 3 2 12 10 20 15
+    Output: 37
+  Hidden Test 4:
+    Input:  4 7 1 3 4 5 1 4 5 7
+    Output: 9
+  Hidden Test 5:
+    Input:  3 50 10 20 30 60 100 120
+    Output: 220
+  Hidden Test 6:
+    Input:  2 10 5 5 10 10
+    Output: 20
+
+
+--------------------------------------------------------------------------------
+[30] LONGEST COMMON SUBSEQUENCE (ID: longest-common-subsequence)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Find the longest matching battle command sequence shared between two elder skalds.
+
+TASK:
+Given two strings S1 and S2 of lowercase English letters, find the length of their longest common subsequence.
+
+INPUT FORMAT:
+Two space-separated strings S1 and S2.
+
+OUTPUT FORMAT:
+Print the length of their longest common subsequence.
+
+CONSTRAINTS:
+- 1 <= |S1|, |S2| <= 100
+- Strings contain lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      abcde ace
+    Expected Output:
+      3
+    Explanation: 'ace' is a common subsequence of length 3.
+
+  Sample Case 2:
+    Input:
+      abc def
+    Expected Output:
+      0
+    Explanation: No common characters.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  abc abc
+    Output: 3
+  Hidden Test 2:
+    Input:  ezupkr rkpuze
+    Output: 1
+  Hidden Test 3:
+    Input:  oxcpqrsvwf shmtflrx
+    Output: 2
+  Hidden Test 4:
+    Input:  vikings vikings
+    Output: 7
+  Hidden Test 5:
+    Input:  a b
+    Output: 0
+  Hidden Test 6:
+    Input:  a a
+    Output: 1
+
+
+--------------------------------------------------------------------------------
+[31] GRID PATHS WITH OBSTACLES (ID: grid-paths-with-obstacles)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Count all valid tactical advance routes from top-left (0,0) to bottom-right (R-1, C-1) moving only right and down.
+
+TASK:
+Given an R x C grid where 0 indicates an empty space and 1 indicates an obstacle, count the number of unique paths from (0,0) to (R-1, C-1). At each cell you can only move right or down.
+
+INPUT FORMAT:
+Line 1: Two integers R and C (1 <= R, C <= 10).
+Next R lines: C space-separated integers (0 or 1).
+
+OUTPUT FORMAT:
+Print the number of unique paths.
+
+CONSTRAINTS:
+- 1 <= R, C <= 10
+- Grid cells are 0 or 1.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      3 3
+      0 0 0
+      0 1 0
+      0 0 0
+    Expected Output:
+      2
+    Explanation: Only 2 paths avoid the obstacle at (1,1).
+
+  Sample Case 2:
+    Input:
+      2 2
+      0 1
+      0 0
+    Expected Output:
+      1
+    Explanation: Only down-then-right is possible.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  1 1 0
+    Output: 1
+  Hidden Test 2:
+    Input:  1 1 1
+    Output: 0
+  Hidden Test 3:
+    Input:  2 2 1 0 0 0
+    Output: 0
+  Hidden Test 4:
+    Input:  3 3 0 0 0 0 0 0 0 0 0
+    Output: 6
+  Hidden Test 5:
+    Input:  4 4 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0
+    Output: 4
+  Hidden Test 6:
+    Input:  1 3 0 1 0
+    Output: 0
+
+
+--------------------------------------------------------------------------------
+[32] LONGEST PALINDROMIC SUBSTRING (ID: longest-palindromic-substring)
+--------------------------------------------------------------------------------
+Tier:        BALLISTA (10 XP / Damage)
+Difficulty:  Extreme
+Time Limit:  2000 ms
+Lore:        Find the longest symmetrical runic inscription on the ballista chassis.
+
+TASK:
+Given a string S of lowercase English letters, find the longest palindromic substring. If multiple palindromic substrings have the same maximum length, output the one that occurs earliest in S.
+
+INPUT FORMAT:
+A single non-empty string S.
+
+OUTPUT FORMAT:
+Print the longest palindromic substring.
+
+CONSTRAINTS:
+- 1 <= |S| <= 100
+- S consists of lowercase English letters.
+
+SAMPLE TEST CASES:
+  Sample Case 1:
+    Input:
+      babad
+    Expected Output:
+      bab
+    Explanation: 'bab' is the earliest longest palindrome of length 3.
+
+  Sample Case 2:
+    Input:
+      cbbd
+    Expected Output:
+      bb
+    Explanation: 'bb' has length 2.
+
+HIDDEN TEST CASES (Used for Final Grading / Attack Damage):
+  Hidden Test 1:
+    Input:  a
+    Output: a
+  Hidden Test 2:
+    Input:  ac
+    Output: a
+  Hidden Test 3:
+    Input:  racecar
+    Output: racecar
+  Hidden Test 4:
+    Input:  noon
+    Output: noon
+  Hidden Test 5:
+    Input:  abacdfgdcaba
+    Output: aba
+  Hidden Test 6:
+    Input:  forge
+    Output: f
+
+

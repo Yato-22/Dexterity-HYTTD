@@ -22,6 +22,9 @@ export default async function handler(req, res) {
         id: doc.id,
         name: data.name || doc.id,
         totalDamage: data.totalDamage || 0,
+        acceptedSolves: data.acceptedSolves || 0,
+        totalSubmits: data.totalSubmits || 0,
+        penalties: data.penalties || 0,
         solvedProblemIds: Array.isArray(data.solvedProblemIds) ? data.solvedProblemIds : [],
         lastSolveAt: data.lastSolveAt,
       };
@@ -30,7 +33,7 @@ export default async function handler(req, res) {
     const rankedTeams = computeRankings(rawTeams, dragonStatus, winnerTeamId);
 
     const rows = [
-      ['Rank', 'Team Name', 'Team ID', 'Total Damage', 'Solved Problems Count', 'Solved Problem IDs', 'Last Solve Time', 'Badge'],
+      ['Rank', 'Team Name', 'Team ID', 'XP (Total Damage)', 'Accuracy (%)', 'Penalties', 'Accepted Solves', 'Total Submissions', 'Last Solve Time', 'Badge'],
     ];
 
     rankedTeams.forEach((t) => {
@@ -44,15 +47,17 @@ export default async function handler(req, res) {
         }
       }
 
-      const badge = t.isDragonSlayer ? 'DRAGON SLAYER (CHAMPION)' : '';
+      const badge = t.isDragonSlayer ? 'DRAGON SLAYER (COSMETIC)' : '';
 
       rows.push([
         t.rank,
         `"${t.name.replace(/"/g, '""')}"`,
         `"${t.id}"`,
         t.totalDamage,
-        t.solvedProblemIds.length,
-        `"${t.solvedProblemIds.join('; ')}"`,
+        `${t.accuracy}%`,
+        t.penalties || 0,
+        t.acceptedSolves || 0,
+        t.totalSubmits || 0,
         `"${lastSolve}"`,
         `"${badge}"`,
       ]);
@@ -61,7 +66,7 @@ export default async function handler(req, res) {
     const csvOutput = rows.map((r) => r.join(',')).join('\n');
 
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', 'attachment; filename="dexterity-teams-export.csv"');
+    res.setHeader('Content-Disposition', 'attachment; filename="dexterity-standings.csv"');
     return res.status(200).send(csvOutput);
   } catch (err) {
     console.error('Export CSV error:', err);

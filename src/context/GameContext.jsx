@@ -464,23 +464,11 @@ export function GameProvider({ children }) {
     [getStorageKey]
   );
 
-  // Inventory firing
-  const dealDamage = useCallback(
-    (teamId, weaponKey = 'axe') => {
-      if (hp <= 0) return { success: false, reason: 'Dragon defeated' };
-
-      const available = inventory[weaponKey] || 0;
-      if (available <= 0) {
-        return { success: false, reason: 'Out of ammo' };
-      }
-
-      setInventory((prev) => ({
-        ...prev,
-        [weaponKey]: Math.max(0, (prev[weaponKey] || 0) - 1),
-      }));
-
-      const weapon = WEAPONS[weaponKey] || WEAPONS.axe;
-      const actualDamage = weapon.damage;
+  // Automatic weapon firing
+  const triggerWeaponAttack = useCallback(
+    (weaponKey = 'dagger') => {
+      const weapon = WEAPONS[weaponKey] || WEAPONS.dagger;
+      const actualDamage = weapon.damage || 2;
       const targetPart = DRAGON_BODY_PARTS[Math.floor(Math.random() * DRAGON_BODY_PARTS.length)];
       const actingTeam = userTeam || { name: 'Viking' };
 
@@ -493,7 +481,7 @@ export function GameProvider({ children }) {
         targetZone,
         actualDamage,
         actingTeam,
-        teamId: userTeam?.id || teamId,
+        teamId: userTeam?.id,
         weaponVerb: weapon.verb,
         targetPart,
         customFeedText: null,
@@ -503,8 +491,10 @@ export function GameProvider({ children }) {
       setPendingFireEvents((prev) => [...prev.slice(-10), fireEvent]);
       return { success: true };
     },
-    [hp, inventory, userTeam]
+    [userTeam]
   );
+
+  const dealDamage = triggerWeaponAttack;
 
   // Rankings derived via computeRankings
   const rankedTeams = computeRankings(teams, dragonStatus, winnerTeamId);
@@ -555,9 +545,8 @@ export function GameProvider({ children }) {
     teams: rankedTeams,
     sortedTeams: rankedTeams,
     feed,
-    inventory,
-    setInventory,
     dealDamage,
+    triggerWeaponAttack,
 
     // Audio & Visual
     soundMuted,

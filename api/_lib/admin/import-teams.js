@@ -2,8 +2,11 @@ import { db, admin } from '../firebaseAdmin.js';
 import { verifyAdmin } from '../auth.js';
 import { drawInitialBoard } from '../pool.js';
 
-function parseCSV(text) {
-  const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
+export function parseCSV(text) {
+  if (!text) return [];
+  // Strip UTF-8 BOM
+  const cleanText = text.replace(/^\uFEFF/, '');
+  const lines = cleanText.split(/\r?\n/).filter((l) => l.trim().length > 0);
   const rows = [];
 
   for (const line of lines) {
@@ -29,10 +32,10 @@ function parseCSV(text) {
   return rows;
 }
 
-// Clean phone string (handles Excel scientific notation like 9.87654E+09)
-function cleanPhoneNumber(raw) {
+export function cleanDigits(raw) {
   if (!raw) return '';
   let str = String(raw).trim().replace(/^["']|["']$/g, '');
+  // Handles Excel scientific notation e.g. 9.87654E+09
   if (/^\d+(\.\d+)?[eE]\+\d+$/.test(str)) {
     try {
       str = String(Math.round(Number(str)));
@@ -41,40 +44,21 @@ function cleanPhoneNumber(raw) {
   return str.replace(/\D/g, '');
 }
 
-// Extract last 10 significant digits
-function getSignificantDigits(digits) {
-  const s = String(digits || '').replace(/^0+/, '');
-  return s.length > 10 ? s.slice(-10) : s;
-}
-
-// Intelligently parse member names (e.g. "Hiccup & Astrid", "Hiccup, Astrid")
-function splitMemberNames(str) {
-  if (!str) return [];
-  const clean = str.replace(/^["']|["']$/g, '').trim();
-  if (!clean) return [];
-  // Split on '&', 'and', ',', '/', '+'
-  const parts = clean
-    .split(/\s*(&|\band\b|,|\/|\+)\s*/i)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0 && !/^(&|\band\b|,|\/|\+)$/i.test(s));
-  return parts.length > 0 ? parts : [clean];
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
   if (!verifyAdmin(req)) return res.status(401).json({ error: 'Unauthorized: Invalid admin credentials' });
 
-  const csvContent = req.body?.csv || (typeof req.body === 'string' ? req.body : null);
-  if (!csvContent) {
+  const { csv, replaceAll = false, previewOnly = false } = req.body || {};
+  if (!csv || typeof csv !== 'string') {
     return res.status(400).json({ error: 'CSV data is required (field: csv).' });
   }
 
-  const rows = parseCSV(csvContent);
+  const rows = parseCSV(csv);
   if (rows.length === 0) {
     return res.status(400).json({ error: 'CSV is empty.' });
   }
 
-  // Detect header and map columns
+  // Detect header row
   let startIdx = 0;
   let teamColIdx = 0;
   let phoneColIdx = 1;
@@ -101,130 +85,154 @@ export default async function handler(req, res) {
     });
   }
 
-  const importedTeams = [];
-  const operations = [];
+  const validRows = [];
+  const skipped = [];
+  const seenFileTeamKeys = new Set();
 
   for (let i = startIdx; i < rows.length; i++) {
+    const rowNum = i + 1;
     const row = rows[i];
-    if (!row || row.length < 2) continue;
+    if (!row || row.length === 0 || row.every((c) => !c.trim())) continue;
 
     const rawTeamName = row[teamColIdx] ? row[teamColIdx].replace(/^["']|["']$/g, '').trim() : '';
     const rawPhone = row[phoneColIdx] ? row[phoneColIdx].replace(/^["']|["']$/g, '').trim() : '';
+    const leaderName = row[leaderColIdx] ? row[leaderColIdx].replace(/^["']|["']$/g, '').trim() : '';
+    const member2Name = row[member2ColIdx] ? row[member2ColIdx].replace(/^["']|["']$/g, '').trim() : '';
 
-    if (!rawTeamName || !rawPhone) continue;
-
-    const teamName = rawTeamName.replace(/\s+/g, ' ');
-    const phoneDigits = cleanPhoneNumber(rawPhone);
-    const sigDigits = getSignificantDigits(phoneDigits);
-
-    if (!phoneDigits) continue;
-
-    // Allowed phone numbers list (handles both full digits and last 10 digits)
-    const allowedPhones = Array.from(new Set([phoneDigits, sigDigits])).filter(Boolean);
-
-    // Parse member names
-    let leaderName = '';
-    let member2Name = '';
-
-    const rawLeader = row[leaderColIdx] ? row[leaderColIdx].replace(/^["']|["']$/g, '').trim() : '';
-    const rawMember2 = row[member2ColIdx] ? row[member2ColIdx].replace(/^["']|["']$/g, '').trim() : '';
-
-    if (rawLeader) {
-      const split = splitMemberNames(rawLeader);
-      if (split.length >= 2) {
-        leaderName = split[0];
-        member2Name = split[1];
-      } else {
-        leaderName = split[0] || '';
-      }
+    if (!rawTeamName || !rawPhone) {
+      skipped.push({
+        row: rowNum,
+        teamName: rawTeamName || '(Empty)',
+        reason: 'Missing team name or phone number',
+      });
+      continue;
     }
 
-    if (!member2Name && rawMember2) {
-      const split2 = splitMemberNames(rawMember2);
-      member2Name = split2[0] || '';
+    const teamKey = rawTeamName.replace(/\s+/g, ' ').toLowerCase();
+    const phoneDigits = cleanDigits(rawPhone);
+
+    if (phoneDigits.length < 10) {
+      skipped.push({
+        row: rowNum,
+        teamName: rawTeamName,
+        reason: `Invalid phone: ${rawPhone} (fewer than 10 digits)`,
+      });
+      continue;
     }
 
-    const registeredMembers = [leaderName, member2Name].filter(Boolean);
+    if (seenFileTeamKeys.has(teamKey)) {
+      skipped.push({
+        row: rowNum,
+        teamName: rawTeamName,
+        reason: 'Duplicate team name within file',
+      });
+      continue;
+    }
 
-    // Deterministic safe team ID
-    const teamId =
-      'team-' +
-      teamName
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-|-$/g, '') || `team-${Date.now()}-${i}`;
+    seenFileTeamKeys.add(teamKey);
 
-    const { board, seenIds } = await drawInitialBoard();
-
-    operations.push({
-      teamId,
-      teamName,
-      teamNameLower: teamName.toLowerCase(),
+    validRows.push({
+      row: rowNum,
+      teamName: rawTeamName.replace(/\s+/g, ' '),
+      teamKey,
       leaderPhone: phoneDigits,
-      allowedPhones,
       leaderName: leaderName || null,
       member2Name: member2Name || null,
-      registeredMembers,
-      board,
-      seenIds,
     });
   }
 
-  if (operations.length === 0) {
-    return res.status(400).json({ error: 'No valid teams found in CSV. Please verify column formatting.' });
+  // If preview only, return parsed valid rows and skips without saving
+  if (previewOnly) {
+    return res.status(200).json({
+      preview: true,
+      totalRows: rows.length - (isHeader ? 1 : 0),
+      validCount: validRows.length,
+      validRows: validRows.map((r) => ({
+        teamName: r.teamName,
+        teamKey: r.teamKey,
+        phonePreview: r.leaderPhone.slice(-10),
+        leaderName: r.leaderName,
+        member2Name: r.member2Name,
+      })),
+      skippedCount: skipped.length,
+      skipped,
+    });
   }
 
-  // Commit in chunks of 200 (Firestore batch max is 500 operations, 2 writes per team = 400 writes max per chunk)
-  const CHUNK_SIZE = 200;
-  for (let i = 0; i < operations.length; i += CHUNK_SIZE) {
-    const chunk = operations.slice(i, i + CHUNK_SIZE);
-    const batch = db.batch();
+  // If replaceAll requested, delete existing registry and teams documents first
+  if (replaceAll) {
+    const regSnap = await db.collection('registry').get();
+    const regBatch = db.batch();
+    regSnap.docs.forEach((doc) => regBatch.delete(doc.ref));
+    await regBatch.commit();
 
-    for (const item of chunk) {
-      // 1. Registry document (server-only)
-      const regRef = db.collection('registry').doc(item.teamId);
-      batch.set(
-        regRef,
-        {
-          teamId: item.teamId,
-          teamName: item.teamName,
-          teamNameLower: item.teamNameLower,
-          leaderPhone: item.leaderPhone,
-          allowedPhones: item.allowedPhones,
-          leaderName: item.leaderName,
-          member2Name: item.member2Name,
-          registeredMembers: item.registeredMembers,
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-          createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
+    const teamSnap = await db.collection('teams').get();
+    const teamBatch = db.batch();
+    teamSnap.docs.forEach((doc) => teamBatch.delete(doc.ref));
+    await teamBatch.commit();
+  }
 
-      // 2. Team document (game state)
-      const teamRef = db.collection('teams').doc(item.teamId);
-      batch.set(
-        teamRef,
-        {
-          name: item.teamName,
-          totalDamage: 0,
-          solvedProblemIds: [],
-          lastSolveAt: null,
-          board: item.board,
-          seenIds: item.seenIds,
-          refreshToken: true,
-          members: item.registeredMembers,
-          updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-        },
-        { merge: true }
-      );
+  let importedCount = 0;
+  let updatedCount = 0;
 
-      importedTeams.push({ teamName: item.teamName, teamId: item.teamId });
+  // Process rows
+  for (const item of validRows) {
+    const teamDocRef = db.collection('teams').doc(item.teamKey);
+    const regDocRef = db.collection('registry').doc(item.teamKey);
+
+    const [existingTeamSnap, existingRegSnap] = await Promise.all([
+      teamDocRef.get(),
+      regDocRef.get(),
+    ]);
+
+    const teamExists = existingTeamSnap.exists;
+
+    // 1. Registry Write
+    await regDocRef.set(
+      {
+        teamName: item.teamName,
+        teamKey: item.teamKey,
+        leaderPhone: item.leaderPhone,
+        leaderName: item.leaderName,
+        member2Name: item.member2Name,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+        createdAt: existingRegSnap.exists
+          ? existingRegSnap.data().createdAt || admin.firestore.FieldValue.serverTimestamp()
+          : admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    // 2. Team Document Write (keep progress if team already exists)
+    if (teamExists) {
+      updatedCount++;
+      await teamDocRef.update({
+        name: item.teamName,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    } else {
+      importedCount++;
+      const { board, seenIds } = await drawInitialBoard();
+      await teamDocRef.set({
+        name: item.teamName,
+        teamKey: item.teamKey,
+        totalDamage: 0,
+        acceptedSolves: 0,
+        totalSubmits: 0,
+        penalties: 0,
+        lastSolveAt: null,
+        solvedProblemIds: [],
+        members: {},
+        board,
+        seenIds,
+        refreshToken: true,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
     }
-
-    await batch.commit();
   }
 
-  // Sync public/state with all teams summary so arena and leaderboard update immediately
+  // Sync public/state with all teams summary
   try {
     const teamsSnap = await db.collection('teams').get();
     const allTeamsSummary = teamsSnap.docs.map((d) => {
@@ -233,6 +241,9 @@ export default async function handler(req, res) {
         id: d.id,
         name: data.name || d.id,
         totalDamage: data.totalDamage || 0,
+        acceptedSolves: data.acceptedSolves || 0,
+        totalSubmits: data.totalSubmits || 0,
+        penalties: data.penalties || 0,
         lastSolveAt: data.lastSolveAt || null,
         solvedCount: (data.solvedProblemIds || []).length,
       };
@@ -246,12 +257,16 @@ export default async function handler(req, res) {
       { merge: true }
     );
   } catch (syncErr) {
-    console.warn('Failed to sync public/state teams after import:', syncErr.message);
+    console.warn('Failed to sync public/state teams:', syncErr.message);
   }
 
   return res.status(200).json({
     success: true,
-    importedCount: importedTeams.length,
-    teams: importedTeams,
+    summary: {
+      imported: importedCount,
+      updated: updatedCount,
+      skippedCount: skipped.length,
+      skipped,
+    },
   });
 }

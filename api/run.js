@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized: Valid session required.' });
   }
 
-  const { teamId } = session;
+  const { teamId, memberName } = session;
 
   // 2. Check if contest is paused
   try {
@@ -26,8 +26,9 @@ export default async function handler(req, res) {
     console.warn('Could not check pause state:', err.message);
   }
 
-  // 3. Rate limiting (cooldown per team)
-  if (!checkRateLimit(`run-${teamId}`, 1500)) {
+  // 3. Rate limiting (cooldown per member)
+  const normMemberKey = String(memberName || '').trim().replace(/\s+/g, ' ').toLowerCase();
+  if (!checkRateLimit(`run-${teamId}-${normMemberKey}`, 1000)) {
     return res.status(429).json({ error: 'Please wait a moment between code runs.' });
   }
 
@@ -45,20 +46,21 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Code size exceeds maximum 64KB.' });
   }
 
-  // 4. If problemId is provided, verify it is on the team's active board
+  // 4. Verify problem is on requesting member's active board
   if (problemId) {
     try {
       const teamDoc = await db.collection('teams').doc(teamId).get();
       if (teamDoc.exists) {
-        const board = teamDoc.data()?.board || {};
+        const teamData = teamDoc.data();
+        const memberBoard = teamData.members?.[normMemberKey]?.board || teamData.board || {};
         const allBoardIds = [
-          ...(board.dagger || []),
-          ...(board.axe || []),
-          ...(board.catapult || []),
-          ...(board.ballista || []),
+          ...(memberBoard.dagger || []),
+          ...(memberBoard.axe || []),
+          ...(memberBoard.catapult || []),
+          ...(memberBoard.ballista || []),
         ];
         if (!allBoardIds.includes(problemId)) {
-          return res.status(403).json({ error: 'This problem is not on your team board.' });
+          return res.status(403).json({ error: 'This problem is not on your active battle board.' });
         }
       }
     } catch (e) {

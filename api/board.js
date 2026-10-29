@@ -19,17 +19,21 @@ export default async function handler(req, res) {
     }
 
     const teamData = teamDoc.data();
-    const board = teamData.board || { dagger: [], axe: [], catapult: [], ballista: [] };
+    const normMemberKey = String(session.memberName || '').trim().replace(/\s+/g, ' ').toLowerCase();
+    const memberData = teamData.members?.[normMemberKey];
+
+    const board = memberData?.board || teamData.board || { dagger: [], axe: [], catapult: [], ballista: [] };
+    const refreshToken = memberData?.refreshToken ?? teamData.refreshToken ?? true;
+
     const { byId } = await loadPool();
 
-    // Map board IDs to full problem statements (without any hidden tests!)
+    // Map board IDs to full problem statements (without hidden tests)
     const enrichedBoard = {};
     for (const [tier, ids] of Object.entries(board)) {
       enrichedBoard[tier] = ids
         .map((id) => byId[id])
         .filter(Boolean)
         .map((p) => {
-          // Explicitly omit hidden tests or server-only fields
           const { hiddenTests, ...publicFields } = p;
           return publicFields;
         });
@@ -38,7 +42,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       board: enrichedBoard,
       rawBoard: board,
-      refreshToken: teamData.refreshToken ?? true,
+      refreshToken,
       solvedProblemIds: teamData.solvedProblemIds || [],
     });
   } catch (err) {
@@ -46,4 +50,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Failed to fetch team board: ' + err.message });
   }
 }
-

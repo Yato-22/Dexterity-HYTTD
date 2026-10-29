@@ -55,7 +55,7 @@ export default function CodingScreen() {
   const [problemError, setProblemError] = useState(null);
 
   // Language & Code State
-  const [language, setLanguage] = useState('python'); // 'c', 'cpp', 'java', 'python'
+  const [language, setLanguage] = useState('c'); // 'c', 'cpp', 'java', 'python'
   const [code, setCode] = useState('');
   const [fontSize, setFontSize] = useState(15);
   const [activeBottomTab, setActiveBottomTab] = useState('testcase'); // 'testcase', 'custom', 'result'
@@ -360,6 +360,18 @@ export default function CodingScreen() {
         setCraftedWeapon(problem.tier || problem.weapon || 'weapon');
         setAcceptedBanner(true);
 
+        try {
+          sessionStorage.setItem(
+            'techflix_pending_attack',
+            JSON.stringify({
+              tier: data.tier || problem.tier || problem.weapon || 'dagger',
+              xp: problem.xp || 2,
+              problemId: problem.id,
+              timestamp: Date.now(),
+            })
+          );
+        } catch {}
+
         setTimeout(() => {
           navigate('/');
         }, 1200);
@@ -520,9 +532,9 @@ export default function CodingScreen() {
                 onChange={(e) => setLanguage(e.target.value)}
                 className="px-2.5 py-1 bg-[#140E0A] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#FFF8ED] uppercase focus:outline-none focus:border-[#FF7A1A]"
               >
-                <option value="python">Python 3</option>
-                <option value="cpp">C++ (GCC)</option>
                 <option value="c">C (GCC)</option>
+                <option value="cpp">C++ (GCC)</option>
+                <option value="python">Python 3</option>
                 <option value="java">Java (OpenJDK)</option>
               </select>
             </div>
