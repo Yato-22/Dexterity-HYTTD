@@ -232,9 +232,10 @@ export async function processAcceptedSubmission({
           }
         }
 
-        // Restore refresh token for the member who solved it
+        // Restore refresh token & increment member solvedCount for the member who solved it
         if (mKey === normMemberKey) {
           mem.refreshToken = true;
+          mem.solvedCount = (mem.solvedCount || 0) + 1;
         }
 
         mem.board = mBoard;
@@ -338,6 +339,8 @@ export async function processAcceptedSubmission({
         totalSubmits: newTotalSubmits,
         penalties: teamData.penalties || 0,
         tier,
+        memberSolvedCount: members[normMemberKey]?.solvedCount || 1,
+        teamSolvedCount: updatedSolved.length,
       };
     } else {
       // Not first solve: no damage, no score increase
@@ -353,6 +356,8 @@ export async function processAcceptedSubmission({
         totalSubmits: teamData.totalSubmits || 0,
         penalties: teamData.penalties || 0,
         tier,
+        memberSolvedCount: members[normMemberKey]?.solvedCount || 0,
+        teamSolvedCount: solvedList.length,
       };
     }
   });

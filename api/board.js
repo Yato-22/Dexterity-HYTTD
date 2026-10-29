@@ -44,6 +44,8 @@ export default async function handler(req, res) {
       rawBoard: board,
       refreshToken,
       solvedProblemIds: teamData.solvedProblemIds || [],
+      memberSolvedCount: memberData?.solvedCount || 0,
+      teamSolvedCount: (teamData.solvedProblemIds || []).length,
     });
   } catch (err) {
     console.error('Board fetch error:', err);

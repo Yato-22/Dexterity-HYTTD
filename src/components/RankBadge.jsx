@@ -7,6 +7,8 @@ export default function RankBadge({
   rank = 1,
   teamName = "Viking Clan",
   memberName = null,
+  memberSolvedCount = 0,
+  teamSolvedCount = null,
   score = 0,
   isHit = false,
 }) {
@@ -42,8 +44,12 @@ export default function RankBadge({
             <div className="font-heading text-[9.5px] 2xl:text-[10.5px] font-bold text-[#D8C39F] uppercase tracking-wider leading-none mb-0.5 flex items-center justify-between">
               <span>WARBAND STANDING</span>
               {memberName && (
-                <span className="text-[#FFB347] flex items-center gap-0.5 normal-case font-sans font-semibold">
-                  <User className="w-2.5 h-2.5 inline" /> {memberName}
+                <span className="text-[#FFB347] flex items-center gap-1 normal-case font-sans font-semibold text-[10px] 2xl:text-[11px]">
+                  <User className="w-2.5 h-2.5 inline text-[#FF9D43]" />
+                  <span>{memberName} - {memberSolvedCount} solved</span>
+                  {teamSolvedCount !== null && (
+                    <span className="text-[#86EFAC] font-bold ml-1">• Team: {teamSolvedCount}</span>
+                  )}
                 </span>
               )}
             </div>

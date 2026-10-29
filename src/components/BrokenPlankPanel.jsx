@@ -52,26 +52,11 @@ export default function BrokenPlankPanel({
           <div className="absolute inset-0 wood-grain-overlay opacity-30" />
         </div>
 
-        {/* Corner Nails & Missing Holes */}
+        {/* Corner Iron Nails */}
         <div className="compact-nail top-2 left-2 pointer-events-none" />
         <div className="compact-nail top-2 right-2 pointer-events-none" />
         <div className="compact-nail bottom-2 left-2 pointer-events-none" />
         <div className="compact-nail bottom-2 right-2 pointer-events-none" />
-        <div className="missing-nail-hole absolute top-[48%] right-2.5 pointer-events-none" />
-
-        {/* Dual Drilled Holes for Left & Right Rope Strands */}
-        {hasDualRopeHoles &&
-          ropeHoles.map((pos, idx) => (
-            <div
-              key={idx}
-              className="drilled-hole absolute z-20 pointer-events-none shadow-md"
-              style={{
-                top: pos.top || "8px",
-                left: pos.left,
-                right: pos.right,
-              }}
-            />
-          ))}
 
         {/* Splinters on hit */}
         {isHit && (

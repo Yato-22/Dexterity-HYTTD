@@ -96,11 +96,6 @@ export default function HPBar({ currentHp, maxHp = 200, dragonName = "THE RED DE
           <div className="compact-nail top-1.5 right-3 pointer-events-none" />
           <div className="compact-nail bottom-1.5 left-3 pointer-events-none" />
           <div className="compact-nail bottom-1.5 right-3 pointer-events-none" />
-          <div className="missing-nail-hole absolute top-2 right-16 pointer-events-none" />
-          
-          {/* Drilled rope holes at rope attachment spots */}
-          <div className="drilled-hole absolute top-1 left-11 pointer-events-none" />
-          <div className="drilled-hole absolute top-1 right-11 pointer-events-none" />
 
           {/* Splinters on hit */}
           {isHit && (

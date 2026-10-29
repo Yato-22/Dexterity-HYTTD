@@ -5,7 +5,7 @@ import BrokenPlankPanel from './BrokenPlankPanel';
 import { RopeKnot, TerminalRopeKnot } from './RopeGraphic';
 
 export default function LiveFeed({ feed = [], lastFeedId = null, isHit = false }) {
-  const displayFeed = feed.slice(0, 4);
+  const displayFeed = feed.slice(0, 10);
 
   return (
     <div className="relative w-full">
@@ -39,8 +39,8 @@ export default function LiveFeed({ feed = [], lastFeedId = null, isHit = false }
           </span>
         </div>
 
-        {/* Feed List */}
-        <div className="space-y-1 overflow-hidden">
+        {/* Feed List with Internal Scrolling */}
+        <div className="max-h-[85px] 2xl:max-h-[110px] overflow-y-auto space-y-1 pr-0.5">
           <AnimatePresence initial={false}>
             {displayFeed.map((item, idx) => {
               const isFirst = idx === 0;
@@ -53,14 +53,14 @@ export default function LiveFeed({ feed = [], lastFeedId = null, isHit = false }
                   animate={{ opacity: 1, x: 0, scale: 1 }}
                   exit={{ opacity: 0, x: 15, scale: 0.94 }}
                   transition={{ type: "spring", stiffness: 350, damping: 26 }}
-                  className={`h-[24px] 2xl:h-[28px] flex items-center justify-between px-2 rounded border text-[12px] 2xl:text-[14px] font-bold transition-all ${
+                  className={`h-[22px] 2xl:h-[26px] flex items-center justify-between px-2 rounded border text-[11px] 2xl:text-[13px] font-bold transition-all flex-shrink-0 ${
                     isFirst
                       ? 'bg-[#332114] border-[#FF7A1A] shadow-solid-ticket text-[#FFF8ED]'
                       : 'bg-[#18110b]/90 border-[#382b20] text-[#EBD4B7]'
                   }`}
                 >
                   <div className="flex items-center gap-1.5 min-w-0 font-sans">
-                    <span className="text-xs flex-shrink-0">⚔️</span>
+                    <span className="text-[10px] flex-shrink-0">⚔️</span>
                     <span className="truncate text-[#FFF8ED]">
                       {item.customText ? (
                         <span>{item.customText}</span>
@@ -74,7 +74,7 @@ export default function LiveFeed({ feed = [], lastFeedId = null, isHit = false }
                     </span>
                   </div>
 
-                  <span className="font-heading text-[9px] 2xl:text-[11px] font-bold text-[#FF7A1A] bg-[#140E0A] px-1.5 py-0.2 rounded border border-[#4A3A2C] flex-shrink-0 ml-1">
+                  <span className="font-heading text-[8.5px] 2xl:text-[10px] font-bold text-[#FF7A1A] bg-[#140E0A] px-1 py-0.2 rounded border border-[#4A3A2C] flex-shrink-0 ml-1">
                     -{item.damage}
                   </span>
                 </motion.div>
@@ -84,11 +84,11 @@ export default function LiveFeed({ feed = [], lastFeedId = null, isHit = false }
         </div>
       </BrokenPlankPanel>
 
-      {/* Two Terminal Knots with Tassels below the left and right strands */}
-      <div className="absolute -bottom-7 left-[12px] z-30 pointer-events-none">
+      {/* Two Terminal Knots */}
+      <div className="absolute -bottom-3 left-[12px] z-30 pointer-events-none">
         <TerminalRopeKnot />
       </div>
-      <div className="absolute -bottom-7 right-[12px] z-30 pointer-events-none">
+      <div className="absolute -bottom-3 right-[12px] z-30 pointer-events-none">
         <TerminalRopeKnot />
       </div>
     </div>

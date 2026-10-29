@@ -939,7 +939,7 @@ export default function AdminScreen() {
               </h3>
             </div>
 
-            <div className="max-h-72 overflow-y-auto rounded-lg border border-[#3A2D22] bg-[#140E0A]">
+            <div className="max-h-[500px] overflow-y-auto rounded-lg border border-[#3A2D22] bg-[#140E0A]">
               <table className="w-full text-left text-xs">
                 <thead className="bg-[#1E1914] text-[#D8C39F] font-heading uppercase text-[10px] tracking-wider sticky top-0 border-b border-[#3A2D22]">
                   <tr>

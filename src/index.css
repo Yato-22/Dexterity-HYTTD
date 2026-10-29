@@ -359,6 +359,26 @@ html {
   animation: lavaFlow 4s ease infinite;
 }
 
+/* Custom Viking scrollbar for all scrollable sections */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(20, 14, 10, 0.75);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 100, 70, 0.65);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 6, 0.85);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(140, 100, 70, 0.65) rgba(20, 14, 10, 0.75);
+}
+
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

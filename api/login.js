@@ -192,6 +192,8 @@ export default async function handler(req, res) {
         acceptedSolves: teamData.acceptedSolves || 0,
         totalSubmits: teamData.totalSubmits || 0,
         penalties: teamData.penalties || 0,
+        memberSolvedCount: memberData.solvedCount || 0,
+        teamSolvedCount: (teamData.solvedProblemIds || []).length,
       },
     });
   } catch (err) {

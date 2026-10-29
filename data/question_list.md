@@ -66,3 +66,4 @@
 46. Sort by Frequency: Given an array of N integers, sort its elements by decreasing frequency. If two elements have the same frequency, place the smaller element first.
 47. Longest Common Prefix: Given N lowercase strings, find and print the longest prefix shared by all strings. If no common prefix exists, print an empty string.
 48. Minimum Jumps: Given an array of N non-negative integers where each element represents the maximum number of positions you can jump forward from that index, find the minimum number of jumps needed to reach the last index. If it is impossible, print -1.
+

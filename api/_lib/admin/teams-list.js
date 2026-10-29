@@ -34,6 +34,23 @@ export default async function handler(req, res) {
 
       const uniqueRegistered = Array.from(new Set(registeredMembers));
 
+      const memberNamesWithSolves = uniqueRegistered.map((name) => {
+        const normKey = String(name).trim().replace(/\s+/g, ' ').toLowerCase();
+        const memObj = membersObj[normKey] || Object.values(membersObj).find(m => (m.name || '').toLowerCase() === name.toLowerCase());
+        const solved = memObj?.solvedCount || 0;
+        return `${name} (${solved} solved)`;
+      });
+
+      const memberDetails = Object.values(membersObj).map((m) => {
+        const name = m.name || 'Member';
+        const solved = m.solvedCount || 0;
+        return `${name} (${solved} solved)`;
+      });
+
+      const displayMemberNames = memberNamesWithSolves.length > 0
+        ? memberNamesWithSolves.join(', ')
+        : (memberDetails.length > 0 ? memberDetails.join(', ') : 'None assigned');
+
       const totalSubmits = team.totalSubmits || 0;
       const acceptedSolves = team.acceptedSolves || 0;
       const accuracy = totalSubmits > 0 ? Math.round((acceptedSolves / totalSubmits) * 1000) / 10 : 0;
@@ -41,7 +58,7 @@ export default async function handler(req, res) {
       return {
         id: teamId,
         teamName: reg.teamName || team.name || teamId,
-        memberNames: uniqueRegistered.length > 0 ? uniqueRegistered.join(', ') : 'None assigned',
+        memberNames: displayMemberNames,
         isLoggedIn: isOnline,
         loggedInMembers: loggedInMembers.join(', ') || 'None',
         totalDamage: team.totalDamage || 0,
@@ -58,3 +75,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: err.message });
   }
 }
+

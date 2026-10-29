@@ -86,20 +86,16 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
 
       {/* Main Plain White Surface Panel (#FFFFFF) with dark text (#1F1F1F) */}
       <div
-        className={`relative bg-[#FFFFFF] text-[#1F1F1F] rounded-lg border-2 border-[#1F1F1F] shadow-[4px_4px_0px_#100C09] p-3 2xl:p-3.5 transition-transform duration-300 ${
+        className={`relative bg-[#FFFFFF] text-[#1F1F1F] rounded-lg border-2 border-[#1F1F1F] shadow-[4px_4px_0px_#100C09] p-3 2xl:p-3.5 max-h-[88vh] overflow-y-auto transition-transform duration-300 ${
           isHit ? 'plank-hit-shake' : ''
         }`}
       >
-        {/* Two Drilled Rope Holes: Left corner & Right corner */}
-        <div className="drilled-hole absolute top-2 left-6 pointer-events-none z-20" />
-        <div className="drilled-hole absolute top-2 right-6 pointer-events-none z-20" />
-
         {/* Header */}
         <div className="text-center pb-1.5 mb-2 border-b-2 border-[#E5E7EB] px-8">
-          <h3 className="font-heading text-[17px] 2xl:text-[21px] font-bold tracking-wider uppercase text-[#1F1F1F] leading-tight">
+          <h3 className="font-heading text-[19px] 2xl:text-[23px] font-bold tracking-wider uppercase text-[#1F1F1F] leading-tight">
             TOME OF TRIALS
           </h3>
-          <p className="text-[11px] 2xl:text-[12px] font-bold text-[#6B7280] font-sans">
+          <p className="text-[12px] 2xl:text-[13.5px] font-bold text-[#6B7280] font-sans">
             Solve trials to strike the Red Death
           </p>
         </div>
@@ -114,22 +110,22 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`compact-tab py-1 px-0.5 flex flex-col items-center relative sword-cursor transition-all ${
+                className={`compact-tab py-1.5 px-0.5 flex flex-col items-center relative sword-cursor transition-all ${
                   isActive
                     ? 'bg-[#1F1F1F] text-[#FFFFFF] shadow-sm'
                     : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#374151]'
                 }`}
               >
                 <Icon
-                  className={`w-3.5 h-3.5 2xl:w-4 2xl:h-4 mb-0.5 ${
+                  className={`w-4 h-4 2xl:w-4.5 2xl:h-4.5 mb-0.5 ${
                     isActive ? 'text-[#FFB347]' : 'text-[#4B5563]'
                   }`}
                 />
-                <span className="font-heading text-[10px] 2xl:text-[11.5px] leading-none font-bold">
+                <span className="font-heading text-[12px] 2xl:text-[14px] leading-none font-bold">
                   {tab.name}
                 </span>
                 <span
-                  className={`font-heading text-[9px] 2xl:text-[10.5px] font-bold mt-0.5 ${
+                  className={`font-heading text-[11px] 2xl:text-[12.5px] font-bold mt-0.5 ${
                     isActive ? 'text-[#FFB347]' : 'text-[#6B7280]'
                   }`}
                 >
@@ -207,7 +203,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                 <div
                   key={problem.id}
                   onClick={() => navigate(`/problem/${problem.id}`)}
-                  className={`p-2 rounded-lg border-2 transition-all cursor-pointer flex flex-col justify-between gap-1 ${
+                  className={`p-2.5 rounded-lg border-2 transition-all cursor-pointer flex flex-col justify-between gap-1.5 ${
                     isSolved
                       ? 'bg-[#F0FDF4] border-[#86EFAC] shadow-sm'
                       : 'bg-[#FAFAFA] hover:bg-[#F4F4F5] border-[#E5E7EB] hover:border-[#1F1F1F] shadow-sm'
@@ -219,19 +215,19 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                         {isSolved && (
                           <CheckCircle2 className="w-4 h-4 text-[#16A34A] flex-shrink-0" />
                         )}
-                        <h4 className="font-heading text-[13px] 2xl:text-[15px] font-bold text-[#1F1F1F] leading-tight truncate">
+                        <h4 className="font-heading text-[17px] 2xl:text-[19px] font-bold text-[#1F1F1F] leading-tight truncate">
                           {problem.title}
                         </h4>
                       </div>
 
-                    <div className="flex items-center gap-1 flex-shrink-0">
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
                       {isSolved && (
-                        <span className="font-heading text-[9px] bg-[#DCFCE7] text-[#15803D] px-1.5 py-0.2 rounded font-bold border border-[#86EFAC]">
+                        <span className="font-heading text-[10.5px] bg-[#DCFCE7] text-[#15803D] px-2 py-0.5 rounded font-bold border border-[#86EFAC]">
                           SOLVED
                         </span>
                       )}
                       <span
-                        className="font-heading text-[9px] 2xl:text-[10px] px-1.5 py-0.2 rounded text-[#FFF] uppercase tracking-wider font-bold"
+                        className="font-heading text-[11.5px] 2xl:text-[13px] px-2 py-0.5 rounded text-[#FFF] uppercase tracking-wider font-bold"
                         style={{ backgroundColor: activeTabMeta?.accentColor || '#FF7A1A' }}
                       >
                         {problem.xp} XP
@@ -239,14 +235,14 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                     </div>
                   </div>
 
-                  <p className="text-[11.5px] 2xl:text-[12.5px] font-bold text-[#4B5563] leading-snug mt-0.5 line-clamp-1 font-sans">
+                  <p className="text-[14.5px] 2xl:text-[16px] font-semibold text-[#4B5563] leading-snug mt-1 line-clamp-2 font-sans">
                     {problem.task || problem.story}
                   </p>
                 </div>
 
                 {/* Attempt / Enter Button */}
-                <div className="flex items-center justify-between pt-0.5">
-                  <span className="text-[10px] 2xl:text-[10.5px] font-bold text-[#6B7280]">
+                <div className="flex items-center justify-between pt-1">
+                  <span className="text-[11.5px] 2xl:text-[12.5px] font-bold text-[#6B7280]">
                     C • C++ • Java • Python
                   </span>
 
@@ -255,11 +251,11 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                       e.stopPropagation();
                       navigate(`/problem/${problem.id}`);
                     }}
-                    className="compact-ticket-btn px-2.5 py-0.5 flex items-center gap-1 flex-shrink-0"
+                    className="compact-ticket-btn px-3 py-1 flex items-center gap-1 flex-shrink-0"
                   >
                     <div className="ticket-notch-left" />
                     <div className="ticket-notch-right" />
-                    <span className="font-heading text-[10px] 2xl:text-[11px] font-bold tracking-wider uppercase text-[#14100D] leading-none">
+                    <span className="font-heading text-[12.5px] 2xl:text-[13.5px] font-bold tracking-wider uppercase text-[#14100D] leading-none">
                       {isSolved ? 'REVIEW' : `ATTEMPT +${problem.xp} XP`}
                     </span>
                   </button>

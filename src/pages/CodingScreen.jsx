@@ -504,7 +504,7 @@ export default function CodingScreen() {
         {/* User Info & Sound Toggle */}
         <div className="flex items-center gap-3 text-xs font-bold text-[#D8C39F]">
           <span className="font-heading tracking-wider hidden sm:inline text-[#FFB347]">
-            {userTeam?.name} ({userTeam?.memberName || 'Warrior'})
+            {userTeam?.name} • {userTeam?.memberName || 'Warrior'} - {userTeam?.memberSolvedCount ?? 0} solved <span className="text-[#86EFAC]">• Team: {userTeam?.teamSolvedCount ?? solvedProblems.length}</span>
           </span>
           <button
             onClick={() => setSoundMuted(!soundMuted)}
@@ -515,11 +515,11 @@ export default function CodingScreen() {
         </div>
       </header>
 
-      {/* MAIN 2-COLUMN CODING WORKSPACE */}
-      <main className="flex-1 min-h-0 w-full flex items-stretch gap-2 p-2 2xl:p-3 relative z-10">
+      {/* MAIN 50/50 2-COLUMN CODING WORKSPACE */}
+      <main className="flex-1 min-h-0 w-full grid grid-cols-1 lg:grid-cols-2 gap-3 p-2 2xl:p-3 relative z-10">
         
         {/* LEFT COLUMN: Code Editor + Bottom Test Panel */}
-        <section className="flex-1 min-w-0 h-full flex flex-col justify-between gap-1.5">
+        <section className="flex flex-col justify-between gap-1.5 h-full min-h-0 min-w-0">
           
           {/* Top Bar above Editor */}
           <div className="flex items-center justify-between px-3 py-1.5 rounded-lg bg-[#1E1A17] border-2 border-[#4A3A2C] shadow-sm">
@@ -768,95 +768,101 @@ export default function CodingScreen() {
           </div>
         </section>
 
-        {/* RIGHT COLUMN: Problem Statement & Hall of Valor */}
-        <section className="w-[32%] min-w-[340px] max-w-[440px] h-full flex flex-col justify-between gap-1.5 flex-shrink-0">
+        {/* RIGHT COLUMN: Problem Statement & Top 5 Warbands */}
+        <section className="flex flex-col justify-between gap-2 h-full min-h-0 min-w-0">
           
-          {/* Problem Statement Card */}
-          <div className="flex-1 min-h-0 w-full rounded-lg border-2 border-[#4A3A2C] bg-[#ECE0C8] shadow-solid-ticket p-3.5 overflow-y-auto text-[#1F140C] font-sans">
-            <div className="border-b-2 border-[#C9B596] pb-2 mb-2 flex items-center justify-between">
+          {/* Problem Statement Card (50/50 Split, Scaled-Up Typography, Internal Scroll) */}
+          <div className="flex-1 min-h-0 w-full rounded-lg border-2 border-[#4A3A2C] bg-[#ECE0C8] shadow-solid-ticket p-4 overflow-y-auto text-[#1F140C] font-sans">
+            <div className="border-b-2 border-[#C9B596] pb-2 mb-3 flex items-center justify-between">
               <div>
-                <span className="font-heading text-[10px] uppercase font-bold text-[#8A633F] tracking-widest block">
+                <span className="font-heading text-xs 2xl:text-sm uppercase font-bold text-[#8A633F] tracking-widest block">
                   {problem.tier || problem.weapon} • {problem.xp} XP
                 </span>
-                <h3 className="font-heading text-lg font-extrabold uppercase text-[#2B1B10] leading-tight">
+                <h3 className="font-heading text-2xl 2xl:text-3xl font-extrabold uppercase text-[#2B1B10] leading-tight">
                   {problem.title}
                 </h3>
               </div>
               {isSolved && (
-                <span className="px-2 py-0.5 rounded bg-[#DCFCE7] border border-[#86EFAC] text-[#15803D] font-heading text-[10px] font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-1 rounded bg-[#DCFCE7] border border-[#86EFAC] text-[#15803D] font-heading text-xs font-bold uppercase tracking-wider">
                   SOLVED
                 </span>
               )}
             </div>
 
-            <div className="space-y-3 text-xs leading-relaxed">
+            <div className="space-y-4 text-sm leading-relaxed">
               {/* Lore / Story */}
               {problem.story && (
-                <p className="italic text-[#6B5037] border-l-2 border-[#BFA885] pl-2">
+                <p className="italic text-base 2xl:text-[18px] text-[#6B5037] border-l-4 border-[#BFA885] pl-3 py-0.5">
                   "{problem.story}"
                 </p>
               )}
 
               {/* Task Statement */}
               <div>
-                <h4 className="font-bold text-[12px] uppercase tracking-wider text-[#63482E] mb-0.5 font-heading">
+                <h4 className="font-bold text-sm 2xl:text-base uppercase tracking-wider text-[#63482E] mb-1 font-heading">
                   TASK
                 </h4>
-                <p className="font-medium text-[#2B1B10]">{problem.task}</p>
+                <p className="font-medium text-[#2B1B10] text-[18px] 2xl:text-[20px] leading-relaxed">
+                  {problem.task}
+                </p>
               </div>
 
               {/* Input Format */}
               <div>
-                <h4 className="font-bold text-[12px] uppercase tracking-wider text-[#63482E] mb-0.5 font-heading">
+                <h4 className="font-bold text-sm 2xl:text-base uppercase tracking-wider text-[#63482E] mb-1 font-heading">
                   INPUT FORMAT
                 </h4>
-                <pre className="p-2 rounded bg-[#D9C6A5] text-[#1F140C] font-mono text-[12px] whitespace-pre-wrap">
+                <pre className="p-3 rounded bg-[#D9C6A5] text-[#1F140C] font-mono text-base 2xl:text-[17px] whitespace-pre-wrap leading-relaxed border border-[#C9B596]">
                   {problem.inputFormat}
                 </pre>
               </div>
 
               {/* Output Format */}
               <div>
-                <h4 className="font-bold text-[12px] uppercase tracking-wider text-[#63482E] mb-0.5 font-heading">
+                <h4 className="font-bold text-sm 2xl:text-base uppercase tracking-wider text-[#63482E] mb-1 font-heading">
                   OUTPUT FORMAT
                 </h4>
-                <pre className="p-2 rounded bg-[#D9C6A5] text-[#1F140C] font-mono text-[12px] whitespace-pre-wrap">
+                <pre className="p-3 rounded bg-[#D9C6A5] text-[#1F140C] font-mono text-base 2xl:text-[17px] whitespace-pre-wrap leading-relaxed border border-[#C9B596]">
                   {problem.outputFormat}
                 </pre>
               </div>
 
               {/* Constraints */}
               <div>
-                <h4 className="font-bold text-[12px] uppercase tracking-wider text-[#63482E] mb-0.5 font-heading">
+                <h4 className="font-bold text-sm 2xl:text-base uppercase tracking-wider text-[#63482E] mb-1 font-heading">
                   CONSTRAINTS
                 </h4>
-                <ul className="list-disc list-inside space-y-0.5 text-[12px] font-mono text-[#422C1A]">
+                <ul className="list-disc list-inside space-y-1 text-base 2xl:text-[17px] font-mono text-[#422C1A]">
                   {(problem.constraints || []).map((c, idx) => (
                     <li key={idx}>{c}</li>
                   ))}
                 </ul>
               </div>
 
-              {/* Samples */}
-              <div className="space-y-2">
-                <h4 className="font-bold text-[12px] uppercase tracking-wider text-[#63482E] font-heading">
+              {/* Sample Cases */}
+              <div className="space-y-3">
+                <h4 className="font-bold text-sm 2xl:text-base uppercase tracking-wider text-[#63482E] font-heading">
                   SAMPLE CASES
                 </h4>
                 {(problem.samples || []).map((ex, idx) => (
-                  <div key={idx} className="p-2 rounded bg-[#D9C6A5] border border-[#BFA885] space-y-1">
-                    <div className="font-heading font-bold text-[11px] text-[#47301B]">
+                  <div key={idx} className="p-3 rounded-lg bg-[#D9C6A5] border border-[#BFA885] space-y-2">
+                    <div className="font-heading font-bold text-sm 2xl:text-base text-[#47301B]">
                       Sample Case {idx + 1}:
                     </div>
                     <div>
-                      <span className="font-bold text-[10px] uppercase text-[#6E4F31]">Input: </span>
-                      <pre className="font-mono text-[12px] text-[#1F140C] inline">{ex.input}</pre>
+                      <span className="font-bold text-xs uppercase text-[#6E4F31] block mb-0.5">Input:</span>
+                      <pre className="font-mono text-base 2xl:text-[17px] text-[#1F140C] p-2.5 rounded bg-[#FAF5EC] border border-[#BFA885] block whitespace-pre-wrap font-medium">
+                        {ex.input}
+                      </pre>
                     </div>
                     <div>
-                      <span className="font-bold text-[10px] uppercase text-[#6E4F31]">Output: </span>
-                      <pre className="font-mono text-[12px] text-[#15803D] inline font-bold">{ex.expectedOutput}</pre>
+                      <span className="font-bold text-xs uppercase text-[#6E4F31] block mb-0.5">Expected Output:</span>
+                      <pre className="font-mono text-base 2xl:text-[17px] text-[#15803D] p-2.5 rounded bg-[#FAF5EC] border border-[#BFA885] block whitespace-pre-wrap font-bold">
+                        {ex.expectedOutput}
+                      </pre>
                     </div>
                     {ex.explanation && (
-                      <div className="text-[11px] italic text-[#5E4228]">
+                      <div className="text-sm 2xl:text-[15px] italic text-[#5E4228] pt-0.5">
                         Explanation: {ex.explanation}
                       </div>
                     )}
@@ -866,52 +872,52 @@ export default function CodingScreen() {
             </div>
           </div>
 
-          {/* Hall of Valor Compact Board */}
-          <div className="h-[140px] 2xl:h-[160px] w-full rounded-lg border-2 border-[#4A3A2C] bg-[#221A14] shadow-solid-ticket p-2 flex flex-col justify-between flex-shrink-0">
+          {/* Top 5 Warbands Compact Board */}
+          <div className="h-[155px] 2xl:h-[175px] w-full rounded-lg border-2 border-[#4A3A2C] bg-[#221A14] shadow-solid-ticket p-2 flex flex-col justify-between flex-shrink-0">
             <div className="flex items-center justify-between border-b border-[#3E2F23] pb-1 px-1">
-              <div className="flex items-center gap-1 text-[#FFB347]">
-                <Trophy className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-1.5 text-[#FFB347]">
+                <Trophy className="w-3.5 h-3.5 text-[#FFB347]" />
                 <h4 className="font-heading text-xs font-bold uppercase tracking-wider text-[#FFF8ED]">
-                  HALL OF VALOR
+                  TOP 5 WARBANDS
                 </h4>
               </div>
-              <span className="text-[10px] font-bold text-[#A89078]">Top Warbands</span>
+              <span className="text-[10px] font-bold text-[#A89078]">Arena Standings</span>
             </div>
 
             <div className="space-y-0.5 overflow-hidden flex-1 min-h-0 pt-1">
-              {sortedTeams.slice(0, 4).map((team) => {
+              {sortedTeams.slice(0, 5).map((team) => {
                 const isUser = team.id === userTeam?.id;
                 return (
                   <div
                     key={team.id}
-                    className={`h-[20px] flex items-center justify-between px-2 rounded text-[11px] font-bold ${
+                    className={`h-[22px] flex items-center justify-between px-2 rounded text-[11.5px] font-bold ${
                       isUser ? 'user-team-highlight text-[#FFF8ED]' : 'bg-[#18110B] text-[#D8C39F]'
                     }`}
                   >
                     <div className="flex items-center gap-1.5 truncate">
-                      <span className="font-heading text-[10px] w-3 text-right">#{team.rank || 1}</span>
+                      <span className="font-heading text-[10.5px] w-4 text-right">#{team.rank || 1}</span>
                       <span className="truncate">{team.name}</span>
                       {isUser && (
-                        <span className="text-[7.5px] bg-[#FF7A1A] text-black px-1 rounded font-heading font-extrabold">
+                        <span className="text-[8px] bg-[#FF7A1A] text-black px-1 rounded font-heading font-extrabold">
                           YOU
                         </span>
                       )}
                     </div>
-                    <span className="font-heading text-[10.5px] text-[#FFB347]">
+                    <span className="font-heading text-[11px] text-[#FFB347]">
                       {team.totalDamage ?? team.score ?? 0} XP
                     </span>
                   </div>
                 );
               })}
 
-              {userTeamRank > 4 && (
-                <div className="h-[20px] flex items-center justify-between px-2 rounded text-[11px] font-bold user-team-highlight text-[#FFF8ED] mt-0.5">
+              {userTeamRank > 5 && (
+                <div className="h-[22px] flex items-center justify-between px-2 rounded text-[11.5px] font-bold user-team-highlight text-[#FFF8ED] mt-0.5">
                   <div className="flex items-center gap-1.5 truncate">
-                    <span className="font-heading text-[10px] w-3 text-right text-[#FF7A1A]">#{userTeamRank}</span>
+                    <span className="font-heading text-[10.5px] w-4 text-right text-[#FF7A1A]">#{userTeamRank}</span>
                     <span className="truncate">{userTeam?.name}</span>
-                    <span className="text-[7.5px] bg-[#FF7A1A] text-black px-1 rounded font-heading font-extrabold">YOU</span>
+                    <span className="text-[8px] bg-[#FF7A1A] text-black px-1 rounded font-heading font-extrabold">YOU</span>
                   </div>
-                  <span className="font-heading text-[10.5px] text-[#FFB347]">
+                  <span className="font-heading text-[11px] text-[#FFB347]">
                     {userTeam?.totalDamage ?? userTeam?.score ?? 0} XP
                   </span>
                 </div>

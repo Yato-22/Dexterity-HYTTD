@@ -1,35 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-// Weapon Station SVGs with idle breathing, warm sunset rim light, firing recoils, and 0 HP victory pose
+// 4 Small Decorative Warriors along the bottom of the arena
 export default function WeaponStations({
   recoilingStation = null, // 'dagger' | 'axe' | 'catapult' | 'ballista'
   isDefeated = false,
-  inventory = { dagger: 0, axe: 0, catapult: 0, ballista: 0 },
-  onStationClick,
 }) {
-  const stations = [
-    { id: 'dagger', name: 'DAGGER', xp: 2 },
-    { id: 'axe', name: 'AXE', xp: 5 },
-    { id: 'catapult', name: 'CATAPULT', xp: 7 },
-    { id: 'ballista', name: 'BALLISTA', xp: 10 },
-  ];
-
   return (
-    <div className="relative w-full flex items-end justify-center gap-3 sm:gap-6 2xl:gap-8 px-2 z-20 pointer-events-auto select-none">
+    <div className="relative w-full flex items-end justify-center gap-6 sm:gap-10 2xl:gap-14 px-2 z-20 pointer-events-none select-none">
       {/* 1. DAGGER THROWER */}
-      <div
-        onClick={() => onStationClick && onStationClick('dagger')}
-        className="flex flex-col items-center sword-cursor group"
-        title="Dagger Thrower (2 XP - Easy Trials)"
-      >
+      <div className="flex flex-col items-center pointer-events-none">
         <motion.div
           animate={
             isDefeated
-              ? { y: [-2, -8, -2], rotate: [-2, 2, -2] }
+              ? { y: [-1, -4, -1], rotate: [-1, 1, -1] }
               : recoilingStation === 'dagger'
               ? { x: [0, 4, -6, 2, 0], y: [0, -3, 2, 0], scale: [1, 1.05, 0.96, 1] }
-              : { y: [0, -1.8, 0] }
+              : { y: [0, -1.2, 0] }
           }
           transition={
             isDefeated
@@ -38,7 +25,7 @@ export default function WeaponStations({
               ? { duration: 0.35, ease: "easeOut" }
               : { repeat: Infinity, duration: 3.4, ease: "easeInOut" }
           }
-          className="relative w-16 h-18 sm:w-20 sm:h-22 2xl:w-24 2xl:h-26 flex items-end justify-center"
+          className="relative h-[6.5vh] max-h-[64px] min-h-[44px] w-auto aspect-[80/88] flex items-end justify-center"
         >
           <svg viewBox="0 0 80 88" className="w-full h-full overflow-visible drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
             <defs>
@@ -120,44 +107,20 @@ export default function WeaponStations({
             </g>
           </svg>
         </motion.div>
-
-        {/* Small label badge */}
-        <div className="flex flex-col items-center mt-1 pointer-events-none">
-          <span className="font-heading text-[10px] 2xl:text-[11px] font-bold text-[#FFB347] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            DAGGER
-          </span>
-          <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            2 XP
-          </span>
-          {/* Inventory Count Pill */}
-          <div
-            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
-              (inventory.dagger || 0) > 0
-                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
-                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
-            }`}
-          >
-            <span>x{inventory.dagger || 0}</span>
-            {(inventory.dagger || 0) > 0 && (
-              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
-            )}
-          </div>
-        </div>
+        <span className="font-heading text-[8.5px] 2xl:text-[10px] font-bold text-[#D8C39F]/80 uppercase tracking-widest mt-0.5">
+          DAGGER
+        </span>
       </div>
 
       {/* 2. AXE THROWER */}
-      <div
-        onClick={() => onStationClick && onStationClick('axe')}
-        className="flex flex-col items-center sword-cursor group"
-        title="Battleaxe Thrower (5 XP - Medium Trials)"
-      >
+      <div className="flex flex-col items-center pointer-events-none">
         <motion.div
           animate={
             isDefeated
-              ? { y: [-2, -8, -2], rotate: [2, -2, 2] }
+              ? { y: [-1, -4, -1], rotate: [1, -1, 1] }
               : recoilingStation === 'axe'
               ? { x: [0, 6, -8, 2, 0], y: [0, -4, 3, 0], scale: [1, 1.06, 0.95, 1] }
-              : { y: [0, -2, 0] }
+              : { y: [0, -1.3, 0] }
           }
           transition={
             isDefeated
@@ -166,7 +129,7 @@ export default function WeaponStations({
               ? { duration: 0.45, ease: "easeOut" }
               : { repeat: Infinity, duration: 3.7, delay: 0.4, ease: "easeInOut" }
           }
-          className="relative w-18 h-20 sm:w-22 sm:h-24 2xl:w-26 2xl:h-28 flex items-end justify-center"
+          className="relative h-[6.5vh] max-h-[64px] min-h-[44px] w-auto aspect-[88/96] flex items-end justify-center"
         >
           <svg viewBox="0 0 88 96" className="w-full h-full overflow-visible drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
             <ellipse cx="44" cy="90" rx="24" ry="4.5" fill="#000000" opacity="0.45" />
@@ -237,43 +200,20 @@ export default function WeaponStations({
             </g>
           </svg>
         </motion.div>
-
-        <div className="flex flex-col items-center mt-1 pointer-events-none">
-          <span className="font-heading text-[10px] 2xl:text-[11px] font-bold text-[#FFB347] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            AXE
-          </span>
-          <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            5 XP
-          </span>
-          {/* Inventory Count Pill */}
-          <div
-            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
-              (inventory.axe || 0) > 0
-                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
-                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
-            }`}
-          >
-            <span>x{inventory.axe || 0}</span>
-            {(inventory.axe || 0) > 0 && (
-              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
-            )}
-          </div>
-        </div>
+        <span className="font-heading text-[8.5px] 2xl:text-[10px] font-bold text-[#D8C39F]/80 uppercase tracking-widest mt-0.5">
+          AXE
+        </span>
       </div>
 
       {/* 3. CATAPULT CREW (Wooden Frame + 2 Humans) */}
-      <div
-        onClick={() => onStationClick && onStationClick('catapult')}
-        className="flex flex-col items-center sword-cursor group"
-        title="Catapult Crew (7 XP - Hard Trials)"
-      >
+      <div className="flex flex-col items-center pointer-events-none">
         <motion.div
           animate={
             isDefeated
-              ? { y: [-2, -6, -2] }
+              ? { y: [-1, -3, -1] }
               : recoilingStation === 'catapult'
               ? { x: [0, 5, -7, 3, 0], y: [0, 3, -3, 0], scale: [1, 0.97, 1.02, 1] }
-              : { y: [0, -1.2, 0] }
+              : { y: [0, -1, 0] }
           }
           transition={
             isDefeated
@@ -282,7 +222,7 @@ export default function WeaponStations({
               ? { duration: 0.5, ease: "easeOut" }
               : { repeat: Infinity, duration: 4.0, ease: "easeInOut" }
           }
-          className="relative w-28 h-22 sm:w-34 sm:h-26 2xl:w-40 2xl:h-30 flex items-end justify-center"
+          className="relative h-[6.5vh] max-h-[64px] min-h-[44px] w-auto aspect-[130/96] flex items-end justify-center"
         >
           <svg viewBox="0 0 130 96" className="w-full h-full overflow-visible drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
             {/* Ground shadow */}
@@ -397,43 +337,20 @@ export default function WeaponStations({
             </motion.g>
           </svg>
         </motion.div>
-
-        <div className="flex flex-col items-center mt-1 pointer-events-none">
-          <span className="font-heading text-[10px] 2xl:text-[11px] font-bold text-[#FFB347] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            CATAPULT
-          </span>
-          <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            7 XP
-          </span>
-          {/* Inventory Count Pill */}
-          <div
-            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
-              (inventory.catapult || 0) > 0
-                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
-                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
-            }`}
-          >
-            <span>x{inventory.catapult || 0}</span>
-            {(inventory.catapult || 0) > 0 && (
-              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
-            )}
-          </div>
-        </div>
+        <span className="font-heading text-[8.5px] 2xl:text-[10px] font-bold text-[#D8C39F]/80 uppercase tracking-widest mt-0.5">
+          CATAPULT
+        </span>
       </div>
 
       {/* 4. BALLISTA CREW (Wooden Frame + 2 Humans) */}
-      <div
-        onClick={() => onStationClick && onStationClick('ballista')}
-        className="flex flex-col items-center sword-cursor group"
-        title="Ballista Crew (10 XP - Extreme Trials)"
-      >
+      <div className="flex flex-col items-center pointer-events-none">
         <motion.div
           animate={
             isDefeated
-              ? { y: [-2, -6, -2] }
+              ? { y: [-1, -3, -1] }
               : recoilingStation === 'ballista'
               ? { x: [0, 8, -6, 2, 0], y: [0, 2, -1, 0], scale: [1, 1.04, 0.97, 1] }
-              : { y: [0, -1.4, 0] }
+              : { y: [0, -1.2, 0] }
           }
           transition={
             isDefeated
@@ -442,7 +359,7 @@ export default function WeaponStations({
               ? { duration: 0.4, ease: "easeOut" }
               : { repeat: Infinity, duration: 4.2, delay: 0.6, ease: "easeInOut" }
           }
-          className="relative w-28 h-22 sm:w-34 sm:h-26 2xl:w-40 2xl:h-30 flex items-end justify-center"
+          className="relative h-[6.5vh] max-h-[64px] min-h-[44px] w-auto aspect-[130/96] flex items-end justify-center"
         >
           <svg viewBox="0 0 130 96" className="w-full h-full overflow-visible drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
             {/* Ground shadow */}
@@ -547,28 +464,9 @@ export default function WeaponStations({
             </motion.g>
           </svg>
         </motion.div>
-
-        <div className="flex flex-col items-center mt-1 pointer-events-none">
-          <span className="font-heading text-[10px] 2xl:text-[11px] font-bold text-[#FFB347] uppercase tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            BALLISTA
-          </span>
-          <span className="font-sans text-[9px] 2xl:text-[10px] font-extrabold text-[#D8C39F] drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-            10 XP
-          </span>
-          {/* Inventory Count Pill */}
-          <div
-            className={`mt-1 px-2.5 py-0.5 rounded-full border text-[9.5px] 2xl:text-[10.5px] font-bold flex items-center gap-1.5 shadow-md transition-all ${
-              (inventory.ballista || 0) > 0
-                ? 'bg-[#2E180D] border-[#FF9D43] text-[#FFD700] shadow-[0_0_8px_rgba(255,157,67,0.4)] group-hover:scale-105 group-hover:border-[#FFD700]'
-                : 'bg-[#140E0A]/80 border-[#4A3828] text-[#8C7A6B] opacity-60'
-            }`}
-          >
-            <span>x{inventory.ballista || 0}</span>
-            {(inventory.ballista || 0) > 0 && (
-              <span className="text-[7.5px] uppercase tracking-wider text-[#FF9D43]">FIRE</span>
-            )}
-          </div>
-        </div>
+        <span className="font-heading text-[8.5px] 2xl:text-[10px] font-bold text-[#D8C39F]/80 uppercase tracking-widest mt-0.5">
+          BALLISTA
+        </span>
       </div>
     </div>
   );

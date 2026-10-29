@@ -11,12 +11,10 @@ export default function Leaderboard({
   isHit = false,
 }) {
   const userTeamIndex = teams.findIndex((t) => t.id === userTeamId || t.isUserTeam);
-  const isUserOutsideTop10 = userTeamIndex >= 10;
   const userTeam = userTeamIndex !== -1 ? teams[userTeamIndex] : null;
+  const isUserOutsideTop5 = userTeamIndex >= 5 && userTeam;
 
-  const displayTeams = isUserOutsideTop10
-    ? teams.slice(0, 9)
-    : teams.slice(0, 10);
+  const displayTeams = teams.slice(0, 5);
 
   return (
     <div className="relative w-full">
@@ -40,7 +38,7 @@ export default function Leaderboard({
         {/* Title Header */}
         <div className="border-b-2 border-[#4A3A2C] pb-1 mb-1 text-center px-6">
           <h3 className="font-heading text-[16px] 2xl:text-[20px] tracking-wider text-[#FFF8ED] uppercase heading-shadow leading-tight">
-            TOP 10 WARBANDS
+            TOP 5 WARBANDS
           </h3>
         </div>
 
@@ -88,24 +86,18 @@ export default function Leaderboard({
                   )}
                 </div>
 
-                <div className="flex items-center gap-1.5 flex-shrink-0 pl-1 text-[10px] 2xl:text-[12px] font-sans">
-                  <span className="font-heading text-[11px] 2xl:text-[13px] font-bold text-[#FFB347] leading-none heading-shadow">
+                <div className="flex items-center gap-1.5 flex-shrink-0 pl-1 text-[11px] 2xl:text-[13px] font-sans">
+                  <span className="font-heading text-[12px] 2xl:text-[14px] font-bold text-[#FFB347] leading-none heading-shadow">
                     {score} XP
-                  </span>
-                  <span className="text-[#86EFAC] font-bold leading-none" title="Accuracy">
-                    {team.accuracy ?? 0}%
-                  </span>
-                  <span className="text-[#FCA5A5] font-bold leading-none" title="Penalties">
-                    {team.penalties ?? 0}P
                   </span>
                 </div>
               </motion.div>
             );
           })}
 
-          {isUserOutsideTop10 && userTeam && (
+          {isUserOutsideTop5 && userTeam && (
             <>
-              <div className="text-center text-[9px] leading-none font-bold text-[#8F745B] py-0.2">
+              <div className="text-center text-[9px] leading-none font-bold text-[#8F745B] py-0.5">
                 • • •
               </div>
               <motion.div
@@ -131,15 +123,9 @@ export default function Leaderboard({
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 flex-shrink-0 pl-1 text-[10px] 2xl:text-[12px] font-sans">
-                  <span className="font-heading text-[11px] 2xl:text-[13px] font-bold text-[#FFB347] leading-none heading-shadow">
+                <div className="flex items-center gap-1.5 flex-shrink-0 pl-1 text-[11px] 2xl:text-[13px] font-sans">
+                  <span className="font-heading text-[12px] 2xl:text-[14px] font-bold text-[#FFB347] leading-none heading-shadow">
                     {userTeam.totalDamage ?? userTeam.score ?? 0} XP
-                  </span>
-                  <span className="text-[#86EFAC] font-bold leading-none" title="Accuracy">
-                    {userTeam.accuracy ?? 0}%
-                  </span>
-                  <span className="text-[#FCA5A5] font-bold leading-none" title="Penalties">
-                    {userTeam.penalties ?? 0}P
                   </span>
                 </div>
               </motion.div>

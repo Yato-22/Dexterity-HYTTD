@@ -9,6 +9,7 @@ import LiveFeed from '../components/LiveFeed';
 import RankBadge from '../components/RankBadge';
 import Embers from '../components/Embers';
 import FlyingProjectiles from '../components/FlyingProjectiles';
+import WeaponStations from '../components/WeaponStations';
 import { RopeSegment, RopeKnot, TerminalRopeKnot } from '../components/RopeGraphic';
 import { Volume2, VolumeX, Flame, LogOut, PauseCircle, AlertTriangle, WifiOff } from 'lucide-react';
 
@@ -285,12 +286,14 @@ export default function ArenaScreen() {
                 rank={userTeamRank}
                 teamName={userTeam?.name || "Viking Clan"}
                 memberName={userTeam?.memberName}
+                memberSolvedCount={userTeam?.memberSolvedCount ?? 0}
+                teamSolvedCount={userTeam?.teamSolvedCount ?? solvedProblems.length}
                 score={userTeam?.totalDamage ?? userTeam?.score ?? 0}
                 isHit={isHit}
               />
             </div>
 
-            {/* 2. Top 10 Leaderboard */}
+            {/* 2. Top 5 Leaderboard */}
             <div className="flex-1 min-h-0 flex flex-col justify-center relative z-10">
               <Leaderboard
                 teams={teams}
@@ -318,8 +321,8 @@ export default function ArenaScreen() {
               onStationRecoil={triggerStationRecoil}
             />
 
-            <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-4">
-              <div className="translate-y-6 2xl:translate-y-10 w-full flex justify-center">
+            <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-1">
+              <div className="translate-y-4 2xl:translate-y-8 w-full flex justify-center">
                 <Dragon
                   hp={hp}
                   maxHp={maxHp}
@@ -336,6 +339,14 @@ export default function ArenaScreen() {
                 />
               </div>
             </div>
+
+            {/* 4 Small Decorative Warriors along the bottom */}
+            <div className="w-full flex-shrink-0 z-30 pb-0.5">
+              <WeaponStations
+                recoilingStation={recoilingStation}
+                isDefeated={isDefeated}
+              />
+            </div>
           </section>
 
           {/* Right Column: Tome of Trials */}
@@ -343,7 +354,7 @@ export default function ArenaScreen() {
             animate={{ rotate: [-0.15, 0.15, -0.15] }}
             transition={{ repeat: Infinity, duration: 9.2, delay: 0.8, ease: "easeInOut" }}
             style={{ transformOrigin: "top center" }}
-            className="w-[24%] min-w-[320px] max-w-[400px] h-full flex flex-col justify-center flex-shrink-0 relative"
+            className="w-[28%] min-w-[340px] max-w-[430px] h-full flex flex-col justify-center flex-shrink-0 relative"
           >
             <div className="relative z-10">
               <ChallengeScroll
@@ -360,7 +371,7 @@ export default function ArenaScreen() {
           <span className="font-heading tracking-wider text-[#FFB347] text-[10px] 2xl:text-[12px]">
             {userTeam?.name ? `Clan: ${userTeam.name} | Warrior: ${userTeam.memberName || 'Leader'}` : 'Viking Warband'}
           </span>
-          <span>Click dragon or attempt trials to deal damage</span>
+          <span>Solve trials to strike the Red Death</span>
         </footer>
       </div>
     </div>
