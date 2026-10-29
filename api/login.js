@@ -25,15 +25,16 @@ export default async function handler(req, res) {
   }
 
   const normStr = (s) => String(s || '').trim().replace(/\s+/g, ' ').toLowerCase();
-  const phoneMatches = (a, b) => {
-    const da = String(a || '').replace(/\D/g, '');
-    const db = String(b || '').replace(/\D/g, '');
-    if (!da || !db) return false;
-    if (da === db) return true;
-    if (da.length >= 7 && db.length >= 7) {
-      return da.endsWith(db) || db.endsWith(da);
-    }
-    return false;
+  const checkPhoneMatch = (docData, inputPhone) => {
+    const inPhone = String(inputPhone || '').replace(/\D/g, '');
+    if (!inPhone) return false;
+    const candidatePhones = [docData?.leaderPhone, ...(docData?.allowedPhones || [])].filter(Boolean);
+    return candidatePhones.some((p) => {
+      const dbPhone = String(p).replace(/\D/g, '');
+      if (dbPhone === inPhone) return true;
+      if (dbPhone.length >= 7 && inPhone.length >= 7 && (dbPhone.endsWith(inPhone) || inPhone.endsWith(dbPhone))) return true;
+      return false;
+    });
   };
 
   const cleanTeamName = teamName.trim();
@@ -53,7 +54,7 @@ export default async function handler(req, res) {
     let regDoc = null;
     for (const doc of nameQuery.docs) {
       const data = doc.data();
-      if (phoneMatches(data.leaderPhone, leaderPhone)) {
+      if (checkPhoneMatch(data, leaderPhone)) {
         regDoc = doc;
         break;
       }
@@ -80,7 +81,7 @@ export default async function handler(req, res) {
       for (const doc of allReg.docs) {
         const data = doc.data();
         const docTeam = normStr(data.teamName || data.teamNameLower);
-        if (docTeam === targetTeamLower && phoneMatches(data.leaderPhone, leaderPhone)) {
+        if (docTeam === targetTeamLower && checkPhoneMatch(data, leaderPhone)) {
           regDoc = doc;
           break;
         }
