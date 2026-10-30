@@ -1,0 +1,55 @@
+# Migration & Feature Implementation Checklist
+
+- [x] **Step 0: Safety Setup**
+  - [x] 0.1 Commit working code on main with "Stable classic version", push `stable-classic` tag, create & push `new-features` branch.
+  - [x] 0.2 Record current production deployment URL and ID in `ROLLBACK.md`.
+  - [x] 0.3 Firebase backup: export teams, registry, public, dragon, feed, pool, hidden tests to `backups/<timestamp>/`.
+  - [x] 0.4 Data safety: `pool` untouched, new pool in `pool_v2`, additive schema only.
+  - [x] 0.5 `ROLLBACK.md` with copy-paste rollback commands.
+  - [x] Start Piston Docker container and Cloudflare tunnel, verify healthy and update `config/runner`.
+- [ ] **Step 1: Problem Pool (`pool_v2`)**
+  - [ ] 1.1 Verify and format 48 problems from `ALL_QUESTIONS.txt` / `data/question_list.md` (12 Dagger, 12 Axe, 12 Catapult, 12 Ballista).
+  - [ ] 1.2 Two independent Python reference solutions per problem in `generate_and_verify_48.py`.
+  - [ ] 1.3 Run `scripts/verifyPool.js` to ensure 100% agreement on all sample and hidden tests.
+  - [ ] 1.4 Seed into `pool_v2` and `problems_private_v2` via `scripts/seedPool.js`.
+- [ ] **Step 2: Team CSV Import and Login**
+  - [ ] 2.1 `/admin` "Import teams" UI: CSV upload, preview parsed rows, download template, confirm import. Support 1 or 2 members, phone matching last 10 digits.
+  - [ ] 2.2 Server endpoint `POST /api/admin/importTeams` creates registry and teams without overwriting existing scores on re-import.
+  - [ ] 2.3 "Replace all teams" option with confirmation.
+  - [ ] 2.4 Registered teams table on `/admin` showing member names, solved counts, login status, XP, delete team button.
+  - [ ] 2.5 Login screen: Team Name, Leader Phone, Your Name. Claiming slots 1 and 2, rejecting 3rd with "This team already has 2 members."
+  - [ ] 2.6 Session tokens per member, editor code in localStorage per (team, member, problem, lang).
+- [ ] **Step 3: Per-Member Boards (5 per tier)**
+  - [ ] 3.1 Per-member board stored in `members.<name>.board`, avoiding teammate problems where possible.
+  - [ ] 3.2 Track `seenIds` per member; team solve removes problem from both members' boards.
+  - [ ] 3.3 Box shrinks when < 5 unsolved remain; "All cleared" when none remain.
+  - [ ] 3.4 Per-member refresh token (`POST /api/refresh`).
+  - [ ] 3.5 Server rejects Run/Test/Submit for off-board problems.
+- [ ] **Step 4: Ranking, Accuracy, Penalties**
+  - [ ] 4.1 Team XP decides position; cosmetic "Dragon Slayer" badge.
+  - [ ] 4.2 Tiebreaker order: (1) accuracy, (2) penalties, (3) lastSolveAt.
+  - [ ] 4.3 Track `totalDamage`, `acceptedSolves`, `totalSubmits`, `penalties`, `lastSolveAt`, and `members.<name>.solvedCount`.
+  - [ ] 4.4 Counted submit rules; admin toggle for compilation error as penalty.
+  - [ ] 4.5 Shared ranking function; `/admin` "End event and finalize" freezes standings.
+- [ ] **Step 5: Arena and UI**
+  - [ ] 5.1 Lower dragon slightly, +10-15% site-wide fonts, default browser cursor everywhere, default editor lang C.
+  - [ ] 5.2 Refresh button: bright accent, bigger, subtle glow, disabled tooltip when no token.
+  - [ ] 5.3 4 small warriors (6-9% screen height) along bottom; delayed projectile throw on real solve; no reload replay.
+  - [ ] 5.4 Tome of Trials: titles & descriptions 1.4x, tabs/badges/attempt buttons 1.25x, 2-line descriptions, adaptive height.
+  - [ ] 5.5 Coding screen 50/50 responsive split; 18-20px body text, 16px sample boxes; Hall of Valor Top 5 + pinned 6th row.
+  - [ ] 5.6 Leaderboard: Top 5 Warbands on Arena, Coding Screen, and Display; rank, name, XP only.
+  - [ ] 5.7 Solved count in standing panel, coding header, and `/admin`.
+  - [ ] 5.8 Admin vertical scrolling; remove stray black dots; fix Battle Log clipping; update footer hint.
+- [ ] **Step 6: Pre-filled Starter Programs**
+  - [ ] 6.1 `scripts/genTemplates.js` generating C, C++, Java, Python templates with `// ===== INPUT =====` and `// ===== WRITE YOUR CODE BELOW =====`.
+  - [ ] 6.2 Templates compile cleanly and print nothing (giving Wrong Answer, not compile error).
+  - [ ] 6.3 Note above editor; Reset Template button; C default language.
+- [ ] **Step 7: Automated Verification**
+  - [ ] 7.1 Solutions in all 4 languages in `data/reference/`; `scripts/verifyTemplates.js` runs 192 runs (48 x 4) against real Piston runner.
+  - [ ] 7.2 Verify unchanged starters give Wrong Answer; test compile error, crash, timeout on sample of 8 problems.
+  - [ ] 7.3 Local feature tests covering all specification flows.
+- [ ] **Step 8: Deploy, Live Tests, Load Test, Cleanup**
+  - [ ] 8.1 Publish Firestore rules, seed `pool_v2`, set Vercel env vars, deploy as PREVIEW.
+  - [ ] 8.2 Run all 48 problems through preview API with TEST_ teams.
+  - [ ] 8.3 Run load test (40 teams, 40 parallel submits).
+  - [ ] 8.4 Clean up all TEST_ data and reset dragon.
