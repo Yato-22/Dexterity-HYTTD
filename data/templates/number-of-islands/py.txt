@@ -1,0 +1,23 @@
+import sys
+
+def main():
+    # ===== INPUT (do not change) =====
+    tokens = sys.stdin.read().split()
+    if not tokens:
+        return
+    r = int(tokens[0])
+    c = int(tokens[1])
+    grid = []
+    idx = 2
+    for _ in range(r):
+        grid.append([int(x) for x in tokens[idx:idx+c]])
+        idx += c
+    # ===== END INPUT =====
+
+    # ===== WRITE YOUR CODE BELOW =====
+
+
+    # Print the number of islands
+
+if __name__ == '__main__':
+    main()

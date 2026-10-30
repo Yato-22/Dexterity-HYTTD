@@ -1,0 +1,19 @@
+import sys
+
+def main():
+    # ===== INPUT (do not change) =====
+    tokens = sys.stdin.read().split()
+    if not tokens:
+        return
+    n = int(tokens[0])
+    k = int(tokens[1])
+    arr = [int(x) for x in tokens[2:2+n]]
+    # ===== END INPUT =====
+
+    # ===== WRITE YOUR CODE BELOW =====
+
+
+    # Print the rotated array elements space-separated on a single line
+
+if __name__ == '__main__':
+    main()

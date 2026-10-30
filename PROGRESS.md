@@ -40,10 +40,10 @@
   - [x] 5.6 Leaderboard: Top 5 Warbands on Arena, Coding Screen, and Display; rank, name, XP only.
   - [x] 5.7 Solved count in standing panel, coding header, and `/admin`.
   - [x] 5.8 Admin vertical scrolling; remove stray black dots; fix Battle Log clipping; update footer hint.
-- [ ] **Step 6: Pre-filled Starter Programs**
-  - [ ] 6.1 `scripts/genTemplates.js` generating C, C++, Java, Python templates with `// ===== INPUT =====` and `// ===== WRITE YOUR CODE BELOW =====`.
-  - [ ] 6.2 Templates compile cleanly and print nothing (giving Wrong Answer, not compile error).
-  - [ ] 6.3 Note above editor; Reset Template button; C default language.
+- [x] **Step 6: Pre-filled Starter Programs**
+  - [x] 6.1 `scripts/genTemplates.js` generating C, C++, Java, Python templates with `// ===== INPUT =====` and `// ===== WRITE YOUR CODE BELOW =====`.
+  - [x] 6.2 Templates compile cleanly and print nothing (giving Wrong Answer, not compile error).
+  - [x] 6.3 Note above editor; Reset Template button; C default language.
 - [ ] **Step 7: Automated Verification**
   - [ ] 7.1 Solutions in all 4 languages in `data/reference/`; `scripts/verifyTemplates.js` runs 192 runs (48 x 4) against real Piston runner.
   - [ ] 7.2 Verify unchanged starters give Wrong Answer; test compile error, crash, timeout on sample of 8 problems.

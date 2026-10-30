@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    // ===== INPUT (do not change) =====
+    int n, amount;
+    if (scanf("%d %d", &n, &amount) != 2) return 0;
+    int coins[1005];
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &coins[i]);
+    }
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the minimum number of coins, or -1 if impossible
+    return 0;
+}

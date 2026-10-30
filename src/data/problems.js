@@ -1,5 +1,5 @@
-// AUTO-GENERATED 48-PROBLEM POOL (NO HIDDEN TESTS)
-export const PROBLEMS = [
+// Auto-generated 48 Viking-themed coding problems with beginner-friendly starter templates
+export const VIKING_PROBLEMS = [
   {
     "id": "sum-of-two-numbers",
     "tier": "dagger",
@@ -34,10 +34,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int a, b;\n    if (scanf(\"%d %d\", &a, &b) != 2) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sum A + B\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int a, b;\n    if (!(cin >> a >> b)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sum A + B\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the sum A + B\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a = int(tokens[0])\n    b = int(tokens[1])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the sum A + B\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -74,10 +74,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print EVEN or ODD\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print EVEN or ODD\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print EVEN or ODD\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print EVEN or ODD\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -114,10 +114,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int a, b, c;\n    if (scanf(\"%d %d %d\", &a, &b, &c) != 3) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the largest number\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int a, b, c;\n    if (!(cin >> a >> b >> c)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the largest number\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        int c = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the largest number\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a = int(tokens[0])\n    b = int(tokens[1])\n    c = int(tokens[2])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the largest number\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -155,10 +155,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the number of vowels in s\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the number of vowels in s\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the number of vowels in s\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the number of vowels in s\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -195,10 +195,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the reversed string\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the reversed string\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the reversed string\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the reversed string\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -235,10 +235,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char n_str[1005];\n    if (scanf(\"%1004s\", n_str) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sum of the digits\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string n_str;\n    if (!(cin >> n_str)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sum of the digits\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String n_str = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the sum of the digits\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n_str = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the sum of the digits\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -275,10 +275,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int y;\n    if (scanf(\"%d\", &y) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int y;\n    if (!(cin >> y)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int y = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    y = int(tokens[0])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -316,10 +316,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sum of the array elements\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sum of the array elements\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the sum of the array elements\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the sum of the array elements\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -356,10 +356,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print N lines representing the pattern\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print N lines representing the pattern\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print N lines representing the pattern\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print N lines representing the pattern\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -397,10 +397,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the smallest element in the array\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the smallest element in the array\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the smallest element in the array\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the smallest element in the array\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -437,10 +437,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char n_str[1005];\n    if (scanf(\"%1004s\", n_str) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the count of digits\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string n_str;\n    if (!(cin >> n_str)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the count of digits\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String n_str = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the count of digits\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n_str = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the count of digits\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -477,10 +477,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the 10 products space-separated on one line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the 10 products space-separated on one line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the 10 products space-separated on one line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the 10 products space-separated on one line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -517,10 +517,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -557,10 +557,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -599,10 +599,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the second largest number\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the second largest number\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the second largest number\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the second largest number\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -639,10 +639,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the most frequent character\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the most frequent character\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the most frequent character\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the most frequent character\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -680,10 +680,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, target;\n    if (scanf(\"%d %d\", &n, &target) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the two 1-based indices separated by a space\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, target;\n    if (!(cin >> n >> target)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the two 1-based indices separated by a space\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int target = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the two 1-based indices separated by a space\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    target = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the two 1-based indices separated by a space\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -720,10 +720,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005], t[1005];\n    if (scanf(\"%1004s %1004s\", s, t) != 2) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s, t;\n    if (!(cin >> s >> t)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        String t = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    t = tokens[1]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -761,10 +761,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the unique elements space-separated on a single line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the unique elements space-separated on a single line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the unique elements space-separated on a single line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the unique elements space-separated on a single line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -801,10 +801,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int a, b;\n    if (scanf(\"%d %d\", &a, &b) != 2) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print GCD and LCM separated by a space\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int a, b;\n    if (!(cin >> a >> b)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print GCD and LCM separated by a space\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print GCD and LCM separated by a space\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    a = int(tokens[0])\n    b = int(tokens[1])\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print GCD and LCM separated by a space\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -841,10 +841,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n - 1; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the missing integer\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n - 1);\n    for (int i = 0; i < n - 1; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the missing integer\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n - 1];\n        for (int i = 0; i < n - 1; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the missing integer\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the missing integer\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -882,10 +882,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the elements space-separated on a single line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the elements space-separated on a single line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the elements space-separated on a single line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the elements space-separated on a single line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -923,10 +923,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    char c;\n    if (scanf(\"%1004s %c\", s, &c) != 2) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the integer count of occurrences of c in s\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    char c;\n    if (!(cin >> s >> c)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the integer count of occurrences of c in s\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        char c = sc.next().charAt(0);\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the integer count of occurrences of c in s\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    c = tokens[1]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the integer count of occurrences of c in s\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -965,10 +965,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (!(cin >> n >> k)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    k = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1005,10 +1005,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1047,10 +1047,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the 1-based index of k, or -1 if absent\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (!(cin >> n >> k)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the 1-based index of k, or -1 if absent\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the 1-based index of k, or -1 if absent\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    k = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the 1-based index of k, or -1 if absent\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1087,10 +1087,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the length as an integer\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the length as an integer\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the length as an integer\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the length as an integer\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1128,10 +1128,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the maximum subarray sum\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the maximum subarray sum\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the maximum subarray sum\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the maximum subarray sum\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1169,10 +1169,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int intervals[1005][2];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d %d\", &intervals[i][0], &intervals[i][1]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print each merged interval on a new line (start end)\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<pair<int, int>> intervals(n);\n    for (int i = 0; i < n; i++) cin >> intervals[i].first >> intervals[i].second;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print each merged interval on a new line (start end)\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[][] intervals = new int[n][2];\n        for (int i = 0; i < n; i++) {\n            intervals[i][0] = sc.nextInt();\n            intervals[i][1] = sc.nextInt();\n        }\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print each merged interval on a new line (start end)\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    intervals = []\n    idx = 1\n    for _ in range(n):\n        intervals.append([int(tokens[idx]), int(tokens[idx+1])])\n        idx += 2\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print each merged interval on a new line (start end)\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1211,10 +1211,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the rotated array elements space-separated on a single line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (!(cin >> n >> k)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the rotated array elements space-separated on a single line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the rotated array elements space-separated on a single line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    k = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the rotated array elements space-separated on a single line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1252,10 +1252,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int r, c;\n    if (scanf(\"%d %d\", &r, &c) != 2) return 0;\n    int grid[105][105];\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) {\n            scanf(\"%d\", &grid[i][j]);\n        }\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the number of islands\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int r, c;\n    if (!(cin >> r >> c)) return 0;\n    vector<vector<int>> grid(r, vector<int>(c));\n    for (int i = 0; i < r; i++) {\n        for (int j = 0; j < c; j++) {\n            cin >> grid[i][j];\n        }\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the number of islands\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int r = sc.nextInt();\n        int c = sc.nextInt();\n        int[][] grid = new int[r][c];\n        for (int i = 0; i < r; i++) {\n            for (int j = 0; j < c; j++) {\n                grid[i][j] = sc.nextInt();\n            }\n        }\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the number of islands\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    r = int(tokens[0])\n    c = int(tokens[1])\n    grid = []\n    idx = 2\n    for _ in range(r):\n        grid.append([int(x) for x in tokens[idx:idx+c]])\n        idx += c\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the number of islands\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1293,10 +1293,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the total count of contiguous subarrays summing to k\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (!(cin >> n >> k)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the total count of contiguous subarrays summing to k\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the total count of contiguous subarrays summing to k\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    k = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the total count of contiguous subarrays summing to k\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1334,10 +1334,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the N product values space-separated on a single line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the N product values space-separated on a single line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the N product values space-separated on a single line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the N product values space-separated on a single line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1375,10 +1375,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the length of the longest consecutive sequence\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the length of the longest consecutive sequence\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the length of the longest consecutive sequence\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the length of the longest consecutive sequence\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1417,10 +1417,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (scanf(\"%d %d\", &n, &k) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the 1-based index of k, or -1 if not found\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, k;\n    if (!(cin >> n >> k)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the 1-based index of k, or -1 if not found\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int k = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the 1-based index of k, or -1 if not found\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    k = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the 1-based index of k, or -1 if not found\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1458,10 +1458,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the majority element, or -1 if none exists\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the majority element, or -1 if none exists\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the majority element, or -1 if none exists\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the majority element, or -1 if none exists\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1500,10 +1500,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, amount;\n    if (scanf(\"%d %d\", &n, &amount) != 2) return 0;\n    int coins[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &coins[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the minimum number of coins, or -1 if impossible\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, amount;\n    if (!(cin >> n >> amount)) return 0;\n    vector<int> coins(n);\n    for (int i = 0; i < n; i++) cin >> coins[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the minimum number of coins, or -1 if impossible\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int amount = sc.nextInt();\n        int[] coins = new int[n];\n        for (int i = 0; i < n; i++) coins[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the minimum number of coins, or -1 if impossible\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    amount = int(tokens[1])\n    coins = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the minimum number of coins, or -1 if impossible\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1541,10 +1541,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the length of the longest strictly increasing contiguous subarray\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the length of the longest strictly increasing contiguous subarray\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the length of the longest strictly increasing contiguous subarray\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the length of the longest strictly increasing contiguous subarray\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1581,10 +1581,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005], t[1005];\n    if (scanf(\"%1004s %1004s\", s, t) != 2) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s, t;\n    if (!(cin >> s >> t)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print YES or NO\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        String t = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print YES or NO\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    t = tokens[1]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print YES or NO\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1623,10 +1623,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n, w;\n    if (scanf(\"%d %d\", &n, &w) != 2) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the maximum possible sum <= w\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n, w;\n    if (!(cin >> n >> w)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the maximum possible sum <= w\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int w = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the maximum possible sum <= w\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    w = int(tokens[1])\n    arr = [int(x) for x in tokens[2:2+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the maximum possible sum <= w\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1663,10 +1663,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005], t[1005];\n    if (scanf(\"%1004s %1004s\", s, t) != 2) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the number of distinct characters shared by both strings\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s, t;\n    if (!(cin >> s >> t)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the number of distinct characters shared by both strings\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        String t = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the number of distinct characters shared by both strings\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    t = tokens[1]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the number of distinct characters shared by both strings\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1704,10 +1704,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the count of positive numbers\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the count of positive numbers\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the count of positive numbers\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the count of positive numbers\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1744,10 +1744,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    char s[1005];\n    if (scanf(\"%1004s\", s) != 1) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the longest palindromic substring\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    string s;\n    if (!(cin >> s)) return 0;\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the longest palindromic substring\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNext()) return;\n        String s = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the longest palindromic substring\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    s = tokens[0]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the longest palindromic substring\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1786,10 +1786,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the second smallest number\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the second smallest number\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the second smallest number\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the second smallest number\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1827,10 +1827,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the maximum difference, or -1 if no positive difference is possible\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the maximum difference, or -1 if no positive difference is possible\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the maximum difference, or -1 if no positive difference is possible\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the maximum difference, or -1 if no positive difference is possible\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1868,10 +1868,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sorted array space-separated on a single line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the sorted array space-separated on a single line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the sorted array space-separated on a single line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the sorted array space-separated on a single line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1909,10 +1909,10 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    char words[1005][105];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%104s\", words[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the longest common prefix on a single line\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<string> words(n);\n    for (int i = 0; i < n; i++) cin >> words[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the longest common prefix on a single line\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        String[] words = new String[n];\n        for (int i = 0; i < n; i++) words[i] = sc.next();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the longest common prefix on a single line\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    words = tokens[1:1+n]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the longest common prefix on a single line\n\nif __name__ == '__main__':\n    main()\n"
     }
   },
   {
@@ -1950,21 +1950,15 @@ export const PROBLEMS = [
       }
     ],
     "starterCode": {
-      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // Write your Viking battle code in C here\n    \n    return 0;\n}",
-      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n    // Write your solution in C++ here\n    \n    return 0;\n}",
-      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) throws Exception {\n        Scanner sc = new Scanner(System.in);\n        // Write your solution in Java here\n        \n    }\n}",
-      "python": "import sys\n\ndef main():\n    input_data = sys.stdin.read().split()\n    if not input_data:\n        return\n    # Write your solution in Python here\n    \n\nif __name__ == '__main__':\n    main()"
+      "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint main() {\n    // ===== INPUT (do not change) =====\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 0;\n    int arr[1005];\n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the minimum number of jumps, or -1 if unreachable\n    return 0;\n}\n",
+      "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    ios_base::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    // ===== INPUT (do not change) =====\n    int n;\n    if (!(cin >> n)) return 0;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // ===== END INPUT =====\n\n    // ===== WRITE YOUR CODE BELOW =====\n\n\n    // Print the minimum number of jumps, or -1 if unreachable\n    return 0;\n}\n",
+      "java": "import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // ===== INPUT (do not change) =====\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int[] arr = new int[n];\n        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();\n        // ===== END INPUT =====\n\n        // ===== WRITE YOUR CODE BELOW =====\n\n\n        // Print the minimum number of jumps, or -1 if unreachable\n    }\n}\n",
+      "python": "import sys\n\ndef main():\n    # ===== INPUT (do not change) =====\n    tokens = sys.stdin.read().split()\n    if not tokens:\n        return\n    n = int(tokens[0])\n    arr = [int(x) for x in tokens[1:1+n]]\n    # ===== END INPUT =====\n\n    # ===== WRITE YOUR CODE BELOW =====\n\n\n    # Print the minimum number of jumps, or -1 if unreachable\n\nif __name__ == '__main__':\n    main()\n"
     }
   }
 ];
 
-export const PROBLEMS_BY_ID = Object.fromEntries(
-  PROBLEMS.map((p) => [p.id, p])
-);
-
-export const PROBLEMS_BY_WEAPON = {
-  dagger: PROBLEMS.filter((p) => p.tier === 'dagger'),
-  axe: PROBLEMS.filter((p) => p.tier === 'axe'),
-  catapult: PROBLEMS.filter((p) => p.tier === 'catapult'),
-  ballista: PROBLEMS.filter((p) => p.tier === 'ballista'),
-};
+export const PROBLEM_MAP = VIKING_PROBLEMS.reduce((acc, p) => {
+  acc[p.id] = p;
+  return acc;
+}, {});

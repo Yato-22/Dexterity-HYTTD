@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // ===== INPUT (do not change) =====
+    string n_str;
+    if (!(cin >> n_str)) return 0;
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the count of digits
+    return 0;
+}

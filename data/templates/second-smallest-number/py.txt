@@ -1,0 +1,18 @@
+import sys
+
+def main():
+    # ===== INPUT (do not change) =====
+    tokens = sys.stdin.read().split()
+    if not tokens:
+        return
+    n = int(tokens[0])
+    arr = [int(x) for x in tokens[1:1+n]]
+    # ===== END INPUT =====
+
+    # ===== WRITE YOUR CODE BELOW =====
+
+
+    # Print the second smallest number
+
+if __name__ == '__main__':
+    main()

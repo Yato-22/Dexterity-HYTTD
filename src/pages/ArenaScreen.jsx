@@ -202,7 +202,7 @@ export default function ArenaScreen() {
             {/* Sound Mute Toggle */}
             <button
               onClick={() => setSoundMuted(!soundMuted)}
-              className="relative z-10 compact-iron-btn p-1 2xl:p-1.5 sword-cursor"
+              className="relative z-10 compact-iron-btn p-1 2xl:p-1.5 "
               title={soundMuted ? "Unmute War Horns" : "Mute War Horns"}
             >
               {!soundMuted ? (
@@ -215,7 +215,7 @@ export default function ArenaScreen() {
             {/* Logout Button */}
             <button
               onClick={logout}
-              className="relative z-10 compact-iron-btn p-1 2xl:p-1.5 sword-cursor hover:text-[#EF4444]"
+              className="relative z-10 compact-iron-btn p-1 2xl:p-1.5  hover:text-[#EF4444]"
               title={`Logged in as ${userTeam?.name || 'Viking'} (${userTeam?.memberName || 'Warrior'}) - Logout`}
             >
               <LogOut className="w-3.5 h-3.5 2xl:w-4 2xl:h-4 text-[#FFB347]" />

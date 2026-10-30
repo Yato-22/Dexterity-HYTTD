@@ -1,0 +1,18 @@
+import sys
+
+def main():
+    # ===== INPUT (do not change) =====
+    tokens = sys.stdin.read().split()
+    if not tokens:
+        return
+    s = tokens[0]
+    t = tokens[1]
+    # ===== END INPUT =====
+
+    # ===== WRITE YOUR CODE BELOW =====
+
+
+    # Print the number of distinct characters shared by both strings
+
+if __name__ == '__main__':
+    main()

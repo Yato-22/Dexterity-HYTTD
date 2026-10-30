@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    // ===== INPUT (do not change) =====
+    char n_str[1005];
+    if (scanf("%1004s", n_str) != 1) return 0;
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the count of digits
+    return 0;
+}

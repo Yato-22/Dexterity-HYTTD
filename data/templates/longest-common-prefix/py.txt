@@ -1,0 +1,18 @@
+import sys
+
+def main():
+    # ===== INPUT (do not change) =====
+    tokens = sys.stdin.read().split()
+    if not tokens:
+        return
+    n = int(tokens[0])
+    words = tokens[1:1+n]
+    # ===== END INPUT =====
+
+    # ===== WRITE YOUR CODE BELOW =====
+
+
+    # Print the longest common prefix on a single line
+
+if __name__ == '__main__':
+    main()

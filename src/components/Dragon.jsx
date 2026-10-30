@@ -103,7 +103,7 @@ export default function Dragon({
             ? { duration: 2.8, ease: "easeInOut" }
             : { duration: 0.5, ease: "easeOut" }
         }
-        className="relative z-10 w-full flex items-end justify-center sword-cursor"
+        className="relative z-10 w-full flex items-end justify-center "
         style={{ transformOrigin: "bottom center" }}
       >
         {/* Dragon Graphic Wrapper with continuous GPU-accelerated breathing */}

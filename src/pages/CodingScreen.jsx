@@ -403,7 +403,7 @@ export default function CodingScreen() {
         </p>
         <button
           onClick={() => navigate('/')}
-          className="px-6 py-2.5 bg-[#9A3412] hover:bg-[#C2410C] text-[#FFF8ED] font-heading font-bold rounded-lg border border-[#FFB347] flex items-center gap-2 sword-cursor"
+          className="px-6 py-2.5 bg-[#9A3412] hover:bg-[#C2410C] text-[#FFF8ED] font-heading font-bold rounded-lg border border-[#FFB347] flex items-center gap-2 "
         >
           <ArrowLeft className="w-4 h-4" />
           <span>RETURN TO THE ARENA</span>
@@ -484,7 +484,7 @@ export default function CodingScreen() {
       <header className="w-full flex-shrink-0 z-30 px-3 py-1.5 flex items-center justify-between border-b-2 border-[#4A3A2C] bg-[#140E0A]/90">
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-[#D8C39F] hover:text-[#FFF8ED] transition-colors sword-cursor"
+          className="flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-[#D8C39F] hover:text-[#FFF8ED] transition-colors "
         >
           <ArrowLeft className="w-4 h-4 text-[#FF7A1A]" />
           <span>ARENA</span>
@@ -537,37 +537,41 @@ export default function CodingScreen() {
                 <option value="python">Python 3</option>
                 <option value="java">Java (OpenJDK)</option>
               </select>
-            </div>
-
-            {/* Separate Font-Size Buttons and Reset Button (Keep separate per Part 8) */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 border-r border-[#4A3A2C] pr-2">
-                <button
-                  onClick={() => setFontSize((s) => Math.max(12, s - 1))}
-                  className="px-2 py-0.5 rounded bg-[#140E0A] border border-[#5A4331] text-xs font-bold text-[#D8C39F] hover:text-[#FFF8ED]"
-                  title="Decrease font size"
-                >
-                  A-
-                </button>
-                <span className="text-[11px] font-mono text-[#A89078] w-5 text-center">{fontSize}</span>
-                <button
-                  onClick={() => setFontSize((s) => Math.min(22, s + 1))}
-                  className="px-2 py-0.5 rounded bg-[#140E0A] border border-[#5A4331] text-xs font-bold text-[#D8C39F] hover:text-[#FFF8ED]"
-                  title="Increase font size"
-                >
-                  A+
-                </button>
-              </div>
 
               <button
                 onClick={handleResetCode}
-                className="flex items-center gap-1 px-2.5 py-1 bg-[#140E0A] hover:bg-[#2A211B] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#D8C39F] hover:text-[#FF7A1A] transition-colors sword-cursor"
-                title="Reset code to starter boilerplate"
+                className="flex items-center gap-1 px-2.5 py-1 bg-[#140E0A] hover:bg-[#2A211B] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#D8C39F] hover:text-[#FF7A1A] transition-colors"
+                title="Reset code to starter template"
               >
                 <RotateCcw className="w-3 h-3" />
-                <span>RESET TEMPLATE</span>
+                <span>Reset template</span>
               </button>
             </div>
+
+            {/* Font-Size Buttons */}
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setFontSize((s) => Math.max(12, s - 1))}
+                className="px-2 py-0.5 rounded bg-[#140E0A] border border-[#5A4331] text-xs font-bold text-[#D8C39F] hover:text-[#FFF8ED]"
+                title="Decrease font size"
+              >
+                A-
+              </button>
+              <span className="text-[11px] font-mono text-[#A89078] w-5 text-center">{fontSize}</span>
+              <button
+                onClick={() => setFontSize((s) => Math.min(22, s + 1))}
+                className="px-2 py-0.5 rounded bg-[#140E0A] border border-[#5A4331] text-xs font-bold text-[#D8C39F] hover:text-[#FFF8ED]"
+                title="Increase font size"
+              >
+                A+
+              </button>
+            </div>
+          </div>
+
+          {/* Permanent Note Above Editor */}
+          <div className="px-3 py-1 bg-[#140E0A] border border-[#4A3A2C] rounded text-[11px] 2xl:text-xs text-[#E6C280] font-mono flex items-center gap-2">
+            <span className="text-[#FF7A1A] font-bold">ℹ</span>
+            <span>Write your code below the marked line and leave the INPUT part as it is.</span>
           </div>
 
           {/* Monaco Editor Container */}
@@ -633,7 +637,7 @@ export default function CodingScreen() {
                 <button
                   onClick={handleRun}
                   disabled={isRunning || cooldownSeconds > 0 || isPaused}
-                  className="px-3 py-1 bg-[#2E241C] hover:bg-[#3E3126] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#FFF8ED] uppercase tracking-wider flex items-center gap-1.5 transition-all disabled:opacity-50 sword-cursor"
+                  className="px-3 py-1 bg-[#2E241C] hover:bg-[#3E3126] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#FFF8ED] uppercase tracking-wider flex items-center gap-1.5 transition-all disabled:opacity-50 "
                 >
                   <Play className="w-3.5 h-3.5 text-[#16A34A]" />
                   <span>RUN (SAMPLES)</span>
@@ -642,7 +646,7 @@ export default function CodingScreen() {
                 <button
                   onClick={handleTest}
                   disabled={isRunning || cooldownSeconds > 0 || isPaused}
-                  className="px-3 py-1 bg-[#2E241C] hover:bg-[#3E3126] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#FFF8ED] uppercase tracking-wider flex items-center gap-1.5 transition-all disabled:opacity-50 sword-cursor"
+                  className="px-3 py-1 bg-[#2E241C] hover:bg-[#3E3126] border border-[#5A4331] rounded text-xs font-heading font-bold text-[#FFF8ED] uppercase tracking-wider flex items-center gap-1.5 transition-all disabled:opacity-50 "
                 >
                   <FlaskConical className="w-3.5 h-3.5 text-[#2563EB]" />
                   <span>TEST CUSTOM</span>
@@ -651,7 +655,7 @@ export default function CodingScreen() {
                 <button
                   onClick={handleSubmit}
                   disabled={isRunning || cooldownSeconds > 0 || isPaused}
-                  className="px-4 py-1 bg-gradient-to-r from-[#9A3412] to-[#C2410C] hover:from-[#C2410C] hover:to-[#EA580C] border border-[#FFB347] rounded text-xs font-heading font-extrabold text-[#FFF8ED] uppercase tracking-wider flex items-center gap-1.5 shadow-md transition-all disabled:opacity-50 sword-cursor"
+                  className="px-4 py-1 bg-gradient-to-r from-[#9A3412] to-[#C2410C] hover:from-[#C2410C] hover:to-[#EA580C] border border-[#FFB347] rounded text-xs font-heading font-extrabold text-[#FFF8ED] uppercase tracking-wider flex items-center gap-1.5 shadow-md transition-all disabled:opacity-50 "
                 >
                   <Send className="w-3.5 h-3.5 text-[#FFD700]" />
                   <span>{cooldownSeconds > 0 ? `WAIT (${cooldownSeconds}s)` : 'SUBMIT TRIAL'}</span>

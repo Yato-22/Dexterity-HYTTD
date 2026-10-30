@@ -110,7 +110,7 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`compact-tab py-1.5 px-0.5 flex flex-col items-center relative sword-cursor transition-all ${
+                className={`compact-tab py-1.5 px-0.5 flex flex-col items-center relative  transition-all ${
                   isActive
                     ? 'bg-[#1F1F1F] text-[#FFFFFF] shadow-sm'
                     : 'bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#374151]'

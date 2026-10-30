@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    // ===== INPUT (do not change) =====
+    char s[1005];
+    char c;
+    if (scanf("%1004s %c", s, &c) != 2) return 0;
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the integer count of occurrences of c in s
+    return 0;
+}

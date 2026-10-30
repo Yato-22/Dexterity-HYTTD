@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // ===== INPUT (do not change) =====
+    string s;
+    if (!(cin >> s)) return 0;
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the length as an integer
+    return 0;
+}

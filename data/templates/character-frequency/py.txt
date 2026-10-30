@@ -1,0 +1,18 @@
+import sys
+
+def main():
+    # ===== INPUT (do not change) =====
+    tokens = sys.stdin.read().split()
+    if not tokens:
+        return
+    s = tokens[0]
+    c = tokens[1]
+    # ===== END INPUT =====
+
+    # ===== WRITE YOUR CODE BELOW =====
+
+
+    # Print the integer count of occurrences of c in s
+
+if __name__ == '__main__':
+    main()

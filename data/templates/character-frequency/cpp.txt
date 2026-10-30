@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    // ===== INPUT (do not change) =====
+    string s;
+    char c;
+    if (!(cin >> s >> c)) return 0;
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the integer count of occurrences of c in s
+    return 0;
+}

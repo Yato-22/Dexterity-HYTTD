@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    // ===== INPUT (do not change) =====
+    int r, c;
+    if (scanf("%d %d", &r, &c) != 2) return 0;
+    int grid[105][105];
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            scanf("%d", &grid[i][j]);
+        }
+    }
+    // ===== END INPUT =====
+
+    // ===== WRITE YOUR CODE BELOW =====
+
+
+    // Print the number of islands
+    return 0;
+}

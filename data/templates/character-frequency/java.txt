@@ -1,0 +1,18 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // ===== INPUT (do not change) =====
+        if (!sc.hasNext()) return;
+        String s = sc.next();
+        char c = sc.next().charAt(0);
+        // ===== END INPUT =====
+
+        // ===== WRITE YOUR CODE BELOW =====
+
+
+        // Print the integer count of occurrences of c in s
+    }
+}
