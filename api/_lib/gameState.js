@@ -176,6 +176,8 @@ export async function processAcceptedSubmission({
     const nowIso = new Date().toISOString();
     const serverTimestamp = admin.firestore.FieldValue.serverTimestamp();
 
+    const tName = teamData.teamName || teamData.name || teamId;
+
     if (isFirstSolve) {
       damage = problem.xp || 2;
 
@@ -185,7 +187,7 @@ export async function processAcceptedSubmission({
           isFinalBlow = true;
           newStatus = 'defeated';
           winnerTeamId = teamId;
-          winnerTeamName = teamData.name;
+          winnerTeamName = tName;
         }
       }
 
@@ -246,9 +248,12 @@ export async function processAcceptedSubmission({
       // Legacy fallback board on team doc
       const legacyBoard = members[normMemberKey]?.board || solverBoard;
 
+      const tName = teamData.teamName || teamData.name || teamId;
+
       // Update team document
       transaction.update(teamRef, {
         totalDamage: newTotalDamage,
+        xp: newTotalDamage,
         acceptedSolves: newAcceptedSolves,
         totalSubmits: newTotalSubmits,
         solvedProblemIds: updatedSolved,
@@ -262,7 +267,7 @@ export async function processAcceptedSubmission({
       // Feed entry (latest 4 kept)
       const newFeedEntry = {
         id: `feed_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-        teamName: teamData.name,
+        teamName: tName,
         problemId: problem.id,
         weapon: tier,
         damage,
@@ -275,8 +280,10 @@ export async function processAcceptedSubmission({
       const teamIdx = existingTeams.findIndex((t) => t.id === teamId);
       const teamSummary = {
         id: teamId,
-        name: teamData.name,
+        name: tName,
+        teamName: tName,
         totalDamage: newTotalDamage,
+        xp: newTotalDamage,
         acceptedSolves: newAcceptedSolves,
         totalSubmits: newTotalSubmits,
         penalties: teamData.penalties || 0,
@@ -296,8 +303,8 @@ export async function processAcceptedSubmission({
         hp: newHp,
         maxHp: stateData.dragon?.maxHp ?? dragonData.maxHp ?? 100,
         status: newStatus,
-        winnerTeamId,
-        winnerTeamName,
+        winnerTeamId: winnerTeamId || null,
+        winnerTeamName: winnerTeamName || null,
       };
 
       // Update public/state

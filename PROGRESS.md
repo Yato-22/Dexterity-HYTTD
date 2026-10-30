@@ -48,8 +48,8 @@
   - [x] 7.1 Solutions in all 4 languages in `data/reference/`; `scripts/verifyTemplates.js` runs 192 runs (48 x 4) against real Piston runner.
   - [x] 7.2 Verify unchanged starters give Wrong Answer; test compile error, crash, timeout on sample of 8 problems.
   - [x] 7.3 Local feature tests covering all specification flows.
-- [ ] **Step 8: Deploy, Live Tests, Load Test, Cleanup**
-  - [ ] 8.1 Publish Firestore rules, seed `pool_v2`, set Vercel env vars, deploy as PREVIEW.
-  - [ ] 8.2 Run all 48 problems through preview API with TEST_ teams.
-  - [ ] 8.3 Run load test (40 teams, 40 parallel submits).
-  - [ ] 8.4 Clean up all TEST_ data and reset dragon.
+- [x] **Step 8: Deploy, Live Tests, Load Test, Cleanup**
+  - [x] 8.1 Publish Firestore rules, seed `pool_v2`, set Vercel env vars, deploy as PREVIEW.
+  - [x] 8.2 Run all 48 problems through preview API with TEST_ teams.
+  - [x] 8.3 Run load test (40 teams, 40 parallel submits).
+  - [x] 8.4 Clean up all TEST_ data and reset dragon.
