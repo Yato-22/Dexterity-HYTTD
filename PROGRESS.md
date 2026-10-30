@@ -12,13 +12,13 @@
   - [x] 1.2 Two independent Python reference solutions per problem in `generate_and_verify_48.py`.
   - [x] 1.3 Run `scripts/verifyPool.js` to ensure 100% agreement on all sample and hidden tests.
   - [x] 1.4 Seed into `pool_v2` and `problems_private_v2` via `scripts/seedPool.js`.
-- [ ] **Step 2: Team CSV Import and Login**
-  - [ ] 2.1 `/admin` "Import teams" UI: CSV upload, preview parsed rows, download template, confirm import. Support 1 or 2 members, phone matching last 10 digits.
-  - [ ] 2.2 Server endpoint `POST /api/admin/importTeams` creates registry and teams without overwriting existing scores on re-import.
-  - [ ] 2.3 "Replace all teams" option with confirmation.
-  - [ ] 2.4 Registered teams table on `/admin` showing member names, solved counts, login status, XP, delete team button.
-  - [ ] 2.5 Login screen: Team Name, Leader Phone, Your Name. Claiming slots 1 and 2, rejecting 3rd with "This team already has 2 members."
-  - [ ] 2.6 Session tokens per member, editor code in localStorage per (team, member, problem, lang).
+- [x] **Step 2: Team CSV Import and Login**
+  - [x] 2.1 `/admin` "Import teams" UI: CSV upload, preview parsed rows, download template, confirm import. Support 1 or 2 members, phone matching last 10 digits.
+  - [x] 2.2 Server endpoint `POST /api/admin/importTeams` creates registry and teams without overwriting existing scores on re-import.
+  - [x] 2.3 "Replace all teams" option with confirmation.
+  - [x] 2.4 Registered teams table on `/admin` showing member names, solved counts, login status, XP, delete team button.
+  - [x] 2.5 Login screen: Team Name, Leader Phone, Your Name. Claiming slots 1 and 2, rejecting 3rd with "This team already has 2 members."
+  - [x] 2.6 Session tokens per member, editor code in localStorage per (team, member, problem, lang).
 - [ ] **Step 3: Per-Member Boards (5 per tier)**
   - [ ] 3.1 Per-member board stored in `members.<name>.board`, avoiding teammate problems where possible.
   - [ ] 3.2 Track `seenIds` per member; team solve removes problem from both members' boards.
