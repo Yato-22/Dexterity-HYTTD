@@ -36,6 +36,7 @@ export default async function handler(req, res) {
     case 'settings':
       return handleSettings(req, res);
     case 'teams':
+    case 'teams-list':
       return handleTeamsList(req, res);
     case 'export':
       return handleExport(req, res);
