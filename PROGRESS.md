@@ -19,27 +19,27 @@
   - [x] 2.4 Registered teams table on `/admin` showing member names, solved counts, login status, XP, delete team button.
   - [x] 2.5 Login screen: Team Name, Leader Phone, Your Name. Claiming slots 1 and 2, rejecting 3rd with "This team already has 2 members."
   - [x] 2.6 Session tokens per member, editor code in localStorage per (team, member, problem, lang).
-- [ ] **Step 3: Per-Member Boards (5 per tier)**
-  - [ ] 3.1 Per-member board stored in `members.<name>.board`, avoiding teammate problems where possible.
-  - [ ] 3.2 Track `seenIds` per member; team solve removes problem from both members' boards.
-  - [ ] 3.3 Box shrinks when < 5 unsolved remain; "All cleared" when none remain.
-  - [ ] 3.4 Per-member refresh token (`POST /api/refresh`).
-  - [ ] 3.5 Server rejects Run/Test/Submit for off-board problems.
-- [ ] **Step 4: Ranking, Accuracy, Penalties**
-  - [ ] 4.1 Team XP decides position; cosmetic "Dragon Slayer" badge.
-  - [ ] 4.2 Tiebreaker order: (1) accuracy, (2) penalties, (3) lastSolveAt.
-  - [ ] 4.3 Track `totalDamage`, `acceptedSolves`, `totalSubmits`, `penalties`, `lastSolveAt`, and `members.<name>.solvedCount`.
-  - [ ] 4.4 Counted submit rules; admin toggle for compilation error as penalty.
-  - [ ] 4.5 Shared ranking function; `/admin` "End event and finalize" freezes standings.
-- [ ] **Step 5: Arena and UI**
-  - [ ] 5.1 Lower dragon slightly, +10-15% site-wide fonts, default browser cursor everywhere, default editor lang C.
-  - [ ] 5.2 Refresh button: bright accent, bigger, subtle glow, disabled tooltip when no token.
-  - [ ] 5.3 4 small warriors (6-9% screen height) along bottom; delayed projectile throw on real solve; no reload replay.
-  - [ ] 5.4 Tome of Trials: titles & descriptions 1.4x, tabs/badges/attempt buttons 1.25x, 2-line descriptions, adaptive height.
-  - [ ] 5.5 Coding screen 50/50 responsive split; 18-20px body text, 16px sample boxes; Hall of Valor Top 5 + pinned 6th row.
-  - [ ] 5.6 Leaderboard: Top 5 Warbands on Arena, Coding Screen, and Display; rank, name, XP only.
-  - [ ] 5.7 Solved count in standing panel, coding header, and `/admin`.
-  - [ ] 5.8 Admin vertical scrolling; remove stray black dots; fix Battle Log clipping; update footer hint.
+- [x] **Step 3: Per-Member Boards (5 per tier)**
+  - [x] 3.1 Per-member board stored in `members.<name>.board`, avoiding teammate problems where possible.
+  - [x] 3.2 Track `seenIds` per member; team solve removes problem from both members' boards.
+  - [x] 3.3 Box shrinks when < 5 unsolved remain; "All cleared" when none remain.
+  - [x] 3.4 Per-member refresh token (`POST /api/refresh`).
+  - [x] 3.5 Server rejects Run/Test/Submit for off-board problems.
+- [x] **Step 4: Ranking, Accuracy, Penalties**
+  - [x] 4.1 Team XP decides position; cosmetic "Dragon Slayer" badge.
+  - [x] 4.2 Tiebreaker order: (1) accuracy, (2) penalties, (3) lastSolveAt.
+  - [x] 4.3 Track `totalDamage`, `acceptedSolves`, `totalSubmits`, `penalties`, `lastSolveAt`, and `members.<name>.solvedCount`.
+  - [x] 4.4 Counted submit rules; admin toggle for compilation error as penalty.
+  - [x] 4.5 Shared ranking function; `/admin` "End event and finalize" freezes standings.
+- [x] **Step 5: Arena and UI**
+  - [x] 5.1 Lower dragon slightly, +10-15% site-wide fonts, default browser cursor everywhere, default editor lang C.
+  - [x] 5.2 Refresh button: bright accent, bigger, subtle glow, disabled tooltip when no token.
+  - [x] 5.3 4 small warriors (6-9% screen height) along bottom; delayed projectile throw on real solve; no reload replay.
+  - [x] 5.4 Tome of Trials: titles & descriptions 1.4x, tabs/badges/attempt buttons 1.25x, 2-line descriptions, adaptive height.
+  - [x] 5.5 Coding screen 50/50 responsive split; 18-20px body text, 16px sample boxes; Hall of Valor Top 5 + pinned 6th row.
+  - [x] 5.6 Leaderboard: Top 5 Warbands on Arena, Coding Screen, and Display; rank, name, XP only.
+  - [x] 5.7 Solved count in standing panel, coding header, and `/admin`.
+  - [x] 5.8 Admin vertical scrolling; remove stray black dots; fix Battle Log clipping; update footer hint.
 - [ ] **Step 6: Pre-filled Starter Programs**
   - [ ] 6.1 `scripts/genTemplates.js` generating C, C++, Java, Python templates with `// ===== INPUT =====` and `// ===== WRITE YOUR CODE BELOW =====`.
   - [ ] 6.2 Templates compile cleanly and print nothing (giving Wrong Answer, not compile error).

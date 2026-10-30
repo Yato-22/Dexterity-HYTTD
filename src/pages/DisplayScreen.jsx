@@ -176,7 +176,7 @@ export default function DisplayScreen() {
           />
 
           <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-4">
-            <div className="translate-y-6 2xl:translate-y-10 w-full flex justify-center">
+            <div className="translate-y-8 2xl:translate-y-14 w-full flex justify-center">
               <Dragon
                 hp={hp}
                 maxHp={maxHp}

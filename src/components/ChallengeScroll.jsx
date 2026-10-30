@@ -166,13 +166,13 @@ export default function ChallengeScroll({ solvedProblems = [], isHit = false }) 
                 ? `Redraw up to 5 new unsolved ${activeTabMeta?.name} trials`
                 : 'No refresh token available. Solve any trial to earn your next tier refresh token.'
             }
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-[11px] 2xl:text-[12px] font-heading font-extrabold uppercase tracking-wider transition-all ${
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-[12px] 2xl:text-[13px] font-heading font-black uppercase tracking-wider transition-all ${
               refreshToken && !isRefreshing
-                ? 'bg-gradient-to-r from-[#EA580C] to-[#F97316] text-[#FFF8ED] border-2 border-[#FDBA74] shadow-[0_0_12px_rgba(234,88,12,0.5)] hover:shadow-[0_0_18px_rgba(234,88,12,0.7)] hover:scale-105 active:scale-95 cursor-pointer'
-                : 'bg-[#E5E7EB] text-[#9CA3AF] border border-[#D1D5DB] cursor-not-allowed opacity-50'
+                ? 'bg-gradient-to-r from-[#EA580C] to-[#F97316] text-[#FFF8ED] border-2 border-[#FDBA74] shadow-[0_0_14px_rgba(249,115,22,0.65)] hover:shadow-[0_0_22px_rgba(249,115,22,0.85)] hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-[#FF7A1A]/50'
+                : 'bg-[#E5E7EB] text-[#9CA3AF] border border-[#D1D5DB] cursor-not-allowed opacity-60'
             }`}
           >
-            <RotateCcw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-[#FFE8D6]' : ''}`} />
+            <RotateCcw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-[#FFE8D6]' : ''}`} />
             <span>{isRefreshing ? 'REDRAWING...' : 'REFRESH TIER'}</span>
           </button>
         </div>

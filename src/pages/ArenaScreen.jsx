@@ -322,7 +322,7 @@ export default function ArenaScreen() {
             />
 
             <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-1">
-              <div className="translate-y-4 2xl:translate-y-8 w-full flex justify-center">
+              <div className="translate-y-8 2xl:translate-y-12 w-full flex justify-center">
                 <Dragon
                   hp={hp}
                   maxHp={maxHp}
