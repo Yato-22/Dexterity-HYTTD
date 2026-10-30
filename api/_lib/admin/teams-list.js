@@ -1,5 +1,6 @@
 import { db } from '../firebaseAdmin.js';
 import { verifyAdmin } from '../auth.js';
+import { resolveTeamMembersAndPhone } from './export.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method Not Allowed' });
@@ -17,9 +18,11 @@ export default async function handler(req, res) {
     });
 
     const result = regSnap.docs.map((doc) => {
-      const reg = doc.data();
+      const reg = doc.data() || {};
       const teamId = doc.id;
       const team = teamsMap[teamId] || {};
+
+      const { phoneNumber, member1Name, member2Name } = resolveTeamMembersAndPhone(team, reg);
 
       const membersObj = team.members || {};
       const loggedInMembers = Object.values(membersObj).map((m) => m.name || m);
@@ -58,6 +61,9 @@ export default async function handler(req, res) {
       return {
         id: teamId,
         teamName: reg.teamName || team.name || teamId,
+        phoneNumber,
+        member1Name,
+        member2Name,
         memberNames: displayMemberNames,
         isLoggedIn: isOnline,
         loggedInMembers: loggedInMembers.join(', ') || 'None',

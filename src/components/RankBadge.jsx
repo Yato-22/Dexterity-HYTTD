@@ -31,37 +31,20 @@ export default function RankBadge({
         rotation={-0.6}
         className="w-full"
       >
-        <div className="flex items-center gap-3 pl-6 pr-6 py-1">
-          {/* Rank Number in Cinzel */}
-          <div className="flex-shrink-0 flex items-center justify-center">
-            <span className="font-heading text-[34px] md:text-[38px] 2xl:text-[44px] font-bold text-[#FFB347] heading-shadow leading-none select-none">
+        <div className="flex items-center gap-3 pl-6 pr-6 py-2">
+          {/* Rank Number in Cinzel with subtle label */}
+          <div className="flex-shrink-0 flex flex-col items-center justify-center">
+            <span className="font-heading text-[10px] 2xl:text-[11px] font-bold text-[#D8C39F] uppercase tracking-wider leading-none">
+              RANK
+            </span>
+            <span className="font-heading text-[32px] md:text-[36px] 2xl:text-[42px] font-bold text-[#FFB347] heading-shadow leading-none select-none mt-0.5">
               #{rank}
             </span>
           </div>
 
-          {/* Right Area: Top stats bar + Bottom Team name & XP */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center gap-1">
-            {/* Top row: Title + Clean Solved Count Badges */}
-            <div className="flex items-center justify-between gap-2 leading-none">
-              <span className="font-heading text-[10px] 2xl:text-[11.5px] font-bold text-[#D8C39F] uppercase tracking-wider">
-                WARBAND STANDING
-              </span>
-              {memberName && (
-                <div className="flex items-center gap-2 whitespace-nowrap">
-                  <span className="text-[#FFB347] font-sans font-bold text-xs 2xl:text-sm flex items-center gap-1 bg-[#140E0A]/90 px-1.5 py-0.5 rounded border border-[#5A4331]">
-                    <User className="w-3 h-3 text-[#FF9D43] flex-shrink-0" />
-                    <span>{memberName} - <span className="text-[#FFF8ED]">{memberSolvedCount}</span> solved</span>
-                  </span>
-                  {teamSolvedCount !== null && (
-                    <span className="text-[#86EFAC] font-sans font-bold text-xs 2xl:text-sm bg-[#140E0A]/90 px-1.5 py-0.5 rounded border border-[#2D5A2D]">
-                      Team: <span className="text-[#FFF8ED]">{teamSolvedCount}</span>
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Bottom row: Team Name + XP badge */}
+          {/* Right Area: Top Team name & XP + Bottom Prominent Solved Counts */}
+          <div className="flex-1 min-w-0 flex flex-col justify-center gap-1.5">
+            {/* Top row: Team Name + XP badge */}
             <div className="flex items-center justify-between gap-2">
               <span className="text-[15px] 2xl:text-[18px] font-bold text-[#FFF8ED] truncate font-sans">
                 {teamName}
@@ -70,6 +53,21 @@ export default function RankBadge({
                 {score} XP
               </span>
             </div>
+
+            {/* Bottom row: Clean, clearly legible Solved Count Badges */}
+            {memberName && (
+              <div className="flex items-center gap-2 whitespace-nowrap">
+                <span className="text-[#FFB347] font-sans font-bold text-[13px] 2xl:text-[14.5px] flex items-center gap-1.5 bg-[#140E0A]/95 px-2 py-0.5 rounded border border-[#5A4331] shadow-sm">
+                  <User className="w-3.5 h-3.5 text-[#FF9D43] flex-shrink-0" />
+                  <span>{memberName} - <span className="text-[#FFF8ED] font-extrabold">{memberSolvedCount}</span> solved</span>
+                </span>
+                {teamSolvedCount !== null && (
+                  <span className="text-[#86EFAC] font-sans font-bold text-[13px] 2xl:text-[14.5px] bg-[#140E0A]/95 px-2 py-0.5 rounded border border-[#2D5A2D] shadow-sm">
+                    Team: <span className="text-[#FFF8ED] font-extrabold">{teamSolvedCount}</span>
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </BrokenPlankPanel>

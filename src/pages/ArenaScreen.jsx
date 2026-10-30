@@ -251,7 +251,7 @@ export default function ArenaScreen() {
             animate={{ rotate: [-0.35, 0.35, -0.35] }}
             transition={{ repeat: Infinity, duration: 8.5, ease: "easeInOut" }}
             style={{ transformOrigin: "top center" }}
-            className="w-[20%] min-w-[270px] max-w-[340px] h-full flex flex-col justify-between gap-1.5 2xl:gap-2 flex-shrink-0 relative"
+            className="w-[20%] min-w-[285px] max-w-[360px] h-full flex flex-col justify-between gap-1.5 2xl:gap-2 flex-shrink-0 relative"
           >
             {/* Left Strand */}
             <div

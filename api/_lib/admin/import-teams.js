@@ -208,6 +208,9 @@ export default async function handler(req, res) {
       updatedCount++;
       await teamDocRef.update({
         name: item.teamName,
+        leaderPhone: item.leaderPhone,
+        leaderName: item.leaderName,
+        member2Name: item.member2Name,
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
     } else {
@@ -216,6 +219,9 @@ export default async function handler(req, res) {
       await teamDocRef.set({
         name: item.teamName,
         teamKey: item.teamKey,
+        leaderPhone: item.leaderPhone,
+        leaderName: item.leaderName,
+        member2Name: item.member2Name,
         totalDamage: 0,
         acceptedSolves: 0,
         totalSubmits: 0,

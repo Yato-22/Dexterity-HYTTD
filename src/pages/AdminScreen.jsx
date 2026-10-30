@@ -944,6 +944,7 @@ export default function AdminScreen() {
                 <thead className="bg-[#1E1914] text-[#D8C39F] font-heading uppercase text-[10px] tracking-wider sticky top-0 border-b border-[#3A2D22]">
                   <tr>
                     <th className="p-2">Team Name</th>
+                    <th className="p-2">Leader Phone</th>
                     <th className="p-2">Registered Members</th>
                     <th className="p-2">Login Status</th>
                     <th className="p-2">XP</th>
@@ -956,6 +957,7 @@ export default function AdminScreen() {
                   {registeredTeams.map((t) => (
                     <tr key={t.id} className="hover:bg-[#1E140E]/60">
                       <td className="p-2 font-bold text-[#FFF8ED]">{t.teamName}</td>
+                      <td className="p-2 font-mono text-[#D8C39F]">{t.phoneNumber || '—'}</td>
                       <td className="p-2 text-[#D8C39F]">{t.memberNames}</td>
                       <td className="p-2">
                         {t.isLoggedIn ? (
@@ -1017,6 +1019,9 @@ export default function AdminScreen() {
                   <tr>
                     <th className="p-2">Rank</th>
                     <th className="p-2">Warband Name</th>
+                    <th className="p-2">Phone Number</th>
+                    <th className="p-2">Member 1</th>
+                    <th className="p-2">Member 2</th>
                     <th className="p-2">Final XP</th>
                     <th className="p-2">Accuracy (%)</th>
                     <th className="p-2">Penalties</th>
@@ -1028,6 +1033,9 @@ export default function AdminScreen() {
                     <tr key={r.id}>
                       <td className="p-2 font-heading font-bold text-[#FDE047]">#{r.rank}</td>
                       <td className="p-2 font-bold text-white">{r.name}</td>
+                      <td className="p-2 font-mono text-[#D8C39F]">{r.phoneNumber || '—'}</td>
+                      <td className="p-2 text-[#E9D5FF]">{r.member1Name || '—'}</td>
+                      <td className="p-2 text-[#E9D5FF]">{r.member2Name || '—'}</td>
                       <td className="p-2 font-mono text-[#4ADE80] font-bold">{r.totalDamage} XP</td>
                       <td className="p-2 font-mono text-[#86EFAC]">{r.accuracy}%</td>
                       <td className="p-2 font-mono text-[#FCA5A5]">{r.penalties || 0}</td>
