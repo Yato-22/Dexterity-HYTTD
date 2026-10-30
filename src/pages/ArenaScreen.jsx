@@ -45,6 +45,7 @@ export default function ArenaScreen() {
     activeFlashZone,
     stuckBolts,
     pendingFireEvents,
+    consumePendingFireEvent,
     recoilingStation,
     triggerStationRecoil,
     onProjectileImpact,
@@ -55,19 +56,22 @@ export default function ArenaScreen() {
   const [leftTopOffset, setLeftTopOffset] = useState(100);
   const [plaqueTopOffset, setPlaqueTopOffset] = useState(14);
 
-  // Delayed damage after returning from solve (~1.5s delay, consumed once)
+  // Delayed damage ONLY after returning from a real fresh solve (~1.5s delay, consumed once)
   useEffect(() => {
     const rawPending = sessionStorage.getItem('techflix_pending_attack');
+    sessionStorage.removeItem('techflix_pending_attack');
     if (rawPending) {
-      sessionStorage.removeItem('techflix_pending_attack');
       try {
         const attack = JSON.parse(rawPending);
-        const timer = setTimeout(() => {
-          if (triggerWeaponAttack) {
-            triggerWeaponAttack(attack.tier || 'dagger');
-          }
-        }, 1500);
-        return () => clearTimeout(timer);
+        // Only trigger if attack was created less than 4 seconds ago
+        if (attack.timestamp && Date.now() - attack.timestamp < 4000) {
+          const timer = setTimeout(() => {
+            if (triggerWeaponAttack) {
+              triggerWeaponAttack(attack.tier || 'dagger');
+            }
+          }, 1500);
+          return () => clearTimeout(timer);
+        }
       } catch {}
     }
   }, [triggerWeaponAttack]);
@@ -319,6 +323,7 @@ export default function ArenaScreen() {
               pendingFireEvents={pendingFireEvents}
               onProjectileImpact={onProjectileImpact}
               onStationRecoil={triggerStationRecoil}
+              onConsumeEvent={consumePendingFireEvent}
             />
 
             <div className="flex-1 w-full flex items-end justify-center relative min-h-0 pb-1">

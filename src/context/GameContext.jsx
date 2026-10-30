@@ -254,37 +254,11 @@ export function GameProvider({ children }) {
         }));
         setFeed(formattedFeed);
 
-        // Trigger projectile animations on new feed entries
-        if (initialFeedLoadedRef.current) {
-          rawFeed.forEach((item) => {
-            if (item.id && !knownFeedIdsRef.current.has(item.id)) {
-              knownFeedIdsRef.current.add(item.id);
-              const weaponKey = item.weapon || 'axe';
-              triggerStationRecoil(weaponKey);
-
-              const candidateZones = WEAPON_ZONE_MAPPING[weaponKey] || ['chest'];
-              const targetZone = candidateZones[Math.floor(Math.random() * candidateZones.length)];
-              const fireEvent = {
-                id: 'fire-feed-' + item.id + '-' + Date.now(),
-                weaponKey,
-                targetZone,
-                actualDamage: item.damage || WEAPONS[weaponKey]?.damage || 5,
-                actingTeam: { name: item.teamName || 'Viking' },
-                teamId: 'live',
-                weaponVerb: WEAPONS[weaponKey]?.verb || 'struck',
-                targetPart: 'hide',
-                customFeedText: null,
-                timestamp: Date.now(),
-              };
-              setPendingFireEvents((prev) => [...prev.slice(-10), fireEvent]);
-            }
-          });
-        } else {
-          rawFeed.forEach((item) => {
-            if (item.id) knownFeedIdsRef.current.add(item.id);
-          });
-          initialFeedLoadedRef.current = true;
-        }
+        // Feed tracks incoming battle notifications for LiveFeed display
+        rawFeed.forEach((item) => {
+          if (item.id) knownFeedIdsRef.current.add(item.id);
+        });
+        initialFeedLoadedRef.current = true;
       },
       (err) => {
         console.error('Firestore public/state listener error:', err);
@@ -465,6 +439,10 @@ export function GameProvider({ children }) {
   );
 
   // Automatic weapon firing
+  const consumePendingFireEvent = useCallback((eventId) => {
+    setPendingFireEvents((prev) => prev.filter((e) => e.id !== eventId));
+  }, []);
+
   const triggerWeaponAttack = useCallback(
     (weaponKey = 'dagger') => {
       const weapon = WEAPONS[weaponKey] || WEAPONS.dagger;
@@ -561,6 +539,7 @@ export function GameProvider({ children }) {
     activeFlashZone,
     stuckBolts,
     pendingFireEvents,
+    consumePendingFireEvent,
     recoilingStation,
     triggerStationRecoil,
     onProjectileImpact,

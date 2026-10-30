@@ -6,16 +6,20 @@ export default function FlyingProjectiles({
   pendingFireEvents = [],
   onProjectileImpact,
   onStationRecoil,
+  onConsumeEvent,
 }) {
   const [activeProjectiles, setActiveProjectiles] = useState([]);
   const queueRef = useRef([]);
   const activeCountRef = useRef(0);
   const lastLaunchTimeRef = useRef(0);
 
-  // Keep queueRef updated with incoming pending events
+  // Keep queueRef updated with incoming pending events, ignoring stale events
   useEffect(() => {
     if (pendingFireEvents.length > 0) {
+      const now = Date.now();
       pendingFireEvents.forEach((ev) => {
+        // Discard stale events (> 4 seconds old) so they never replay on screen transitions
+        if (ev.timestamp && now - ev.timestamp > 4000) return;
         if (!queueRef.current.some((q) => q.id === ev.id)) {
           queueRef.current.push(ev);
         }
@@ -37,6 +41,10 @@ export default function FlyingProjectiles({
         // Pop next event from queue
         const nextEvent = queueRef.current.shift();
         if (!nextEvent) return;
+
+        if (onConsumeEvent) {
+          onConsumeEvent(nextEvent.id);
+        }
 
         lastLaunchTimeRef.current = now;
         activeCountRef.current += 1;

@@ -70,6 +70,11 @@ export default function CodingScreen() {
   const [acceptedBanner, setAcceptedBanner] = useState(false);
   const [craftedWeapon, setCraftedWeapon] = useState(null);
 
+  // Clean up any stale attack flags on mount
+  useEffect(() => {
+    sessionStorage.removeItem('techflix_pending_attack');
+  }, []);
+
   // Fetch problem statement if not in memory
   useEffect(() => {
     if (boardProblems?.[id]) {
@@ -360,17 +365,22 @@ export default function CodingScreen() {
         setCraftedWeapon(problem.tier || problem.weapon || 'weapon');
         setAcceptedBanner(true);
 
-        try {
-          sessionStorage.setItem(
-            'techflix_pending_attack',
-            JSON.stringify({
-              tier: data.tier || problem.tier || problem.weapon || 'dagger',
-              xp: problem.xp || 2,
-              problemId: problem.id,
-              timestamp: Date.now(),
-            })
-          );
-        } catch {}
+        // Only schedule an attack if it is an actual first solve that damaged the dragon
+        if (data.solveResult?.isFirstSolve || (data.solveResult?.damage && data.solveResult.damage > 0)) {
+          try {
+            sessionStorage.setItem(
+              'techflix_pending_attack',
+              JSON.stringify({
+                tier: data.tier || problem.tier || problem.weapon || 'dagger',
+                xp: problem.xp || 2,
+                problemId: problem.id,
+                timestamp: Date.now(),
+              })
+            );
+          } catch {}
+        } else {
+          sessionStorage.removeItem('techflix_pending_attack');
+        }
 
         setTimeout(() => {
           navigate('/');
@@ -402,7 +412,10 @@ export default function CodingScreen() {
           {problemError || 'This trial is not on your warband’s active board.'}
         </p>
         <button
-          onClick={() => navigate('/')}
+          onClick={() => {
+            sessionStorage.removeItem('techflix_pending_attack');
+            navigate('/');
+          }}
           className="px-6 py-2.5 bg-[#9A3412] hover:bg-[#C2410C] text-[#FFF8ED] font-heading font-bold rounded-lg border border-[#FFB347] flex items-center gap-2 "
         >
           <ArrowLeft className="w-4 h-4" />
@@ -483,7 +496,10 @@ export default function CodingScreen() {
       {/* TOP HEADER BAR */}
       <header className="w-full flex-shrink-0 z-30 px-3 py-1.5 flex items-center justify-between border-b-2 border-[#4A3A2C] bg-[#140E0A]/90">
         <button
-          onClick={() => navigate('/')}
+          onClick={() => {
+            sessionStorage.removeItem('techflix_pending_attack');
+            navigate('/');
+          }}
           className="flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-[#D8C39F] hover:text-[#FFF8ED] transition-colors "
         >
           <ArrowLeft className="w-4 h-4 text-[#FF7A1A]" />
@@ -502,9 +518,9 @@ export default function CodingScreen() {
         </div>
 
         {/* User Info & Sound Toggle */}
-        <div className="flex items-center gap-3 text-xs font-bold text-[#D8C39F]">
+        <div className="flex items-center gap-3 text-xs sm:text-sm font-bold text-[#D8C39F]">
           <span className="font-heading tracking-wider hidden sm:inline text-[#FFB347]">
-            {userTeam?.name} • {userTeam?.memberName || 'Warrior'} - {userTeam?.memberSolvedCount ?? 0} solved <span className="text-[#86EFAC]">• Team: {userTeam?.teamSolvedCount ?? solvedProblems.length}</span>
+            {userTeam?.name} • <span className="text-[#FFF8ED]">{userTeam?.memberName || 'Warrior'}</span> - {userTeam?.memberSolvedCount ?? 0} solved <span className="text-[#86EFAC] font-bold ml-1">• Team: {userTeam?.teamSolvedCount ?? solvedProblems.length}</span>
           </span>
           <button
             onClick={() => setSoundMuted(!soundMuted)}
