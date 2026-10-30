@@ -2,6 +2,8 @@
 .env*
 node_modules
 dist
+__pycache__/
+*.pyc
 
 .vercel
 scripts/hidden_tests.json

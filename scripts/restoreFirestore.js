@@ -45,3 +45,4 @@ restore(targetTimestamp).then(() => process.exit(0)).catch((err) => {
   console.error('Restore failed:', err);
   process.exit(1);
 });
+

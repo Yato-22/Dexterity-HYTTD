@@ -545,3 +545,4 @@ export function generateAllTemplates() {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   generateAllTemplates();
 }
+

@@ -55,3 +55,4 @@ backup().then(() => process.exit(0)).catch((err) => {
   console.error('Backup failed:', err);
   process.exit(1);
 });
+

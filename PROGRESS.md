@@ -44,10 +44,10 @@
   - [x] 6.1 `scripts/genTemplates.js` generating C, C++, Java, Python templates with `// ===== INPUT =====` and `// ===== WRITE YOUR CODE BELOW =====`.
   - [x] 6.2 Templates compile cleanly and print nothing (giving Wrong Answer, not compile error).
   - [x] 6.3 Note above editor; Reset Template button; C default language.
-- [ ] **Step 7: Automated Verification**
-  - [ ] 7.1 Solutions in all 4 languages in `data/reference/`; `scripts/verifyTemplates.js` runs 192 runs (48 x 4) against real Piston runner.
-  - [ ] 7.2 Verify unchanged starters give Wrong Answer; test compile error, crash, timeout on sample of 8 problems.
-  - [ ] 7.3 Local feature tests covering all specification flows.
+- [x] **Step 7: Automated Verification**
+  - [x] 7.1 Solutions in all 4 languages in `data/reference/`; `scripts/verifyTemplates.js` runs 192 runs (48 x 4) against real Piston runner.
+  - [x] 7.2 Verify unchanged starters give Wrong Answer; test compile error, crash, timeout on sample of 8 problems.
+  - [x] 7.3 Local feature tests covering all specification flows.
 - [ ] **Step 8: Deploy, Live Tests, Load Test, Cleanup**
   - [ ] 8.1 Publish Firestore rules, seed `pool_v2`, set Vercel env vars, deploy as PREVIEW.
   - [ ] 8.2 Run all 48 problems through preview API with TEST_ teams.

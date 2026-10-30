@@ -49,3 +49,4 @@ To restore `teams`, `registry`, `public`, `dragon`, `feed`, `pool`, and `data/hi
 # Run the automated restore script with the backup timestamp
 node scripts/restoreFirestore.js 2026-10-30T01-34-09-319Z
 ```
+
