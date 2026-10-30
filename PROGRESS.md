@@ -7,11 +7,11 @@
   - [x] 0.4 Data safety: `pool` untouched, new pool in `pool_v2`, additive schema only.
   - [x] 0.5 `ROLLBACK.md` with copy-paste rollback commands.
   - [x] Start Piston Docker container and Cloudflare tunnel, verify healthy and update `config/runner`.
-- [ ] **Step 1: Problem Pool (`pool_v2`)**
-  - [ ] 1.1 Verify and format 48 problems from `ALL_QUESTIONS.txt` / `data/question_list.md` (12 Dagger, 12 Axe, 12 Catapult, 12 Ballista).
-  - [ ] 1.2 Two independent Python reference solutions per problem in `generate_and_verify_48.py`.
-  - [ ] 1.3 Run `scripts/verifyPool.js` to ensure 100% agreement on all sample and hidden tests.
-  - [ ] 1.4 Seed into `pool_v2` and `problems_private_v2` via `scripts/seedPool.js`.
+- [x] **Step 1: Problem Pool (`pool_v2`)**
+  - [x] 1.1 Verify and format 48 problems from `ALL_QUESTIONS.txt` / `data/question_list.md` (12 Dagger, 12 Axe, 12 Catapult, 12 Ballista).
+  - [x] 1.2 Two independent Python reference solutions per problem in `generate_and_verify_48.py`.
+  - [x] 1.3 Run `scripts/verifyPool.js` to ensure 100% agreement on all sample and hidden tests.
+  - [x] 1.4 Seed into `pool_v2` and `problems_private_v2` via `scripts/seedPool.js`.
 - [ ] **Step 2: Team CSV Import and Login**
   - [ ] 2.1 `/admin` "Import teams" UI: CSV upload, preview parsed rows, download template, confirm import. Support 1 or 2 members, phone matching last 10 digits.
   - [ ] 2.2 Server endpoint `POST /api/admin/importTeams` creates registry and teams without overwriting existing scores on re-import.

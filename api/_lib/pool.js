@@ -23,7 +23,10 @@ export async function loadPool() {
   }
 
   if (!problems || problems.length === 0) {
-    const snapshot = await db.collection('pool').get();
+    let snapshot = await db.collection('pool_v2').get();
+    if (snapshot.empty) {
+      snapshot = await db.collection('pool').get();
+    }
     problems = snapshot.docs.map((doc) => doc.data());
   }
 

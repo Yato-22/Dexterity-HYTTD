@@ -94,7 +94,10 @@ export default async function handler(req, res) {
     let rawTimeLimit = problem.timeLimitMs || 2000;
 
     try {
-      const privDoc = await db.collection('problems_private').doc(problemId).get();
+      let privDoc = await db.collection('problems_private_v2').doc(problemId).get();
+      if (!privDoc.exists) {
+        privDoc = await db.collection('problems_private').doc(problemId).get();
+      }
       if (privDoc.exists) {
         const pData = privDoc.data();
         hiddenTests = pData.hiddenTests || [];
