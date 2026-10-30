@@ -1,11 +1,16 @@
 .node/
-.env
-.env.local
+.env*
 node_modules
 dist
 
 .vercel
 scripts/hidden_tests.json
 data/hidden_tests.json
+**/hidden_tests.json
 data/reference_solutions.json
+data/reference/
+backups/
+*service_account*.json
+*service-account*.json
+*firebase-adminsdk*.json
 
